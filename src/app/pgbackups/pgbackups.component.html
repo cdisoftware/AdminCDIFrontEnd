@@ -1,0 +1,301 @@
+<div class="container bg-white pt-5 pb-5">
+    <div class="row justify-content-center ">
+        <h5 class="col-12 tituloformulario">Backups</h5>
+    </div>
+    <div class="row mt-3">
+        <!--Ayuda IP-->
+        <div class="col-sm-8 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #Ip placeholder="IP" title="IP" [(ngModel)]="LblIp"
+                (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value)">
+        </div>
+        <!--Fin ayuda-->
+
+        <!--Tipo lista-->
+        <div class="col-sm-4 m-0 mb-3 ">
+            <select class="form-select" title="Seleccionar usuario" [(ngModel)]="IdUsuario" #Selecusuario (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value)'>
+                <option value="0" selected>Seleccione usuario</option>
+                <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">
+                    {{arRespu.Nombre}}</option>
+            </select>
+        </div>
+        <!--Fin Tipo lista-->
+
+        <!--Tipo lista-->
+        <div class="col-sm-4 m-0 mb-3 ">
+            <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdCliente">
+                <option value="0" selected>Seleccione cliente</option>
+                <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">
+                    {{arRespu.Nombre}}</option>
+            </select>
+        </div>
+        <!--Fin Tipo lista-->
+
+        <!--Ayuda Nombre-->
+        <div class="col-sm-8 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control" placeholder="Nombre" #Nombre title="Nombre backup"
+                [(ngModel)]="NombreBCK" (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value)">
+        </div>
+        <!--Fin ayuda-->
+
+
+
+
+        <!--Botones-->
+        <div class="row displayCenter col-12 mt-3">
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Limpiar" (click)="Limpiar()">
+                <img src="../../../../assets/ImagenesRDN/ic_limpiar.png" class="BtnimgTamanoPeque mr-2">
+                Limpiar
+            </button>
+
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf()">
+                <img src="../../../../assets/ImagenesRDN/ic_pdf.png" class="BtnimgTamanoPeque mr-2">
+                Descargar PDF
+            </button>
+
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Exportar Excel" (click)="BtnExportarExcel(templateMensaje)">
+                <img src="../../../../assets/ImagenesRDN/ic_excel.png" class="BtnimgTamanoPeque mr-2">
+                Descarga excel
+            </button>
+
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Nuevo"
+                (click)="BtnNuevo(templateAgregar,templateMensaje)">
+                <img src="../../../../assets/ImagenesRDN/Agregar.png" class="BtnimgTamanoPeque mr-2">
+                Agregar
+            </button>
+        </div>
+        <!--Fin botones-->
+
+        <!--Grilla-->
+        <div class="col-sm-12 mt-5">
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th colspan="9">Backups</th>
+                </tr>
+                <tr>
+                    <th (click)="OrdenarIpServidor()" class="cursorPointer">Ip</th>
+                    <th (click)="OrdenarNombre()" class="cursorPointer">Nombre</th>
+                    <th (click)="OrdenarNombreProyecto()" class="cursorPointer">Cliente</th>
+                    <th (click)="OrdenarAmbiente()" class="cursorPointer">Ambiente</th>
+                    <th (click)="OrdenarDescripcion()" class="cursorPointer">Tipo</th>
+                    <th (click)="OrdenarPeriodicidad()" class="cursorPointer">Periodicidad</th>
+                    <th (click)="OrdenarUsuarioModifi()" class="cursorPointer">Usuario Mod</th>
+                    <th (click)="OrdenarFecha_Ult_Mod()" class="cursorPointer">Fecha Ultima Mod</th>
+                    <th>Editar</th>
+                    <th>Ver</th>
+                </tr>
+                <tr *ngFor="let ArGrilla of ArregloGrilla">
+                    <td>{{ArGrilla.IpServidor}}</td>
+                    <td>{{ArGrilla.Nombre}}</td>
+                    <td>{{ArGrilla.NombreProyecto}}</td>
+                    <td>{{ArGrilla.Ambiente}}</td>
+                    <td>{{ArGrilla.Descripcion}}</td>
+                    <td>{{ArGrilla.Periodicidad}}</td>
+                    <td>{{ArGrilla.UsuarioModifi}}</td>
+                    <td>{{ArGrilla.Fecha_Ult_Mod}}</td>
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="Editarbackup(templateEditarBackup, ArGrilla)">
+                            <img src="../../../../assets/ImagenesRDN/ic_editar.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Ver" (click)="VerDetalle(templateVerDetalles, templateMensaje)">
+                            <img src="../../../../assets/ImagenesRDN/eye.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--fin Grilla-->
+    </div>
+</div>
+
+
+
+
+
+
+<ng-template #templateMensaje>
+
+    <div class="modaBody">
+        <div class="col-12">
+            <p class="pModals">{{ lblModalMsaje }}</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn-Login bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateAgregar>
+    <div class="disppleflex m-3 ">
+        <p class="titulopopup">AGREGAR</p>
+        <button type="button" class="bot" aria-label="Close" (click)="modalAgregar.hide();">
+            <img id="imgActual" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
+        </button>
+        <br>
+    </div>
+    <div class="modal-header m-0 p-0 mt-3"></div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control" title="Nombre Kackup">
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar cliente">
+                        <option value="0">Seleccione cliente</option>
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control" title="Ambiente">
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Periodicidad" class="col-sm-6 text-center form-control" title="Periodicidad">
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar servidor">
+                        <option value="0">Seleccione servidor</option>
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar el tipo backup">
+                        <option value="0">Seleccione tipo backup</option>
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" [(ngModel)]="Fecha" placeholder="Fecha" class="col-sm-6 text-center form-control" title="Fecha" disabled>
+                </div>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar">
+                        <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
+                        <img src="../../../../assets/ImagenesRDN/ic_signoEx.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+
+
+
+<ng-template #templateVerDetalles let-modal>
+    <div class="modal-header">
+        <p class="titulopopup">VER</p>
+        <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="mrd mld" id="htmlData_">
+        <div class="row Texto text-center">
+            <div class="col-sm-4 mt-3">
+                <input type="text" class="form-control" title="Nombre Kackup" [(ngModel)]="NombreBackup">
+            </div>
+            <div class="col-sm-4 mt-3">
+                <input type="text" class="form-control" title="Cliente" [(ngModel)]="Clientee">
+            </div>
+            <div class="col-sm-4 mt-3">
+                <input type="text" class="form-control" title="Ambiente" [(ngModel)]="Ambiente">
+            </div>
+            <div class="col-sm-4 mt-3">
+                <input type="text" class="form-control" title="Periodicidad" [(ngModel)]="Periodicidad">
+            </div>
+            <div class="col-sm-4 mt-3">
+                <input type="text" class="form-control" title="Servidor" [(ngModel)]="Servidor">
+            </div>
+            <div class="col-sm-4 mt-3">
+                <input type="text" class="form-control" title="Tipo backup" [(ngModel)]="TipoBackup">
+
+            </div>
+            <div class="col-sm-4 mt-3">
+                <input type="text" class="form-control" title="Usuario" [(ngModel)]="Usuario" disabled>
+            </div>
+            <div class="col-sm-4 mt-3">
+                <input type="text" class="form-control" title="Fecha ultima modificación" [(ngModel)]="FechaUlt" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="row displayCenter col-12 mt-3 p-3">
+        <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar">
+            <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2" (click)="AgregarBck()">
+            Guardar
+        </button>
+        <button class="btn btn-outline-dark col-sm-3 mrd" title="Cancelar" (click)="modal.dismiss('Cross click')">
+            <img src="../../../../assets/ImagenesRDN/ic_signoEx.png" class="BtnimgTamanoPeque mr-2">
+            Cancelar
+        </button>
+    </div>
+</ng-template>
+
+
+
+<ng-template #templateEditarBackup>
+    <div class="disppleflex m-3 ">
+        <p class="titulopopup">EDITAR BACKUP</p>
+        <button type="button" class="bot" aria-label="Close" (click)="modalVer.hide();">
+            <img id="imgActual" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
+        </button>
+        <br>
+    </div>
+    <div class="modal-header m-0 p-0 mt-3"></div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control" title="Nombre Kackup" [(ngModel)]="NombreBackup">
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar cliente" [(ngModel)]="Clientee">
+                        <option value="0">Seleccione cliente</option>
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control" title="Ambiente" [(ngModel)]="Ambiente">
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Periodicidad" class="col-sm-6 text-center form-control" title="Periodicidad" [(ngModel)]="Periodicidad">
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar servidor"  [(ngModel)]="Servidor">
+                        <option value="0">Seleccione servidor</option>
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar el tipo backup"  [(ngModel)]="TipoBackup">
+                        <option value="0">Seleccione tipo backup</option>
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" [(ngModel)]="Fecha" placeholder="Fecha" class="col-sm-6 text-center form-control" title="Fecha" [(ngModel)]="Usuario" disabled>
+                </div>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar">
+                        <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Cancelar" (click)="modalVer.hide();">
+                        <img src="../../../../assets/ImagenesRDN/ic_signoEx.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>

@@ -1,0 +1,327 @@
+:root {
+    --main-bg-color-red: #DB0019;
+    --main-bg-color-redOscuro: #8A0010;
+    --main-bg-color-grisClaro: #c4c4c4;
+    --main-bg-color-grisMedio: #5B5B5B;
+    --main-bg-color-Blanco: white;
+
+    --main-bg-color-grisWhiteFont: white;
+  }
+
+  .textRedOscuro{
+      color: var(--main-bg-color-redOscuro) ;
+  }
+/*-----ESTILOS BOTONES -------------*/
+.BtnClaro {
+    background: var(--main-bg-color-Blanco) !important;
+    border: solid 1px var(--main-bg-color-grisMedio);
+    border-radius: 5px;
+    color: var(--main-bg-color-grisMedio) !important;    
+    height: 40px;    
+    border: 1px solid var(--main-bg-color-grisMedio);
+    text-align: center;
+    padding: auto;
+}
+
+.BtnClaroDos {
+    background: white;
+    border: solid 1px var(--main-bg-color-grisMedio);
+    border-radius: 5px;
+    color: var(--main-bg-color-grisMedio) !important;      
+    border: 1px solid var(--main-bg-color-grisMedio);
+    text-align: center;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.BtnClaroDos:hover {
+    background: #E1E1E1;
+    border: solid 1px var(--main-bg-color-grisMedio);
+    border-radius: 5px;
+    color: var(--main-bg-color-grisMedio) !important;      
+    border: 1px solid var(--main-bg-color-grisMedio);
+    text-align: center;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.btn-general {
+    background: var(--main-bg-color-red) !important;
+    border: solid 1px var(--main-bg-color-grisClaro);
+    border-radius: 5px;
+    color: #ffffff !important;    
+    height: 40px;    
+}
+
+.btn-Login {
+    background: var(--main-bg-color-red) !important;
+    border: solid 1px var(--main-bg-color-grisClaro);
+    border-radius: 5px;
+    color: #ffffff !important;    
+    height: 40px;    
+}
+
+.btn-desactivado {
+    background: #8E8E8E !important;
+    border: solid 1px var(--main-bg-color-grisClaro);
+    border-radius: 5px;
+    color: #ffffff !important;    
+    height: 40px;    
+}
+
+.btnEquis {
+    width: 13px;
+    padding: 0px;
+}
+
+.btnReloj{
+
+    width: 19px;
+    height: 19px;
+    padding: 0px;
+}
+
+.BtnimgTamanoPeque{
+    width: 21px;
+    height: 21px;
+    padding: 0px;
+}
+
+.BtnimgTamanoMediano{
+    width: 28px;
+    height: 28px;
+    padding: 0px;
+}
+
+.btnsmall{
+    width: 30px;
+    height: 30px;
+}
+
+.BtnimgTamano{
+    width: 33px;
+    height: 33px;
+    padding: 0px;
+
+}
+
+.BtnGuardar{
+    background: var(--main-bg-color-red) !important;
+    border: solid 1px var(--main-bg-color-grisClaro);
+    border-radius: 5px;
+    color: #ffffff !important;    
+    font-size: 15px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.bot{   
+    border:0;
+    background: none;
+    outline: none;
+ }
+
+ .bot:active{   
+    border:0;
+    background: none;
+    outline: none;
+ }
+
+
+/*--------ESTILOS LETRAS---------------------*/
+
+.fontEstandar{ /* letralogin */
+    font-size: 14px;
+}
+
+.fontEstandarMedia{ /* letraformulario */
+    font-size: 16px;
+}
+
+.tituloformulario{ 
+    font-weight: bold;    
+    font-style: #333333;
+}
+
+.textarea {
+    resize: none;
+}
+
+.romperPalabra {
+    overflow-wrap: break-word;
+    word-break: break-all;
+    min-height: 15px;
+}
+
+/*----------ESTILOS DISPLAY-------------------*/
+.displayFlexStar{
+    display: flex;
+    justify-content: start;
+}
+
+.displayFlexbetween{
+    display: flex;
+    justify-content: space-between;
+}
+
+.displayCenter{
+    display: flex;
+    justify-content:  center;
+}
+
+.displayend{
+    display: flex;
+    justify-content:flex-end;
+}
+
+.disppleflex {
+    display: flex;
+    margin: 0px;
+}
+.block{
+    display: block;
+}
+
+/*----------ESTILOS MODALES-------------------*/
+.pModals{
+    font-size: large;
+    align-items: center;
+    padding: 20px !important;
+}
+
+
+.titulopopup{
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--main-bg-color-red);
+    margin: auto;
+    text-transform: uppercase;
+}
+
+.modaBody{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/*-----ESTILOS CARGE DE IMAGENES------------------------*/
+
+ .image-upload > input
+ {
+     display: none;
+ }
+ 
+ .image-upload img
+ {
+     width: 30px;
+     cursor: pointer;
+ }
+
+ .image-uploadDos > input
+ {
+     display: none;
+ }
+ 
+ .image-uploadDos img
+ {
+     width: 100%;
+     cursor: pointer;
+ }
+
+ .image-uploadTres > input
+ {
+     display: none;
+ }
+ 
+ .image-uploadTres img
+ {
+     width: 200px;
+     cursor: pointer;
+ }
+
+ .image-uploadCuatro > input
+ {
+     display: none;
+ }
+ 
+ .image-uploadCuatro img
+ {
+     max-width: 100%;
+     max-height: 140px;
+     cursor: pointer;
+ }
+ /*-----------------------------*/
+
+ .BoderImg{
+
+    border-style: solid;
+    border-radius: 3px;
+    border-color: var(--main-bg-color-grisClaro);
+    border-width: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+ }
+
+ /*-----------MENU SUPERIOR------------------*/
+ .bg-red{
+    background-color: var(--main-bg-color-red);
+}
+
+/*-----------------------------*/
+
+.tablaRedes{
+    max-width: 600px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 5px;
+}
+
+/*-----------------------------*/
+
+.espacioul{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.SinEstilo{
+    all: unset;
+}
+
+.mld{
+    margin-left: 10px;
+}
+
+.mrd{
+    margin-right: 10px;
+}
+
+.mldDos{
+    margin-left: 50px;
+}
+
+.mrdDos{
+    margin-right: 50px;
+}
+
+.mtdDos{
+    margin-top: 25px;
+}
+
+.mbdDos{
+    margin-bottom: 10px;
+}
+
+.cursorPointer{
+    cursor: pointer;
+}
+
+.fondoGris{
+    background: #F0F0F0;
+}
