@@ -45,9 +45,6 @@ export class PgbackupsComponent implements OnInit {
   //Variables lista editar
   modalEditar: BsModalRef;
 
-  //Variables Editar BCK
-  ArregloEditar: any;
-
   NombreBackup: string;
   Clientee: string;
   Ambiente: string;
@@ -310,18 +307,8 @@ export class PgbackupsComponent implements OnInit {
     doc.save('Registro backups - ' + this.Fecha + '.pdf')
 
   }
-  VerDetalle(templateEditarBackup: TemplateRef<any>, Array: any) {
-    this.ArregloEditar = [];
-    this.modalServiceDos.open(templateEditarBackup, { size: 'xl' });
-
-    this.NombreBackup = Array.Nombre;
-    this.Clientee = Array.NombreProyecto;
-    this.Ambiente = Array.Ambiente;
-    this.Periodicidad = Array.Periodicidad;
-    this.Servidor = Array.IpServidor;
-    this.TipoBackup = Array.Descripcion;
-    this.Usuario = Array.UsuarioModifi;
-    this.FechaUlt = Array.Fecha_Ult_Mod;
+  VerDetalle(templateVerDetalles: TemplateRef<any>) {
+    this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
   }
 
   AgregarBck(){
@@ -344,7 +331,15 @@ export class PgbackupsComponent implements OnInit {
     })
   }
 
-  Editarbackup(templateVerDetalles: TemplateRef<any>, templateMensaje: TemplateRef<any>){
-    this.modalVer = this._modalService.show(templateVerDetalles)
+  Editarbackup(templateEditarBackup: TemplateRef<any>, Array: any){
+    this.modalVer = this._modalService.show(templateEditarBackup)
+    this.NombreBackup = Array.Nombre;
+    this.Clientee = Array.NombreProyecto;
+    this.Ambiente = Array.Ambiente;
+    this.Periodicidad = Array.Periodicidad;
+    this.Servidor = Array.IpServidor;
+    this.TipoBackup = Array.Descripcion;
+    this.Usuario = Array.UsuarioModifi;
+    this.FechaUlt = Array.Fecha_Ult_Mod;
   }
 }
