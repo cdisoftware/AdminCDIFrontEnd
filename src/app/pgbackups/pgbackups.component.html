@@ -258,8 +258,8 @@
                     <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control" title="Nombre Kackup" [(ngModel)]="NombreBackup">
                 </div>
                 <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar cliente" [(ngModel)]="Clientee">
-                        <option value="0">Seleccione cliente</option>
+                    <select class="form-select" title="Seleccionar cliente">
+                        <option value="0">{{Clientee}}</option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">
@@ -269,13 +269,13 @@
                     <input type="text" value="" placeholder="Periodicidad" class="col-sm-6 text-center form-control" title="Periodicidad" [(ngModel)]="Periodicidad">
                 </div>
                 <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar servidor"  [(ngModel)]="Servidor">
-                        <option value="0">Seleccione servidor</option>
+                    <select class="form-select" title="Seleccionar servidor">
+                        <option value="0">{{Servidor}}</option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar el tipo backup"  [(ngModel)]="TipoBackup">
-                        <option value="0">Seleccione tipo backup</option>
+                    <select class="form-select" title="Seleccionar el tipo backup">
+                        <option value="0">{{TipoBackup}}</option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">

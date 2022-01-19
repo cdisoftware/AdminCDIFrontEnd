@@ -96,6 +96,7 @@ export class PgbackupsComponent implements OnInit {
     this.ArregloGrilla = [];
     this.AuxiliadorGrilla = false;
     this.Servicios.consultabackup(Nombre, Ip, IdUsuario, '0').subscribe(respu => {
+      console.log(respu)
       if (respu.length > 0) {
         this.ArregloGrilla = respu;
         this.AuxiliadorGrilla = true;
