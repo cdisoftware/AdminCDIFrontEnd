@@ -312,7 +312,7 @@ export class PgbackupsComponent implements OnInit {
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
   }
 
-  AgregarBck(){
+  AgregarBck(templateMensaje: TemplateRef<any>){
     const datosinsert =
     {
       Nombre: "Prueba agregar",
@@ -326,8 +326,8 @@ export class PgbackupsComponent implements OnInit {
     }
     this.Servicios.insertarbackup('3', datosinsert).subscribe(respu => {
       if (respu.length > 0) {
-        this.ArregloGrilla = respu;
-        this.AuxiliadorGrilla = true;
+        this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = respu;
       }
     })
   }
