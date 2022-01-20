@@ -12,7 +12,8 @@
 
         <!--Tipo lista-->
         <div class="col-sm-4 m-0 mb-3 ">
-            <select class="form-select" title="Seleccionar usuario" [(ngModel)]="IdUsuario" #Selecusuario (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value)'>
+            <select class="form-select" title="Seleccionar usuario" [(ngModel)]="IdUsuario" #Selecusuario
+                (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value)'>
                 <option value="0" selected>Seleccione usuario</option>
                 <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">
                     {{arRespu.Nombre}}</option>
@@ -52,7 +53,8 @@
                 Descargar PDF
             </button>
 
-            <button class="btn btn-outline-dark col-sm-2 mrd" title="Exportar Excel" (click)="BtnExportarExcel(templateMensaje)">
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Exportar Excel"
+                (click)="BtnExportarExcel(templateMensaje)">
                 <img src="../../../../assets/ImagenesRDN/ic_excel.png" class="BtnimgTamanoPeque mr-2">
                 Descarga excel
             </button>
@@ -144,7 +146,8 @@
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control" title="Nombre Kackup">
+                    <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control"
+                        title="Nombre Kackup">
                 </div>
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar cliente">
@@ -152,10 +155,12 @@
                     </select>
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control" title="Ambiente">
+                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control"
+                        title="Ambiente">
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Periodicidad" class="col-sm-6 text-center form-control" title="Periodicidad">
+                    <input type="text" value="" placeholder="Periodicidad" class="col-sm-6 text-center form-control"
+                        title="Periodicidad">
                 </div>
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar servidor">
@@ -168,7 +173,8 @@
                     </select>
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="text" value="" [(ngModel)]="Fecha" placeholder="Fecha" class="col-sm-6 text-center form-control" title="Fecha" disabled>
+                    <input type="text" value="" [(ngModel)]="Fecha" placeholder="Fecha"
+                        class="col-sm-6 text-center form-control" title="Fecha" disabled>
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
@@ -200,43 +206,79 @@
         </button>
     </div>
     <div class="mrd mld" id="htmlData_">
+        <div class="row texto text-center">
+            <div class="col-sm-9 mt-3">
+                <textarea id="form10" class="md-textarea form-control" placeholder="Observaciones" rows="-1"
+                    disabled></textarea>
+            </div>
+            <button class="btn btn-outline-dark col-sm-3 mt-3" title="Nuevo">
+                <img src="../../../../assets/ImagenesRDN/Agregar.png" class="BtnimgTamanoPeque mr-2"
+                    (click)="AgregarBck(templateMensaje)">
+                Nuevo
+            </button>
+        </div>
         <div class="row Texto text-center">
-            <div class="col-sm-4 mt-3">
-                <input type="text" class="form-control" title="Nombre Kackup" [(ngModel)]="NombreBackup">
-            </div>
-            <div class="col-sm-4 mt-3">
-                <input type="text" class="form-control" title="Cliente" [(ngModel)]="Clientee">
-            </div>
-            <div class="col-sm-4 mt-3">
-                <input type="text" class="form-control" title="Ambiente" [(ngModel)]="Ambiente">
-            </div>
-            <div class="col-sm-4 mt-3">
-                <input type="text" class="form-control" title="Periodicidad" [(ngModel)]="Periodicidad">
-            </div>
-            <div class="col-sm-4 mt-3">
-                <input type="text" class="form-control" title="Servidor" [(ngModel)]="Servidor">
-            </div>
-            <div class="col-sm-4 mt-3">
-                <input type="text" class="form-control" title="Tipo backup" [(ngModel)]="TipoBackup">
 
+            <div class="col-sm-6 mt-3">
+                <select class="form-select" title="Seleccionar backup" disabled>
+                    <option value="0" selected>Seleccione backup</option>
+                    <option value="{{arRespu.Id_BCK}}" *ngFor="let arRespu of ArregloListaUsuario">
+                        {{arRespu.Nombre}}</option>
+                </select>
             </div>
-            <div class="col-sm-4 mt-3">
-                <input type="text" class="form-control" title="Usuario" [(ngModel)]="Usuario" disabled>
+
+            <div class="col-sm-6 mt-3">
+                <input type="text" class="form-control" placeholder="Estado" disabled>
             </div>
-            <div class="col-sm-4 mt-3">
-                <input type="text" class="form-control" title="Fecha ultima modificación" [(ngModel)]="FechaUlt" disabled>
+
+            <div class="col-sm-6 mt-3">
+                <select class="form-select" title="Seleccionar usuario" disabled>
+                    <option value="0" selected>Seleccione usuario</option>
+                    <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">
+                        {{arRespu.Nombre}}</option>
+                </select>
+            </div>
+
+            <div class="col-sm-6 mt-3">
+                <input type="date" class="form-control" placeholder="Fecha" disabled>
+            </div>
+            <div class="row displayCenter col-12 mt-3 p-3">
+                <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar">
+                    <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2"
+                        (click)="AgregarBck(templateMensaje)">
+                    Guardar
+                </button>
+                <button class="btn btn-outline-dark col-sm-3 mrd" title="Cancelar"
+                    (click)="modal.dismiss('Cross click')">
+                    <img src="../../../../assets/ImagenesRDN/ic_signoEx.png" class="BtnimgTamanoPeque mr-2">
+                    Cancelar
+                </button>
             </div>
         </div>
-    </div>
-    <div class="row displayCenter col-12 mt-3 p-3">
-        <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar">
-            <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2" (click)="AgregarBck(templateMensaje)">
-            Guardar
-        </button>
-        <button class="btn btn-outline-dark col-sm-3 mrd" title="Cancelar" (click)="modal.dismiss('Cross click')">
-            <img src="../../../../assets/ImagenesRDN/ic_signoEx.png" class="BtnimgTamanoPeque mr-2">
-            Cancelar
-        </button>
+
+        <div class="row texto text-center">
+            <div class="col-sm-12 mt-3">
+                <table class="table table-bordered text-center">
+                    <tr style="background-color: var(--main-bg-color-red); color: white;">
+                        <th colspan="5">REGISTRO BACKUPS</th>
+                    </tr>
+                    <tr>
+                        <th class="cursorPointer">BACKUP</th>
+                        <th class="cursorPointer">FECHA</th>
+                        <th class="cursorPointer">ESTADO</th>
+                        <th class="cursorPointer">OBSERVACIONES</th>
+                        <th class="cursorPointer">USUARIO</th>
+                    </tr>
+                    <tr *ngFor="let ArGrilla of ArregloGrilla">
+                        <td>{{ArGrilla.IpServidor}}</td>
+                        <td>{{ArGrilla.Nombre}}</td>
+                        <td>{{ArGrilla.NombreProyecto}}</td>
+                        <td>{{ArGrilla.Ambiente}}</td>
+                        <td>{{ArGrilla.Descripcion}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </ng-template>
 
@@ -254,7 +296,32 @@
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
-                
+                <div class="col-sm-4 mt-3">
+                    <input type="text" class="form-control" title="Nombre Kackup" [(ngModel)]="NombreBackup">
+                </div>
+                <div class="col-sm-4 mt-3">
+                    <input type="text" class="form-control" title="Cliente" [(ngModel)]="Clientee">
+                </div>
+                <div class="col-sm-4 mt-3">
+                    <input type="text" class="form-control" title="Ambiente" [(ngModel)]="Ambiente">
+                </div>
+                <div class="col-sm-4 mt-3">
+                    <input type="text" class="form-control" title="Periodicidad" [(ngModel)]="Periodicidad">
+                </div>
+                <div class="col-sm-4 mt-3">
+                    <input type="text" class="form-control" title="Servidor" [(ngModel)]="Servidor">
+                </div>
+                <div class="col-sm-4 mt-3">
+                    <input type="text" class="form-control" title="Tipo backup" [(ngModel)]="TipoBackup">
+
+                </div>
+                <div class="col-sm-4 mt-3">
+                    <input type="text" class="form-control" title="Usuario" [(ngModel)]="Usuario" disabled>
+                </div>
+                <div class="col-sm-4 mt-3">
+                    <input type="text" class="form-control" title="Fecha ultima modificación" [(ngModel)]="FechaUlt"
+                        disabled>
+                </div>
             </li>
         </div>
         <br>
