@@ -69,7 +69,7 @@
         <div class="col-sm-12 mt-5">
             <table class="table table-bordered text-center">
                 <tr>
-                    <th colspan="9">Backups</th>
+                    <th colspan="10">Backups</th>
                 </tr>
                 <tr>
                     <th (click)="OrdenarIpServidor()" class="cursorPointer">Ip</th>
@@ -254,45 +254,7 @@
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
-                <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control" title="Nombre Kackup" [(ngModel)]="NombreBackup">
-                </div>
-                <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar cliente">
-                        <option value="0">{{Clientee}}</option>
-                    </select>
-                </div>
-                <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control" title="Ambiente" [(ngModel)]="Ambiente">
-                </div>
-                <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Periodicidad" class="col-sm-6 text-center form-control" title="Periodicidad" [(ngModel)]="Periodicidad">
-                </div>
-                <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar servidor">
-                        <option value="0">{{Servidor}}</option>
-                    </select>
-                </div>
-                <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar el tipo backup">
-                        <option value="0">{{TipoBackup}}</option>
-                    </select>
-                </div>
-                <div class="col-6 mt-3">
-                    <input type="text" value="" [(ngModel)]="Fecha" placeholder="Fecha" class="col-sm-6 text-center form-control" title="Fecha" [(ngModel)]="Usuario" disabled>
-                </div>
-                <!---Botones--->
-                <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar">
-                        <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2">
-                        Guardar..
-                    </button>
-
-                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Cancelar" (click)="modalVer.hide();">
-                        <img src="../../../../assets/ImagenesRDN/ic_signoEx.png" class="BtnimgTamanoPeque mr-2">
-                        Cancelar
-                    </button>
-                </div>
+                
             </li>
         </div>
         <br>
