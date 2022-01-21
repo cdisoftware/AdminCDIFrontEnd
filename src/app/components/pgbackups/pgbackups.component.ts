@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { MetodosGlobalesService } from '../core/metodosglobales.service';
+import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Workbook } from "exceljs";
@@ -80,6 +80,9 @@ export class PgbackupsComponent implements OnInit {
 
   //Variables servidor
   ArregloListaServidor: any;
+
+  //Variables agregar registro bck
+  DisableAgregarReguistroBck: boolean;
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
@@ -328,6 +331,7 @@ export class PgbackupsComponent implements OnInit {
   }
   VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
+    this.DisableAgregarReguistroBck = false;
     const ConsultaRegistroBck =
     {
       Fecha: '0',
@@ -381,8 +385,8 @@ export class PgbackupsComponent implements OnInit {
      this.IdTipoBackup = Array.Id_Tipo_BCK;
   }
 
-  AgregarRegistroBackup(SeleccionaBackup: HTMLElement) {
-    SeleccionaBackup.innerHTML.valueOf
+  AgregarRegistroBackup() {
+    this.DisableAgregarReguistroBck = true
   }
   
 }
