@@ -31,8 +31,15 @@ export class PgbackupsComponent implements OnInit {
 
   //Variables grilla
   ArregloGrilla: any;
+
   //Variables agregar
   modalAgregar: BsModalRef;
+  LblAgregarNombre: string;
+  IdAgregarCliente: string;
+  LblAgregarAmbiente: string;
+  LblAgregarPeriodicidad: string;
+  IdAgregarServidor: string;
+  IdAgregarTipoBackup: string;
 
   //Variables lista Usuario
   IdUsuario: string;
@@ -56,6 +63,9 @@ export class PgbackupsComponent implements OnInit {
 
   //Variables Ver
   modalVer: BsModalRef;
+
+  //Variables consultareguistri backup
+  ArregloGrillaReguistroBck: any;
 
   //Variables Fecha
   Dia = new Date().getDate();
@@ -96,7 +106,6 @@ export class PgbackupsComponent implements OnInit {
     this.ArregloGrilla = [];
     this.AuxiliadorGrilla = false;
     this.Servicios.consultabackup(Nombre, Ip, IdUsuario, '0').subscribe(respu => {
-      console.log(respu)
       if (respu.length > 0) {
         this.ArregloGrilla = respu;
         this.AuxiliadorGrilla = true;
@@ -308,31 +317,45 @@ export class PgbackupsComponent implements OnInit {
     doc.save('Registro backups - ' + this.Fecha + '.pdf')
 
   }
-  VerDetalle(templateVerDetalles: TemplateRef<any>) {
-    this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
-  }
-
-  AgregarBck(templateMensaje: TemplateRef<any>){
-    const datosinsert =
+  VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
+    const ConsultaRegistroBck =
     {
-      Nombre: "Prueba agregar",
-      Id_PRY: 1,
-      Ambiente : "Prueba",
-      Periodicidad: "Prueba",
-      Id_Servidor: 1,
-      Id_Tipo_BCK: 1,
-      Id_Usuario: 2,
-      Fecha_Ult_Mod: "2022-01-18"
+      Fecha: '0',
+      Estado: 2,
+      Usuario: 0
     }
-    this.Servicios.insertarbackup('3', datosinsert).subscribe(respu => {
+    this.Servicios.consultaregistbck(ConsultaRegistroBck, ArGrilla.Id_B).subscribe(respu => {
       if (respu.length > 0) {
-        this.modalMensaje = this._modalService.show(templateMensaje);
-          this.lblModalMsaje = respu;
+        this.ArregloGrillaReguistroBck = respu;
+        this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
       }
     })
   }
 
-  Editarbackup(templateEditarBackup: TemplateRef<any>, Array: any){
+  AgregarBck(templateMensaje: TemplateRef<any>) {
+    const datosinsert =
+    {
+      Nombre: this.LblAgregarNombre,
+      Id_PRY: this.IdAgregarCliente,
+      Ambiente: this.LblAgregarAmbiente,
+      Periodicidad: this.LblAgregarPeriodicidad,
+      Id_Servidor: this.IdAgregarServidor,
+      Id_Tipo_BCK:this.IdAgregarTipoBackup,
+      Id_Usuario: 1,//Falta esta con el login
+      Fecha_Ult_Mod: this.Fecha
+    }
+    this.Servicios.insertarbackup('3', datosinsert).subscribe(respu => {
+      if (respu.length > 0) {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+        this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario);
+
+        this.modalAgregar.hide()
+      }
+    })
+  }
+
+  Editarbackup(templateEditarBackup: TemplateRef<any>, Array: any) {
     this.modalVer = this._modalService.show(templateEditarBackup)
     this.NombreBackup = Array.Nombre;
     this.Clientee = Array.NombreProyecto;
@@ -342,5 +365,9 @@ export class PgbackupsComponent implements OnInit {
     this.TipoBackup = Array.Descripcion;
     this.Usuario = Array.UsuarioModifi;
     this.FechaUlt = Array.Fecha_Ult_Mod;
+  }
+
+  AgregarRegistroBackup(SeleccionaBackup: HTMLElement) {
+    SeleccionaBackup.innerHTML.valueOf
   }
 }
