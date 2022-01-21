@@ -221,8 +221,7 @@
     <div class="mrd mld" id="htmlData_">
         <div class="row texto text-center">
             <div class="col-sm-9 mt-3">
-                <textarea id="form10" class="md-textarea form-control" placeholder="Observaciones" rows="-1"
-                    disabled></textarea>
+                <textarea id="form10" class="md-textarea form-control" placeholder="Observaciones" [disabled] = "DisableAgregarReguistroBck == false"></textarea>
             </div>
             <div class="col-sm-3 mt-3">
                 <button class="btn btn-outline-dark" id="BotonAgregarRegistroBackup" title="Nuevo" (click)="AgregarRegistroBackup()">
