@@ -5,15 +5,19 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PgbackupsComponent } from './pgbackups/pgbackups.component';
+import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PgservidoresComponent } from './pgservidores/pgservidores.component';
+import { PgservidoresComponent } from './components/pgservidores/pgservidores.component';
+import { LayautprincipalComponent } from './layouts/layautprincipal/layautprincipal.component';
+import { LayautloginComponent } from './layouts/layautlogin/layautlogin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PgbackupsComponent,
-    PgservidoresComponent
+    PgservidoresComponent,
+    LayautprincipalComponent,
+    LayautloginComponent
   ],
   imports: [
     ModalModule.forRoot(),
@@ -26,4 +30,5 @@ import { PgservidoresComponent } from './pgservidores/pgservidores.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+ }
