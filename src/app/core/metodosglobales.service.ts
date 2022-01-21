@@ -11,7 +11,7 @@ export class MetodosGlobalesService {
 
     url_servidor = this.serviciosconexion.SeleccionAmbiente();
 
-    consultabackup(NombreBck: string, Ip: string, usuario:string, cliente: string) {
+    consultabackup(NombreBck: string, Ip: string, usuario: string, cliente: string) {
         return this.http.get<any[]>(this.url_servidor + 'consultabackup/' + NombreBck + '/' + Ip + '/' + usuario + '/' + cliente)
     }
     consultausuarios() {
@@ -20,8 +20,13 @@ export class MetodosGlobalesService {
     consultaproyect(bandera: string) {
         return this.http.get<any[]>(this.url_servidor + 'consultaproyect/' + bandera)
     }
-
     insertarbackup(ORIGEN: string, BodyPost: any) {
         return this.http.post<any>(this.url_servidor + 'insertarbackup/' + ORIGEN, BodyPost)
+    }
+    consultaregistbck(BodyPost: any, IdUsuario: string) {
+        return this.http.post<any>(this.url_servidor + 'consultaregistbck/' + IdUsuario, BodyPost)
+    }
+    consultaservidors(bandera: string) {
+        return this.http.get<any[]>(this.url_servidor + 'consultaservidors/' + bandera)
     }
 }
