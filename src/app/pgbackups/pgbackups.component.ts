@@ -60,6 +60,10 @@ export class PgbackupsComponent implements OnInit {
   TipoBackup: string;
   Usuario: string;
   FechaUlt: string;
+  IdClientee: string;
+  IdServidor: string;
+  TipoBackupEdit: string;
+  IdTipoBackup: string;
 
   //Variables Ver
   modalVer: BsModalRef;
@@ -318,6 +322,7 @@ export class PgbackupsComponent implements OnInit {
 
   }
   VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
+    this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
     const ConsultaRegistroBck =
     {
       Fecha: '0',
@@ -327,7 +332,6 @@ export class PgbackupsComponent implements OnInit {
     this.Servicios.consultaregistbck(ConsultaRegistroBck, ArGrilla.Id_B).subscribe(respu => {
       if (respu.length > 0) {
         this.ArregloGrillaReguistroBck = respu;
-        this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
       }
     })
   }
@@ -357,6 +361,7 @@ export class PgbackupsComponent implements OnInit {
 
   Editarbackup(templateEditarBackup: TemplateRef<any>, Array: any) {
     this.modalVer = this._modalService.show(templateEditarBackup)
+    this.IdClientee = Array.Id_PRY;
     this.NombreBackup = Array.Nombre;
     this.Clientee = Array.NombreProyecto;
     this.Ambiente = Array.Ambiente;
@@ -365,6 +370,9 @@ export class PgbackupsComponent implements OnInit {
     this.TipoBackup = Array.Descripcion;
     this.Usuario = Array.UsuarioModifi;
     this.FechaUlt = Array.Fecha_Ult_Mod;
+     this.IdServidor = Array.Id_Servidor;
+     this.TipoBackupEdit = Array.Descripcion;
+     this.IdTipoBackup = Array.Id_Tipo_BCK;
   }
 
   AgregarRegistroBackup(SeleccionaBackup: HTMLElement) {

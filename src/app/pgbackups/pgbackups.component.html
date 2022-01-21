@@ -15,8 +15,7 @@
             <select class="form-select" title="Seleccionar usuario" [(ngModel)]="IdUsuario" #Selecusuario
                 (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value)'>
                 <option value="0" selected>Seleccione usuario</option>
-                <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">
-                    {{arRespu.Nombre}}</option>
+                <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>
             </select>
         </div>
         <!--Fin Tipo lista-->
@@ -25,7 +24,8 @@
         <div class="col-sm-4 m-0 mb-3 ">
             <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdCliente">
                 <option value="0" selected>Seleccione cliente</option>
-                <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">{{arRespu.Nombre}}</option>
+                <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">{{arRespu.Nombre}}
+                </option>
             </select>
         </div>
         <!--Fin Tipo lista-->
@@ -145,16 +145,19 @@
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control" title="Nombre Kackup" [(ngModel)]="LblAgregarNombre">
+                    <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control"
+                        title="Nombre Kackup" [(ngModel)]="LblAgregarNombre">
                 </div>
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdAgregarCliente">
                         <option value="0">Seleccione cliente</option>
-                        <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">{{arRespu.Nombre}}</option>
+                        <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">
+                            {{arRespu.Nombre}}</option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control" title="Ambiente" [(ngModel)]="LblAgregarAmbiente">
+                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control"
+                        title="Ambiente" [(ngModel)]="LblAgregarAmbiente">
                 </div>
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccione periodicidad" [(ngModel)]="LblAgregarPeriodicidad">
@@ -178,14 +181,16 @@
                     </select>
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="text" value="" [(ngModel)]="Fecha" placeholder="Fecha" class="col-sm-6 text-center form-control" title="Fecha" disabled>
+                    <input type="text" value="" [(ngModel)]="Fecha" placeholder="Fecha"
+                        class="col-sm-6 text-center form-control" title="Fecha" disabled>
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                        <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar" (click)="AgregarBck(templateMensaje)">
-                            <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2">
-                            Guardar..
-                        </button>
+                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar"
+                        (click)="AgregarBck(templateMensaje)">
+                        <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
 
                     <button class="btn btn-outline-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
                         <img src="../../../../assets/ImagenesRDN/ic_signoEx.png" class="BtnimgTamanoPeque mr-2">
@@ -302,30 +307,46 @@
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
                 <div class="col-sm-4 mt-3">
-                    <input type="text" class="form-control" title="Nombre Kackup" [(ngModel)]="NombreBackup">
+                    <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control"
+                        title="Nombre Kackup" [(ngModel)]="NombreBackup">
                 </div>
                 <div class="col-sm-4 mt-3">
-                    <input type="text" class="form-control" title="Cliente" [(ngModel)]="Clientee">
+                    <select class="form-select" title="Seleccionar cliente">
+                        <option value="{{IdClientee}}">{{Clientee}}</option>
+                            <option *ngFor="let arRespu of ArregloListaCliente" value="{{arRespu.Id_PRY}}">{{arRespu.Nombre}}</option>
+                    </select>
                 </div>
                 <div class="col-sm-4 mt-3">
-                    <input type="text" class="form-control" title="Ambiente" [(ngModel)]="Ambiente">
+                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control" title="Ambiente" [(ngModel)]="Ambiente">
                 </div>
                 <div class="col-sm-4 mt-3">
-                    <input type="text" class="form-control" title="Periodicidad" [(ngModel)]="Periodicidad">
+                    <select class="form-select" title="Seleccione periodicidad" [(ngModel)]="Periodicidad">
+                        <option value="{{Periodicidad}}">{{Periodicidad}}</option>
+                        <option value="DIARIO">DIARIO</option>
+                        <option value="VIERNES">VIERNES</option>
+                        <option value="QUINCENAL">QUINCENAL</option>
+                        <option value="MENSUAL">MENSUAL</option>
+                    </select>
                 </div>
                 <div class="col-sm-4 mt-3">
-                    <input type="text" class="form-control" title="Servidor" [(ngModel)]="Servidor">
+                    <select class="form-select" title="Seleccionar servidor">
+                        <option value="{{IdServidor}}">{{Servidor}}</option>
+                        <option value="22">CONTABILIDAD</option>
+                    </select>
                 </div>
                 <div class="col-sm-4 mt-3">
-                    <input type="text" class="form-control" title="Tipo backup" [(ngModel)]="TipoBackup">
+                    <select class="form-select" title="Seleccionar el tipo backup">
+                        <option value="{{IdTipoBackup}}">{{TipoBackupEdit}}</option>
+                        <option value="2">APPS</option>
+                    </select>
 
                 </div>
                 <div class="col-sm-4 mt-3">
                     <input type="text" class="form-control" title="Usuario" [(ngModel)]="Usuario" disabled>
                 </div>
                 <div class="col-sm-4 mt-3">
-                    <input type="text" class="form-control" title="Fecha ultima modificación" [(ngModel)]="FechaUlt"
-                        disabled>
+                    <input type="text" value="" [(ngModel)]="Fecha" placeholder="Fecha"
+                        class="col-sm-6 text-center form-control" title="Fecha" disabled>
                 </div>
             </li>
         </div>
