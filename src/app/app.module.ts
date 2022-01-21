@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PgservidoresComponent } from './components/pgservidores/pgservidores.component';
 import { LayautprincipalComponent } from './layouts/layautprincipal/layautprincipal.component';
 import { LayautloginComponent } from './layouts/layautlogin/layautlogin.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LayautloginComponent } from './layouts/layautlogin/layautlogin.componen
     PgbackupsComponent,
     PgservidoresComponent,
     LayautprincipalComponent,
-    LayautloginComponent
+    LayautloginComponent,
+    LoginComponent
   ],
   imports: [
     ModalModule.forRoot(),
