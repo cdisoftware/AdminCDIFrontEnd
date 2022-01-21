@@ -11,6 +11,7 @@ import { PgservidoresComponent } from './components/pgservidores/pgservidores.co
 import { LayautprincipalComponent } from './layouts/layautprincipal/layautprincipal.component';
 import { LayautloginComponent } from './layouts/layautlogin/layautlogin.component';
 import { LoginComponent } from './components/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LoginComponent } from './components/login/login.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ModalModule
+    ModalModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
