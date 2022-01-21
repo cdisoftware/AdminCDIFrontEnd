@@ -97,7 +97,6 @@ export class PgbackupsComponent implements OnInit {
 
   //Grilla
   Grilla(Ip: string, Nombre: string, IdUsuario: string, IdCliente: string) {
-    console.log(IdCliente)
     if (Ip == undefined || Ip == '') {
       Ip = '0';
     }
@@ -215,6 +214,7 @@ export class PgbackupsComponent implements OnInit {
   ListaUsuario() {
     this.ArregloListaUsuario = [];
     this.Servicios.consultausuarios().subscribe(respu => {
+      console.log(respu)
       this.ArregloListaUsuario = respu;
     })
   }
@@ -385,12 +385,4 @@ export class PgbackupsComponent implements OnInit {
     SeleccionaBackup.innerHTML.valueOf
   }
   
-
-
-  ListaServidor() {
-    this.ArregloListaServidor = [];
-    this.Servicios.consultaservidors('1').subscribe(respu => {
-      this.ArregloListaServidor = respu;
-    })
-  }
 }
