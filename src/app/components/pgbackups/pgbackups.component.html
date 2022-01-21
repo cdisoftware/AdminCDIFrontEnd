@@ -224,7 +224,7 @@
                 <textarea id="form10" class="md-textarea form-control" placeholder="Observaciones" [disabled] = "DisableAgregarReguistroBck == false"></textarea>
             </div>
             <div class="col-sm-3 mt-3">
-                <button class="btn btn-outline-dark" id="BotonAgregarRegistroBackup" title="Nuevo" (click)="AgregarRegistroBackup()">
+                <button class="btn btn-outline-dark col-sm-12" id="BotonAgregarRegistroBackup" title="Nuevo" (click)="AgregarRegistroBackup()">
                     <img src="../../../../assets/ImagenesRDN/Agregar.png" class="BtnimgTamanoPeque mr-2">
                     Nuevo
                 </button>
@@ -253,7 +253,7 @@
             </div>
 
             <div class="col-sm-6 mt-3">
-                <input type="date" class="form-control" placeholder="Fecha"   [(ngModel)]="Fecha">
+                <input type="text" class="form-control text-center" placeholder="Fecha"   [(ngModel)]="Fecha" disabled>
             </div>
             <div class="row displayCenter col-12 mt-3 p-3">
                 <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar">
