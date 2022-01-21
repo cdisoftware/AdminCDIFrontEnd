@@ -26,4 +26,7 @@ export class MetodosGlobalesService {
     consultaregistbck(BodyPost: any, IdUsuario: string) {
         return this.http.post<any>(this.url_servidor + 'consultaregistbck/' + IdUsuario, BodyPost)
     }
+    consultaservidors(bandera: string) {
+        return this.http.get<any[]>(this.url_servidor + 'consultaservidors/' + bandera)
+    }
 }

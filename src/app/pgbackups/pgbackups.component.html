@@ -6,14 +6,14 @@
         <!--Ayuda IP-->
         <div class="col-sm-8 m-0 mb-3 displayFlexbetween">
             <input type="text" class="form-control table-bordered" #Ip placeholder="IP" title="IP" [(ngModel)]="LblIp"
-                (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value)">
+                (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneCliente.value)">
         </div>
         <!--Fin ayuda-->
 
         <!--Tipo lista-->
         <div class="col-sm-4 m-0 mb-3 ">
             <select class="form-select" title="Seleccionar usuario" [(ngModel)]="IdUsuario" #Selecusuario
-                (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value)'>
+                (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneCliente.value)'>
                 <option value="0" selected>Seleccione usuario</option>
                 <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>
             </select>
@@ -22,7 +22,7 @@
 
         <!--Tipo lista-->
         <div class="col-sm-4 m-0 mb-3 ">
-            <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdCliente">
+            <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdCliente" #SelecioneCliente (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneCliente.value)'>
                 <option value="0" selected>Seleccione cliente</option>
                 <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">{{arRespu.Nombre}}
                 </option>
@@ -33,7 +33,7 @@
         <!--Ayuda Nombre-->
         <div class="col-sm-8 m-0 mb-3 displayFlexbetween">
             <input type="text" class="form-control" placeholder="Nombre" #Nombre title="Nombre backup"
-                [(ngModel)]="NombreBCK" (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value)">
+                [(ngModel)]="NombreBCK" (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneCliente.value)">
         </div>
         <!--Fin ayuda-->
 

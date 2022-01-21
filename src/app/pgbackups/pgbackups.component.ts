@@ -78,7 +78,8 @@ export class PgbackupsComponent implements OnInit {
 
   Fecha: string = this.Año + '-' + this.Mes + '-' + this.Dia;
 
-  //Variables agregar
+  //Variables servidor
+  ArregloListaServidor: any;
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
@@ -89,13 +90,14 @@ export class PgbackupsComponent implements OnInit {
     this.IdUsuario = '0';
     this.IdCliente = '0';
 
-    this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario);
+    this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
     this.ListaUsuario();
     this.ListaCliente();
   }
 
   //Grilla
-  Grilla(Ip: string, Nombre: string, IdUsuario: string) {
+  Grilla(Ip: string, Nombre: string, IdUsuario: string, IdCliente: string) {
+    console.log(IdCliente)
     if (Ip == undefined || Ip == '') {
       Ip = '0';
     }
@@ -107,9 +109,12 @@ export class PgbackupsComponent implements OnInit {
     if (IdUsuario == undefined || IdUsuario == '') {
       IdUsuario = '0';
     }
+    if (IdCliente == undefined || IdCliente == '') {
+      IdCliente = '0';
+    }
     this.ArregloGrilla = [];
     this.AuxiliadorGrilla = false;
-    this.Servicios.consultabackup(Nombre, Ip, IdUsuario, '0').subscribe(respu => {
+    this.Servicios.consultabackup(Nombre, Ip, IdUsuario, IdCliente).subscribe(respu => {
       if (respu.length > 0) {
         this.ArregloGrilla = respu;
         this.AuxiliadorGrilla = true;
@@ -200,7 +205,7 @@ export class PgbackupsComponent implements OnInit {
     this.LblIp = '';
     this.NombreBCK = '';
 
-    this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario);
+    this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
   }
 
   BtnNuevo(templateAgregar: TemplateRef<any>, templateMensaje: TemplateRef<any>) {
@@ -334,6 +339,7 @@ export class PgbackupsComponent implements OnInit {
         this.ArregloGrillaReguistroBck = respu;
       }
     })
+    this.ArregloGrillaReguistroBck = [];
   }
 
   AgregarBck(templateMensaje: TemplateRef<any>) {
@@ -352,7 +358,7 @@ export class PgbackupsComponent implements OnInit {
       if (respu.length > 0) {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
-        this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario);
+        this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
 
         this.modalAgregar.hide()
       }
@@ -377,5 +383,14 @@ export class PgbackupsComponent implements OnInit {
 
   AgregarRegistroBackup(SeleccionaBackup: HTMLElement) {
     SeleccionaBackup.innerHTML.valueOf
+  }
+  
+
+
+  ListaServidor() {
+    this.ArregloListaServidor = [];
+    this.Servicios.consultaservidors('1').subscribe(respu => {
+      this.ArregloListaServidor = respu;
+    })
   }
 }
