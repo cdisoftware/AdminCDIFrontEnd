@@ -1,3 +1,6 @@
 .texto{
 font-size: 11px;
 }
+.textarea {
+    resize: none;
+}
