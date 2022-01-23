@@ -150,10 +150,10 @@
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
                     <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control"
-                        title="Nombre Kackup" [(ngModel)]="LblAgregarNombre">
+                        title="Nombre Kackup" [(ngModel)]="LblAgregarNombre" required>
                 </div>
                 <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdAgregarCliente">
+                    <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdAgregarCliente" required>
                         <option value="0">Seleccione cliente</option>
                         <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">
                             {{arRespu.Nombre}}</option>
@@ -161,10 +161,10 @@
                 </div>
                 <div class="col-6 mt-3">
                     <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control"
-                        title="Ambiente" [(ngModel)]="LblAgregarAmbiente">
+                        title="Ambiente" [(ngModel)]="LblAgregarAmbiente" required>
                 </div>
                 <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccione periodicidad" [(ngModel)]="LblAgregarPeriodicidad">
+                    <select class="form-select" title="Seleccione periodicidad" [(ngModel)]="LblAgregarPeriodicidad" required>
                         <option value="0">Seleccione periodicidad</option>
                         <option value="DIARIO">DIARIO</option>
                         <option value="VIERNES">VIERNES</option>
@@ -173,15 +173,15 @@
                     </select>
                 </div>
                 <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar servidor" [(ngModel)]="IdAgregarServidor">
+                    <select class="form-select" title="Seleccionar servidor" [(ngModel)]="IdAgregarServidor" required>
                         <option value="0">Seleccione servidor</option>
-                        <option value="22">CONTABILIDAD</option>
+                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}</option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar el tipo backup" [(ngModel)]="IdAgregarTipoBackup">
+                    <select class="form-select" title="Seleccionar el tipo backup" [(ngModel)]="IdAgregarTipoBackup" required>
                         <option value="0">Seleccione tipo backup</option>
-                        <option value="2">APPS</option>
+                        <option value="{{arRespu.Id_Tipo_BCK}}" *ngFor="let arRespu of ArregloListaTipoBackup">{{arRespu.Descripcion}}</option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">

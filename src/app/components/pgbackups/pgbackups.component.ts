@@ -1,13 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
 import { Workbook } from "exceljs";
 import { saveAs } from 'file-saver';
-
 import autoTable from 'jspdf-autotable'
 import jsPDF from 'jspdf';
-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -39,11 +36,14 @@ export class PgbackupsComponent implements OnInit {
   LblAgregarAmbiente: string;
   LblAgregarPeriodicidad: string;
   IdAgregarServidor: string;
-  IdAgregarTipoBackup: string;
 
   //Variables lista Usuario
   IdUsuario: string;
   ArregloListaUsuario: any;
+
+  //Variables lista TipoBackup
+  IdAgregarTipoBackup: string;
+  ArregloListaTipoBackup: any;
 
   //Variable lista cliente
   IdCliente: string;
@@ -93,9 +93,17 @@ export class PgbackupsComponent implements OnInit {
     this.IdUsuario = '0';
     this.IdCliente = '0';
 
+    //Inicializar agregar
+    this.IdAgregarCliente = '0';
+    this.LblAgregarPeriodicidad = '0';
+    this.IdAgregarServidor = '0';
+    this.IdAgregarTipoBackup = '0';
+
     this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
     this.ListaUsuario();
     this.ListaCliente();
+    this.ListaTipoServidor();
+    this.ListaTipoBackup();
   }
 
   //Grilla
@@ -206,6 +214,8 @@ export class PgbackupsComponent implements OnInit {
   Limpiar() {
     this.LblIp = '';
     this.NombreBCK = '';
+    this.IdUsuario = '0';
+    this.IdCliente = '0';
 
     this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
   }
@@ -217,7 +227,6 @@ export class PgbackupsComponent implements OnInit {
   ListaUsuario() {
     this.ArregloListaUsuario = [];
     this.Servicios.consultausuarios().subscribe(respu => {
-      console.log(respu)
       this.ArregloListaUsuario = respu;
     })
   }
@@ -354,7 +363,7 @@ export class PgbackupsComponent implements OnInit {
       Ambiente: this.LblAgregarAmbiente,
       Periodicidad: this.LblAgregarPeriodicidad,
       Id_Servidor: this.IdAgregarServidor,
-      Id_Tipo_BCK:this.IdAgregarTipoBackup,
+      Id_Tipo_BCK: this.IdAgregarTipoBackup,
       Id_Usuario: 1,//Falta esta con el login
       Fecha_Ult_Mod: this.Fecha
     }
@@ -380,13 +389,35 @@ export class PgbackupsComponent implements OnInit {
     this.TipoBackup = Array.Descripcion;
     this.Usuario = Array.UsuarioModifi;
     this.FechaUlt = Array.Fecha_Ult_Mod;
-     this.IdServidor = Array.Id_Servidor;
-     this.TipoBackupEdit = Array.Descripcion;
-     this.IdTipoBackup = Array.Id_Tipo_BCK;
+    this.IdServidor = Array.Id_Servidor;
+    this.TipoBackupEdit = Array.Descripcion;
+    this.IdTipoBackup = Array.Id_Tipo_BCK;
   }
 
   AgregarRegistroBackup() {
     this.DisableAgregarReguistroBck = true
   }
-  
+
+  ListaTipoServidor() {
+    this.ArregloListaServidor = [];
+    this.Servicios.consultaservidors('1').subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaServidor = respu;
+      }
+    })
+  }
+  ListaTipoBackup() {
+    const ConsultaTipoB =
+    {
+      IdTipoBackup: "0",
+      Descripcion: "0"
+    }
+    this.ArregloListaTipoBackup = [];
+    this.Servicios.consultatipobck(ConsultaTipoB).subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaTipoBackup = respu;
+      }
+    })
+  }
+
 }
