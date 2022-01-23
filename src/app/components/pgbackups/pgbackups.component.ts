@@ -93,6 +93,12 @@ export class PgbackupsComponent implements OnInit {
     this.IdUsuario = '0';
     this.IdCliente = '0';
 
+    //Inicializar agregar
+    this.IdAgregarCliente = '0';
+    this.LblAgregarPeriodicidad = '0';
+    this.IdAgregarServidor = '0';
+    this.IdAgregarTipoBackup = '0';
+
     this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
     this.ListaUsuario();
     this.ListaCliente();
@@ -206,6 +212,8 @@ export class PgbackupsComponent implements OnInit {
   Limpiar() {
     this.LblIp = '';
     this.NombreBCK = '';
+    this.IdUsuario = '0';
+    this.IdCliente = '0';
 
     this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
   }
@@ -217,7 +225,6 @@ export class PgbackupsComponent implements OnInit {
   ListaUsuario() {
     this.ArregloListaUsuario = [];
     this.Servicios.consultausuarios().subscribe(respu => {
-      console.log(respu)
       this.ArregloListaUsuario = respu;
     })
   }
@@ -354,7 +361,7 @@ export class PgbackupsComponent implements OnInit {
       Ambiente: this.LblAgregarAmbiente,
       Periodicidad: this.LblAgregarPeriodicidad,
       Id_Servidor: this.IdAgregarServidor,
-      Id_Tipo_BCK:this.IdAgregarTipoBackup,
+      Id_Tipo_BCK: this.IdAgregarTipoBackup,
       Id_Usuario: 1,//Falta esta con el login
       Fecha_Ult_Mod: this.Fecha
     }
@@ -380,13 +387,13 @@ export class PgbackupsComponent implements OnInit {
     this.TipoBackup = Array.Descripcion;
     this.Usuario = Array.UsuarioModifi;
     this.FechaUlt = Array.Fecha_Ult_Mod;
-     this.IdServidor = Array.Id_Servidor;
-     this.TipoBackupEdit = Array.Descripcion;
-     this.IdTipoBackup = Array.Id_Tipo_BCK;
+    this.IdServidor = Array.Id_Servidor;
+    this.TipoBackupEdit = Array.Descripcion;
+    this.IdTipoBackup = Array.Id_Tipo_BCK;
   }
 
   AgregarRegistroBackup() {
     this.DisableAgregarReguistroBck = true
   }
-  
+
 }
