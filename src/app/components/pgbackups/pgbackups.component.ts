@@ -225,8 +225,14 @@ export class PgbackupsComponent implements OnInit {
   }
 
   ListaUsuario() {
+    const ConsultaUsu =
+    {
+      Nombre:"0",
+      Apellido:"0",
+      Cedula:"0"
+    }
     this.ArregloListaUsuario = [];
-    this.Servicios.consultausuarios().subscribe(respu => {
+    this.Servicios.consultausuarios(ConsultaUsu).subscribe(respu => {
       this.ArregloListaUsuario = respu;
     })
   }
@@ -379,6 +385,7 @@ export class PgbackupsComponent implements OnInit {
   }
 
   Editarbackup(templateEditarBackup: TemplateRef<any>, Array: any) {
+    console.log(Array)
     this.modalVer = this._modalService.show(templateEditarBackup)
     this.IdClientee = Array.Id_PRY;
     this.NombreBackup = Array.Nombre;
@@ -387,7 +394,6 @@ export class PgbackupsComponent implements OnInit {
     this.Periodicidad = Array.Periodicidad;
     this.Servidor = Array.IpServidor;
     this.TipoBackup = Array.Descripcion;
-    this.Usuario = Array.UsuarioModifi;
     this.FechaUlt = Array.Fecha_Ult_Mod;
     this.IdServidor = Array.Id_Servidor;
     this.TipoBackupEdit = Array.Descripcion;
@@ -420,4 +426,27 @@ export class PgbackupsComponent implements OnInit {
     })
   }
 
+  UpdateBck(templateMensaje: TemplateRef<any>) {
+    console.log("Paso")
+    const datosupdate =
+    {
+      Nombre: this.NombreBackup,
+      Id_PRY: this.IdClientee,
+      Ambiente: this.Ambiente,
+      Periodicidad: this.Periodicidad,
+      Id_Servidor: this.IdServidor,
+      Id_Tipo_BCK: this.IdTipoBackup,
+      Id_Usuario: 1,//Falta esta con el login
+      Fecha_Ult_Mod: this.Fecha
+    }
+    this.Servicios.actualizabackup('2', datosupdate).subscribe(respu => {
+      if (respu.length > 0) {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+        this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
+
+        this.modalVer.hide()
+      }
+    })
+  }
 }
