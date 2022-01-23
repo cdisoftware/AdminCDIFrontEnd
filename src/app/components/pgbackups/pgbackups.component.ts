@@ -338,12 +338,12 @@ export class PgbackupsComponent implements OnInit {
       Estado: 2,
       Usuario: 0
     }
+    this.ArregloGrillaReguistroBck = [];
     this.Servicios.consultaregistbck(ConsultaRegistroBck, ArGrilla.Id_B).subscribe(respu => {
       if (respu.length > 0) {
         this.ArregloGrillaReguistroBck = respu;
       }
     })
-    this.ArregloGrillaReguistroBck = [];
   }
 
   AgregarBck(templateMensaje: TemplateRef<any>) {
