@@ -218,6 +218,14 @@ export class PgbackupsComponent implements OnInit {
     this.IdUsuario = '0';
     this.IdCliente = '0';
 
+    //Limpiar agregar
+    this.LblAgregarNombre = '';
+    this.IdAgregarCliente = '0';
+    this.LblAgregarAmbiente = '';
+    this.LblAgregarPeriodicidad = '0';
+    this.IdAgregarServidor = '0';
+    this.IdAgregarTipoBackup = '0';
+
     this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
   }
 
@@ -363,26 +371,35 @@ export class PgbackupsComponent implements OnInit {
   }
 
   AgregarBck(templateMensaje: TemplateRef<any>) {
-    const datosinsert =
-    {
-      Nombre: this.LblAgregarNombre,
-      Id_PRY: this.IdAgregarCliente,
-      Ambiente: this.LblAgregarAmbiente,
-      Periodicidad: this.LblAgregarPeriodicidad,
-      Id_Servidor: this.IdAgregarServidor,
-      Id_Tipo_BCK: this.IdAgregarTipoBackup,
-      Id_Usuario: 1,//Falta esta con el login
-      Fecha_Ult_Mod: this.Fecha
-    }
-    this.Servicios.insertarbackup('3', datosinsert).subscribe(respu => {
-      if (respu.length > 0) {
-        this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = respu;
-        this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
+    if (this.LblAgregarNombre == undefined || this.LblAgregarNombre == '' || this.IdAgregarCliente == undefined || this.IdAgregarCliente == ''
+      || this.LblAgregarAmbiente == undefined || this.LblAgregarAmbiente == '' || this.LblAgregarPeriodicidad == undefined || this.LblAgregarPeriodicidad == '0'
+      || this.IdAgregarServidor == undefined || this.IdAgregarServidor == '0' || this.IdAgregarTipoBackup == undefined || this.IdAgregarTipoBackup == '0') {
 
-        this.modalAgregar.hide()
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = "Por favor complete los campos a agregar";
+    } else {
+      const datosinsert =
+      {
+        Nombre: this.LblAgregarNombre,
+        Id_PRY: this.IdAgregarCliente,
+        Ambiente: this.LblAgregarAmbiente,
+        Periodicidad: this.LblAgregarPeriodicidad,
+        Id_Servidor: this.IdAgregarServidor,
+        Id_Tipo_BCK: this.IdAgregarTipoBackup,
+        Id_Usuario: 1,//Falta esta con el login
+        Fecha_Ult_Mod: this.Fecha
       }
-    })
+      this.Servicios.insertarbackup('3', datosinsert).subscribe(respu => {
+        if (respu.length > 0) {
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = respu;
+          this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
+
+          this.modalAgregar.hide();
+          this.Limpiar();
+        }
+      })
+    }
   }
 
   Editarbackup(templateEditarBackup: TemplateRef<any>, Array: any) {
@@ -441,13 +458,14 @@ export class PgbackupsComponent implements OnInit {
       Fecha_Ult_Mod: this.Fecha
     }
     console.log(this.IdBackupEdit)
-    this.Servicios.actualizabackup('2', this.IdBackupEdit,  datosupdate).subscribe(respu => {
+    this.Servicios.actualizabackup('2', this.IdBackupEdit, datosupdate).subscribe(respu => {
       if (respu.length > 0) {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
         this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
 
         this.modalVer.hide()
+        console.log("Paso........")
       }
     })
   }
