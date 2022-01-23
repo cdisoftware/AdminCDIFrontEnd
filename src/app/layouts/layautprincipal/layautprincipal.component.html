@@ -1,27 +1,30 @@
 <nav class="navbar">
-    <!-- LOGO -->
-    <div class="logo">AdminCDI</div>
-    <!-- NAVIGATION MENU -->
-    <ul class="nav-links">
-      <div class="menu">
-        <li><a class="cursorPointer titulopopup" (click)="VerPgBackup()">Backups</a></li>
-        <li><a href="/" class="titulopopup">Clientes</a></li>
-        <li class="services titulopopup">
-          <a href="/">Servidores</a>
-          <!-- DROPDOWN MENU -->
-          <ul class="dropdown">
-            <li><a href="/">Dropdown 1 </a></li>
-            <li><a href="/">Dropdown 2</a></li>
-            <li><a href="/">Dropdown 2</a></li>
-            <li><a href="/">Dropdown 3</a></li>
-            <li><a href="/">Dropdown 4</a></li>
-          </ul>
-        </li>
-        <li><a href="/" class="titulopopup">Usuarios</a></li>
-        <li><a href="/" class="titulopopup">Cerrar cesion</a></li>
-      </div>
-    </ul>
-  </nav>
+  <!-- LOGO -->
+  <div class="logo">AdminCDI
+    <img src="../../../assets/ImagenesAdminCDI/Logo.png" class="BtnimgTamanoPeque mr-2">
+  </div>
+  <!-- NAVIGATION MENU -->
+  <ul class="nav-links">
+    <div class="menu">
+      <li><a class="cursorPointer titulopopup" (click)="VerPgBackup()">Backups</a></li>
+      <li><a href="/" class="titulopopup">Clientes</a></li>
+      <li class="services titulopopup">
+        <a href="/">Servidores</a>
+        <!-- DROPDOWN MENU -->
+        <ul class="dropdown">
+          <li><a href="/">Dropdown 1 </a></li>
+          <li><a href="/">Dropdown 2</a></li>
+          <li><a href="/">Dropdown 2</a></li>
+          <li><a href="/">Dropdown 3</a></li>
+          <li><a href="/">Dropdown 4</a></li>
+        </ul>
+      </li>
+      <li><a href="/" class="titulopopup">Usuarios</a></li>
+      <li>
+        <a href="/" class="titulopopup">Cerrar cesion</a>
+        <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 10px;" class="BtnimgTamanoPeque mr-2">
+      </li>
+    </div>
+  </ul>
+</nav>
 <router-outlet></router-outlet>
-
-
