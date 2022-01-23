@@ -1,13 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
 import { Workbook } from "exceljs";
 import { saveAs } from 'file-saver';
-
 import autoTable from 'jspdf-autotable'
 import jsPDF from 'jspdf';
-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -39,11 +36,14 @@ export class PgbackupsComponent implements OnInit {
   LblAgregarAmbiente: string;
   LblAgregarPeriodicidad: string;
   IdAgregarServidor: string;
-  IdAgregarTipoBackup: string;
 
   //Variables lista Usuario
   IdUsuario: string;
   ArregloListaUsuario: any;
+
+  //Variables lista TipoBackup
+  IdAgregarTipoBackup: string;
+  ArregloListaTipoBackup: any;
 
   //Variable lista cliente
   IdCliente: string;
@@ -102,6 +102,8 @@ export class PgbackupsComponent implements OnInit {
     this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
     this.ListaUsuario();
     this.ListaCliente();
+    this.ListaTipoServidor();
+    this.ListaTipoBackup();
   }
 
   //Grilla
@@ -394,6 +396,28 @@ export class PgbackupsComponent implements OnInit {
 
   AgregarRegistroBackup() {
     this.DisableAgregarReguistroBck = true
+  }
+
+  ListaTipoServidor() {
+    this.ArregloListaServidor = [];
+    this.Servicios.consultaservidors('1').subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaServidor = respu;
+      }
+    })
+  }
+  ListaTipoBackup() {
+    const ConsultaTipoB =
+    {
+      IdTipoBackup: "0",
+      Descripcion: "0"
+    }
+    this.ArregloListaTipoBackup = [];
+    this.Servicios.consultatipobck(ConsultaTipoB).subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaTipoBackup = respu;
+      }
+    })
   }
 
 }
