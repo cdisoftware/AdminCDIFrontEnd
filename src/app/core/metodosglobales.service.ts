@@ -23,8 +23,9 @@ export class MetodosGlobalesService {
     insertarbackup(Bandera: string, BodyPost: any) {
         return this.http.post<any>(this.url_servidor + 'insertarbackup/' + Bandera, BodyPost)
     }
-    actualizabackup(Bandera: string, BodyPost: any) {
-        return this.http.put<any>(this.url_servidor + 'actualizabackup/' + Bandera, BodyPost)
+    actualizabackup(Bandera: string, IdBackup: string, BodyPost: any) {
+        console.log(this.url_servidor + 'actualizabackup/' + Bandera + '/' + IdBackup, BodyPost)
+        return this.http.put<any>(this.url_servidor + 'actualizabackup/' + Bandera + '/' + IdBackup, BodyPost)
     }
 
     consultaregistbck(BodyPost: any, IdUsuario: string) {
