@@ -14,15 +14,19 @@ export class MetodosGlobalesService {
     consultabackup(NombreBck: string, Ip: string, usuario: string, cliente: string) {
         return this.http.get<any[]>(this.url_servidor + 'consultabackup/' + NombreBck + '/' + Ip + '/' + usuario + '/' + cliente)
     }
-    consultausuarios() {
-        return this.http.get<any[]>(this.url_servidor + 'consultausuarios')
+    consultausuarios(BodyPost: any) {
+        return this.http.post<any[]>(this.url_servidor + 'consultausuarios', BodyPost)
     }
     consultaproyect(bandera: string) {
         return this.http.get<any[]>(this.url_servidor + 'consultaproyect/' + bandera)
     }
-    insertarbackup(ORIGEN: string, BodyPost: any) {
-        return this.http.post<any>(this.url_servidor + 'insertarbackup/' + ORIGEN, BodyPost)
+    insertarbackup(Bandera: string, BodyPost: any) {
+        return this.http.post<any>(this.url_servidor + 'insertarbackup/' + Bandera, BodyPost)
     }
+    actualizabackup(Bandera: string, BodyPost: any) {
+        return this.http.put<any>(this.url_servidor + 'actualizabackup/' + Bandera, BodyPost)
+    }
+
     consultaregistbck(BodyPost: any, IdUsuario: string) {
         return this.http.post<any>(this.url_servidor + 'consultaregistbck/' + IdUsuario, BodyPost)
     }
