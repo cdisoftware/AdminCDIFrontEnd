@@ -424,7 +424,7 @@ export class PgbackupsComponent implements OnInit {
 
   ListaTipoServidor() {
     this.ArregloListaServidor = [];
-    this.Servicios.consultaservidors('1').subscribe(respu => {
+    this.Servicios.consultaservidors('1', '0', '0', '2', '0').subscribe(respu => {
       if (respu.length > 0) {
         this.ArregloListaServidor = respu;
       }

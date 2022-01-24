@@ -11,7 +11,8 @@
 
         <!--Ayuda SO-->
         <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" #SO placeholder="Sistema operativo" title="Sistema operativo">
+            <input type="text" class="form-control table-bordered" #SO placeholder="Sistema operativo"
+                title="Sistema operativo">
         </div>
         <!--Fin ayuda-->
 
@@ -64,14 +65,36 @@
                 <tr>
                     <th class="cursorPointer">Ip</th>
                     <th class="cursorPointer">Nombre</th>
-                    <th class="cursorPointer">Cliente</th>
-                    <th class="cursorPointer">Ambiente</th>
-                    <th class="cursorPointer">Tipo</th>
-                    <th class="cursorPointer">Periodicidad</th>
-                    <th class="cursorPointer">Usuario Mod</th>
-                    <th class="cursorPointer">Fecha Ultima Mod</th>
+                    <th class="cursorPointer">Sistema Operativo</th>
+                    <th class="cursorPointer">Software</th>
+                    <th class="cursorPointer">Estado</th>
+                    <th class="cursorPointer">Ultima mod</th>
+                    <th class="cursorPointer">Observación</th>
+                    <th class="cursorPointer">Tipo Servidor</th>
+
                     <th>Editar</th>
                     <th>Ver</th>
+                </tr>
+                <tr *ngFor="let ArGrilla of ArregloGrilla">
+                    <td>{{ArGrilla.Ip_S}}</td>
+                    <td>{{ArGrilla.Nombre}}</td>
+                    <td>{{ArGrilla.SO}}</td>
+                    <td>{{ArGrilla.Software}}</td>
+                    <td>{{ArGrilla.Estado}}</td>
+                    <td>{{ArGrilla.UsuarioUltMod}}</td>
+                    <td>{{ArGrilla.Observacion}}</td>
+                    <td>{{ArGrilla.TipoServidor}}</td>
+
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar">
+                            <img src="../../../../assets/ImagenesRDN/ic_editar.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Ver">
+                            <img src="../../../../assets/ImagenesRDN/eye.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
                 </tr>
             </table>
         </div>
