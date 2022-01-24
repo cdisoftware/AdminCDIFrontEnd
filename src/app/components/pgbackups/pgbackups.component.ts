@@ -388,5 +388,5 @@ export class PgbackupsComponent implements OnInit {
   AgregarRegistroBackup() {
     this.DisableAgregarReguistroBck = true
   }
-  
+
 }
