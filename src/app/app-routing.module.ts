@@ -7,7 +7,7 @@ import { LayautloginComponent } from './layouts/layautlogin/layautlogin.componen
 const routes: Routes = [
   {path:'', redirectTo: 'login', pathMatch: 'full'},
   { path: 'login', component: LayautloginComponent},
- // {path: 'dashboard', loadChildren:() => import('./components/pgbackups').then(x => x.DashboardModule)},
+ {path: 'home/PgBackup', loadChildren:() => import('./components/pgbackups/pgbackups.component').then(x => x.PgbackupsComponent)},
   {path: '**', redirectTo: 'login', pathMatch: 'full'},
 
   {
