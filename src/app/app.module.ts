@@ -4,11 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PgservidoresComponent } from './components/pgservidores/pgservidores.component';
 import { LayautprincipalComponent } from './layouts/layautprincipal/layautprincipal.component';
 import { LayautloginComponent } from './layouts/layautlogin/layautlogin.component';
+import { LoginComponent } from './components/login/login.component';
+import { SharedModule } from './components/shared/shared.module';
+import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
+
+
 
 @NgModule({
   declarations: [
@@ -16,7 +20,8 @@ import { LayautloginComponent } from './layouts/layautlogin/layautlogin.componen
     PgbackupsComponent,
     PgservidoresComponent,
     LayautprincipalComponent,
-    LayautloginComponent
+    LayautloginComponent,
+    LoginComponent
   ],
   imports: [
     ModalModule.forRoot(),
@@ -24,7 +29,9 @@ import { LayautloginComponent } from './layouts/layautlogin/layautlogin.componen
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ModalModule
+    ModalModule,
+    SharedModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

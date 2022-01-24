@@ -422,7 +422,7 @@ export class PgbackupsComponent implements OnInit {
     this.DisableAgregarReguistroBck = true
   }
 
-  ListaTipoServidor() {
+ListaTipoServidor() {
     this.ArregloListaServidor = [];
     this.Servicios.consultaservidors('1', '0', '0', '2', '0').subscribe(respu => {
       if (respu.length > 0) {
