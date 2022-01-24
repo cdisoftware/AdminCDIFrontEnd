@@ -403,7 +403,6 @@ export class PgbackupsComponent implements OnInit {
   }
 
   Editarbackup(templateEditarBackup: TemplateRef<any>, Array: any) {
-    console.log(Array);
     this.modalVer = this._modalService.show(templateEditarBackup)
     this.IdBackupEdit = Array.Id_B;
     this.IdClientee = Array.Id_PRY;
@@ -411,7 +410,7 @@ export class PgbackupsComponent implements OnInit {
     this.Clientee = Array.NombreProyecto;
     this.Ambiente = Array.Ambiente;
     this.Periodicidad = Array.Periodicidad;
-    this.Servidor = Array.IpServidor;
+    this.Servidor = Array.NombreServidor;
     this.TipoBackup = Array.Descripcion;
     this.FechaUlt = Array.Fecha_Ult_Mod;
     this.IdServidor = Array.Id_Servidor;
@@ -448,6 +447,7 @@ export class PgbackupsComponent implements OnInit {
   UpdateBck(templateMensaje: TemplateRef<any>) {
     const datosupdate =
     {
+      Id_B: this.IdBackupEdit,
       Nombre: this.NombreBackup,
       Id_PRY: this.IdClientee,
       Ambiente: this.Ambiente,
@@ -457,15 +457,13 @@ export class PgbackupsComponent implements OnInit {
       Id_Usuario: 1,//Falta esta con el login
       Fecha_Ult_Mod: this.Fecha
     }
-    console.log(this.IdBackupEdit)
-    this.Servicios.actualizabackup('2', this.IdBackupEdit, datosupdate).subscribe(respu => {
+    this.Servicios.actualizabackup('2', datosupdate).subscribe(respu => {
       if (respu.length > 0) {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
         this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
 
         this.modalVer.hide()
-        console.log("Paso........")
       }
     })
   }
