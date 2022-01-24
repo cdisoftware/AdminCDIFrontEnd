@@ -3,5 +3,78 @@
         <h5 class="col-12 tituloformulario">Servidores</h5>
     </div>
     <div class="row mt-3">
+        <!--Ayuda Nombre-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #Ip placeholder="Nombre servidor" title="IP">
+        </div>
+        <!--Fin ayuda-->
+
+        <!--Ayuda SO-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #SO placeholder="Sistema operativo" title="Sistema operativo">
+        </div>
+        <!--Fin ayuda-->
+
+        <!--Tipo lista Estado-->
+        <div class="col-sm-6 m-0 mb-3 ">
+            <select class="form-select" title="Seleccionar Estado">
+                <option value="2" selected>Seleccionar Estado</option>
+                <option value="1" selected>Activo</option>
+                <option value="0" selected>Desactivado</option>
+            </select>
+        </div>
+        <!--Fin Tipo lista-->
+
+        <!--Ayuda SO-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #USU placeholder="Usuario" title="Usuario">
+        </div>
+        <!--Fin ayuda-->
+
+        <!--Botones-->
+        <div class="row displayCenter col-12 mt-3">
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Limpiar">
+                <img src="../../../../assets/ImagenesRDN/ic_limpiar.png" class="BtnimgTamanoPeque mr-2">
+                Limpiar
+            </button>
+
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Descargar PDF">
+                <img src="../../../../assets/ImagenesRDN/ic_pdf.png" class="BtnimgTamanoPeque mr-2">
+                Descargar PDF
+            </button>
+
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Exportar Excel">
+                <img src="../../../../assets/ImagenesRDN/ic_excel.png" class="BtnimgTamanoPeque mr-2">
+                Descarga excel
+            </button>
+
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Nuevo">
+                <img src="../../../../assets/ImagenesRDN/Agregar.png" class="BtnimgTamanoPeque mr-2">
+                Agregar
+            </button>
+        </div>
+        <!--Fin botones-->
+
+        <!--Grilla-->
+        <div class="col-sm-12 mt-5">
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th colspan="10">Backups</th>
+                </tr>
+                <tr>
+                    <th class="cursorPointer">Ip</th>
+                    <th class="cursorPointer">Nombre</th>
+                    <th class="cursorPointer">Cliente</th>
+                    <th class="cursorPointer">Ambiente</th>
+                    <th class="cursorPointer">Tipo</th>
+                    <th class="cursorPointer">Periodicidad</th>
+                    <th class="cursorPointer">Usuario Mod</th>
+                    <th class="cursorPointer">Fecha Ultima Mod</th>
+                    <th>Editar</th>
+                    <th>Ver</th>
+                </tr>
+            </table>
+        </div>
+        <!--fin Grilla-->
     </div>
 </div>
