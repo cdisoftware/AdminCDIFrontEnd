@@ -6,19 +6,19 @@
   <!-- NAVIGATION MENU -->
   <ul class="nav-links">
     <div class="menu">
-      <li><a class="cursorPointer titulopopup" (click)="VerPgBackup()">Backups</a></li>
-      <li><a href="/" class="titulopopup">Clientes</a></li>
+      <li class="cursorPointer titulopopup" (click)="VerPgBackup()"><a>Backups</a></li>
       <li class="services titulopopup">
-        <a href="/">Servidores</a>
+        <a (click)="VerPgServidores()" class="cursorPointer">Servidores</a>
         <!-- DROPDOWN MENU -->
         <ul class="dropdown">
-          <li><a href="/">Dropdown 1 </a></li>
+          <li class="cursorPointer"><a>Tipo servidor</a></li>
           <li><a href="/">Dropdown 2</a></li>
           <li><a href="/">Dropdown 2</a></li>
           <li><a href="/">Dropdown 3</a></li>
           <li><a href="/">Dropdown 4</a></li>
         </ul>
       </li>
+      <li><a href="/" class="titulopopup">Clientes</a></li>
       <li><a href="/" class="titulopopup">Usuarios</a></li>
       <li>
         <a href="/" class="titulopopup">Cerrar cesion</a>
