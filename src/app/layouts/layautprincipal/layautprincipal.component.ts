@@ -17,4 +17,7 @@ export class LayautprincipalComponent implements OnInit {
   VerPgBackup(){
     this.router.navigate(["home/PgBackup"]);
   }
+  VerPgServidores(){
+    this.router.navigate(["home/PgServidores"]);
+  }
 }

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
+import { PgservidoresComponent } from './components/pgservidores/pgservidores.component';
 import { LayautprincipalComponent } from './layouts/layautprincipal/layautprincipal.component';
-import { LoginComponent } from './components/login/login.component';
 import { LayautloginComponent } from './layouts/layautlogin/layautlogin.component';
 const routes: Routes = [
   {path:'', redirectTo: 'login', pathMatch: 'full'},
@@ -21,6 +21,16 @@ const routes: Routes = [
     ]
   },
 
+  {
+    path: 'home',
+    component: LayautprincipalComponent,
+    children: [
+      {
+        path: 'PgServidores',
+        component: PgservidoresComponent,
+      }
+    ]
+  }
 ];
 
 @NgModule({

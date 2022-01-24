@@ -3,5 +3,101 @@
         <h5 class="col-12 tituloformulario">Servidores</h5>
     </div>
     <div class="row mt-3">
+        <!--Ayuda Nombre-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #Ip placeholder="Nombre servidor" title="IP">
+        </div>
+        <!--Fin ayuda-->
+
+        <!--Ayuda SO-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #SO placeholder="Sistema operativo"
+                title="Sistema operativo">
+        </div>
+        <!--Fin ayuda-->
+
+        <!--Tipo lista Estado-->
+        <div class="col-sm-6 m-0 mb-3 ">
+            <select class="form-select" title="Seleccionar Estado">
+                <option value="2" selected>Seleccionar Estado</option>
+                <option value="1" selected>Activo</option>
+                <option value="0" selected>Desactivado</option>
+            </select>
+        </div>
+        <!--Fin Tipo lista-->
+
+        <!--Ayuda SO-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #USU placeholder="Usuario" title="Usuario">
+        </div>
+        <!--Fin ayuda-->
+
+        <!--Botones-->
+        <div class="row displayCenter col-12 mt-3">
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Limpiar">
+                <img src="../../../../assets/ImagenesRDN/ic_limpiar.png" class="BtnimgTamanoPeque mr-2">
+                Limpiar
+            </button>
+
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Descargar PDF">
+                <img src="../../../../assets/ImagenesRDN/ic_pdf.png" class="BtnimgTamanoPeque mr-2">
+                Descargar PDF
+            </button>
+
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Exportar Excel">
+                <img src="../../../../assets/ImagenesRDN/ic_excel.png" class="BtnimgTamanoPeque mr-2">
+                Descarga excel
+            </button>
+
+            <button class="btn btn-outline-dark col-sm-2 mrd" title="Nuevo">
+                <img src="../../../../assets/ImagenesRDN/Agregar.png" class="BtnimgTamanoPeque mr-2">
+                Agregar
+            </button>
+        </div>
+        <!--Fin botones-->
+
+        <!--Grilla-->
+        <div class="col-sm-12 mt-5">
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th colspan="10">Servidores</th>
+                </tr>
+                <tr>
+                    <th class="cursorPointer">Ip</th>
+                    <th class="cursorPointer">Nombre</th>
+                    <th class="cursorPointer">Sistema Operativo</th>
+                    <th class="cursorPointer">Software</th>
+                    <th class="cursorPointer">Estado</th>
+                    <th class="cursorPointer">Ultima mod</th>
+                    <th class="cursorPointer">Observación</th>
+                    <th class="cursorPointer">Tipo Servidor</th>
+
+                    <th>Editar</th>
+                    <th>Ver</th>
+                </tr>
+                <tr *ngFor="let ArGrilla of ArregloGrilla">
+                    <td>{{ArGrilla.Ip_S}}</td>
+                    <td>{{ArGrilla.Nombre}}</td>
+                    <td>{{ArGrilla.SO}}</td>
+                    <td>{{ArGrilla.Software}}</td>
+                    <td>{{ArGrilla.Estado}}</td>
+                    <td>{{ArGrilla.UsuarioUltMod}}</td>
+                    <td>{{ArGrilla.Observacion}}</td>
+                    <td>{{ArGrilla.TipoServidor}}</td>
+
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar">
+                            <img src="../../../../assets/ImagenesRDN/ic_editar.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Ver">
+                            <img src="../../../../assets/ImagenesRDN/eye.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--fin Grilla-->
     </div>
 </div>

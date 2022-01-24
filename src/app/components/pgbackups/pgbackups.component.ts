@@ -1,13 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
 import { Workbook } from "exceljs";
 import { saveAs } from 'file-saver';
-
 import autoTable from 'jspdf-autotable'
 import jsPDF from 'jspdf';
-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -39,11 +36,14 @@ export class PgbackupsComponent implements OnInit {
   LblAgregarAmbiente: string;
   LblAgregarPeriodicidad: string;
   IdAgregarServidor: string;
-  IdAgregarTipoBackup: string;
 
   //Variables lista Usuario
   IdUsuario: string;
   ArregloListaUsuario: any;
+
+  //Variables lista TipoBackup
+  IdAgregarTipoBackup: string;
+  ArregloListaTipoBackup: any;
 
   //Variable lista cliente
   IdCliente: string;
@@ -64,6 +64,7 @@ export class PgbackupsComponent implements OnInit {
   IdServidor: string;
   TipoBackupEdit: string;
   IdTipoBackup: string;
+  IdBackupEdit: string;
 
   //Variables Ver
   modalVer: BsModalRef;
@@ -93,9 +94,17 @@ export class PgbackupsComponent implements OnInit {
     this.IdUsuario = '0';
     this.IdCliente = '0';
 
+    //Inicializar agregar
+    this.IdAgregarCliente = '0';
+    this.LblAgregarPeriodicidad = '0';
+    this.IdAgregarServidor = '0';
+    this.IdAgregarTipoBackup = '0';
+
     this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
     this.ListaUsuario();
     this.ListaCliente();
+    this.ListaTipoServidor();
+    this.ListaTipoBackup();
   }
 
   //Grilla
@@ -206,6 +215,16 @@ export class PgbackupsComponent implements OnInit {
   Limpiar() {
     this.LblIp = '';
     this.NombreBCK = '';
+    this.IdUsuario = '0';
+    this.IdCliente = '0';
+
+    //Limpiar agregar
+    this.LblAgregarNombre = '';
+    this.IdAgregarCliente = '0';
+    this.LblAgregarAmbiente = '';
+    this.LblAgregarPeriodicidad = '0';
+    this.IdAgregarServidor = '0';
+    this.IdAgregarTipoBackup = '0';
 
     this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
   }
@@ -215,9 +234,14 @@ export class PgbackupsComponent implements OnInit {
   }
 
   ListaUsuario() {
+    const ConsultaUsu =
+    {
+      Nombre: "0",
+      Apellido: "0",
+      Cedula: "0"
+    }
     this.ArregloListaUsuario = [];
-    this.Servicios.consultausuarios().subscribe(respu => {
-      console.log(respu)
+    this.Servicios.consultausuarios(ConsultaUsu).subscribe(respu => {
       this.ArregloListaUsuario = respu;
     })
   }
@@ -338,55 +362,109 @@ export class PgbackupsComponent implements OnInit {
       Estado: 2,
       Usuario: 0
     }
+    this.ArregloGrillaReguistroBck = [];
     this.Servicios.consultaregistbck(ConsultaRegistroBck, ArGrilla.Id_B).subscribe(respu => {
       if (respu.length > 0) {
         this.ArregloGrillaReguistroBck = respu;
       }
     })
-    this.ArregloGrillaReguistroBck = [];
   }
 
   AgregarBck(templateMensaje: TemplateRef<any>) {
-    const datosinsert =
-    {
-      Nombre: this.LblAgregarNombre,
-      Id_PRY: this.IdAgregarCliente,
-      Ambiente: this.LblAgregarAmbiente,
-      Periodicidad: this.LblAgregarPeriodicidad,
-      Id_Servidor: this.IdAgregarServidor,
-      Id_Tipo_BCK:this.IdAgregarTipoBackup,
-      Id_Usuario: 1,//Falta esta con el login
-      Fecha_Ult_Mod: this.Fecha
-    }
-    this.Servicios.insertarbackup('3', datosinsert).subscribe(respu => {
-      if (respu.length > 0) {
-        this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = respu;
-        this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
+    if (this.LblAgregarNombre == undefined || this.LblAgregarNombre == '' || this.IdAgregarCliente == undefined || this.IdAgregarCliente == ''
+      || this.LblAgregarAmbiente == undefined || this.LblAgregarAmbiente == '' || this.LblAgregarPeriodicidad == undefined || this.LblAgregarPeriodicidad == '0'
+      || this.IdAgregarServidor == undefined || this.IdAgregarServidor == '0' || this.IdAgregarTipoBackup == undefined || this.IdAgregarTipoBackup == '0') {
 
-        this.modalAgregar.hide()
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = "Por favor complete los campos a agregar";
+    } else {
+      const datosinsert =
+      {
+        Nombre: this.LblAgregarNombre,
+        Id_PRY: this.IdAgregarCliente,
+        Ambiente: this.LblAgregarAmbiente,
+        Periodicidad: this.LblAgregarPeriodicidad,
+        Id_Servidor: this.IdAgregarServidor,
+        Id_Tipo_BCK: this.IdAgregarTipoBackup,
+        Id_Usuario: 1,//Falta esta con el login
+        Fecha_Ult_Mod: this.Fecha
       }
-    })
+      this.Servicios.insertarbackup('3', datosinsert).subscribe(respu => {
+        if (respu.length > 0) {
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = respu;
+          this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
+
+          this.modalAgregar.hide();
+          this.Limpiar();
+        }
+      })
+    }
   }
 
   Editarbackup(templateEditarBackup: TemplateRef<any>, Array: any) {
     this.modalVer = this._modalService.show(templateEditarBackup)
+    this.IdBackupEdit = Array.Id_B;
     this.IdClientee = Array.Id_PRY;
     this.NombreBackup = Array.Nombre;
     this.Clientee = Array.NombreProyecto;
     this.Ambiente = Array.Ambiente;
     this.Periodicidad = Array.Periodicidad;
-    this.Servidor = Array.IpServidor;
+    this.Servidor = Array.NombreServidor;
     this.TipoBackup = Array.Descripcion;
-    this.Usuario = Array.UsuarioModifi;
     this.FechaUlt = Array.Fecha_Ult_Mod;
-     this.IdServidor = Array.Id_Servidor;
-     this.TipoBackupEdit = Array.Descripcion;
-     this.IdTipoBackup = Array.Id_Tipo_BCK;
+    this.IdServidor = Array.Id_Servidor;
+    this.TipoBackupEdit = Array.Descripcion;
+    this.IdTipoBackup = Array.Id_Tipo_BCK;
   }
 
   AgregarRegistroBackup() {
     this.DisableAgregarReguistroBck = true
   }
 
+ListaTipoServidor() {
+    this.ArregloListaServidor = [];
+    this.Servicios.consultaservidors('1', '0', '0', '2', '0').subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaServidor = respu;
+      }
+    })
+  }
+  ListaTipoBackup() {
+    const ConsultaTipoB =
+    {
+      IdTipoBackup: "0",
+      Descripcion: "0"
+    }
+    this.ArregloListaTipoBackup = [];
+    this.Servicios.consultatipobck(ConsultaTipoB).subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaTipoBackup = respu;
+      }
+    })
+  }
+
+  UpdateBck(templateMensaje: TemplateRef<any>) {
+    const datosupdate =
+    {
+      Id_B: this.IdBackupEdit,
+      Nombre: this.NombreBackup,
+      Id_PRY: this.IdClientee,
+      Ambiente: this.Ambiente,
+      Periodicidad: this.Periodicidad,
+      Id_Servidor: this.IdServidor,
+      Id_Tipo_BCK: this.IdTipoBackup,
+      Id_Usuario: 1,//Falta esta con el login
+      Fecha_Ult_Mod: this.Fecha
+    }
+    this.Servicios.actualizabackup('2', datosupdate).subscribe(respu => {
+      if (respu.length > 0) {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+        this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
+
+        this.modalVer.hide()
+      }
+    })
+  }
 }
