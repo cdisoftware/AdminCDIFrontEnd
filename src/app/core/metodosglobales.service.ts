@@ -30,8 +30,8 @@ export class MetodosGlobalesService {
     consultaregistbck(BodyPost: any, IdUsuario: string) {
         return this.http.post<any>(this.url_servidor + 'consultaregistbck/' + IdUsuario, BodyPost)
     }
-    consultaservidors(bandera: string) {
-        return this.http.get<any[]>(this.url_servidor + 'consultaservidors/' + bandera)
+    consultaservidors(bandera: string, NomServidor: string, SO: string, Estado: string, Usuario: string) {
+        return this.http.get<any[]>(this.url_servidor + 'consultaservidors/' + bandera + '/' + NomServidor + '/' + SO + '/' + Estado + '/' + Usuario)
     }
     consultatipobck(BodyPost: any) {
         return this.http.post<any>(this.url_servidor + 'consultatipobck', BodyPost)
