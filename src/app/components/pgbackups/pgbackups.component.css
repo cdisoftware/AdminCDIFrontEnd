@@ -4,3 +4,11 @@ font-size: 11px;
 .textarea {
     resize: none;
 }
+.btn-Mensaje {
+    background-color: teal;
+    border: solid 1px var(--main-bg-color-grisClaro);
+    border-radius: 5px;
+    color: #DC7633 !important;    
+    height: 40px;
+    font-weight: bold;
+}
