@@ -137,14 +137,12 @@
 </ng-template>
 
 <ng-template #templateAgregar>
-    <div class="disppleflex m-3 ">
+    <div class="modal-header">
         <p class="titulopopup">AGREGAR</p>
         <button type="button" class="bot" aria-label="Close" (click)="modalAgregar.hide();">
-            <img id="imgActual" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
         </button>
-        <br>
     </div>
-    <div class="modal-header m-0 p-0 mt-3"></div>
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
@@ -306,14 +304,12 @@
 
 
 <ng-template #templateEditarBackup>
-    <div class="disppleflex m-3 ">
+    <div class="modal-header">
         <p class="titulopopup">EDITAR BACKUP</p>
         <button type="button" class="bot" aria-label="Close" (click)="modalVer.hide();">
-            <img id="imgActual" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
         </button>
-        <br>
     </div>
-    <div class="modal-header m-0 p-0 mt-3"></div>
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
@@ -342,7 +338,7 @@
                     </select>
                 </div>
                 <div class="col-sm-6 mt-3">
-                    <select class="form-select" title="Seleccionar servidor"  [(ngModel)]="IdServidor">
+                    <select class="form-select" title="Seleccionar servidor" [(ngModel)]="IdServidor">
                         <option value="{{IdServidor}}">{{Servidor}}</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                         </option>
@@ -363,7 +359,8 @@
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar" (click)="UpdateBck(templateMensaje)">
+                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar"
+                        (click)="UpdateBck(templateMensaje)">
                         <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
