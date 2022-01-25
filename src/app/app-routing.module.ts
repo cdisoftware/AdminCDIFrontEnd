@@ -4,12 +4,19 @@ import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
 import { PgservidoresComponent } from './components/pgservidores/pgservidores.component';
 import { LayautprincipalComponent } from './layouts/layautprincipal/layautprincipal.component';
 import { LayautloginComponent } from './layouts/layautlogin/layautlogin.component';
+import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
-  {path:'', redirectTo: 'login', pathMatch: 'full'},
-  { path: 'login', component: LayautloginComponent},
- {path: 'home/PgBackup', loadChildren:() => import('./components/pgbackups/pgbackups.component').then(x => x.PgbackupsComponent)},
-  {path: '**', redirectTo: 'login', pathMatch: 'full'},
-
+  /*{
+    path: '',
+    component: LayautloginComponent,
+    children: [
+      {
+        path: '',
+        component: LoginComponent,
+      }
+    ]
+  },
+*/
   {
     path: 'home',
     component: LayautprincipalComponent,
