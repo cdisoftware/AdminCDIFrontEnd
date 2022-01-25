@@ -200,7 +200,7 @@
 .titulopopup{
     font-size: 18px;
     font-weight: bold;
-    color: var(--main-bg-color-red);
+    color: #000000;
     margin: auto;
     text-transform: uppercase;
 }

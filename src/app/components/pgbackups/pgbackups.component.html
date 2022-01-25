@@ -44,25 +44,25 @@
 
         <!--Botones-->
         <div class="row displayCenter col-12 mt-3">
-            <button class="btn btn-outline-dark col-sm-2 mrd" title="Limpiar" (click)="Limpiar()">
-                <img src="../../../../assets/ImagenesRDN/ic_limpiar.png" class="BtnimgTamanoPeque mr-2">
+            <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="Limpiar()">
+                <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
                 Limpiar
             </button>
 
-            <button class="btn btn-outline-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf()">
-                <img src="../../../../assets/ImagenesRDN/ic_pdf.png" class="BtnimgTamanoPeque mr-2">
+            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf()">
+                <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
                 Descargar PDF
             </button>
 
-            <button class="btn btn-outline-dark col-sm-2 mrd" title="Exportar Excel"
+            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
                 (click)="BtnExportarExcel(templateMensaje)">
-                <img src="../../../../assets/ImagenesRDN/ic_excel.png" class="BtnimgTamanoPeque mr-2">
+                <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
                 Descarga excel
             </button>
 
-            <button class="btn btn-outline-dark col-sm-2 mrd" title="Nuevo"
+            <button class="btn btn-dark col-sm-2 mrd" title="Nuevo"
                 (click)="BtnNuevo(templateAgregar,templateMensaje)">
-                <img src="../../../../assets/ImagenesRDN/Agregar.png" class="BtnimgTamanoPeque mr-2">
+                <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
                 Agregar
             </button>
         </div>
@@ -98,13 +98,13 @@
                     <td class="text-center">
                         <button class="BtnClaro mrd m-auto text-center" title="Editar"
                             (click)="Editarbackup(templateEditarBackup, ArGrilla)">
-                            <img src="../../../../assets/ImagenesRDN/ic_editar.png" class="BtnimgTamanoPeque mr-2">
+                            <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
                     <td class="text-center">
                         <button class="BtnClaro mrd m-auto text-center" title="Ver"
                             (click)="VerDetalle(templateVerDetalles, ArGrilla)">
-                            <img src="../../../../assets/ImagenesRDN/eye.png" class="BtnimgTamanoPeque mr-2">
+                            <img src="../../../../assets/ImagenesAdminCDI/ojo.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
                 </tr>
@@ -128,7 +128,7 @@
     </div>
     <div class="row text-center">
         <div class="col-0">
-            <button class="btn btn-Login bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
                 Aceptar
             </button>
         </div>
@@ -137,14 +137,12 @@
 </ng-template>
 
 <ng-template #templateAgregar>
-    <div class="disppleflex m-3 ">
-        <p class="titulopopup">AGREGAR</p>
+    <div class="modal-header">
+        <th class="titulopopup">AGREGAR</th>
         <button type="button" class="bot" aria-label="Close" (click)="modalAgregar.hide();">
-            <img id="imgActual" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
         </button>
-        <br>
     </div>
-    <div class="modal-header m-0 p-0 mt-3"></div>
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
@@ -194,14 +192,14 @@
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar"
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
                         (click)="AgregarBck(templateMensaje)">
-                        <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
 
-                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
-                        <img src="../../../../assets/ImagenesRDN/ic_signoEx.png" class="BtnimgTamanoPeque mr-2">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
                 </div>
@@ -229,9 +227,9 @@
                     [disabled]="DisableAgregarReguistroBck == false" rows="3"></textarea>
             </div>
             <div class="col-sm-3 mt-3">
-                <button class="btn btn-outline-dark col-sm-12" id="BotonAgregarRegistroBackup" title="Nuevo"
+                <button class="btn btn-dark col-sm-12" id="BotonAgregarRegistroBackup" title="Nuevo"
                     (click)="AgregarRegistroBackup()">
-                    <img src="../../../../assets/ImagenesRDN/Agregar.png" class="BtnimgTamanoPeque mr-2">
+                    <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
                     Nuevo
                 </button>
             </div>
@@ -265,13 +263,13 @@
                 <input type="text" class="form-control text-center" placeholder="Fecha" [(ngModel)]="Fecha" disabled>
             </div>
             <div class="row displayCenter col-12 mt-3 p-3">
-                <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar">
-                    <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2">
+                <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
+                    <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                     Guardar
                 </button>
-                <button class="btn btn-outline-dark col-sm-3 mrd" title="Cancelar"
+                <button class="btn btn-dark col-sm-3 mrd" title="Cancelar"
                     (click)="modal.dismiss('Cross click')">
-                    <img src="../../../../assets/ImagenesRDN/ic_signoEx.png" class="BtnimgTamanoPeque mr-2">
+                    <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                     Cancelar
                 </button>
             </div>
@@ -280,7 +278,7 @@
         <div class="row texto text-center">
             <div class="col-sm-12 mt-3">
                 <table class="table table-bordered text-center">
-                    <tr style="background-color: var(--main-bg-color-red); color: white;">
+                    <tr style="background-color: teal; color: #000000;">
                         <th colspan="5">REGISTRO BACKUPS</th>
                     </tr>
                     <tr>
@@ -306,14 +304,12 @@
 
 
 <ng-template #templateEditarBackup>
-    <div class="disppleflex m-3 ">
+    <div class="modal-header">
         <p class="titulopopup">EDITAR BACKUP</p>
         <button type="button" class="bot" aria-label="Close" (click)="modalVer.hide();">
-            <img id="imgActual" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesRDN/ic_equis.png" class="btnEquis">
         </button>
-        <br>
     </div>
-    <div class="modal-header m-0 p-0 mt-3"></div>
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
@@ -342,7 +338,7 @@
                     </select>
                 </div>
                 <div class="col-sm-6 mt-3">
-                    <select class="form-select" title="Seleccionar servidor"  [(ngModel)]="IdServidor">
+                    <select class="form-select" title="Seleccionar servidor" [(ngModel)]="IdServidor">
                         <option value="{{IdServidor}}">{{Servidor}}</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                         </option>
@@ -363,13 +359,14 @@
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Guardar" (click)="UpdateBck(templateMensaje)">
-                        <img src="../../../../assets/ImagenesRDN/ic_guardar.png" class="BtnimgTamanoPeque mr-2">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
+                        (click)="UpdateBck(templateMensaje)">
+                    <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
 
-                    <button class="btn btn-outline-dark col-sm-3 mrd" title="Cancelar" (click)="modalVer.hide();">
-                        <img src="../../../../assets/ImagenesRDN/ic_signoEx.png" class="BtnimgTamanoPeque mr-2">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalVer.hide();">
+                    <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
                 </div>

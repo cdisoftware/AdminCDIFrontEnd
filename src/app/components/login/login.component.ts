@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { LayautprincipalComponent } from 'src/app/layouts/layautprincipal/layautprincipal.component';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private layautPrincipal: LayautprincipalComponent
   ) {
     this.form = this.fb.group({
       usuario: ['', Validators.required],
@@ -56,9 +58,11 @@ export class LoginComponent implements OnInit {
 
   fakeLoading() {
     this.loading = true;
-    setTimeout(() => {
+    /*setTimeout(() => {
       //lo direccionamos al home
       this.router.navigate(["home/PgBackup"]);
-    }, 1500);
+    }, 1500);*/
+
+    this.layautPrincipal.VerPgBackup();
   }
 }
