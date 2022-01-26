@@ -68,6 +68,7 @@ export class PgbackupsComponent implements OnInit {
 
   //Variables Ver
   modalVer: BsModalRef;
+  IdBackupSelect: number;
 
   //Variables consultareguistri backup
   ArregloGrillaReguistroBck: any;
@@ -84,6 +85,8 @@ export class PgbackupsComponent implements OnInit {
 
   //Variables agregar registro bck
   DisableAgregarReguistroBck: boolean;
+  LblObservaciones: string;
+  IdEstado: string;
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
@@ -93,6 +96,7 @@ export class PgbackupsComponent implements OnInit {
   ngOnInit(): void {
     this.IdUsuario = '0';
     this.IdCliente = '0';
+    this.IdEstado = '2';
 
     //Inicializar agregar
     this.IdAgregarCliente = '0';
@@ -363,7 +367,8 @@ export class PgbackupsComponent implements OnInit {
       Usuario: 0
     }
     this.ArregloGrillaReguistroBck = [];
-    this.Servicios.consultaregistbck(ConsultaRegistroBck, ArGrilla.Id_B).subscribe(respu => {
+    this.IdBackupSelect = ArGrilla.Id_B;
+    this.Servicios.consultaregistbck(this.IdBackupSelect, ConsultaRegistroBck).subscribe(respu => {
       if (respu.length > 0) {
         this.ArregloGrillaReguistroBck = respu;
       }
@@ -418,11 +423,41 @@ export class PgbackupsComponent implements OnInit {
     this.IdTipoBackup = Array.Id_Tipo_BCK;
   }
 
-  AgregarRegistroBackup() {
+  DesbloqqueaCamposRegistrobck() {
     this.DisableAgregarReguistroBck = true
   }
+  AgregarRegistroBackup(templateMensaje: TemplateRef<any>) {
+    const insertaregistrobck = {
+      Id_BCK: this.IdBackupSelect,
+      Fecha: this.Fecha,
+      Estado: this.IdEstado,
+      Observaciones: this.LblObservaciones,
+      Id_U: 1
+    }
+    this.Servicios.insertaregistbck(insertaregistrobck).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
 
-ListaTipoServidor() {
+      if (respu == "Registro ingresado exitosamente.") {
+        this.LblObservaciones = '';
+        this.IdEstado = '2';
+        const ConsultaRegistroBck =
+        {
+          Fecha: '0',
+          Estado: 2,
+          Usuario: 0
+        }
+        this.ArregloGrillaReguistroBck = [];
+        this.Servicios.consultaregistbck(this.IdBackupSelect, ConsultaRegistroBck).subscribe(respu => {
+          if (respu.length > 0) {
+            this.ArregloGrillaReguistroBck = respu;
+          }
+        })
+      }
+    })
+  }
+
+  ListaTipoServidor() {
     this.ArregloListaServidor = [];
     this.Servicios.consultaservidors('1', '0', '0', '2', '0').subscribe(respu => {
       if (respu.length > 0) {

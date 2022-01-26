@@ -27,7 +27,7 @@ export class MetodosGlobalesService {
         return this.http.put<any>(this.url_servidor + 'actualizabackup/' + Bandera, BodyPost)
     }
 
-    consultaregistbck(BodyPost: any, IdUsuario: string) {
+    consultaregistbck(IdUsuario: number, BodyPost: any) {
         return this.http.post<any>(this.url_servidor + 'consultaregistbck/' + IdUsuario, BodyPost)
     }
     consultaservidors(bandera: string, NomServidor: string, SO: string, Estado: string, Usuario: string) {
@@ -35,5 +35,8 @@ export class MetodosGlobalesService {
     }
     consultatipobck(BodyPost: any) {
         return this.http.post<any>(this.url_servidor + 'consultatipobck', BodyPost)
+    }
+    insertaregistbck(BodyPost: any) {
+        return this.http.post<any>(this.url_servidor + 'insertaregistbck', BodyPost)
     }
 }

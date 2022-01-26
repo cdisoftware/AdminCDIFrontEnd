@@ -3,20 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
 import { PgservidoresComponent } from './components/pgservidores/pgservidores.component';
 import { LayautprincipalComponent } from './layouts/layautprincipal/layautprincipal.component';
-import { LayautloginComponent } from './layouts/layautlogin/layautlogin.component';
 import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
-  /*{
+  {
     path: '',
-    component: LayautloginComponent,
+    component: LayautprincipalComponent,
     children: [
       {
-        path: '',
+        path: 'home',
         component: LoginComponent,
       }
     ]
   },
-*/
   {
     path: 'home',
     component: LayautprincipalComponent,
