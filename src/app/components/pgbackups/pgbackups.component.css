@@ -12,3 +12,9 @@ font-size: 11px;
     height: 40px;
     font-weight: bold;
 }
+td{
+    word-wrap:break-word
+}
+.tablaAjuste{
+    table-layout: fixed;
+}
