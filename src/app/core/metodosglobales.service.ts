@@ -46,9 +46,9 @@ export class MetodosGlobalesService {
     return this.http.post<any>(this.url_servidor + 'insertaregistbck', BodyPost);
   }
   insertaserv(Bandera: string, BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'insertaserv', BodyPost);
+    return this.http.post<any>(this.url_servidor + 'insertaserv/'+Bandera, BodyPost);
   }
   consultatiposerv(IdTipoServidor: string, BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'consultatiposerv/'+IdTipoServidor, BodyPost);
+    return this.http.post<any>(this.url_servidor + 'consultatiposerv/'+ IdTipoServidor, BodyPost);
   }
 }
