@@ -6,6 +6,7 @@ import { saveAs } from 'file-saver';
 import autoTable from 'jspdf-autotable'
 import jsPDF from 'jspdf';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: 'app-pgbackups',
@@ -90,7 +91,8 @@ export class PgbackupsComponent implements OnInit {
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
-    private modalServiceDos: NgbModal
+    private modalServiceDos: NgbModal,
+    private Cokies: CookieService
   ) { }
 
   ngOnInit(): void {
