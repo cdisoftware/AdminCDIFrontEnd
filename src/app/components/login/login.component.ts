@@ -46,18 +46,16 @@ export class LoginComponent implements OnInit {
       Password: this.passw,
       RESPUESTA: '0',
     };
-    this.Servicios.consultavalidlogin(consultalogin).subscribe((respu) => {
+    this.Servicios.consultavalidlogin(consultalogin).subscribe(respu => {
       console.log(respu);
-      if (respu.length <= 0 && respu =='El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion') {
+      if (respu =='"El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion"') {
         this.error();
         this.form.reset();
-       if(respu =='El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion'){
-        this.error();
-        this.form.reset();
-       }else{
+      }else{
+        this.cookies.set("IdUsuario", respu[0].Id_U);
+        this.cookies.set("Nombre", respu[0].Nombre);
+        this.cookies.set("Apellido", respu[0].Apellido);
         this.fakeLoading();
-       }
-
       }
     });
   }
