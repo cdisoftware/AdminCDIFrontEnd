@@ -8,22 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.component';
 
 const routes: Routes = [
-  /*
-  { path: '', redirectTo: 'app/components/login.component', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent},
-  //{ path: 'home/PgBackup', loadChildren: () => import('./layouts/layautprincipal/layautprincipal.component').then(x => x.LayautprincipalComponent)},
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
-*/
-  {
-    path: '',
-    component: LayautprincipalComponent,
-    children: [
-      {
-        path: 'home',
-        component: LoginComponent,
-      }
-    ]
-  },
 
   {
     path: 'home',
