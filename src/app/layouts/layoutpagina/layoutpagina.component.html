@@ -1,0 +1,49 @@
+
+<nav class="navbar">
+  <!-- LOGO -->
+  <div class="logo">AdminCDI <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/admin.png">
+  </div>
+  <!-- NAVIGATION MENU -->
+  <ul class="nav-links">
+    <div class="menu">
+      <li class="titulopopup services cursorPointer" (click)="VerPgBackup()">
+        <a>Backups<img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/backup.png"
+            class="BtnimgTamanoPeque mr-2"></a>
+        <!-- DROPDOWN MENU -->
+        <ul class="dropdown">
+          <li class="cursorPointer">
+            <a>Tipo Backup</a>
+          </li>
+          <li><a href="/">Dropdown 1</a></li>
+          <li><a href="/">Dropdown 2</a></li>
+        </ul>
+      </li>
+
+      <li class="services titulopopup" (click)="VerPgServidores()">
+        <a class="cursorPointer">Servidores <img src="../../../../assets/ImagenesAdminCDI/servidores.png"
+            class="BtnimgTamanoPeque mr-2"></a>
+        <!-- DROPDOWN MENU -->
+        <ul class="dropdown">
+          <li class="cursorPointer"><a>Tipo<img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/servidores.png"
+                class="BtnimgTamanoPeque mr-2"></a></li>
+          <li><a href="/">Hardware<img src="../../../../assets/ImagenesAdminCDI/ram.png"
+            class="BtnimgTamanoPeque mr-2"></a></li>
+        </ul>
+      </li>
+      <li><a href="/" class="titulopopup">Clientes <img style="margin-left: 5px;"
+            src="../../../../assets/ImagenesAdminCDI/clientes.png" class="BtnimgTamanoPeque mr-2"></a></li>
+      <li>
+        <a href="/" class="titulopopup">Proyectos</a>
+        <img src="../../../assets/ImagenesAdminCDI/proyecto.png" style="margin-left: 5px;" class="BtnimgTamanoPeque mr-2">
+      </li>
+
+      <li><a href="/" class="titulopopup">Usuarios <img style="margin-left: 5px;"
+            src="../../../../assets/ImagenesAdminCDI/usuarios.png" class="BtnimgTamanoPeque mr-2"></a></li>
+      <li>
+        <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 5px;" class="cursorPointer BtnimgCerrarCesion mr-2">
+      </li>
+    </div>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>

@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LayautprincipalComponent } from 'src/app/layouts/layautprincipal/layautprincipal.component';
+import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: 'app-login',
@@ -13,11 +17,20 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   loading = false;
 
+  // variable usuario login
+  user: string;
+  // variable contraseña login
+  passw: string;
+
   constructor(
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private router: Router,
-    private layautPrincipal: LayautprincipalComponent
+    private layautPrincipal: LayautprincipalComponent,
+    private _modalService: BsModalService,
+    private Servicios: MetodosGlobalesService,
+    private modalServiceDos: NgbModal,
+    private cookies: CookieService
   ) {
     this.form = this.fb.group({
       usuario: ['', Validators.required],
@@ -28,20 +41,23 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   ingresar() {
-    console.log(this.form);
-    const usuario = this.form.value.usuario;
-    const password = this.form.value.password;
-    if (
-      (usuario == 'juan' && password == '1234') ||
-      (usuario == 'william' && password == '1234')
-    ) {
-      this.fakeLoading();
-      //direccionamos al home
-    } else {
-      //mostramos mensaje de error
-      this.error();
-      this.form.reset();
-    }
+    const consultalogin = {
+      Usuario: this.user,
+      Password: this.passw,
+      RESPUESTA: '0',
+    };
+    this.Servicios.consultavalidlogin(consultalogin).subscribe((respu) => {
+      console.log(respu);
+      if (
+        respu ==
+        'El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion'
+      ) {
+        this.error();
+        this.form.reset();
+      } else {
+        this.fakeLoading();
+      }
+    });
   }
 
   error() {
@@ -58,11 +74,9 @@ export class LoginComponent implements OnInit {
 
   fakeLoading() {
     this.loading = true;
-    /*setTimeout(() => {
+    setTimeout(() => {
       //lo direccionamos al home
-      this.router.navigate(["home/PgBackup"]);
-    }, 1500);*/
-
-    this.layautPrincipal.VerPgBackup();
+      this.router.navigate(['home/PgBackup']);
+    }, 500);
   }
 }
