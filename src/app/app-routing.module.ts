@@ -15,6 +15,17 @@ const routes: Routes = [
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 */
   {
+    path: '',
+    component: LayautprincipalComponent,
+    children: [
+      {
+        path: 'home',
+        component: LoginComponent,
+      }
+    ]
+  },
+
+  {
     path: 'home',
     component: LayoutpaginaComponent,
     children: [

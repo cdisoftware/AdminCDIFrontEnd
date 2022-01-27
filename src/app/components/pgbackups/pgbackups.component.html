@@ -60,8 +60,7 @@
                 Descarga excel
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Nuevo"
-                (click)="BtnNuevo(templateAgregar,templateMensaje)">
+            <button class="btn btn-dark col-sm-2 mrd" title="Nuevo" (click)="BtnNuevo(templateAgregar,templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
                 Agregar
             </button>
@@ -192,8 +191,7 @@
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
-                        (click)="AgregarBck(templateMensaje)">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregarBck(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
@@ -224,11 +222,11 @@
         <div class="row texto text-center">
             <div class="col-sm-9 mt-3">
                 <textarea id="form10" class="md-textarea form-control textarea" placeholder="Observaciones"
-                    [disabled]="DisableAgregarReguistroBck == false" rows="3"></textarea>
+                    [disabled]="DisableAgregarReguistroBck == false" rows="3" [(ngModel)]="LblObservaciones"></textarea>
             </div>
             <div class="col-sm-3 mt-3">
                 <button class="btn btn-dark col-sm-12" id="BotonAgregarRegistroBackup" title="Nuevo"
-                    (click)="AgregarRegistroBackup()">
+                    (click)="DesbloqqueaCamposRegistrobck()">
                     <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
                     Nuevo
                 </button>
@@ -237,25 +235,10 @@
         <div class="row Texto text-center">
 
             <div class="col-sm-6 mt-3">
-                <select class="form-select" title="Seleccionar backup" id="SeleccionarBackup"
-                    [disabled]="DisableAgregarReguistroBck == false">
-                    <option value="0" selected>Seleccione backup</option>
-                    <option value="{{arRespu.Id_BCK}}" *ngFor="let arRespu of ArregloListaUsuario">
-                        {{arRespu.Nombre}}</option>
-                </select>
-            </div>
-
-            <div class="col-sm-6 mt-3">
-                <input type="text" class="form-control" placeholder="Estado"
-                    [disabled]="DisableAgregarReguistroBck == false">
-            </div>
-
-            <div class="col-sm-6 mt-3">
-                <select class="form-select" title="Seleccionar usuario"
-                    [disabled]="DisableAgregarReguistroBck == false">
-                    <option value="0" selected>Seleccione usuario</option>
-                    <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">
-                        {{arRespu.Nombre}}</option>
+                <select class="form-select" placeholder="Estado" [disabled]="DisableAgregarReguistroBck == false" [(ngModel)]="IdEstado">
+                    <option value="2">Seleccione estado</option>
+                    <option value="0">Error</option>
+                    <option value="1">Exitoso</option>
                 </select>
             </div>
 
@@ -263,12 +246,11 @@
                 <input type="text" class="form-control text-center" placeholder="Fecha" [(ngModel)]="Fecha" disabled>
             </div>
             <div class="row displayCenter col-12 mt-3 p-3">
-                <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
+                <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregarRegistroBackup(templateMensaje)">
                     <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                     Guardar
                 </button>
-                <button class="btn btn-dark col-sm-3 mrd" title="Cancelar"
-                    (click)="modal.dismiss('Cross click')">
+                <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modal.dismiss('Cross click')">
                     <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                     Cancelar
                 </button>
@@ -277,7 +259,7 @@
 
         <div class="row texto text-center">
             <div class="col-sm-12 mt-3">
-                <table class="table table-bordered text-center">
+                <table class="table table-bordered text-center tablaAjuste">
                     <tr style="background-color: teal; color: #000000;">
                         <th colspan="5">REGISTRO BACKUPS</th>
                     </tr>
@@ -291,7 +273,8 @@
                     <tr *ngFor="let ArGrilla of ArregloGrillaReguistroBck">
                         <td>{{ArGrilla.NombreBck}}</td>
                         <td>{{ArGrilla.Fecha}}</td>
-                        <td>{{ArGrilla.Estado}}</td>
+                        <td *ngIf="ArGrilla.Estado == 1">Exitoso</td>
+                        <td *ngIf="ArGrilla.Estado == 0">Error</td>
                         <td>{{ArGrilla.Observaciones}}</td>
                         <td>{{ArGrilla.Nombre}}</td>
                     </tr>
@@ -359,14 +342,13 @@
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
-                        (click)="UpdateBck(templateMensaje)">
-                    <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateBck(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
 
                     <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalVer.hide();">
-                    <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
                 </div>
