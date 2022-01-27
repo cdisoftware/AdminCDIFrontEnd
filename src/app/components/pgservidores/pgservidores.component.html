@@ -5,22 +5,24 @@
     <div class="row mt-3">
         <!--Ayuda Nombre-->
         <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" #NombreServidor placeholder="Nombre servidor" title="IP" [(ngModel)]="lblNombreservidor"
-            (keyup)="Grilla(NombreServidor.value, SO.value, Estado.value,  Selecusuario.value)">
+            <input type="text" class="form-control table-bordered" #NombreServidor placeholder="Nombre servidor"
+                title="IP" [(ngModel)]="lblNombreservidor"
+                (keyup)="Grilla(NombreServidor.value, SO.value, Estado.value,  Selecusuario.value)">
         </div>
         <!--Fin ayuda-->
 
         <!--Ayuda SO-->
         <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" #SO placeholder="Sistema operativo" title="Sistema operativo" [(ngModel)]="lblSO"
-            (keyup)="Grilla(NombreServidor.value, SO.value, Estado.value,  Selecusuario.value)">
+            <input type="text" class="form-control table-bordered" #SO placeholder="Sistema operativo"
+                title="Sistema operativo" [(ngModel)]="lblSO"
+                (keyup)="Grilla(NombreServidor.value, SO.value, Estado.value,  Selecusuario.value)">
         </div>
         <!--Fin ayuda-->
 
         <!--Tipo lista Estado-->
         <div class="col-sm-6 m-0 mb-3 ">
-            <select class="form-select" title="Seleccionar Estado" #Estado  [(ngModel)]="IdEstado"
-            (change)='Grilla(NombreServidor.value, SO.value, Estado.value,  Selecusuario.value)'>
+            <select class="form-select" title="Seleccionar Estado" #Estado [(ngModel)]="IdEstado"
+                (change)='Grilla(NombreServidor.value, SO.value, Estado.value,  Selecusuario.value)'>
                 <option value="2" selected>Seleccionar Estado</option>
                 <option value="1" selected>Activo</option>
                 <option value="0" selected>Desactivado</option>
@@ -55,7 +57,7 @@
                 Descarga excel
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Nuevo">
+            <button class="btn btn-dark col-sm-2 mrd" title="Nuevo" (click)="BtnNuevo(templateAgregar)">
                 <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
                 Agregar
             </button>
@@ -109,3 +111,92 @@
         <!--fin Grilla-->
     </div>
 </div>
+
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12">
+            <p class="pModals">{{ lblModalMsaje }}</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateAgregar>
+    <div class="modal-header">
+        <th class="titulopopup">AGREGAR</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalAgregar.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Ip Servidor" class="col-sm-6 text-center form-control" [(ngModel)]="LblIpServidor"
+                        title="Ip Servidor">
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Nombre Servidor" class="col-sm-6 text-center form-control" [(ngModel)]="LblNombre"
+                        title="Nombre Servidor">
+                </div>
+                <div class="col-6 mt-3">
+                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblObservacion" placeholder="Observacion" rows="3"></textarea>
+                </div>
+                <div class="col-6 mt-3">
+                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblSoftware" placeholder="Software Instalado" rows="3"></textarea>
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Sistema Operativo" [(ngModel)]="LblSO"
+                        class="col-sm-6 text-center form-control" title="Sistema Operativo">
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar estado" [(ngModel)]="IdEstadoAgregar">
+                        <option value="2">Seleccione estado</option>
+                        <option value="1">Activo</option>
+                        <option value="0">Desabilitado</option>
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidor">
+                        <option value="0">Seleccione tipo servidor</option>
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAloja">
+                        <option value="0">Seleccione servidor aloja</option>
+                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Usuario" class="col-sm-6 text-center form-control" [(ngModel)]="LblUsuarios"
+                        title="Usuario">
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="password" value="" placeholder="Contraseña" class="col-sm-6 text-center form-control" [(ngModel)]="LblPassword"
+                        title="Contraseña">
+                </div>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregarServidor(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
