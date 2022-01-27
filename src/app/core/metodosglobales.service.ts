@@ -39,4 +39,7 @@ export class MetodosGlobalesService {
     insertaregistbck(BodyPost: any) {
         return this.http.post<any>(this.url_servidor + 'insertaregistbck', BodyPost)
     }
+    insertaserv(Bandera: string, BodyPost: any) {
+        return this.http.post<any>(this.url_servidor + 'insertaserv', BodyPost)
+    }
 }
