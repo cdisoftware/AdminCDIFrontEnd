@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LayoutpaginaComponent implements OnInit {
 
-  constructor(public router: Router, private cookies: CookieService,) { }
+  constructor(public router: Router, private cookies: CookieService) { }
 
   ngOnInit(): void {
     this.Obtienedata();

@@ -14,6 +14,8 @@ import { CookieService } from "ngx-cookie-service";
   styleUrls: ['./pgbackups.component.css']
 })
 export class PgbackupsComponent implements OnInit {
+  //Usuario
+  IdUsuarioCookies: string = this.cookies.get('IdUsuario');
 
   //Variables globales
   AuxiliadorGrilla: boolean;
@@ -92,7 +94,7 @@ export class PgbackupsComponent implements OnInit {
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
     private modalServiceDos: NgbModal,
-    private Cokies: CookieService
+    private cookies: CookieService
   ) { }
 
   ngOnInit(): void {
@@ -393,7 +395,7 @@ export class PgbackupsComponent implements OnInit {
         Periodicidad: this.LblAgregarPeriodicidad,
         Id_Servidor: this.IdAgregarServidor,
         Id_Tipo_BCK: this.IdAgregarTipoBackup,
-        Id_Usuario: 1,//Falta esta con el login
+        Id_Usuario: this.IdUsuarioCookies,
         Fecha_Ult_Mod: this.Fecha
       }
       this.Servicios.insertarbackup('3', datosinsert).subscribe(respu => {
@@ -434,7 +436,7 @@ export class PgbackupsComponent implements OnInit {
       Fecha: this.Fecha,
       Estado: this.IdEstado,
       Observaciones: this.LblObservaciones,
-      Id_U: 1
+      Id_U: this.IdUsuarioCookies
     }
     this.Servicios.insertaregistbck(insertaregistrobck).subscribe(respu => {
       this.modalMensaje = this._modalService.show(templateMensaje);
@@ -491,7 +493,7 @@ export class PgbackupsComponent implements OnInit {
       Periodicidad: this.Periodicidad,
       Id_Servidor: this.IdServidor,
       Id_Tipo_BCK: this.IdTipoBackup,
-      Id_Usuario: 1,//Falta esta con el login
+      Id_Usuario: this.IdUsuarioCookies,
       Fecha_Ult_Mod: this.Fecha
     }
     this.Servicios.actualizabackup('2', datosupdate).subscribe(respu => {

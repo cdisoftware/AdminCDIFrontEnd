@@ -166,6 +166,7 @@
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidor">
                         <option value="0">Seleccione tipo servidor</option>
+                        <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">{{arRespu.Descripcion}}
                     </select>
                 </div>
                 <div class="col-6 mt-3">
