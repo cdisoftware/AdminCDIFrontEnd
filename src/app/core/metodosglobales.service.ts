@@ -36,4 +36,9 @@ export class MetodosGlobalesService {
     consultatipobck(BodyPost: any) {
         return this.http.post<any>(this.url_servidor + 'consultatipobck', BodyPost)
     }
+
+    consultavalidlogin(BodyPost: any) {
+      return this.http.post<any>(this.url_servidor + 'consultavalidlogin', BodyPost)
+  }
+
 }

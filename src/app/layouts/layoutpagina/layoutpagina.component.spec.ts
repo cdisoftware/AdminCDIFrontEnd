@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LayautloginComponent } from './layautlogin.component';
+import { LayoutpaginaComponent } from './layoutpagina.component';
 
-describe('LayautloginComponent', () => {
-  let component: LayautloginComponent;
-  let fixture: ComponentFixture<LayautloginComponent>;
+describe('LayoutpaginaComponent', () => {
+  let component: LayoutpaginaComponent;
+  let fixture: ComponentFixture<LayoutpaginaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LayautloginComponent ]
+      declarations: [ LayoutpaginaComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LayautloginComponent);
+    fixture = TestBed.createComponent(LayoutpaginaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -7,12 +7,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PgservidoresComponent } from './components/pgservidores/pgservidores.component';
 import { LayautprincipalComponent } from './layouts/layautprincipal/layautprincipal.component';
-import { LayautloginComponent } from './layouts/layautlogin/layautlogin.component';
 import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from './components/shared/shared.module';
 import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
-
-
+import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +18,8 @@ import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
     PgbackupsComponent,
     PgservidoresComponent,
     LayautprincipalComponent,
-    LayautloginComponent,
-    LoginComponent
+    LoginComponent,
+    LayoutpaginaComponent,
   ],
   imports: [
     ModalModule.forRoot(),
@@ -30,11 +28,9 @@ import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
     FormsModule,
     HttpClientModule,
     ModalModule,
-    SharedModule
-
+    SharedModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
- }
+export class AppModule {}
