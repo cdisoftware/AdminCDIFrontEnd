@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from './components/shared/shared.module';
 import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
 import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.compo
     HttpClientModule,
     ModalModule,
     SharedModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

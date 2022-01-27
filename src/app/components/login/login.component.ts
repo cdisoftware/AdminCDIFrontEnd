@@ -6,7 +6,7 @@ import { LayautprincipalComponent } from 'src/app/layouts/layautprincipal/layaut
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CookieService } from "ngx-cookie-service";
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -48,14 +48,16 @@ export class LoginComponent implements OnInit {
     };
     this.Servicios.consultavalidlogin(consultalogin).subscribe((respu) => {
       console.log(respu);
-      if (
-        respu ==
-        'El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion'
-      ) {
+      if (respu.length <= 0 && respu =='El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion') {
         this.error();
         this.form.reset();
-      } else {
+       if(respu =='El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion'){
+        this.error();
+        this.form.reset();
+       }else{
         this.fakeLoading();
+       }
+
       }
     });
   }
