@@ -1,0 +1,11 @@
+.portada{
+    background: url(https://cyber.contabilidadonline.com/img/Plantilla_CoL.png) no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    width: 100% ;
+    text-align: center;
+  
+ }
