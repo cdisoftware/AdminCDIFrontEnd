@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
   loading = false;
 
   // variable usuario login
-  user: string;
+  user: string = 'Admin00';
   // variable contraseña login
-  passw: string;
+  passw: string = 'Admin00';
 
   constructor(
     private fb: FormBuilder,
