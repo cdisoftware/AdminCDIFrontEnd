@@ -12,6 +12,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
 import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LayautprincipalComponent,
     LoginComponent,
     LayoutpaginaComponent,
+    HomeComponent,
   ],
   imports: [
     ModalModule.forRoot(),
