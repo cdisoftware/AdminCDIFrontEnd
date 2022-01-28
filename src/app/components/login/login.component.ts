@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     setTimeout(() => {
       //lo direccionamos al home
-      this.router.navigate(['home/PgBackup']);
+      this.router.navigate(['home']);
     }, 500);
   }
 }
