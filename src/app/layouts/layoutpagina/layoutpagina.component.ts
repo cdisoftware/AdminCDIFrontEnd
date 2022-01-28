@@ -14,16 +14,13 @@ export class LayoutpaginaComponent implements OnInit {
   ngOnInit(): void {
     this.Obtienedata();
   }
-  //Usuario
-  IdUsuario: string;
 
 
   Obtienedata() {
-    this.IdUsuario = this.cookies.get('IdUsuario');
-    console.log(this.IdUsuario)
+    this.cookies.get('IdUsuario');
     this.cookies.get('Nombre');
     this.cookies.get('Apellido');
-    if (this.IdUsuario == undefined || this.IdUsuario == '' || this.IdUsuario == null) {
+    if (this.cookies.get('IdUsuario') == undefined || this.cookies.get('IdUsuario') == '' || this.cookies.get('IdUsuario') == null) {
       this.Cerrar();
       window.alert("Operacion no permitida");
 
