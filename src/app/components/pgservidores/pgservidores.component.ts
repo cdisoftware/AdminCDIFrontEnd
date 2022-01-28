@@ -64,6 +64,12 @@ export class PgservidoresComponent implements OnInit {
   //Variables lista agregar servidor
   ArregloListaTipoServidor: any;
 
+  //Variables ver detalles
+  ArregloVerDetalles: any;
+  LblUsuario: string;
+  LblPasswordVer: string;
+  LblServidor: string;
+
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
     private modalServiceDos: NgbModal,
@@ -126,6 +132,7 @@ export class PgservidoresComponent implements OnInit {
     this.ArregloGrilla = [];
     this.AuxiliadorGrilla = false;
     this.Servicios.consultaservidors('1', NombreServidor, SO, IdEstado, IdUsuario).subscribe(respu => {
+      console.log(respu)
       if (respu.length > 0) {
         this.ArregloGrilla = respu;
         this.AuxiliadorGrilla = true;
@@ -202,5 +209,13 @@ export class PgservidoresComponent implements OnInit {
         this.ArregloListaTipoServidor = respu;
       }
     })
+  }
+
+  //Ver detalle
+  VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
+    this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
+    this.LblUsuario = ArGrilla[0].Usuario_Ser;
+    this.LblPasswordVer = ArGrilla[0].Password;
+    this.LblServidor = ArGrilla[0].Servidor_Aloja;
   }
 }
