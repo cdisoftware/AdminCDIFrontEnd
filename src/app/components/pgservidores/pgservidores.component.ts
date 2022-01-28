@@ -70,6 +70,19 @@ export class PgservidoresComponent implements OnInit {
   LblPasswordVer: string;
   LblServidor: string;
 
+  //Variables editar servidor
+  modalEditarServidor: BsModalRef;
+  LblIpServidorEdit: string;
+  LblNombreEdit: string;
+  LblSOEdit: string;
+  LblSoftwareEdit: string;
+  IdEstadoAgregarEdit: string;
+  Id_TipoServidorEdit: string;
+  LblObservacionEdit: string;
+  LblUsuariosEdit: string;
+  LblPasswordEdit: string;
+  IdServidorAlojaEdit: string;
+
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
     private modalServiceDos: NgbModal,
@@ -93,6 +106,18 @@ export class PgservidoresComponent implements OnInit {
     this.LblUsuarios = "";
     this.LblPassword = '';
     this.IdServidorAloja = "0";
+
+    //Inicializar variables editar servidor
+    this.LblIpServidorEdit = '';
+    this.LblNombreEdit = '';
+    this.LblSOEdit = '';
+    this.LblSoftwareEdit = '';
+    this.IdEstadoAgregarEdit = '';
+    this.Id_TipoServidorEdit = '';
+    this.LblObservacionEdit = '';
+    this.LblUsuariosEdit = '';
+    this.LblPasswordEdit = '';
+    this.IdServidorAlojaEdit = '';
 
 
     this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
@@ -119,6 +144,19 @@ export class PgservidoresComponent implements OnInit {
     this.LblPassword = '';
     this.IdServidorAloja = "0";
 
+
+    //Limpiar variables editar servidor
+    this.LblIpServidorEdit = '';
+    this.LblNombreEdit = '';
+    this.LblSOEdit = '';
+    this.LblSoftwareEdit = '';
+    this.IdEstadoAgregarEdit = '';
+    this.Id_TipoServidorEdit = '';
+    this.LblObservacionEdit = '';
+    this.LblUsuariosEdit = '';
+    this.LblPasswordEdit = '';
+    this.IdServidorAlojaEdit = '';
+
     this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
   }
   //Grilla
@@ -132,7 +170,6 @@ export class PgservidoresComponent implements OnInit {
     this.ArregloGrilla = [];
     this.AuxiliadorGrilla = false;
     this.Servicios.consultaservidors('1', NombreServidor, SO, IdEstado, IdUsuario).subscribe(respu => {
-      console.log(respu)
       if (respu.length > 0) {
         this.ArregloGrilla = respu;
         this.AuxiliadorGrilla = true;
@@ -201,10 +238,10 @@ export class PgservidoresComponent implements OnInit {
   }
   ListaTipoServidor() {
     this.ArregloListaTipoServidor = [];
-    const ListaTipoServidor ={
+    const ListaTipoServidor = {
       Descripcion: '0'
     }
-    this.Servicios.consultatiposerv('0',ListaTipoServidor).subscribe(respu => {
+    this.Servicios.consultatiposerv('0', ListaTipoServidor).subscribe(respu => {
       if (respu.length > 0) {
         this.ArregloListaTipoServidor = respu;
       }
@@ -214,8 +251,26 @@ export class PgservidoresComponent implements OnInit {
   //Ver detalle
   VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
-    this.LblUsuario = ArGrilla[0].Usuario_Ser;
-    this.LblPasswordVer = ArGrilla[0].Password;
-    this.LblServidor = ArGrilla[0].Servidor_Aloja;
+    console.log(ArGrilla)
+    this.ArregloVerDetalles = ArGrilla;
+
+
+  }
+
+
+
+  //Editar Bckup
+  Editarbackup(templateEditarServidor: TemplateRef<any>, Array: any) {
+    this.modalEditarServidor = this._modalService.show(templateEditarServidor);
+    this.LblIpServidorEdit = Array.Ip_S;
+    this.LblNombreEdit = Array.Nombre;
+    this.LblSOEdit = Array.SO;
+    this.LblSoftwareEdit = Array.Software;
+    this.IdEstadoAgregarEdit = Array.Estado;
+    this.Id_TipoServidorEdit = Array.TipoServidor;//Falta editar tiene que traer el id no el nombre
+    this.LblObservacionEdit = Array.Observacion;
+    this.LblUsuariosEdit = Array.Usuario_Ser;
+    this.LblPasswordEdit = Array.Password;
+    this.IdServidorAlojaEdit = Array.Servidor_Aloja;
   }
 }
