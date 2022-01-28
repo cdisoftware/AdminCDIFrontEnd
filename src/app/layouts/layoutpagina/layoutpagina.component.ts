@@ -43,6 +43,9 @@ export class LayoutpaginaComponent implements OnInit {
   VerPgServidores() {
     this.router.navigate(['home/PgServidores']);
   }
+  VerHome() {
+    this.router.navigate(['home']);
+  }
 }
 function templateMensaje(templateMensaje: any, arg1: any) {
   throw new Error('Function not implemented.');
