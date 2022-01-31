@@ -76,3 +76,6 @@ li {
   height: 41px;
   padding: 0px;
 }
+.textarea {
+  resize: none;
+}
