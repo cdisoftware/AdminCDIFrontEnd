@@ -14,9 +14,12 @@ export class LayoutpaginaComponent implements OnInit {
   //Variables globales
   lblModalMsaje: string;
   modalMensaje: BsModalRef;
+  AuxiliarDiv: boolean;
 
-  //Variables consulta tipo servidor
-  ArrayConsultatipoServidor: any;
+
+  //Variables TipoServidor
+  ArregloGrillaTipoServidor: any;
+  LblDescripcion: string;
 
   constructor(
     private _modalService: BsModalService,
@@ -59,20 +62,34 @@ export class LayoutpaginaComponent implements OnInit {
   }
 
 
-
+  //Tipo servidor
+    //Consulta
   TipoServidor(templateHardware: TemplateRef<any>, templateMensaje: TemplateRef<any>) {
     this.modalServiceDos.open(templateHardware, { size: 'xl' });
     const consultaTipoServidor = {
-      Descripcion:""
+      Descripcion: "0"
     }
-    this.ArrayConsultatipoServidor = [];
+    this.ArregloGrillaTipoServidor = [];
     this.Servicios.consultatiposerv('0', consultaTipoServidor).subscribe(respu => {
       if (respu.length > 0) {
-        this.ArrayConsultatipoServidor = respu;
-      }else{
+        this.ArregloGrillaTipoServidor = respu;
+      } else {
         this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = respu;
+        this.lblModalMsaje = "No fue posible ver los resultados, por favor comuníquese con soporte técnico.";
       }
+    })
+  }
+  verDiv() {
+    this.AuxiliarDiv = true;
+  }
+    //Insert
+  InsertaTipoServidor(templateMensaje: TemplateRef<any>){
+    const InsertaTipoServidor = {
+      Descripcion: this.LblDescripcion
+    }
+    this.Servicios.insertatiposervidor('3', InsertaTipoServidor).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
     })
   }
 }

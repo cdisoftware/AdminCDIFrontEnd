@@ -95,8 +95,36 @@
   </div>
   <div class="mrd mld" id="htmlData_">
     <div class="row texto text-center">
-      <div class="col-6 mt-3">
-        <textarea class="md-textarea form-control textarea" placeholder="Descripción" rows="3"></textarea>
+
+      <div class="col-9 mt-3 font-weight-bold TituloAgregar">
+        <p>Click para agregar tipo servidor</p>
+      </div>
+
+      <div class="col-3 mt-3">
+        <button class="btn btn-dark col-sm-3 mrd" title="Agregar" (click)="verDiv()">
+          <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
+          Agregar
+        </button>
+      </div>
+
+      <div *ngIf="AuxiliarDiv == true">
+        <div class="col-12 mt-3">
+          <textarea class="md-textarea form-control textarea" placeholder="Descripción" rows="3" [(ngModel)]="LblDescripcion"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row texto text-center">
+      <!---Botones--->
+      <div class="row displayCenter col-12 mt-3" *ngIf="AuxiliarDiv == true">
+        <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="InsertaTipoServidor(templateMensaje)">
+          <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+          Guardar..
+        </button>
+
+        <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modal.dismiss('Cross click');">
+          <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+          Cancelar
+        </button>
       </div>
     </div>
   </div>
@@ -111,9 +139,9 @@
           <th class="cursorPointer">Descripción</th>
           <th class="cursorPointer">Editar</th>
         </tr>
-        <tr>
-          <td></td>
-          <td></td>
+        <tr *ngFor="let ArGrilla of ArregloGrillaTipoServidor">
+          <td>{{ArGrilla.Id_Tipo_S}}</td>
+          <td style="word-wrap:break-word">{{ArGrilla.Descripcion}}</td>
           <td><button class="BtnClaro mrd m-auto text-center" title="Editar">
               <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
             </button>

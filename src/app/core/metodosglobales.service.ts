@@ -51,4 +51,7 @@ export class MetodosGlobalesService {
   consultatiposerv(IdTipoServidor: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'consultatiposerv/'+ IdTipoServidor, BodyPost);
   }
+  insertatiposervidor(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertatiposervidor/'+ bandera, BodyPost);
+  }
 }
