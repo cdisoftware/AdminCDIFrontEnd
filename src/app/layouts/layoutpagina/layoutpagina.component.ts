@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-layoutpagina',
@@ -8,8 +11,22 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./layoutpagina.component.css'],
 })
 export class LayoutpaginaComponent implements OnInit {
+  //Variables globales
+  lblModalMsaje: string;
+  modalMensaje: BsModalRef;
+  AuxiliarDiv: boolean;
 
-  constructor(public router: Router, private cookies: CookieService) { }
+
+  //Variables TipoServidor
+  ArregloGrillaTipoServidor: any;
+  LblDescripcion: string;
+
+  constructor(
+    private _modalService: BsModalService,
+    public router: Router,
+    private cookies: CookieService,
+    private modalServiceDos: NgbModal,
+    private Servicios: MetodosGlobalesService) { }
 
   ngOnInit(): void {
     this.Obtienedata();
@@ -42,6 +59,38 @@ export class LayoutpaginaComponent implements OnInit {
   }
   VerHome() {
     this.router.navigate(['home']);
+  }
+
+
+  //Tipo servidor
+    //Consulta
+  TipoServidor(templateHardware: TemplateRef<any>, templateMensaje: TemplateRef<any>) {
+    this.modalServiceDos.open(templateHardware, { size: 'xl' });
+    const consultaTipoServidor = {
+      Descripcion: "0"
+    }
+    this.ArregloGrillaTipoServidor = [];
+    this.Servicios.consultatiposerv('0', consultaTipoServidor).subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloGrillaTipoServidor = respu;
+      } else {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = "No fue posible ver los resultados, por favor comuníquese con soporte técnico.";
+      }
+    })
+  }
+  verDiv() {
+    this.AuxiliarDiv = true;
+  }
+    //Insert
+  InsertaTipoServidor(templateMensaje: TemplateRef<any>){
+    const InsertaTipoServidor = {
+      Descripcion: this.LblDescripcion
+    }
+    this.Servicios.insertatiposervidor('3', InsertaTipoServidor).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+    })
   }
 }
 function templateMensaje(templateMensaje: any, arg1: any) {

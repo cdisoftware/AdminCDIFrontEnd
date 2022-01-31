@@ -7,10 +7,12 @@
     <div class="menu">
 
       <li class="titulopopup services cursorPointer" (click)="VerHome()"><a class="titulopopup"><a>Home</a>
-        <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/home.png" class="BtnimgTamanoPeque mr-2"></a>
+          <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/home.png"
+            class="BtnimgTamanoPeque mr-2"></a>
       </li>
 
-      <li class="titulopopup services cursorPointer"> <a (click)="VerPgBackup()">Backups<img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/backup.png" class="BtnimgTamanoPeque mr-2"></a>
+      <li class="titulopopup services cursorPointer"> <a (click)="VerPgBackup()">Backups<img style="margin-left: 5px;"
+            src="../../../../assets/ImagenesAdminCDI/backup.png" class="BtnimgTamanoPeque mr-2"></a>
         <!-- DROPDOWN MENU -->
         <ul class="dropdown">
           <li class="cursorPointer">
@@ -21,32 +23,131 @@
         </ul>
       </li>
 
-      <li class="services titulopopup cursorPointer" (click)="VerPgServidores()">
-        <a>Servidores <img src="../../../../assets/ImagenesAdminCDI/servidores.png" class="BtnimgTamanoPeque mr-2"></a>
+      <li class="services titulopopup cursorPointer">
+        <a (click)="VerPgServidores()">Servidores <img src="../../../../assets/ImagenesAdminCDI/servidores.png"
+            class="BtnimgTamanoPeque mr-2"></a>
         <!-- DROPDOWN MENU -->
         <ul class="dropdown">
-          <li class="cursorPointer"><a>Tipo<img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/servidores.png" class="BtnimgTamanoPeque mr-2"></a></li>
+          <li class="cursorPointer" (click)="TipoServidor(templateHardware, templateMensaje)"><a>Tipo<img
+                style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/servidores.png"
+                class="BtnimgTamanoPeque mr-2"></a></li>
           <li><a>Hardware<img src="../../../../assets/ImagenesAdminCDI/ram.png" class="BtnimgTamanoPeque mr-2"></a></li>
         </ul>
       </li>
-      
+
       <li class="titulopopup services cursorPointer">
-        <a>Clientes <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/clientes.png" class="BtnimgTamanoPeque mr-2"></a>
-      </li>
-      
-      <li class="titulopopup services cursorPointer">
-        <a>Proyectos</a> <img src="../../../assets/ImagenesAdminCDI/proyecto.png" style="margin-left: 5px;" class="BtnimgTamanoPeque mr-2">
+        <a>Clientes <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/clientes.png"
+            class="BtnimgTamanoPeque mr-2"></a>
       </li>
 
       <li class="titulopopup services cursorPointer">
-        <a>Usuarios <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/usuarios.png" class="BtnimgTamanoPeque mr-2"></a>
+        <a>Proyectos</a> <img src="../../../assets/ImagenesAdminCDI/proyecto.png" style="margin-left: 5px;"
+          class="BtnimgTamanoPeque mr-2">
+      </li>
+
+      <li class="titulopopup services cursorPointer">
+        <a>Usuarios <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/usuarios.png"
+            class="BtnimgTamanoPeque mr-2"></a>
       </li>
 
       <li>
-        <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 5px;" class="cursorPointer BtnimgCerrarCesion mr-2" (click)="Cerrar()">
+        <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 5px;"
+          class="cursorPointer BtnimgCerrarCesion mr-2" (click)="Cerrar()">
       </li>
     </div>
   </ul>
 </nav>
 
 <router-outlet></router-outlet>
+
+
+
+
+
+
+
+<ng-template #templateMensaje>
+  <div class="modaBody">
+    <div class="col-12">
+      <p class="pModals">{{ lblModalMsaje }}</p>
+    </div>
+  </div>
+  <div class="row text-center">
+    <div class="col-0">
+      <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+        Aceptar
+      </button>
+    </div>
+  </div>
+  <br>
+</ng-template>
+
+
+
+
+
+<ng-template #templateHardware let-modal>
+  <div class="modal-header">
+    <p class="titulopopup">Tipo servidor</p>
+    <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+    </button>
+  </div>
+  <div class="mrd mld" id="htmlData_">
+    <div class="row texto text-center">
+
+      <div class="col-9 mt-3 font-weight-bold TituloAgregar">
+        <p>Click para agregar tipo servidor</p>
+      </div>
+
+      <div class="col-3 mt-3">
+        <button class="btn btn-dark col-sm-3 mrd" title="Agregar" (click)="verDiv()">
+          <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
+          Agregar
+        </button>
+      </div>
+
+      <div *ngIf="AuxiliarDiv == true">
+        <div class="col-12 mt-3">
+          <textarea class="md-textarea form-control textarea" placeholder="Descripción" rows="3" [(ngModel)]="LblDescripcion"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row texto text-center">
+      <!---Botones--->
+      <div class="row displayCenter col-12 mt-3" *ngIf="AuxiliarDiv == true">
+        <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="InsertaTipoServidor(templateMensaje)">
+          <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+          Guardar..
+        </button>
+
+        <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modal.dismiss('Cross click');">
+          <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row texto text-center">
+    <div class="col-sm-12 mt-3">
+      <table class="table table-bordered text-center tablaAjuste">
+        <tr style="background-color: teal; color: #000000;">
+          <th colspan="4">Tipo servidor</th>
+        </tr>
+        <tr>
+          <th class="cursorPointer">Identificador</th>
+          <th class="cursorPointer">Descripción</th>
+          <th class="cursorPointer">Editar</th>
+        </tr>
+        <tr *ngFor="let ArGrilla of ArregloGrillaTipoServidor">
+          <td>{{ArGrilla.Id_Tipo_S}}</td>
+          <td style="word-wrap:break-word">{{ArGrilla.Descripcion}}</td>
+          <td><button class="BtnClaro mrd m-auto text-center" title="Editar">
+              <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</ng-template>
