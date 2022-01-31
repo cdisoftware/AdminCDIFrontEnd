@@ -28,7 +28,7 @@
             class="BtnimgTamanoPeque mr-2"></a>
         <!-- DROPDOWN MENU -->
         <ul class="dropdown">
-          <li class="cursorPointer" (click)="TipoServidor(templateHardware, templateMensaje)"><a>Tipo<img
+          <li class="cursorPointer" (click)="TipoServidor(templaTipoSer, templateMensaje)"><a>Tipo<img
                 style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/servidores.png"
                 class="BtnimgTamanoPeque mr-2"></a></li>
           <li><a>Hardware<img src="../../../../assets/ImagenesAdminCDI/ram.png" class="BtnimgTamanoPeque mr-2"></a></li>
@@ -86,7 +86,7 @@
 
 
 
-<ng-template #templateHardware let-modal>
+<ng-template #templaTipoSer let-modal>
   <div class="modal-header">
     <p class="titulopopup">Tipo servidor</p>
     <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -95,7 +95,6 @@
   </div>
   <div class="mrd mld" id="htmlData_">
     <div class="row texto text-center">
-
       <div class="col-9 mt-3 font-weight-bold TituloAgregar">
         <p>Click para agregar tipo servidor</p>
       </div>
@@ -121,7 +120,7 @@
           Guardar..
         </button>
 
-        <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modal.dismiss('Cross click');">
+        <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="OcultarDiv()">
           <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
           Cancelar
         </button>
@@ -142,7 +141,7 @@
         <tr *ngFor="let ArGrilla of ArregloGrillaTipoServidor">
           <td>{{ArGrilla.Id_Tipo_S}}</td>
           <td style="word-wrap:break-word">{{ArGrilla.Descripcion}}</td>
-          <td><button class="BtnClaro mrd m-auto text-center" title="Editar">
+          <td><button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="EditarTipoServidor(templateEditartiposervidor, ArGrilla)">
               <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
             </button>
           </td>
@@ -150,4 +149,39 @@
       </table>
     </div>
   </div>
+</ng-template>
+
+
+<ng-template #templateEditartiposervidor>
+  <div class="modal-header">
+      <p class="titulopopup">EDITAR TIPO SERVIDOR</p>
+      <button type="button" class="bot" aria-label="Close" (click)="modalEditarTipoServidor.hide();">
+          <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+      </button>
+  </div>
+  <div class="modaBody">
+      <div class="col-sm-12 mt-3 row displayCenter">
+          <li class="row col-sm-12 displayCenter">
+
+            <div class="col-10 mt-3">
+              <textarea class="md-textarea form-control textarea" placeholder="Descripción" rows="3" [(ngModel)]="LblDescripcionEdit"></textarea>
+            </div>
+
+              <!---Botones--->
+              <div class="row displayCenter col-12 mt-3">
+                  <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
+                      <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                      Guardar..
+                  </button>
+
+                  <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarTipoServidor.hide();">
+                      <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                      Cancelar
+                  </button>
+              </div>
+          </li>
+      </div>
+      <br>
+  </div>
+  <br>
 </ng-template>

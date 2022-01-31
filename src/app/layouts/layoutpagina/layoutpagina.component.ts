@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-layoutpagina',
@@ -20,6 +21,9 @@ export class LayoutpaginaComponent implements OnInit {
   //Variables TipoServidor
   ArregloGrillaTipoServidor: any;
   LblDescripcion: string;
+      //Editar
+      modalEditarTipoServidor: BsModalRef;
+      LblDescripcionEdit: string;
 
   constructor(
     private _modalService: BsModalService,
@@ -64,8 +68,8 @@ export class LayoutpaginaComponent implements OnInit {
 
   //Tipo servidor
     //Consulta
-  TipoServidor(templateHardware: TemplateRef<any>, templateMensaje: TemplateRef<any>) {
-    this.modalServiceDos.open(templateHardware, { size: 'xl' });
+  TipoServidor(templaTipoSer: TemplateRef<any>, templateMensaje: TemplateRef<any>) {
+    this.modalServiceDos.open(templaTipoSer, { size: 'xl' });
     const consultaTipoServidor = {
       Descripcion: "0"
     }
@@ -82,6 +86,9 @@ export class LayoutpaginaComponent implements OnInit {
   verDiv() {
     this.AuxiliarDiv = true;
   }
+  OcultarDiv() {
+    this.AuxiliarDiv = false;
+  }
     //Insert
   InsertaTipoServidor(templateMensaje: TemplateRef<any>){
     const InsertaTipoServidor = {
@@ -90,10 +97,29 @@ export class LayoutpaginaComponent implements OnInit {
     this.Servicios.insertatiposervidor('3', InsertaTipoServidor).subscribe(respu => {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = respu;
+
+      this.LblDescripcion = '';
+      this.AuxiliarDiv = false;
     })
   }
-}
-function templateMensaje(templateMensaje: any, arg1: any) {
-  throw new Error('Function not implemented.');
-}
+    //Edit
+    EditarTipoServidor(templateEditartiposervidor: TemplateRef<any>, ArGrilla: any){
+      this.modalEditarTipoServidor = this._modalService.show(templateEditartiposervidor)
+      this.LblDescripcionEdit = ArGrilla.Descripcion;
+    }
 
+    EditarTS(templateMensaje: TemplateRef<any>, ArGrilla: any){
+      console.log(this.LblDescripcionEdit)
+      const EditTipoServidor = {
+        Id_Tipo_S:ArGrilla.Id_Tipo_S,
+        Descripcion: this.LblDescripcionEdit
+      }
+      console.log(EditTipoServidor)
+      this.Servicios.actualizatiposervidor('2', EditTipoServidor).subscribe(respu => {
+        this.modalEditarTipoServidor = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+  
+        this.LblDescripcionEdit = '';
+      })
+    }
+}
