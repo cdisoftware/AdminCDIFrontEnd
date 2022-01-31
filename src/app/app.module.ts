@@ -13,6 +13,7 @@ import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
 import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
+import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HomeComponent } from './components/home/home.component';
     LoginComponent,
     LayoutpaginaComponent,
     HomeComponent,
+    PgusuariosComponent,
   ],
   imports: [
     ModalModule.forRoot(),
