@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-layoutpagina',
@@ -20,6 +21,9 @@ export class LayoutpaginaComponent implements OnInit {
   //Variables TipoServidor
   ArregloGrillaTipoServidor: any;
   LblDescripcion: string;
+      //Editar
+      modalEditarTipoServidor: BsModalRef;
+      LblDescripcionEdit: string;
 
   constructor(
     private _modalService: BsModalService,
@@ -90,8 +94,25 @@ export class LayoutpaginaComponent implements OnInit {
     this.Servicios.insertatiposervidor('3', InsertaTipoServidor).subscribe(respu => {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = respu;
+
+      this.LblDescripcion = '';
+      this.AuxiliarDiv = false;
     })
   }
+    //Edit
+    EditarTipoServidor(templateMensaje: TemplateRef<any>, ArGrilla: any){
+      this.LblDescripcionEdit = ArGrilla.Descripcion;
+      console.log(this.LblDescripcionEdit)
+      const EditTipoServidor = {
+        Descripcion: this.LblDescripcionEdit
+      }
+      this.Servicios.insertatiposervidor('2', EditTipoServidor).subscribe(respu => {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+  
+        this.LblDescripcionEdit = '';
+      })
+    }
 }
 function templateMensaje(templateMensaje: any, arg1: any) {
   throw new Error('Function not implemented.');
