@@ -65,6 +65,12 @@ export class LayoutpaginaComponent implements OnInit {
   VerHome() {
     this.router.navigate(['home']);
   }
+  VerPgUsuarios() {
+    this.router.navigate(['home/PgUsuarios']);
+  }
+
+
+
 
 
   //Tipo servidor
