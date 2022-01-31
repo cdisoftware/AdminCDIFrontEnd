@@ -65,7 +65,6 @@ export class PgservidoresComponent implements OnInit {
   ArregloListaTipoServidor: any;
 
   //Variables ver detalles
-  ArregloVerDetalles: any;
   LblUsuario: string;
   LblPasswordVer: string;
   LblServidor: string;
@@ -218,12 +217,12 @@ export class PgservidoresComponent implements OnInit {
         Id_U: this.IdUsuarioCookies,
         Fecha_Ult_Mod: this.Fecha
       }
-      console.log(InsertaServidor)
       this.Servicios.insertaserv('3', InsertaServidor).subscribe(respu => {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
 
         this.Limpiar();
+
         this.modalAgregar.hide();
       })
     }
@@ -251,10 +250,9 @@ export class PgservidoresComponent implements OnInit {
   //Ver detalle
   VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
-    console.log(ArGrilla)
-    this.ArregloVerDetalles = ArGrilla;
-
-
+    this.LblUsuario = ArGrilla.Usuario_Ser;
+    this.LblPasswordVer = ArGrilla.Password;
+    this.LblServidor = ArGrilla.Servidor_Aloja;
   }
 
 
