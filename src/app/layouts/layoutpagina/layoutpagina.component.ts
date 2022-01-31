@@ -106,7 +106,7 @@ export class LayoutpaginaComponent implements OnInit {
       const EditTipoServidor = {
         Descripcion: this.LblDescripcionEdit
       }
-      this.Servicios.insertatiposervidor('2', EditTipoServidor).subscribe(respu => {
+      this.Servicios.actualizatiposervidor('2', EditTipoServidor).subscribe(respu => {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
   
