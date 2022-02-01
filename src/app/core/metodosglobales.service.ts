@@ -57,4 +57,10 @@ export class MetodosGlobalesService {
   actualizatiposervidor(bandera: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizatiposervidor/'+ bandera, BodyPost);
   }
+  insertausuario(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertausuario/'+ bandera, BodyPost);
+  }
+  actualizausuario(bandera: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizausuario/'+ bandera, BodyPost);
+  }
 }
