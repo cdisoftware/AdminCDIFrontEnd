@@ -96,12 +96,12 @@
                     <td>{{ArGrilla.Fecha_Ult_Mod}}</td>
 
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Editar">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="Editarbackup(templateEditarServidor, ArGrilla)">
                             <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Ver">
+                        <button class="BtnClaro mrd m-auto text-center" title="Ver"  (click)="VerDetalle(templateVerDetalles, ArGrilla)">
                             <img src="../../../../assets/ImagenesAdminCDI/ojo.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
@@ -139,18 +139,20 @@
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Ip Servidor" class="col-sm-6 text-center form-control" [(ngModel)]="LblIpServidor"
-                        title="Ip Servidor">
+                    <input type="text" value="" placeholder="Ip Servidor" class="col-sm-6 text-center form-control"
+                        [(ngModel)]="LblIpServidor" title="Ip Servidor">
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Nombre Servidor" class="col-sm-6 text-center form-control" [(ngModel)]="LblNombre"
-                        title="Nombre Servidor">
+                    <input type="text" value="" placeholder="Nombre Servidor" class="col-sm-6 text-center form-control"
+                        [(ngModel)]="LblNombre" title="Nombre Servidor">
                 </div>
                 <div class="col-6 mt-3">
-                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblObservacion" placeholder="Observacion" rows="3"></textarea>
+                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblObservacion"
+                        placeholder="Observacion" rows="3"></textarea>
                 </div>
                 <div class="col-6 mt-3">
-                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblSoftware" placeholder="Software Instalado" rows="3"></textarea>
+                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblSoftware"
+                        placeholder="Software Instalado" rows="3"></textarea>
                 </div>
                 <div class="col-6 mt-3">
                     <input type="text" value="" placeholder="Sistema Operativo" [(ngModel)]="LblSO"
@@ -166,6 +168,8 @@
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidor">
                         <option value="0">Seleccione tipo servidor</option>
+                        <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
+                            {{arRespu.Descripcion}}
                     </select>
                 </div>
                 <div class="col-6 mt-3">
@@ -175,21 +179,139 @@
                     </select>
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Usuario" class="col-sm-6 text-center form-control" [(ngModel)]="LblUsuarios"
-                        title="Usuario">
+                    <input type="text" value="" placeholder="Usuario" class="col-sm-6 text-center form-control"
+                        [(ngModel)]="LblUsuarios" title="Usuario">
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="password" value="" placeholder="Contraseña" class="col-sm-6 text-center form-control" [(ngModel)]="LblPassword" autocomplete="off"
-                        title="Contraseña">
+                    <input type="password" value="" placeholder="Contraseña" class="col-sm-6 text-center form-control"
+                        [(ngModel)]="LblPassword" autocomplete="off" title="Contraseña">
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregarServidor(templateMensaje)">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
+                        (click)="AgregarServidor(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
 
                     <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateVerDetalles let-modal>
+    <div class="modal-header">
+        <p class="titulopopup">VER</p>
+        <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="mrd mld" id="htmlData_">
+        <div class="row texto text-center">
+            <!--Para el editar-->
+        </div>
+        <div class="row texto text-center">
+            <div class="col-sm-12 mt-3">
+                <table class="table table-bordered text-center tablaAjuste">
+                    <tr style="background-color: teal; color: #000000;">
+                        <th colspan="4">Detalles servidor</th>
+                    </tr>
+                    <tr>
+                        <th class="cursorPointer">Usuario</th>
+                        <th class="cursorPointer">Contraseña</th>
+                        <th class="cursorPointer">Servidor donde se ubica</th>
+                        <th class="cursorPointer">Editar</th>
+                    </tr>
+                    <tr>
+                        <td>{{LblUsuario}}</td>
+                        <td>{{LblPasswordVer}}</td>
+                        <td>{{LblServidor}}</td>
+                        <td><button class="BtnClaro mrd m-auto text-center" title="Editar">
+                                <img src="../../../../assets/ImagenesAdminCDI/editar.png"
+                                    class="BtnimgTamanoPeque mr-2">
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #templateEditarServidor>
+    <div class="modal-header">
+        <th class="titulopopup">EDITAR</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalEditarServidor.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Ip Servidor" class="col-sm-6 text-center form-control"
+                        [(ngModel)]="LblIpServidorEdit" title="Ip Servidor">
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Nombre Servidor" class="col-sm-6 text-center form-control"
+                        [(ngModel)]="LblNombreEdit" title="Nombre Servidor">
+                </div>
+                <div class="col-6 mt-3">
+                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblObservacionEdit"
+                        placeholder="Observacion" rows="3"></textarea>
+                </div>
+                <div class="col-6 mt-3">
+                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblSoftwareEdit"
+                        placeholder="Software Instalado" rows="3"></textarea>
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Sistema Operativo" [(ngModel)]="LblSOEdit"
+                        class="col-sm-6 text-center form-control" title="Sistema Operativo">
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar estado" [(ngModel)]="IdEstadoAgregarEdit">
+                        <option value="1">Activo</option>
+                        <option value="0">Desabilitado</option>
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidorEdit">
+                        <option value="{{Id_TipoServidorEdit}}">{{Id_TipoServidorEdit}}</option>
+                        <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
+                            {{arRespu.Descripcion}}
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAlojaEdit">
+                        <option value="0">Seleccione servidor aloja</option>
+                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
+                    </select>
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="text" value="" placeholder="Usuario" class="col-sm-6 text-center form-control"
+                        [(ngModel)]="LblUsuariosEdit" title="Usuario">
+                </div>
+                <div class="col-6 mt-3">
+                    <input type="password" value="" placeholder="Contraseña" class="col-sm-6 text-center form-control"
+                        [(ngModel)]="LblPasswordEdit" autocomplete="off" title="Contraseña">
+                </div>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
+                        (click)="AgregarServidor(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarServidor.hide();">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>

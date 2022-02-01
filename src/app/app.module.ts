@@ -12,7 +12,11 @@ import { SharedModule } from './components/shared/shared.module';
 import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
 import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { PgtipobackupComponent } from './components/pgtipobackup/pgtipobackup.component';
+
+import { HomeComponent } from './components/home/home.component';
+import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,8 @@ import { PgtipobackupComponent } from './components/pgtipobackup/pgtipobackup.co
     LoginComponent,
     LayoutpaginaComponent,
     PgtipobackupComponent,
+    HomeComponent,
+    PgusuariosComponent,
   ],
   imports: [
     ModalModule.forRoot(),

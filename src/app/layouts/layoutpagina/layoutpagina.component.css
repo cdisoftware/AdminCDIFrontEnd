@@ -76,3 +76,12 @@ li {
   height: 41px;
   padding: 0px;
 }
+.textarea {
+  resize: none;
+}
+.TituloAgregar{
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  margin: auto;
+}

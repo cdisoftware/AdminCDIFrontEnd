@@ -1,0 +1,208 @@
+<div class="container bg-white pt-5 pb-5">
+    <div class="row justify-content-center ">
+        <h5 class="col-12 tituloformulario">Usuarios</h5>
+    </div>
+    <div class="row mt-3">
+
+        <!--Ayuda Nombre-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #Nombre placeholder="Nombre" title="Nombre"
+                [(ngModel)]="LblNombre" (keyup)="ListaUsuario(Nombre.value, Apellido.value, Cedula.value)">
+        </div>
+
+        <!--Ayuda Apellido-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #Apellido placeholder="Apellido" title="Apellido"
+                [(ngModel)]="LblApellido" (keyup)="ListaUsuario(Nombre.value, Apellido.value, Cedula.value)">
+        </div>
+
+        <!--Ayuda Cedula-->
+        <div class="col-sm-12 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered col-8" #Cedula placeholder="Cedula" title="Cedula"
+                [(ngModel)]="LblCedula" (keyup)="ListaUsuario(Nombre.value, Apellido.value, Cedula.value)">
+        </div>
+
+
+        <!--Botones-->
+        <div class="row displayCenter col-12 mt-3">
+            <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="Limpiar()">
+                <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
+                Limpiar
+            </button>
+
+            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf()">
+                <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
+                Descargar PDF
+            </button>
+
+            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel" (click)="BtnExportarExcel(Nombre.value, Apellido.value, Cedula.value, templateMensaje)">
+                <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
+                Descarga excel
+            </button>
+
+            <button class="btn btn-dark col-sm-2 mrd" title="Nuevo" (click)="BtnNuevo(templateAgregar)">
+                <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
+                Agregar
+            </button>
+        </div>
+        <!--Fin botones-->
+
+
+        <!--Grilla-->
+        <div class="col-sm-12 mt-5">
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th colspan="6">Usuarios</th>
+                </tr>
+                <tr>
+                    <th class="cursorPointer">Nombre</th>
+                    <th class="cursorPointer">Apellido</th>
+                    <th class="cursorPointer">Usuario</th>
+                    <th class="cursorPointer">Contraseña</th>
+                    <th class="cursorPointer">Cedula</th>
+                    <th>Editar</th>
+                </tr>
+                <tr *ngFor="let ArGrilla of ArregloGrillaUsuario">
+                    <td>{{ArGrilla.Nombre}}</td>
+                    <td>{{ArGrilla.Apellido}}</td>
+                    <td>{{ArGrilla.Usuario}}</td>
+                    <td>{{ArGrilla.Password}}</td>
+                    <td>{{ArGrilla.Cedula}}</td>
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="BtnEdit(templateEditar, ArGrilla)">
+                            <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--fin Grilla-->
+    </div>
+</div>
+
+
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12">
+            <p class="pModals">{{ lblModalMsaje }}</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateAgregar>
+    <div class="modal-header">
+        <th class="titulopopup">AGREGAR</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalAgregar.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+
+                <div class="col-6 mt-3">
+                    <input type="text" placeholder="Nombre" class="col-sm-6 text-center form-control" title="Nombre"
+                        [(ngModel)]="LblAgregarNombre">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <input type="text" placeholder="Apellido" class="col-sm-6 text-center form-control" title="Apellido"
+                        [(ngModel)]="LblAgregarApellido">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <input type="text" placeholder="Usuario" class="col-sm-6 text-center form-control" title="Usuario"
+                        [(ngModel)]="LblAgregarUsuario">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <input type="text" placeholder="Password" class="col-sm-6 text-center form-control" title="Password"
+                        [(ngModel)]="LblAgregarPasword">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <input type="text" placeholder="Cedula" class="col-sm-6 text-center form-control" title="Cedula"
+                        [(ngModel)]="LblAgregarCedula">
+                </div>
+
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregarBck(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateEditar>
+    <div class="modal-header">
+        <p class="titulopopup">EDITAR BACKUP</p>
+        <button type="button" class="bot" aria-label="Close" (click)="modalEditar.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+
+                <div class="col-6 mt-3">
+                    <input type="text" placeholder="Nombre" class="col-sm-6 text-center form-control" title="Nombre"
+                        [(ngModel)]="LblEditNombre">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <input type="text" placeholder="Apellido" class="col-sm-6 text-center form-control" title="Apellido"
+                        [(ngModel)]="LblEditApellido">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <input type="text" placeholder="Usuario" class="col-sm-6 text-center form-control" title="Usuario"
+                        [(ngModel)]="LblEditUsuario">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <input type="text" placeholder="Password" class="col-sm-6 text-center form-control" title="Password"
+                        [(ngModel)]="LblEditPasword">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <input type="text" placeholder="Cedula" class="col-sm-6 text-center form-control" title="Cedula"
+                        [(ngModel)]="LblEditCedula">
+                </div>
+
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="Update(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditar.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
