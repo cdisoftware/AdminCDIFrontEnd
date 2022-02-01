@@ -6,6 +6,7 @@ import { saveAs } from 'file-saver';
 import autoTable from 'jspdf-autotable'
 import jsPDF from 'jspdf';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-pgservidores',
@@ -13,6 +14,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./pgservidores.component.css']
 })
 export class PgservidoresComponent implements OnInit {
+  //Usuario
+  IdUsuarioCookies: string = this.cookies.get('IdUsuario');
   //Variables globales
   lblModalMsaje: string;
   modalMensaje: BsModalRef;
@@ -58,9 +61,31 @@ export class PgservidoresComponent implements OnInit {
   //Variables lista agregar servidor
   ArregloListaServidor: any;
 
+  //Variables lista agregar servidor
+  ArregloListaTipoServidor: any;
+
+  //Variables ver detalles
+  LblUsuario: string;
+  LblPasswordVer: string;
+  LblServidor: string;
+
+  //Variables editar servidor
+  modalEditarServidor: BsModalRef;
+  LblIpServidorEdit: string;
+  LblNombreEdit: string;
+  LblSOEdit: string;
+  LblSoftwareEdit: string;
+  IdEstadoAgregarEdit: string;
+  Id_TipoServidorEdit: string;
+  LblObservacionEdit: string;
+  LblUsuariosEdit: string;
+  LblPasswordEdit: string;
+  IdServidorAlojaEdit: string;
+
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
-    private modalServiceDos: NgbModal
+    private modalServiceDos: NgbModal,
+    private cookies: CookieService
   ) { }
 
   ngOnInit(): void {
@@ -81,10 +106,23 @@ export class PgservidoresComponent implements OnInit {
     this.LblPassword = '';
     this.IdServidorAloja = "0";
 
+    //Inicializar variables editar servidor
+    this.LblIpServidorEdit = '';
+    this.LblNombreEdit = '';
+    this.LblSOEdit = '';
+    this.LblSoftwareEdit = '';
+    this.IdEstadoAgregarEdit = '';
+    this.Id_TipoServidorEdit = '';
+    this.LblObservacionEdit = '';
+    this.LblUsuariosEdit = '';
+    this.LblPasswordEdit = '';
+    this.IdServidorAlojaEdit = '';
+
 
     this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
     this.ListaUsuario();
     this.ListaServidor();
+    this.ListaTipoServidor();
   }
 
   Limpiar() {
@@ -104,6 +142,19 @@ export class PgservidoresComponent implements OnInit {
     this.LblUsuarios = "";
     this.LblPassword = '';
     this.IdServidorAloja = "0";
+
+
+    //Limpiar variables editar servidor
+    this.LblIpServidorEdit = '';
+    this.LblNombreEdit = '';
+    this.LblSOEdit = '';
+    this.LblSoftwareEdit = '';
+    this.IdEstadoAgregarEdit = '';
+    this.Id_TipoServidorEdit = '';
+    this.LblObservacionEdit = '';
+    this.LblUsuariosEdit = '';
+    this.LblPasswordEdit = '';
+    this.IdServidorAlojaEdit = '';
 
     this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
   }
@@ -163,12 +214,16 @@ export class PgservidoresComponent implements OnInit {
         Usuario_Ser: this.LblUsuarios,
         Password: this.LblPassword,
         Servicio_aloja: this.IdServidorAloja,
-        Id_U: 1,
+        Id_U: this.IdUsuarioCookies,
         Fecha_Ult_Mod: this.Fecha
       }
       this.Servicios.insertaserv('3', InsertaServidor).subscribe(respu => {
-        this.ArregloListaUsuario = respu;
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+
         this.Limpiar();
+
+        this.modalAgregar.hide();
       })
     }
   }
@@ -179,5 +234,41 @@ export class PgservidoresComponent implements OnInit {
         this.ArregloListaServidor = respu;
       }
     })
+  }
+  ListaTipoServidor() {
+    this.ArregloListaTipoServidor = [];
+    const ListaTipoServidor = {
+      Descripcion: '0'
+    }
+    this.Servicios.consultatiposerv('0', ListaTipoServidor).subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaTipoServidor = respu;
+      }
+    })
+  }
+
+  //Ver detalle
+  VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
+    this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
+    this.LblUsuario = ArGrilla.Usuario_Ser;
+    this.LblPasswordVer = ArGrilla.Password;
+    this.LblServidor = ArGrilla.Servidor_Aloja;
+  }
+
+
+
+  //Editar Bckup
+  Editarbackup(templateEditarServidor: TemplateRef<any>, Array: any) {
+    this.modalEditarServidor = this._modalService.show(templateEditarServidor);
+    this.LblIpServidorEdit = Array.Ip_S;
+    this.LblNombreEdit = Array.Nombre;
+    this.LblSOEdit = Array.SO;
+    this.LblSoftwareEdit = Array.Software;
+    this.IdEstadoAgregarEdit = Array.Estado;
+    this.Id_TipoServidorEdit = Array.TipoServidor;//Falta editar tiene que traer el id no el nombre
+    this.LblObservacionEdit = Array.Observacion;
+    this.LblUsuariosEdit = Array.Usuario_Ser;
+    this.LblPasswordEdit = Array.Password;
+    this.IdServidorAlojaEdit = Array.Servidor_Aloja;
   }
 }
