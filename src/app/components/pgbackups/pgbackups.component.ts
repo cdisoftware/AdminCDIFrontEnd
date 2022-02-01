@@ -237,7 +237,7 @@ export class PgbackupsComponent implements OnInit {
     this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
   }
 
-  BtnNuevo(templateAgregar: TemplateRef<any>, templateMensaje: TemplateRef<any>) {
+  BtnNuevo(templateAgregar: TemplateRef<any>) {
     this.modalAgregar = this._modalService.show(templateAgregar)
   }
 
