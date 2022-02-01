@@ -62,12 +62,19 @@ export class LayoutpaginaComponent implements OnInit {
   VerPgServidores() {
     this.router.navigate(['home/PgServidores']);
   }
+
+  VerPgTipoBackup() {
+    this.router.navigate(['home/Pgtipobackup']);
+  }
+
+
   VerHome() {
     this.router.navigate(['home']);
   }
   VerPgUsuarios() {
     this.router.navigate(['home/PgUsuarios']);
   }
+
 
 
 
@@ -159,3 +166,4 @@ export class LayoutpaginaComponent implements OnInit {
     })
   }
 }
+
