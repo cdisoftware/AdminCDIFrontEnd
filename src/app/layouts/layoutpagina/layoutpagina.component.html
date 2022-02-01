@@ -1,10 +1,16 @@
 <nav class="navbar">
   <!-- LOGO -->
-  <div class="logo">AdminCDI <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/admin.png">
+  <div class="logo">
+    AdminCDI
+    <img
+      style="margin-left: 5px"
+      src="../../../../assets/ImagenesAdminCDI/admin.png"
+    />
   </div>
   <!-- NAVIGATION MENU -->
   <ul class="nav-links">
     <div class="menu">
+
 
       <li class="titulopopup services cursorPointer" (click)="VerHome()"><a class="titulopopup"><a>Home</a>
           <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/home.png"
@@ -13,10 +19,11 @@
 
       <li class="titulopopup services cursorPointer"> <a (click)="VerPgBackup()">Backups<img style="margin-left: 5px;"
             src="../../../../assets/ImagenesAdminCDI/backup.png" class="BtnimgTamanoPeque mr-2"></a>
+
         <!-- DROPDOWN MENU -->
         <ul class="dropdown">
-          <li class="cursorPointer">
-            <a>Tipo Backup</a>
+          <li class="cursorPointer" (click)="VerPgTipoBackup()">
+            <a href="home/Pgtipobackup">Tipo Backup</a>
           </li>
           <li><a>Dropdown 1</a></li>
           <li><a>Dropdown 2</a></li>
@@ -53,18 +60,13 @@
       <li>
         <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 5px;"
           class="cursorPointer BtnimgCerrarCesion mr-2" (click)="Cerrar()">
+
       </li>
     </div>
   </ul>
 </nav>
 
 <router-outlet></router-outlet>
-
-
-
-
-
-
 
 <ng-template #templateMensaje>
   <div class="modaBody">
@@ -81,9 +83,6 @@
   </div>
   <br>
 </ng-template>
-
-
-
 
 
 <ng-template #templaTipoSer let-modal>
@@ -185,3 +184,4 @@
   </div>
   <br>
 </ng-template>
+
