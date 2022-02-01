@@ -47,12 +47,12 @@
                 Limpiar
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF">
+            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf(templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
                 Descargar PDF
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel">
+            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel" (click)="BtnExportarExcel(templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
                 Descarga excel
             </button>
@@ -89,7 +89,10 @@
                     <td>{{ArGrilla.Nombre}}</td>
                     <td>{{ArGrilla.SO}}</td>
                     <td>{{ArGrilla.Software}}</td>
-                    <td>{{ArGrilla.Estado}}</td>
+
+                    <td *ngIf="ArGrilla.Estado == 1">Exitoso</td>
+                    <td *ngIf="ArGrilla.Estado == 0">Error</td>
+
                     <td>{{ArGrilla.UsuarioUltMod}}</td>
                     <td>{{ArGrilla.Observacion}}</td>
                     <td>{{ArGrilla.TipoServidor}}</td>

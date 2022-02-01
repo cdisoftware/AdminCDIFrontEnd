@@ -271,4 +271,106 @@ export class PgservidoresComponent implements OnInit {
     this.LblPasswordEdit = Array.Password;
     this.IdServidorAlojaEdit = Array.Servidor_Aloja;
   }
+
+  //Descargar Pdf
+  DescargarDatosPdf(templateMensaje: TemplateRef<any>) {
+    const doc = new jsPDF('l', 'px', 'a3');
+
+    autoTable(doc, {
+      styles: { fillColor: [236, 240, 241] },
+      columnStyles: {
+        1: { cellWidth: 96 },
+        2: { cellWidth: 96 },
+        3: { cellWidth: 96 },
+        4: { cellWidth: 96 },
+        5: { cellWidth: 96 },
+        6: { cellWidth: 96 },
+        7: { cellWidth: 96 },
+        8: { cellWidth: 96 },
+        9: { cellWidth: 96 }
+      },
+      didParseCell: function (data) {
+        var rows = data.table.body;
+        if (data.row.index === 0) {
+          data.cell.styles.fillColor = [0, 80, 80];
+        }
+      },
+      margin: { top: 10 },
+      body: [
+        ['Ip', 'Nombre', 'Sistema Operativo', 'Software', 'Estado', 'Ultima mod', 'Observación', 'Tipo Servidor', 'Fecha ultima Mod'],
+      ]
+    })
+
+    if (this.ArregloGrilla.length > 0) {
+      this.ArregloGrilla.forEach(function (respuesta: any) {
+
+        var Res = [respuesta.Ip_S, respuesta.Nombre, respuesta.SO, respuesta.Software, respuesta.Estado, respuesta.UsuarioUltMod, respuesta.Observacion, respuesta.TipoServidor,
+        respuesta.Fecha_Ult_Mod];
+
+        autoTable(doc, {
+          margin: { top: 0, bottom: 0 },
+          columnStyles: {
+            1: { cellWidth: 96 },
+            2: { cellWidth: 96 },
+            3: { cellWidth: 96 },
+            4: { cellWidth: 96 },
+            5: { cellWidth: 96 },
+            6: { cellWidth: 96 },
+            7: { cellWidth: 96 },
+            8: { cellWidth: 96 },
+            9: { cellWidth: 96 }
+          },
+          body:
+            [
+              Res
+            ]
+        })
+      });
+
+      doc.save('Registro servidores - ' + this.Fecha + '.pdf')
+    } else {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
+    }
+  }
+
+
+  //Descargar Excel
+  BtnExportarExcel(templateMensaje: TemplateRef<any>) {
+    if (this.ArregloGrilla.length > 0) {
+      let workbook = new Workbook();
+      let worksheet = workbook.addWorksheet("Registro servidores");
+      let header = ['Ip', 'Nombre', 'Sistema Operativo', 'Software', 'Estado', 'Ultima mod', 'Observación', 'Tipo Servidor', 'Fecha ultima Mod'];
+      worksheet.addRow(header);
+
+      for (let x1 of this.ArregloGrilla) {
+        let temp = []
+        temp.push(x1['Ip_S'])
+        temp.push(x1['Nombre'])
+        temp.push(x1['SO'])
+        temp.push(x1['Software'])
+        if (x1['Estado'] == 1) {
+          temp.push('Exitoso')
+        }else{
+          temp.push('Error')
+        }
+        temp.push(x1['UsuarioUltMod'])
+        temp.push(x1['Observacion'])
+        temp.push(x1['TipoServidor'])
+        temp.push(x1['Fecha_Ult_Mod'])
+
+        worksheet.addRow(temp)
+      }
+
+      let fname = "Registro servidores - " + this.Fecha;
+
+      workbook.xlsx.writeBuffer().then((data) => {
+        let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        saveAs(blob, fname + '.xlsx');
+      });
+    } else {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
+    }
+  }
 }

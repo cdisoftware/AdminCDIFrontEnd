@@ -169,8 +169,7 @@ export class PgusuariosComponent implements OnInit {
 
 
 
-  DescargarDatosPdf() {
-
+  DescargarDatosPdf(templateMensaje: TemplateRef<any>) {
     const doc = new jsPDF('l', 'px', 'a3');
 
     autoTable(doc, {
@@ -194,30 +193,34 @@ export class PgusuariosComponent implements OnInit {
       ]
     })
 
-    this.ArregloGrillaUsuario.forEach(function (respuesta: any) {
+    if (this.ArregloGrillaUsuario.length > 0) {
+      this.ArregloGrillaUsuario.forEach(function (respuesta: any) {
 
-      var Res =
-        [respuesta.Nombre, respuesta.Apellido, respuesta.Usuario, respuesta.Password, respuesta.Cedula];
+        var Res = [respuesta.Nombre, respuesta.Apellido, respuesta.Usuario, respuesta.Password, respuesta.Cedula];
 
-      autoTable(doc, {
-        margin: { top: 0, bottom: 0 },
-        columnStyles: {
-          1: { cellWidth: 172.8 },
-        2: { cellWidth: 172.8 },
-        3: { cellWidth: 172.8 },
-        4: { cellWidth: 172.8 },
-        5: { cellWidth: 172.8 }
-        },
-        body:
-          [
-            Res
-          ]
-      })
-    });
+        autoTable(doc, {
+          margin: { top: 0, bottom: 0 },
+          columnStyles: {
+            1: { cellWidth: 172.8 },
+            2: { cellWidth: 172.8 },
+            3: { cellWidth: 172.8 },
+            4: { cellWidth: 172.8 },
+            5: { cellWidth: 172.8 }
+          },
+          body:
+            [
+              Res
+            ]
+        })
+      });
 
-    doc.save('Registro Usuarios - ' + this.Fecha + '.pdf')
-
+      doc.save('Registro Usuarios - ' + this.Fecha + '.pdf')
+    } else {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
+    }
   }
+  
   //Descargar Excel
   BtnExportarExcel(Nombre: string, Apellido: string, LblCedula: string, templateMensaje: TemplateRef<any>) {
     if (Nombre == undefined || Nombre == '') {
