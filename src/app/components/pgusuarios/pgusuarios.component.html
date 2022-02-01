@@ -1,1 +1,66 @@
-<p>pgusuarios works!</p>
+<div class="container bg-white pt-5 pb-5">
+    <div class="row justify-content-center ">
+        <h5 class="col-12 tituloformulario">Usuarios</h5>
+    </div>
+    <div class="row mt-3">
+
+        <!--Ayuda Nombre-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #Ip placeholder="Nombre" title="Nombre">
+        </div>
+
+        <!--Ayuda Apellido-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #Ip placeholder="Apellido" title="Apellido">
+        </div>
+
+        <!--Ayuda Cedula-->
+        <div class="col-sm-12 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered col-8" #Ip placeholder="Cedula" title="Cedula">
+        </div>
+
+
+        <!--Botones-->
+        <div class="row displayCenter col-12 mt-3">
+            <button class="btn btn-dark col-sm-2 mrd" title="Limpiar">
+                <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
+                Limpiar
+            </button>
+
+            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF">
+                <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
+                Descargar PDF
+            </button>
+
+            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel">
+                <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
+                Descarga excel
+            </button>
+
+            <button class="btn btn-dark col-sm-2 mrd" title="Nuevo">
+                <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
+                Agregar
+            </button>
+        </div>
+        <!--Fin botones-->
+
+
+        <!--Grilla-->
+        <div class="col-sm-12 mt-5">
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th colspan="10">Backups</th>
+                </tr>
+                <tr>
+                    <th class="cursorPointer">Nombre</th>
+                    <th class="cursorPointer">Apellido</th>
+                    <th class="cursorPointer">Usuario</th>
+                    <th class="cursorPointer">Contraseña</th>
+                    <th class="cursorPointer">Cedula</th>
+                    <th>Editar</th>
+                </tr>
+            </table>
+        </div>
+        <!--fin Grilla-->
+    </div>
+</div>

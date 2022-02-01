@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.component';
 import { HomeComponent } from './components/home/home.component';
+import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.component';
 
 const routes: Routes = [
 
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
+      },
+      {
+        path: 'PgUsuarios',
+        component: PgusuariosComponent,
       }
     ],
   },
