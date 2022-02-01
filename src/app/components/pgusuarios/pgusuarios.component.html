@@ -30,12 +30,12 @@
                 Limpiar
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF">
+            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf()">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
                 Descargar PDF
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel">
+            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel" (click)="BtnExportarExcel(Nombre.value, Apellido.value, Cedula.value, templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
                 Descarga excel
             </button>

@@ -41,6 +41,13 @@ export class PgusuariosComponent implements OnInit {
   LblEditPasword: string;
   LblEditCedula: string;
 
+  //Variables Fecha
+  Dia = new Date().getDate();
+  Mes = new Date().getMonth() + 1;
+  Año = new Date().getFullYear();
+
+  Fecha: string = this.Año + '-' + this.Mes + '-' + this.Dia;
+
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
     private modalServiceDos: NgbModal,
@@ -155,6 +162,108 @@ export class PgusuariosComponent implements OnInit {
 
         this.modalEditar.hide();
         this.Limpiar();
+      }
+    })
+  }
+
+
+
+
+  DescargarDatosPdf() {
+
+    const doc = new jsPDF('l', 'px', 'a3');
+
+    autoTable(doc, {
+      styles: { fillColor: [236, 240, 241] },
+      columnStyles: {
+        1: { cellWidth: 172.8 },
+        2: { cellWidth: 172.8 },
+        3: { cellWidth: 172.8 },
+        4: { cellWidth: 172.8 },
+        5: { cellWidth: 172.8 }
+      },
+      didParseCell: function (data) {
+        var rows = data.table.body;
+        if (data.row.index === 0) {
+          data.cell.styles.fillColor = [0, 80, 80];
+        }
+      },
+      margin: { top: 10 },
+      body: [
+        ['Nombre', 'Apellido', 'Usuario', 'Contraseña', 'Cedula'],
+      ]
+    })
+
+    this.ArregloGrillaUsuario.forEach(function (respuesta: any) {
+
+      var Res =
+        [respuesta.Nombre, respuesta.Apellido, respuesta.Usuario, respuesta.Password, respuesta.Cedula];
+
+      autoTable(doc, {
+        margin: { top: 0, bottom: 0 },
+        columnStyles: {
+          1: { cellWidth: 172.8 },
+        2: { cellWidth: 172.8 },
+        3: { cellWidth: 172.8 },
+        4: { cellWidth: 172.8 },
+        5: { cellWidth: 172.8 }
+        },
+        body:
+          [
+            Res
+          ]
+      })
+    });
+
+    doc.save('Registro Usuarios - ' + this.Fecha + '.pdf')
+
+  }
+  //Descargar Excel
+  BtnExportarExcel(Nombre: string, Apellido: string, LblCedula: string, templateMensaje: TemplateRef<any>) {
+    if (Nombre == undefined || Nombre == '') {
+      Nombre = '0';
+    }
+    if (Apellido == undefined || Apellido == '') {
+      Apellido = '0';
+    }
+    if (LblCedula == undefined || LblCedula == '') {
+      LblCedula = '0';
+    }
+
+    const ConsultaU = {
+      Nombre: Nombre,
+      Apellido: Apellido,
+      Cedula: LblCedula
+    }
+    this.ArregloGrillaUsuario = [];
+    this.Servicios.consultausuarios(ConsultaU).subscribe(respu => {
+      if (respu.length > 0) {
+        let workbook = new Workbook();
+        let worksheet = workbook.addWorksheet("Registro backup");
+        let header = ['Nombre', 'Apellido', 'Usuario', 'Contraseña', 'Cedula'];
+        worksheet.addRow(header);
+
+        for (let x1 of respu) {
+          let temp = []
+          temp.push(x1['Nombre'])
+          temp.push(x1['Apellido'])
+          temp.push(x1['Usuario'])
+          temp.push(x1['Password'])
+          temp.push(x1['Cedula'])
+
+          worksheet.addRow(temp)
+        }
+
+        let fname = "Registro usuarios - " + this.Fecha;
+
+        workbook.xlsx.writeBuffer().then((data) => {
+          let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          saveAs(blob, fname + '.xlsx');
+        });
+
+      } else {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
       }
     })
   }
