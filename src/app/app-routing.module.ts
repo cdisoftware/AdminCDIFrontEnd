@@ -6,6 +6,7 @@ import { LayautprincipalComponent } from './layouts/layautprincipal/layautprinci
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.component';
+import { PgtipobackupComponent } from './components/pgtipobackup/pgtipobackup.component';
 
 const routes: Routes = [
 
@@ -21,6 +22,10 @@ const routes: Routes = [
         path: 'PgServidores',
         component: PgservidoresComponent,
       },
+      {
+        path: 'Pgtipobackup',
+        component: PgtipobackupComponent,
+      }
     ],
   },
 
