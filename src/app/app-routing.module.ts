@@ -9,6 +9,7 @@ import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.compo
 import { PgtipobackupComponent } from './components/pgtipobackup/pgtipobackup.component';
 import { HomeComponent } from './components/home/home.component';
 import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.component';
+import { PghardwareComponent } from './components/pghardware/pghardware.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,11 @@ const routes: Routes = [
       {
         path: 'PgUsuarios',
         component: PgusuariosComponent,
+
+      },
+      {
+        path: 'PgHardware',
+        component: PghardwareComponent,
 
       }
     ],
