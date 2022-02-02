@@ -5,49 +5,30 @@
   <div class="row mt-3">
     <!--Ayuda Descripcion-->
     <div class="col-sm-12 m-0 mb-3 displayFlexbetween">
-      <input
-        type="text"
-        class="form-control table-bordered"
-        #Descripcion
-        placeholder="Descripcion"
-        [(ngModel)]="lblDescripcion"
-        (keyup)="consultaTipoBackup(Descripcion.value)"
-        title="Descripcion"
-      />
+      <input type="text" class="form-control table-bordered" #Descripcion placeholder="Descripcion"
+        [(ngModel)]="lblDescripcion" (keyup)="consultaTipoBackup(Descripcion.value)" title="Descripcion" />
     </div>
     <!--Fin ayuda-->
 
     <!--Botones-->
     <div class="row displayCenter col-12 mt-3">
       <button class="btn btn-dark col-sm-2 mrd" title="Limpiar">
-        <img
-          src="../../../../assets/ImagenesAdminCDI/Limpiar.png"
-          class="BtnimgTamanoPeque mr-2"
-        />
+        <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2" />
         Limpiar
       </button>
 
       <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF">
-        <img
-          src="../../../../assets/ImagenesAdminCDI/descargarpdf.png"
-          class="BtnimgTamanoPeque mr-2"
-        />
+        <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2" />
         Descargar PDF
       </button>
 
       <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel">
-        <img
-          src="../../../../assets/ImagenesAdminCDI/descargarexcel.png"
-          class="BtnimgTamanoPeque mr-2"
-        />
+        <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2" />
         Descarga excel
       </button>
 
-      <button class="btn btn-dark col-sm-2 mrd" title="Nuevo">
-        <img
-          src="../../../../assets/ImagenesAdminCDI/agregar.png"
-          class="BtnimgTamanoPeque mr-2"
-        />
+      <button class="btn btn-dark col-sm-2 mrd" title="Nuevo" (click)="agregarTipoBackup(templateAgregar  )">
+        <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2" />
         Agregar
       </button>
     </div>
@@ -63,19 +44,102 @@
           <th class="cursorPointer">Id</th>
           <th class="cursorPointer">Descripcion</th>
           <th>Editar</th>
-
         </tr>
         <tr *ngFor="let ArGrilla of ArrayGrilla">
-          <td>{{ArGrilla.Id_Tipo_BCK}}</td>
-          <td>{{ArGrilla.Descripcion}}</td>
+          <td>{{ ArGrilla.Id_Tipo_BCK }}</td>
+          <td>{{ ArGrilla.Descripcion }}</td>
           <td class="text-center">
-            <button class="BtnClaro mrd m-auto text-center" title="Editar">
-                <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
+            <button class="BtnClaro mrd m-auto text-center" title="Editar"
+              (click)="editarTipoBackup(templateEditarTipoBackup, ArGrilla)">
+              <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2" />
             </button>
-        </td>
+          </td>
         </tr>
       </table>
     </div>
     <!--fin Grilla-->
   </div>
 </div>
+
+<ng-template #templateAgregar>
+  <div class="modal-header">
+      <th class="titulopopup">AGREGAR TIPO BACKUP</th>
+      <button type="button" class="bot" aria-label="Close" (click)="modalAgregarTipoBackup.hide()">
+          <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+      </button>
+  </div>
+  <div class="modaBody">
+      <div class="col-sm-12 mt-3 row displayCenter">
+          <li class="row col-sm-12 displayCenter">
+            <div class="col-sm-12 mt-6">
+              <textarea id="form10" class="form-control" rows="6" placeholder="Descripcion" rows="3"
+                [(ngModel)]="lblDescripcionAgregar"></textarea>
+            </div>
+            <!---Botones--->
+            <div class="row displayCenter col-12 mt-3">
+              <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="guardarTipoBackup(templateMensaje)">
+                <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2" />
+                Guardar..
+              </button>
+    
+              <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregarTipoBackup.hide()">
+                <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2" />
+                Cancelar
+              </button>
+            </div>
+          </li>
+      </div>
+      <br>
+  </div>
+  <br>
+</ng-template>
+
+
+<ng-template #templateMensaje>
+  <div class="modaBody">
+      <div class="col-12">
+          <p class="pModals">{{ lblModalMsaje }}</p>
+      </div>
+  </div>
+  <div class="row text-center">
+      <div class="col-0">
+          <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+              Aceptar
+          </button>
+      </div>
+  </div>
+  <br>
+</ng-template>
+
+<ng-template #templateEditarTipoBackup>
+  <div class="modal-header">
+    <th class="titulopopup">EDITAR</th>
+    <button type="button" class="bot" aria-label="Close" (click)="modalEditarTipoBackup.hide()">
+      <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis" />
+    </button>
+  </div>
+  <div class="modaBody">
+    <div class="col-sm-12 mt-3 row displayCenter">
+      <li class="row">
+        <div class="col-sm-12 mt-6">
+          <textarea id="form10" class="form-control" rows="6" placeholder="Descripcion" rows="3"
+            [(ngModel)]="lblDescripcionEditar"></textarea>
+        </div>
+        <!---Botones--->
+        <div class="row displayCenter col-12 mt-3">
+          <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateTipoBck()">
+            <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2" />
+            Guardar..
+          </button>
+
+          <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarTipoBackup.hide()">
+            <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2" />
+            Cancelar
+          </button>
+        </div>
+      </li>
+    </div>
+    <br />
+  </div>
+  <br />
+</ng-template>

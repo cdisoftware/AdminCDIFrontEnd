@@ -9,19 +9,19 @@ export class MetodosGlobalesService {
   constructor(
     private http: HttpClient,
     private serviciosconexion: ConexionprincipalService
-  ) {}
+  ) { }
 
   url_servidor = this.serviciosconexion.SeleccionAmbiente();
 
   consultavalidlogin(BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'consultavalidlogin',BodyPost);
+    return this.http.post<any>(this.url_servidor + 'consultavalidlogin', BodyPost);
   }
 
-  consultabackup(NombreBck: string,Ip: string,usuario: string,cliente: string) {
+  consultabackup(NombreBck: string, Ip: string, usuario: string, cliente: string) {
     return this.http.get<any[]>(this.url_servidor + 'consultabackup/' + NombreBck + '/' + Ip + '/' + usuario + '/' + cliente);
   }
   consultausuarios(BodyPost: any) {
-    return this.http.post<any[]>( this.url_servidor + 'consultausuarios', BodyPost);
+    return this.http.post<any[]>(this.url_servidor + 'consultausuarios', BodyPost);
   }
   consultaproyect(bandera: string) {
     return this.http.get<any[]>(this.url_servidor + 'consultaproyect/' + bandera);
@@ -30,14 +30,14 @@ export class MetodosGlobalesService {
     return this.http.post<any>(this.url_servidor + 'insertarbackup/' + Bandera, BodyPost);
   }
   actualizabackup(Bandera: string, BodyPost: any) {
-    return this.http.put<any>( this.url_servidor + 'actualizabackup/' + Bandera, BodyPost);
+    return this.http.put<any>(this.url_servidor + 'actualizabackup/' + Bandera, BodyPost);
   }
 
   consultaregistbck(IdUsuario: number, BodyPost: any) {
-    return this.http.post<any>( this.url_servidor + 'consultaregistbck/' + IdUsuario, BodyPost);
+    return this.http.post<any>(this.url_servidor + 'consultaregistbck/' + IdUsuario, BodyPost);
   }
-  consultaservidors( bandera: string, NomServidor: string, SO: string, Estado: string, Usuario: string ) {
-    return this.http.get<any[]>( this.url_servidor + 'consultaservidors/' + bandera + '/' + NomServidor + '/' + SO + '/' + Estado + '/' + Usuario);
+  consultaservidors(bandera: string, NomServidor: string, SO: string, Estado: string, Usuario: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consultaservidors/' + bandera + '/' + NomServidor + '/' + SO + '/' + Estado + '/' + Usuario);
   }
   consultatipobck(BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'consultatipobck', BodyPost);
@@ -46,21 +46,28 @@ export class MetodosGlobalesService {
     return this.http.post<any>(this.url_servidor + 'insertaregistbck', BodyPost);
   }
   insertaserv(Bandera: string, BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'insertaserv/'+Bandera, BodyPost);
+    return this.http.post<any>(this.url_servidor + 'insertaserv/' + Bandera, BodyPost);
   }
   consultatiposerv(IdTipoServidor: string, BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'consultatiposerv/'+ IdTipoServidor, BodyPost);
+    return this.http.post<any>(this.url_servidor + 'consultatiposerv/' + IdTipoServidor, BodyPost);
   }
   insertatiposervidor(bandera: string, BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'insertatiposervidor/'+ bandera, BodyPost);
+    return this.http.post<any>(this.url_servidor + 'insertatiposervidor/' + bandera, BodyPost);
   }
   actualizatiposervidor(bandera: string, BodyPost: any) {
-    return this.http.put<any>(this.url_servidor + 'actualizatiposervidor/'+ bandera, BodyPost);
+    return this.http.put<any>(this.url_servidor + 'actualizatiposervidor/' + bandera, BodyPost);
   }
   insertausuario(bandera: string, BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'insertausuario/'+ bandera, BodyPost);
+    return this.http.post<any>(this.url_servidor + 'insertausuario/' + bandera, BodyPost);
   }
   actualizausuario(bandera: string, BodyPost: any) {
-    return this.http.put<any>(this.url_servidor + 'actualizausuario/'+ bandera, BodyPost);
+    return this.http.put<any>(this.url_servidor + 'actualizausuario/' + bandera, BodyPost);
   }
+  actualizatipobackup(bandera: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizatipobackup/' + bandera, BodyPost);
+  }
+  insertatipobackup(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertatipobackup/' + bandera, BodyPost);
+  }
+
 }
