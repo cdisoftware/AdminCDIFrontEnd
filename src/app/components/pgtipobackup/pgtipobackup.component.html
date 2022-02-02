@@ -3,14 +3,11 @@
     <h3 class="col-12 tituloformulario">Tipos Backups</h3>
   </div>
   <div class="row mt-3">
-    <!--Ayuda IP-->
+    <!--Ayuda Descripcion-->
     <div class="col-sm-12 m-0 mb-3 displayFlexbetween">
-      <input type="text" class="form-control table-bordered" #Ip placeholder="Descripcion" title="Descripcion"/>
+      <input type="text" class="form-control table-bordered" #Descripcion placeholder="Descripcion" title="Descripcion" [(ngModel)]="lblDescripcion" (keyup)="consultaTipoBackup(Descripcion.value)">
     </div>
     <!--Fin ayuda-->
-
-    <!--Tipo lista-->
-
 
     <!--Botones-->
     <div class="row displayCenter col-12 mt-3">
@@ -46,7 +43,16 @@
           <th class="cursorPointer">Id</th>
           <th class="cursorPointer">Descripcion</th>
           <th>Editar</th>
-          <th>Ver</th>
+
+        </tr>
+        <tr *ngFor="let ArGrilla of ArrayGrilla">
+          <td>{{ArGrilla.Id_Tipo_BCK}}</td>
+          <td>{{ArGrilla.Descripcion}}</td>
+          <td class="text-center">
+            <button class="BtnClaro mrd m-auto text-center" title="Editar">
+                <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
+            </button>
+        </td>
         </tr>
       </table>
     </div>
