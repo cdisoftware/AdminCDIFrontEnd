@@ -155,6 +155,7 @@ export class PgusuariosComponent implements OnInit {
       Password: this.LblEditPasword,
       Cedula: this.LblEditCedula
     }
+    console.log(datosupdate)
     this.Servicios.actualizausuario('2', datosupdate).subscribe(respu => {
       if (respu.length > 0) {
         this.modalMensaje = this._modalService.show(templateMensaje);

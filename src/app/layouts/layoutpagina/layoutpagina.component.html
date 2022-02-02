@@ -2,10 +2,7 @@
   <!-- LOGO -->
   <div class="logo">
     AdminCDI
-    <img
-      style="margin-left: 5px"
-      src="../../../../assets/ImagenesAdminCDI/admin.png"
-    />
+    <img style="margin-left: 5px" src="../../../../assets/ImagenesAdminCDI/admin.png" />
   </div>
   <!-- NAVIGATION MENU -->
   <ul class="nav-links">
@@ -38,7 +35,8 @@
           <li class="cursorPointer" (click)="TipoServidor(templaTipoSer, templateMensaje)"><a>Tipo<img
                 style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/servidores.png"
                 class="BtnimgTamanoPeque mr-2"></a></li>
-          <li><a>Hardware<img src="../../../../assets/ImagenesAdminCDI/ram.png" class="BtnimgTamanoPeque mr-2"></a></li>
+          <li (click)="VerPgHardware()"><a>Hardware<img src="../../../../assets/ImagenesAdminCDI/ram.png"
+                class="BtnimgTamanoPeque mr-2"></a></li>
         </ul>
       </li>
 
@@ -84,7 +82,7 @@
   <br>
 </ng-template>
 
-
+<!-------------------------------------------------------------------------------------------------------------------------------Tipo servidor------------------------------------------------------------------------------------------------------------------------------->
 <ng-template #templaTipoSer let-modal>
   <div class="modal-header">
     <p class="titulopopup">Tipo servidor</p>
@@ -107,7 +105,8 @@
 
       <div *ngIf="AuxiliarDiv == true">
         <div class="col-12 mt-3">
-          <textarea class="md-textarea form-control textarea" placeholder="Descripción" rows="3" [(ngModel)]="LblDescripcion"></textarea>
+          <textarea class="md-textarea form-control textarea" placeholder="Descripción" rows="3"
+            [(ngModel)]="LblDescripcion"></textarea>
         </div>
       </div>
     </div>
@@ -140,7 +139,8 @@
         <tr *ngFor="let ArGrilla of ArregloGrillaTipoServidor">
           <td>{{ArGrilla.Id_Tipo_S}}</td>
           <td style="word-wrap:break-word">{{ArGrilla.Descripcion}}</td>
-          <td><button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="EditarTipoServidor(templateEditartiposervidor, ArGrilla)">
+          <td><button class="BtnClaro mrd m-auto text-center" title="Editar"
+              (click)="EditarTipoServidor(templateEditartiposervidor, ArGrilla)">
               <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
             </button>
           </td>
@@ -153,35 +153,36 @@
 
 <ng-template #templateEditartiposervidor>
   <div class="modal-header">
-      <p class="titulopopup">EDITAR TIPO SERVIDOR</p>
-      <button type="button" class="bot" aria-label="Close" (click)="modalEditarTipoServidor.hide();">
-          <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
-      </button>
+    <p class="titulopopup">EDITAR TIPO SERVIDOR</p>
+    <button type="button" class="bot" aria-label="Close" (click)="modalEditarTipoServidor.hide();">
+      <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+    </button>
   </div>
   <div class="modaBody">
-      <div class="col-sm-12 mt-3 row displayCenter">
-          <li class="row col-sm-12 displayCenter">
+    <div class="col-sm-12 mt-3 row displayCenter">
+      <li class="row col-sm-12 displayCenter">
 
-            <div class="col-10 mt-3">
-              <textarea class="md-textarea form-control textarea" placeholder="Descripción" rows="3" [(ngModel)]="LblDescripcionEdit"></textarea>
-            </div>
+        <div class="col-10 mt-3">
+          <textarea class="md-textarea form-control textarea" placeholder="Descripción" rows="3"
+            [(ngModel)]="LblDescripcionEdit"></textarea>
+        </div>
 
-              <!---Botones--->
-              <div class="row displayCenter col-12 mt-3">
-                  <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="EditarTS(templaTipoSer, templateMensaje)">
-                      <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
-                      Guardar
-                  </button>
+        <!---Botones--->
+        <div class="row displayCenter col-12 mt-3">
+          <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="EditarTS(templaTipoSer, templateMensaje)">
+            <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+            Guardar
+          </button>
 
-                  <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarTipoServidor.hide();">
-                      <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
-                      Cancelar
-                  </button>
-              </div>
-          </li>
-      </div>
-      <br>
+          <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarTipoServidor.hide();">
+            <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+            Cancelar
+          </button>
+        </div>
+      </li>
+    </div>
+    <br>
   </div>
   <br>
 </ng-template>
-
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
