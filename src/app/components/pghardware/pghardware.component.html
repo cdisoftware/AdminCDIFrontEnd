@@ -5,33 +5,38 @@
     <div class="row mt-3">
         <!--Tipo lista Servidor-->
         <div class="col-sm-4 m-0 mb-3 ">
-            <select class="form-select" title="Seleccionar Servidor" #IdServidor  [(ngModel)]="IdServidor" (change)='ConsultaHardware(IdServidor.value)'>
+            <select class="form-select" title="Seleccionar Servidor" #IdServidorCons  [(ngModel)]="IdServidorConsult"
+            (change)='ConsultaHardware(IdServidorCons.value, Procesador.value, DiscoDuro.value, RAM.value)'>
                 <option value="0" selected>Seleccione servidor</option>
+                <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}</option>
             </select>
         </div>
         <!--Fin Tipo lista-->
 
         <!--Ayuda Procesador-->
         <div class="col-sm-8 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" #Procesador placeholder="Procesador" title="Procesador">
+            <input type="text" class="form-control table-bordered" #Procesador placeholder="Procesador" title="Procesador" [(ngModel)]="LblProcesador"
+            (keyup)="ConsultaHardware(IdServidorCons.value, Procesador.value, DiscoDuro.value, RAM.value)">
         </div>
         <!--Fin Procesador-->
 
         <!--Ayuda DiscoDuro-->
         <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" #DiscoDuro placeholder="Disco Duro" title="Disco Duro">
+            <input type="text" class="form-control table-bordered" #DiscoDuro placeholder="Disco Duro" [(ngModel)]="LblDiscoDuro" title="Disco Duro"
+            (keyup)="ConsultaHardware(IdServidorCons.value, Procesador.value, DiscoDuro.value, RAM.value)">
         </div>
         <!--Fin ayuda-->
 
-        <!--Ayuda SO-->
+        <!--Ayuda Ram-->
         <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" #RAM placeholder="RAM" title="RAM">
+            <input type="text" class="form-control table-bordered" #RAM placeholder="RAM" title="RAM"
+            (keyup)="ConsultaHardware(IdServidorCons.value, Procesador.value, DiscoDuro.value, RAM.value)">
         </div>
         <!--Fin ayuda-->
 
         <!--Botones-->
         <div class="row displayCenter col-12 mt-3">
-            <button class="btn btn-dark col-sm-2 mrd" title="Limpiar">
+            <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="Limpiar()">
                 <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
                 Limpiar
             </button>
@@ -84,3 +89,19 @@
         <!--fin Grilla-->
     </div>
 </div>
+
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12">
+            <p class="pModals">{{ lblModalMsaje }}</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>
