@@ -72,4 +72,7 @@ export class MetodosGlobalesService {
   consultahardware(IdServidor: string, DiscoDuro: string, Ram: string, Procesador: string) {
     return this.http.get<any[]>(this.url_servidor + 'consultahardware/' + IdServidor + '/' + DiscoDuro + '/' + Ram + '/' + Procesador);
   }
+  insertarhardserv(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertarhardserv/' + bandera, BodyPost);
+  }
 }

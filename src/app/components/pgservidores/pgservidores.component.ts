@@ -68,6 +68,7 @@ export class PgservidoresComponent implements OnInit {
   LblUsuario: string;
   LblPasswordVer: string;
   LblServidor: string;
+  ArrListaHardware: any;
 
   //Variables editar servidor
   modalEditarServidor: BsModalRef;
@@ -81,6 +82,14 @@ export class PgservidoresComponent implements OnInit {
   LblUsuariosEdit: string;
   LblPasswordEdit: string;
   IdServidorAlojaEdit: string;
+
+  //Variables agregar hardware
+  AuxiliarDiv: boolean;
+  modalAgregarHardware: BsModalRef;
+  IdServidor: string;
+  LblDiscoDuro: string;
+  LblRam: string;
+  LblProcesador: string;
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
@@ -248,11 +257,24 @@ export class PgservidoresComponent implements OnInit {
   }
 
   //Ver detalle
-  VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
+  VerDetalle(templateVerDetalles: TemplateRef<any>, templateMensaje: TemplateRef<any>, ArGrilla: any) {
+    this.AuxiliarDiv = false;
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
+    this.ArrListaHardware = [];
+    this.Servicios.consultahardware(ArGrilla.Id_S, '0', '0', '0').subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArrListaHardware = respu;
+        this.AuxiliarDiv = false;
+      } else {
+        this.AuxiliarDiv = true;
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'No existe hardware inscrito para este servidor por favor agregeselo';
+      }
+    })
     this.LblUsuario = ArGrilla.Usuario_Ser;
     this.LblPasswordVer = ArGrilla.Password;
     this.LblServidor = ArGrilla.Servidor_Aloja;
+    this.IdServidor = ArGrilla.Id_S;
   }
 
 
@@ -351,7 +373,7 @@ export class PgservidoresComponent implements OnInit {
         temp.push(x1['Software'])
         if (x1['Estado'] == 1) {
           temp.push('Exitoso')
-        }else{
+        } else {
           temp.push('Error')
         }
         temp.push(x1['UsuarioUltMod'])
@@ -372,5 +394,51 @@ export class PgservidoresComponent implements OnInit {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
     }
+  }
+
+
+
+
+
+
+
+
+
+  //Popap agregar hardware
+  AbrirpopapHardware(templateAgregarHARDWARE: TemplateRef<any>) {
+    this.modalAgregarHardware = this._modalService.show(templateAgregarHARDWARE)
+  }
+  InsetHardware(templateMensaje: TemplateRef<any>) {
+    const Insert = {
+      Id_S: this.IdServidor,
+      DiscoDuro: this.LblDiscoDuro,
+      RAM: this.LblRam,
+      Procesador: this.LblProcesador
+    }
+    this.Servicios.insertarhardserv('3', Insert).subscribe(respu => {
+      console.log(respu)
+      if (respu == 'Hardware de servidor registrado exitosamente.') {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+
+        this.modalAgregarHardware.hide();
+
+        this.ArrListaHardware = [];
+        this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
+          if (respu.length > 0) {
+            this.ArrListaHardware = respu;
+            this.AuxiliarDiv = false;
+          }
+        })
+
+      } else {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'Por favor verefique los datos a ingresar.';
+      }
+    })
+
+
   }
 }

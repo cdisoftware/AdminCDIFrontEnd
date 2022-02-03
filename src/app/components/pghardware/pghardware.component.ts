@@ -28,6 +28,9 @@ export class PghardwareComponent implements OnInit {
   lblModalMsaje: string;
   modalMensaje: BsModalRef;
 
+  //Variables modal agregar
+  modalAgregar: BsModalRef;
+
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
     private modalServiceDos: NgbModal,
@@ -80,5 +83,10 @@ export class PghardwareComponent implements OnInit {
         this.ArregloListaServidor = respu;
       }
     })
+  }
+
+  //Popap agregar
+  BtnNuevo(templateAgregar: TemplateRef<any>) {
+    this.modalAgregar = this._modalService.show(templateAgregar)
   }
 }
