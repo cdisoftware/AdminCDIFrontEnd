@@ -16,7 +16,17 @@ import { CookieService } from 'ngx-cookie-service';
 export class PghardwareComponent implements OnInit {
   //Variables consulta hardware
   ArrayConsulta: any;
-  IdServidor: string;
+  IdServidorConsult: string;
+  LblProcesador: string;
+  LblDiscoDuro: string;
+  LblRam: string;
+
+  //Lista servidor
+  ArregloListaServidor: any;
+
+  //Variables modal mensaje
+  lblModalMsaje: string;
+  modalMensaje: BsModalRef;
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
@@ -25,18 +35,49 @@ export class PghardwareComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ConsultaHardware(this.IdServidor);
+    //Inizializa bariables consulta
+    this.IdServidorConsult = '0';
+
+    this.ConsultaHardware(this.IdServidorConsult, this.LblProcesador, this.LblDiscoDuro, this.LblRam);
+    this.ListaTipoServidor();
+  }
+
+  //Limpiar
+  Limpiar(){
+    this.IdServidorConsult = '0';
+    this.LblProcesador = '';
+    this.LblDiscoDuro = '';
+    this.LblRam = '';
+
+    this.ConsultaHardware(this.IdServidorConsult, this.LblProcesador, this.LblDiscoDuro, this.LblRam);
   }
 
   //Consulta
-  ConsultaHardware(IdSer: string){
+  ConsultaHardware(IdSer: string, Procesador: string, DiscoDuro: string, Ram: string) {
     if (IdSer == undefined || IdSer == '') {
       IdSer = '0';
     }
+    if (Procesador == undefined || Procesador == '') {
+      Procesador = '0';
+    }
+    if (DiscoDuro == undefined || DiscoDuro == '') {
+      DiscoDuro = '0';
+    }
+    if (Ram == undefined || Ram == '') {
+      Ram = '0';
+    }
     this.ArrayConsulta = [];
-    this.Servicios.consultahardware(IdSer,'0','0','0').subscribe(respu => {
+    this.Servicios.consultahardware(IdSer, DiscoDuro, Ram, Procesador).subscribe(respu => {
       if (respu.length > 0) {
         this.ArrayConsulta = respu;
+      }
+    })
+  }
+  ListaTipoServidor() {
+    this.ArregloListaServidor = [];
+    this.Servicios.consultaservidors('1','0','0','2','0').subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaServidor = respu;
       }
     })
   }
