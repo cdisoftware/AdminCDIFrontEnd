@@ -75,4 +75,7 @@ export class MetodosGlobalesService {
   insertarhardserv(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'insertarhardserv/' + bandera, BodyPost);
   }
+  actualizachardserv(bandera: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizachardserv/' + bandera, BodyPost);
+  }
 }

@@ -91,6 +91,12 @@ export class PgservidoresComponent implements OnInit {
   LblRam: string;
   LblProcesador: string;
 
+  //Variables agregar hardware
+  modalEditarHardware: BsModalRef;
+  LblDiscoDuroEdit: string;
+  LblRamEdit: string;
+  LblProcesadorEdit: string;
+
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
     private modalServiceDos: NgbModal,
@@ -406,7 +412,7 @@ export class PgservidoresComponent implements OnInit {
 
   //Popap agregar hardware
   AbrirpopapHardware(templateAgregarHARDWARE: TemplateRef<any>) {
-    this.modalAgregarHardware = this._modalService.show(templateAgregarHARDWARE)
+    this.modalAgregarHardware = this._modalService.show(templateAgregarHARDWARE);
   }
   InsetHardware(templateMensaje: TemplateRef<any>) {
     const Insert = {
@@ -416,7 +422,6 @@ export class PgservidoresComponent implements OnInit {
       Procesador: this.LblProcesador
     }
     this.Servicios.insertarhardserv('3', Insert).subscribe(respu => {
-      console.log(respu)
       if (respu == 'Hardware de servidor registrado exitosamente.') {
 
         this.modalMensaje = this._modalService.show(templateMensaje);
@@ -440,5 +445,44 @@ export class PgservidoresComponent implements OnInit {
     })
 
 
+  }
+
+  //Popap editar hardware
+  Editar(templateEditarHARDWARE: TemplateRef<any>, Array: any) {
+    this.modalEditarHardware = this._modalService.show(templateEditarHARDWARE);
+
+    this.LblDiscoDuroEdit = Array.DiscoDuro;
+    this.LblRamEdit = Array.RAM;
+    this.LblProcesadorEdit = Array.Procesador;
+  }
+  updateHardware(templateMensaje: TemplateRef<any>){
+    const Update = {
+      Id_S: this.IdServidor,
+      DiscoDuro: this.LblDiscoDuroEdit,
+      RAM: this.LblRamEdit,
+      Procesador: this.LblProcesadorEdit
+    }
+    this.Servicios.actualizachardserv('2', Update).subscribe(respu => {
+      if (respu == 'Hardware de servidor actualizado exitosamente.') {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+
+        this.modalEditarHardware.hide();
+
+        this.ArrListaHardware = [];
+        this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
+          if (respu.length > 0) {
+            this.ArrListaHardware = respu;
+            this.AuxiliarDiv = false;
+          }
+        })
+
+      } else {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'Por favor verefique los datos a actualizar.';
+      }
+    })
   }
 }
