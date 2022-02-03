@@ -265,7 +265,7 @@
                         <td>{{ArGrilla.DiscoDuro}}</td>
                         <td>{{ArGrilla.RAM}}</td>
                         <td>{{ArGrilla.Procesador}}</td>
-                        <td><button class="BtnClaro mrd m-auto text-center" title="Editar">
+                        <td><button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="Editar(templateEditarHARDWARE, ArGrilla)">
                                 <img src="../../../../assets/ImagenesAdminCDI/editar.png"
                                     class="BtnimgTamanoPeque mr-2">
                             </button>
@@ -274,15 +274,13 @@
                 </table>
 
                 <div class="col-sm-12" *ngIf="AuxiliarDiv == true">
-                    <button class="btn btn-dark col-sm-2 mrd" title="Nuevo"
+                    <button class="btn btn-dark col-sm-2 mrd" title="Nuevo" style="margin-bottom: 10px;"
                         (click)="AbrirpopapHardware(templateAgregarHARDWARE)">
                         <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
                         Agregar
                     </button>
                 </div>
             </div>
-
-
         </div>
     </div>
 </ng-template>
@@ -390,7 +388,8 @@
             <li class="row col-sm-12 displayCenter">
 
                 <div class="col-12 mt-3">
-                    <input type="text" placeholder="Disco duro" class="form-control" title="Disco duro" [(ngModel)]="LblDiscoDuro">
+                    <input type="text" placeholder="Disco duro" class="form-control" title="Disco duro"
+                        [(ngModel)]="LblDiscoDuro">
                 </div>
 
                 <div class="col-12 mt-3">
@@ -398,7 +397,8 @@
                 </div>
 
                 <div class="col-12 mt-3">
-                    <input type="text" placeholder="Procesador" class="form-control" title="Procesador" [(ngModel)]="LblProcesador">
+                    <input type="text" placeholder="Procesador" class="form-control" title="Procesador"
+                        [(ngModel)]="LblProcesador">
                 </div>
 
                 <!---Botones--->
@@ -409,6 +409,51 @@
                     </button>
 
                     <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregarHardware.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+
+<ng-template #templateEditarHARDWARE>
+    <div class="modal-header">
+        <th class="titulopopup">EDITAR HARDWARE</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalEditarHardware.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+
+                <div class="col-12 mt-3">
+                    <input type="text" placeholder="Disco duro" class="form-control" title="Disco duro"
+                        [(ngModel)]="LblDiscoDuroEdit">
+                </div>
+
+                <div class="col-12 mt-3">
+                    <input type="text" placeholder="Ram" class="form-control" title="Ram" [(ngModel)]="LblRamEdit">
+                </div>
+
+                <div class="col-12 mt-3">
+                    <input type="text" placeholder="Procesador" class="form-control" title="Procesador"
+                        [(ngModel)]="LblProcesadorEdit">
+                </div>
+
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="updateHardware(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarHardware.hide();">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
