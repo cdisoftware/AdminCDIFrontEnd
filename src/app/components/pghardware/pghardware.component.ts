@@ -14,6 +14,9 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./pghardware.component.css']
 })
 export class PghardwareComponent implements OnInit {
+  //Variables consulta hardware
+  ArrayConsulta: any;
+  IdServidor: string;
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
@@ -22,6 +25,19 @@ export class PghardwareComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.ConsultaHardware(this.IdServidor);
   }
 
+  //Consulta
+  ConsultaHardware(IdSer: string){
+    if (IdSer == undefined || IdSer == '') {
+      IdSer = '0';
+    }
+    this.ArrayConsulta = [];
+    this.Servicios.consultahardware(IdSer,'0','0','0').subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArrayConsulta = respu;
+      }
+    })
+  }
 }
