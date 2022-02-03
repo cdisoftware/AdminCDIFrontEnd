@@ -5,7 +5,7 @@
     <div class="row mt-3">
         <!--Tipo lista Servidor-->
         <div class="col-sm-4 m-0 mb-3 ">
-            <select class="form-select" title="Seleccionar Servidor" #IdServidor>
+            <select class="form-select" title="Seleccionar Servidor" #IdServidor  [(ngModel)]="IdServidor" (change)='ConsultaHardware(IdServidor.value)'>
                 <option value="0" selected>Seleccione servidor</option>
             </select>
         </div>
@@ -57,7 +57,7 @@
         <div class="col-sm-12 mt-5">
             <table class="table table-bordered text-center">
                 <tr>
-                    <th colspan="5">Servidores</th>
+                    <th colspan="5">Hardware servidores</th>
                 </tr>
                 <tr>
                     <th class="cursorPointer">Nombre servidor</th>
@@ -67,8 +67,17 @@
                     
                     <th>Editar</th>
                 </tr>
-                <tr>
-                    
+                <tr *ngFor="let ArGrilla of ArrayConsulta">
+                    <td>{{ArGrilla.NombreServidor}}</td>
+                    <td>{{ArGrilla.DiscoDuro}}</td>
+                    <td>{{ArGrilla.RAM}}</td>
+                    <td>{{ArGrilla.Procesador}}</td>
+
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar">
+                            <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
                 </tr>
             </table>
         </div>
