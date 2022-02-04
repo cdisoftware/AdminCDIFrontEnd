@@ -7,6 +7,7 @@ import autoTable from 'jspdf-autotable'
 import jsPDF from 'jspdf';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-pgservidores',
@@ -96,6 +97,9 @@ export class PgservidoresComponent implements OnInit {
   LblDiscoDuroEdit: string;
   LblRamEdit: string;
   LblProcesadorEdit: string;
+
+  //Variables editar servidor
+  modalEditarSer: BsModalRef;
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
@@ -256,6 +260,7 @@ export class PgservidoresComponent implements OnInit {
       Descripcion: '0'
     }
     this.Servicios.consultatiposerv('0', ListaTipoServidor).subscribe(respu => {
+      console.log(respu)
       if (respu.length > 0) {
         this.ArregloListaTipoServidor = respu;
       }
@@ -274,30 +279,13 @@ export class PgservidoresComponent implements OnInit {
       } else {
         this.AuxiliarDiv = true;
         this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = 'No existe hardware inscrito para este servidor por favor agregeselo';
+        this.lblModalMsaje = 'No existe hardware inscrito para este servidor, por favor ingreselo';
       }
     })
     this.LblUsuario = ArGrilla.Usuario_Ser;
     this.LblPasswordVer = ArGrilla.Password;
-    this.LblServidor = ArGrilla.Servidor_Aloja;
+    this.LblServidor = ArGrilla.NombreServidorAloja;
     this.IdServidor = ArGrilla.Id_S;
-  }
-
-
-
-  //Editar Bckup
-  Editarbackup(templateEditarServidor: TemplateRef<any>, Array: any) {
-    this.modalEditarServidor = this._modalService.show(templateEditarServidor);
-    this.LblIpServidorEdit = Array.Ip_S;
-    this.LblNombreEdit = Array.Nombre;
-    this.LblSOEdit = Array.SO;
-    this.LblSoftwareEdit = Array.Software;
-    this.IdEstadoAgregarEdit = Array.Estado;
-    this.Id_TipoServidorEdit = Array.TipoServidor;//Falta editar tiene que traer el id no el nombre
-    this.LblObservacionEdit = Array.Observacion;
-    this.LblUsuariosEdit = Array.Usuario_Ser;
-    this.LblPasswordEdit = Array.Password;
-    this.IdServidorAlojaEdit = Array.Servidor_Aloja;
   }
 
   //Descargar Pdf
@@ -405,7 +393,20 @@ export class PgservidoresComponent implements OnInit {
 
 
 
-
+//Editar Servidor
+EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
+  this.modalEditarServidor = this._modalService.show(templateEditarServidor);
+  this.LblIpServidorEdit = Array.Ip_S;
+  this.LblNombreEdit = Array.Nombre;
+  this.LblSOEdit = Array.SO;
+  this.LblSoftwareEdit = Array.Software;
+  this.IdEstadoAgregarEdit = Array.Estado;
+  this.Id_TipoServidorEdit = Array.TipoServidor;//Falta editar tiene que traer el id no el nombre
+  this.LblObservacionEdit = Array.Observacion;
+  this.LblUsuariosEdit = Array.Usuario_Ser;
+  this.LblPasswordEdit = Array.Password;
+  this.IdServidorAlojaEdit = Array.Servidor_Aloja;
+}
 
 
 
@@ -455,7 +456,7 @@ export class PgservidoresComponent implements OnInit {
     this.LblRamEdit = Array.RAM;
     this.LblProcesadorEdit = Array.Procesador;
   }
-  updateHardware(templateMensaje: TemplateRef<any>){
+  updateHardware(templateMensaje: TemplateRef<any>) {
     const Update = {
       Id_S: this.IdServidor,
       DiscoDuro: this.LblDiscoDuroEdit,
@@ -484,5 +485,81 @@ export class PgservidoresComponent implements OnInit {
         this.lblModalMsaje = 'Por favor verefique los datos a actualizar.';
       }
     })
+  }
+
+
+
+
+
+  //EditarVerDetalles servidor
+  EditarServ(templateEditarServidorVerDetalles: TemplateRef<any>) {
+    this.modalEditarSer = this._modalService.show(templateEditarServidorVerDetalles);
+    this.LblUsuariosEdit = this.LblUsuario;
+    this.LblPasswordEdit = this.LblPasswordVer;
+  }
+  UpdateSerVer(templateMensaje: TemplateRef<any>) {
+    const update = {
+      Id_S: this.IdServidor,
+      Ip_S: this.LblIpServidorEdit,
+      Nombre: this.LblNombreEdit,
+      SO: this.LblSOEdit,
+      Software: this.LblSoftwareEdit,
+      Estado: this.IdEstadoAgregarEdit,
+      Id_Tipo_S: this.Id_TipoServidorEdit,
+      Observacion: this.LblObservacionEdit,
+      Usuario_Ser: this.LblUsuariosEdit,
+      Password: this.LblPasswordEdit,
+      Servicio_aloja: this.IdServidorAlojaEdit,
+      Id_U: this.IdUsuarioCookies,
+      Fecha_Ult_Mod: this.Fecha
+    }
+    console.log(update)
+    this.Servicios.insertarhardserv('3', update).subscribe(respu => {
+      if (respu == 'Hardware de servidor registrado exitosamente.') {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+
+        this.modalAgregarHardware.hide();
+
+        this.ArrListaHardware = [];
+        this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
+          if (respu.length > 0) {
+            this.ArrListaHardware = respu;
+            this.AuxiliarDiv = false;
+          }
+        })
+
+      } else {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'Por favor verefique los datos a ingresar.';
+      }
+    })
+  }
+
+  //Descargar pdf de ver detalles
+  DescargaPDF() {
+    const doc = new jsPDF('p', 'pt', 'a4');
+    const options = {
+      background: 'white',
+      scale: 3
+    };
+
+
+    var DATAg = document.getElementById('htmlData_');
+    if (DATAg != null) {
+      html2canvas(DATAg, options).then((canvas) => {
+        var imgDos = canvas.toDataURL('image/PNG');
+        var imgPropDso = (doc as any).getImageProperties(imgDos);
+
+        var pdfWidthDso = doc.internal.pageSize.getWidth() - 2 * 15;
+        var pdfHeightDso = (imgPropDso.height * pdfWidthDso) / imgPropDso.width;
+
+        doc.addImage(imgDos, 'PNG', 15, 15, pdfWidthDso, pdfHeightDso, undefined, 'FAST');
+
+        doc.save('Detalles servidor.pdf');//Agregar el nombre de el servidor mas la fecha
+      })
+    }
   }
 }
