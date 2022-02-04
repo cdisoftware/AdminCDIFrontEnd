@@ -7,6 +7,7 @@ import autoTable from 'jspdf-autotable'
 import jsPDF from 'jspdf';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-pgservidores',
@@ -535,5 +536,30 @@ EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
         this.lblModalMsaje = 'Por favor verefique los datos a ingresar.';
       }
     })
+  }
+
+  //Descargar pdf de ver detalles
+  DescargaPDF() {
+    const doc = new jsPDF('p', 'pt', 'a4');
+    const options = {
+      background: 'white',
+      scale: 3
+    };
+
+
+    var DATAg = document.getElementById('htmlData_');
+    if (DATAg != null) {
+      html2canvas(DATAg, options).then((canvas) => {
+        var imgDos = canvas.toDataURL('image/PNG');
+        var imgPropDso = (doc as any).getImageProperties(imgDos);
+
+        var pdfWidthDso = doc.internal.pageSize.getWidth() - 2 * 15;
+        var pdfHeightDso = (imgPropDso.height * pdfWidthDso) / imgPropDso.width;
+
+        doc.addImage(imgDos, 'PNG', 15, 15, pdfWidthDso, pdfHeightDso, undefined, 'FAST');
+
+        doc.save('Detalles servidor.pdf');//Agregar el nombre de el servidor mas la fecha
+      })
+    }
   }
 }
