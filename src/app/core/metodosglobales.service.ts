@@ -78,4 +78,11 @@ export class MetodosGlobalesService {
   actualizachardserv(bandera: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizachardserv/' + bandera, BodyPost);
   }
+
+  actualizaservdos(bandera: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizaservdos/' + bandera, BodyPost);
+  }
+  actualizaservcuatro(bandera: string, IdServidorAloja: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizaservcuatro/' + bandera + '/' + IdServidorAloja, BodyPost);
+  }
 }

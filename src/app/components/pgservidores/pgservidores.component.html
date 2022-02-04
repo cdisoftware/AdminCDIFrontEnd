@@ -345,7 +345,7 @@
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
                     <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
-                        (click)="AgregarServidor(templateMensaje)">
+                        (click)="UpdateServDos(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
@@ -467,7 +467,7 @@
 
 <ng-template #templateEditarServidorVerDetalles>
     <div class="modal-header">
-        <th class="titulopopup">EDITAR HARDWARE</th>
+        <th class="titulopopup">EDITAR SERVIDOR DETALLES</th>
         <button type="button" class="bot" aria-label="Close" (click)="modalEditarSer.hide();">
             <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
         </button>
@@ -480,7 +480,7 @@
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAlojaEdit">
                         <option value="{{IdServidorAlojaEdit}}">{{LblServidor}}</option>
-                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
+                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}</option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">
