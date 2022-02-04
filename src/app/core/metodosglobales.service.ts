@@ -69,5 +69,13 @@ export class MetodosGlobalesService {
   insertatipobackup(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'insertatipobackup/' + bandera, BodyPost);
   }
-
+  consultahardware(IdServidor: string, DiscoDuro: string, Ram: string, Procesador: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consultahardware/' + IdServidor + '/' + DiscoDuro + '/' + Ram + '/' + Procesador);
+  }
+  insertarhardserv(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertarhardserv/' + bandera, BodyPost);
+  }
+  actualizachardserv(bandera: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizachardserv/' + bandera, BodyPost);
+  }
 }

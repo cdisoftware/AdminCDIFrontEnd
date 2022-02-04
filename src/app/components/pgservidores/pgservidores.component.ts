@@ -7,6 +7,7 @@ import autoTable from 'jspdf-autotable'
 import jsPDF from 'jspdf';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-pgservidores',
@@ -68,6 +69,7 @@ export class PgservidoresComponent implements OnInit {
   LblUsuario: string;
   LblPasswordVer: string;
   LblServidor: string;
+  ArrListaHardware: any;
 
   //Variables editar servidor
   modalEditarServidor: BsModalRef;
@@ -81,6 +83,23 @@ export class PgservidoresComponent implements OnInit {
   LblUsuariosEdit: string;
   LblPasswordEdit: string;
   IdServidorAlojaEdit: string;
+
+  //Variables agregar hardware
+  AuxiliarDiv: boolean;
+  modalAgregarHardware: BsModalRef;
+  IdServidor: string;
+  LblDiscoDuro: string;
+  LblRam: string;
+  LblProcesador: string;
+
+  //Variables agregar hardware
+  modalEditarHardware: BsModalRef;
+  LblDiscoDuroEdit: string;
+  LblRamEdit: string;
+  LblProcesadorEdit: string;
+
+  //Variables editar servidor
+  modalEditarSer: BsModalRef;
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
@@ -241,6 +260,7 @@ export class PgservidoresComponent implements OnInit {
       Descripcion: '0'
     }
     this.Servicios.consultatiposerv('0', ListaTipoServidor).subscribe(respu => {
+      console.log(respu)
       if (respu.length > 0) {
         this.ArregloListaTipoServidor = respu;
       }
@@ -248,28 +268,24 @@ export class PgservidoresComponent implements OnInit {
   }
 
   //Ver detalle
-  VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
+  VerDetalle(templateVerDetalles: TemplateRef<any>, templateMensaje: TemplateRef<any>, ArGrilla: any) {
+    this.AuxiliarDiv = false;
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
+    this.ArrListaHardware = [];
+    this.Servicios.consultahardware(ArGrilla.Id_S, '0', '0', '0').subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArrListaHardware = respu;
+        this.AuxiliarDiv = false;
+      } else {
+        this.AuxiliarDiv = true;
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'No existe hardware inscrito para este servidor, por favor ingreselo';
+      }
+    })
     this.LblUsuario = ArGrilla.Usuario_Ser;
     this.LblPasswordVer = ArGrilla.Password;
-    this.LblServidor = ArGrilla.Servidor_Aloja;
-  }
-
-
-
-  //Editar Bckup
-  Editarbackup(templateEditarServidor: TemplateRef<any>, Array: any) {
-    this.modalEditarServidor = this._modalService.show(templateEditarServidor);
-    this.LblIpServidorEdit = Array.Ip_S;
-    this.LblNombreEdit = Array.Nombre;
-    this.LblSOEdit = Array.SO;
-    this.LblSoftwareEdit = Array.Software;
-    this.IdEstadoAgregarEdit = Array.Estado;
-    this.Id_TipoServidorEdit = Array.TipoServidor;//Falta editar tiene que traer el id no el nombre
-    this.LblObservacionEdit = Array.Observacion;
-    this.LblUsuariosEdit = Array.Usuario_Ser;
-    this.LblPasswordEdit = Array.Password;
-    this.IdServidorAlojaEdit = Array.Servidor_Aloja;
+    this.LblServidor = ArGrilla.NombreServidorAloja;
+    this.IdServidor = ArGrilla.Id_S;
   }
 
   //Descargar Pdf
@@ -351,7 +367,7 @@ export class PgservidoresComponent implements OnInit {
         temp.push(x1['Software'])
         if (x1['Estado'] == 1) {
           temp.push('Exitoso')
-        }else{
+        } else {
           temp.push('Error')
         }
         temp.push(x1['UsuarioUltMod'])
@@ -371,6 +387,179 @@ export class PgservidoresComponent implements OnInit {
     } else {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
+    }
+  }
+
+
+
+
+//Editar Servidor
+EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
+  this.modalEditarServidor = this._modalService.show(templateEditarServidor);
+  this.LblIpServidorEdit = Array.Ip_S;
+  this.LblNombreEdit = Array.Nombre;
+  this.LblSOEdit = Array.SO;
+  this.LblSoftwareEdit = Array.Software;
+  this.IdEstadoAgregarEdit = Array.Estado;
+  this.Id_TipoServidorEdit = Array.TipoServidor;//Falta editar tiene que traer el id no el nombre
+  this.LblObservacionEdit = Array.Observacion;
+  this.LblUsuariosEdit = Array.Usuario_Ser;
+  this.LblPasswordEdit = Array.Password;
+  this.IdServidorAlojaEdit = Array.Servidor_Aloja;
+}
+
+
+
+
+  //Popap agregar hardware
+  AbrirpopapHardware(templateAgregarHARDWARE: TemplateRef<any>) {
+    this.modalAgregarHardware = this._modalService.show(templateAgregarHARDWARE);
+  }
+  InsetHardware(templateMensaje: TemplateRef<any>) {
+    const Insert = {
+      Id_S: this.IdServidor,
+      DiscoDuro: this.LblDiscoDuro,
+      RAM: this.LblRam,
+      Procesador: this.LblProcesador
+    }
+    this.Servicios.insertarhardserv('3', Insert).subscribe(respu => {
+      if (respu == 'Hardware de servidor registrado exitosamente.') {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+
+        this.modalAgregarHardware.hide();
+
+        this.ArrListaHardware = [];
+        this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
+          if (respu.length > 0) {
+            this.ArrListaHardware = respu;
+            this.AuxiliarDiv = false;
+          }
+        })
+
+      } else {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'Por favor verefique los datos a ingresar.';
+      }
+    })
+
+
+  }
+
+  //Popap editar hardware
+  Editar(templateEditarHARDWARE: TemplateRef<any>, Array: any) {
+    this.modalEditarHardware = this._modalService.show(templateEditarHARDWARE);
+
+    this.LblDiscoDuroEdit = Array.DiscoDuro;
+    this.LblRamEdit = Array.RAM;
+    this.LblProcesadorEdit = Array.Procesador;
+  }
+  updateHardware(templateMensaje: TemplateRef<any>) {
+    const Update = {
+      Id_S: this.IdServidor,
+      DiscoDuro: this.LblDiscoDuroEdit,
+      RAM: this.LblRamEdit,
+      Procesador: this.LblProcesadorEdit
+    }
+    this.Servicios.actualizachardserv('2', Update).subscribe(respu => {
+      if (respu == 'Hardware de servidor actualizado exitosamente.') {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+
+        this.modalEditarHardware.hide();
+
+        this.ArrListaHardware = [];
+        this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
+          if (respu.length > 0) {
+            this.ArrListaHardware = respu;
+            this.AuxiliarDiv = false;
+          }
+        })
+
+      } else {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'Por favor verefique los datos a actualizar.';
+      }
+    })
+  }
+
+
+
+
+
+  //EditarVerDetalles servidor
+  EditarServ(templateEditarServidorVerDetalles: TemplateRef<any>) {
+    this.modalEditarSer = this._modalService.show(templateEditarServidorVerDetalles);
+    this.LblUsuariosEdit = this.LblUsuario;
+    this.LblPasswordEdit = this.LblPasswordVer;
+  }
+  UpdateSerVer(templateMensaje: TemplateRef<any>) {
+    const update = {
+      Id_S: this.IdServidor,
+      Ip_S: this.LblIpServidorEdit,
+      Nombre: this.LblNombreEdit,
+      SO: this.LblSOEdit,
+      Software: this.LblSoftwareEdit,
+      Estado: this.IdEstadoAgregarEdit,
+      Id_Tipo_S: this.Id_TipoServidorEdit,
+      Observacion: this.LblObservacionEdit,
+      Usuario_Ser: this.LblUsuariosEdit,
+      Password: this.LblPasswordEdit,
+      Servicio_aloja: this.IdServidorAlojaEdit,
+      Id_U: this.IdUsuarioCookies,
+      Fecha_Ult_Mod: this.Fecha
+    }
+    console.log(update)
+    this.Servicios.insertarhardserv('3', update).subscribe(respu => {
+      if (respu == 'Hardware de servidor registrado exitosamente.') {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+
+        this.modalAgregarHardware.hide();
+
+        this.ArrListaHardware = [];
+        this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
+          if (respu.length > 0) {
+            this.ArrListaHardware = respu;
+            this.AuxiliarDiv = false;
+          }
+        })
+
+      } else {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'Por favor verefique los datos a ingresar.';
+      }
+    })
+  }
+
+  //Descargar pdf de ver detalles
+  DescargaPDF() {
+    const doc = new jsPDF('p', 'pt', 'a4');
+    const options = {
+      background: 'white',
+      scale: 3
+    };
+
+
+    var DATAg = document.getElementById('htmlData_');
+    if (DATAg != null) {
+      html2canvas(DATAg, options).then((canvas) => {
+        var imgDos = canvas.toDataURL('image/PNG');
+        var imgPropDso = (doc as any).getImageProperties(imgDos);
+
+        var pdfWidthDso = doc.internal.pageSize.getWidth() - 2 * 15;
+        var pdfHeightDso = (imgPropDso.height * pdfWidthDso) / imgPropDso.width;
+
+        doc.addImage(imgDos, 'PNG', 15, 15, pdfWidthDso, pdfHeightDso, undefined, 'FAST');
+
+        doc.save('Detalles servidor.pdf');//Agregar el nombre de el servidor mas la fecha
+      })
     }
   }
 }
