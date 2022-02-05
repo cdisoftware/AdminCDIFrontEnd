@@ -17,6 +17,7 @@ import { PgtipobackupComponent } from './components/pgtipobackup/pgtipobackup.co
 
 import { HomeComponent } from './components/home/home.component';
 import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.component';
+import { PgproyectosComponent } from './components/pgproyectos/pgproyectos.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.componen
     LayoutpaginaComponent,
     PgtipobackupComponent,
     HomeComponent,
-    PgusuariosComponent
+    PgusuariosComponent,
+    PgproyectosComponent
   ],
   imports: [
     ModalModule.forRoot(),

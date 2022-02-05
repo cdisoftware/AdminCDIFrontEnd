@@ -23,8 +23,8 @@ export class MetodosGlobalesService {
   consultausuarios(BodyPost: any) {
     return this.http.post<any[]>(this.url_servidor + 'consultausuarios', BodyPost);
   }
-  consultaproyect(bandera: string) {
-    return this.http.get<any[]>(this.url_servidor + 'consultaproyect/' + bandera);
+  consultaproyect(bandera: string, Nombre: string, IdCliente: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consultaproyect/' + bandera + '/' + Nombre + '/' + IdCliente);
   }
   insertarbackup(Bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'insertarbackup/' + Bandera, BodyPost);
