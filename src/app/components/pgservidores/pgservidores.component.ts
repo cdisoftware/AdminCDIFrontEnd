@@ -260,7 +260,6 @@ export class PgservidoresComponent implements OnInit {
       Descripcion: '0'
     }
     this.Servicios.consultatiposerv('0', ListaTipoServidor).subscribe(respu => {
-      console.log(respu)
       if (respu.length > 0) {
         this.ArregloListaTipoServidor = respu;
       }
@@ -545,7 +544,6 @@ export class PgservidoresComponent implements OnInit {
       Id_U: this.IdUsuarioCookies,
       Fecha_Ult_Mod: this.Fecha
     }
-    console.log(update)
     this.Servicios.actualizaservcuatro('4', '11', update).subscribe(respu => {
       if (respu == 'Servidor actualizado exitosamente.') {
 
