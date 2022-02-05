@@ -39,7 +39,7 @@ export class PgproyectosComponent implements OnInit {
       IdCliente = '0';
     }
     this.ArrayConsultaProyecto = [];
-    this.Servicios.consultaproyect('1', '0', '0').subscribe(respu => {
+    this.Servicios.consultaproyect('1', Nombre, IdCliente).subscribe(respu => {
       if (respu.length > 0) {
         this.ArrayConsultaProyecto = respu;
         console.log(respu)
