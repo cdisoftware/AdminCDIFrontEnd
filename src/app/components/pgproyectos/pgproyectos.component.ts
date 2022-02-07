@@ -35,7 +35,7 @@ export class PgproyectosComponent implements OnInit {
   ngOnInit(): void {
     this.consultaproyectos(this.LblNombre, this.IdCliente);
     this.IdCliente = '0';
-    
+
     this.consultaclientes(this.LblDescripcion);
     this.listacliente();
   }
@@ -66,6 +66,12 @@ export class PgproyectosComponent implements OnInit {
       }
     })
   }
+  LimpiarProyectos(){
+    this.LblNombre = '';
+    this.IdCliente = '0';
+    this.consultaproyectos(this.LblNombre, this.IdCliente);
+  }
+
   consultaclientes(Descripcion: string) {
     if (Descripcion == undefined || Descripcion == '') {
       Descripcion = '0';
@@ -81,5 +87,9 @@ export class PgproyectosComponent implements OnInit {
         console.log(respu)
       }
     })
+  }
+  LimpiarClientes(){
+    this.LblDescripcion = '';
+    this.consultaclientes(this.LblDescripcion);
   }
 }
