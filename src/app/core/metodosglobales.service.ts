@@ -23,8 +23,8 @@ export class MetodosGlobalesService {
   consultausuarios(BodyPost: any) {
     return this.http.post<any[]>(this.url_servidor + 'consultausuarios', BodyPost);
   }
-  consultaproyect(bandera: string) {
-    return this.http.get<any[]>(this.url_servidor + 'consultaproyect/' + bandera);
+  consultaproyect(bandera: string, Nombre: string, IdCliente: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consultaproyect/' + bandera + '/' + Nombre + '/' + IdCliente);
   }
   insertarbackup(Bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'insertarbackup/' + Bandera, BodyPost);
@@ -77,5 +77,21 @@ export class MetodosGlobalesService {
   }
   actualizachardserv(bandera: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizachardserv/' + bandera, BodyPost);
+  }
+
+  actualizaservdos(bandera: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizaservdos/' + bandera, BodyPost);
+  }
+  actualizaservcuatro(bandera: string, IdServidorAloja: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizaservcuatro/' + bandera + '/' + IdServidorAloja, BodyPost);
+  }
+  consultacliente(BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'consultacliente',BodyPost);
+  }
+  insertaproyecto(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertaproyecto/'+bandera,BodyPost);
+  }
+  insertarcliente(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertarcliente/'+bandera,BodyPost);
   }
 }

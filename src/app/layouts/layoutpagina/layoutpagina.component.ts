@@ -66,8 +66,8 @@ export class LayoutpaginaComponent implements OnInit {
   VerPgTipoBackup() {
     this.router.navigate(['home/Pgtipobackup']);
   }
-  VerPgHardware() {
-    this.router.navigate(['home/PgHardware']);
+  VerPgProyectos() {
+    this.router.navigate(['home/PgProyectos']);
   }
 
 

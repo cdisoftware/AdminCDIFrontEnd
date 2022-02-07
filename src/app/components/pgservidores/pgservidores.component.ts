@@ -3,7 +3,7 @@ import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Workbook } from "exceljs";
 import { saveAs } from 'file-saver';
-import autoTable from 'jspdf-autotable'
+import autoTable from 'jspdf-autotable';
 import jsPDF from 'jspdf';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
@@ -260,7 +260,6 @@ export class PgservidoresComponent implements OnInit {
       Descripcion: '0'
     }
     this.Servicios.consultatiposerv('0', ListaTipoServidor).subscribe(respu => {
-      console.log(respu)
       if (respu.length > 0) {
         this.ArregloListaTipoServidor = respu;
       }
@@ -393,20 +392,53 @@ export class PgservidoresComponent implements OnInit {
 
 
 
-//Editar Servidor
-EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
-  this.modalEditarServidor = this._modalService.show(templateEditarServidor);
-  this.LblIpServidorEdit = Array.Ip_S;
-  this.LblNombreEdit = Array.Nombre;
-  this.LblSOEdit = Array.SO;
-  this.LblSoftwareEdit = Array.Software;
-  this.IdEstadoAgregarEdit = Array.Estado;
-  this.Id_TipoServidorEdit = Array.TipoServidor;//Falta editar tiene que traer el id no el nombre
-  this.LblObservacionEdit = Array.Observacion;
-  this.LblUsuariosEdit = Array.Usuario_Ser;
-  this.LblPasswordEdit = Array.Password;
-  this.IdServidorAlojaEdit = Array.Servidor_Aloja;
-}
+  //Editar Servidor
+  EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
+    this.modalEditarServidor = this._modalService.show(templateEditarServidor);
+    this.LblIpServidorEdit = Array.Ip_S;
+    this.LblNombreEdit = Array.Nombre;
+    this.LblSOEdit = Array.SO;
+    this.LblSoftwareEdit = Array.Software;
+    this.IdEstadoAgregarEdit = Array.Estado;
+    this.Id_TipoServidorEdit = Array.TipoServidor;//Falta editar tiene que traer el id no el nombre
+    this.LblObservacionEdit = Array.Observacion;
+    this.LblUsuariosEdit = Array.Usuario_Ser;
+    this.LblPasswordEdit = Array.Password;
+    this.IdServidorAlojaEdit = Array.Servidor_Aloja;
+  }
+  UpdateServDos(templateMensaje: TemplateRef<any>) {
+    const Update = {
+      Id_S: 29,
+      Ip_S: this.LblIpServidorEdit,
+      Nombre: this.LblNombreEdit,
+      SO: this.LblSOEdit,
+      Software: this.LblSoftwareEdit,
+      Estado: this.IdEstadoAgregarEdit,
+      Id_Tipo_S: this.Id_TipoServidorEdit,
+      Observacion: this.LblObservacionEdit,
+      Usuario_Ser: "0",
+      Password: "0",
+      ServicioAloja: 0,
+      Id_U: this.IdUsuarioCookies,
+      Fecha_Ult_Mod: this.Fecha
+    }
+    this.Servicios.actualizaservdos('2', Update).subscribe(respu => {
+      if (respu == 'Servidor actualizado exitosamente.') {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+
+        this.modalEditarServidor.hide();
+
+        this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
+
+      } else {
+
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'Por favor verefique los datos a actualizar.';
+      }
+    })
+  }
 
 
 
@@ -500,35 +532,27 @@ EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
   UpdateSerVer(templateMensaje: TemplateRef<any>) {
     const update = {
       Id_S: this.IdServidor,
-      Ip_S: this.LblIpServidorEdit,
-      Nombre: this.LblNombreEdit,
-      SO: this.LblSOEdit,
-      Software: this.LblSoftwareEdit,
-      Estado: this.IdEstadoAgregarEdit,
-      Id_Tipo_S: this.Id_TipoServidorEdit,
-      Observacion: this.LblObservacionEdit,
+      Ip_S: "0",
+      Nombre: "0",
+      SO: "0",
+      Software: "0",
+      Estado: 0,
+      Id_Tipo_S: 0,
+      Observacion: "0",
       Usuario_Ser: this.LblUsuariosEdit,
       Password: this.LblPasswordEdit,
-      Servicio_aloja: this.IdServidorAlojaEdit,
       Id_U: this.IdUsuarioCookies,
       Fecha_Ult_Mod: this.Fecha
     }
-    console.log(update)
-    this.Servicios.insertarhardserv('3', update).subscribe(respu => {
-      if (respu == 'Hardware de servidor registrado exitosamente.') {
+    this.Servicios.actualizaservcuatro('4', '11', update).subscribe(respu => {
+      if (respu == 'Servidor actualizado exitosamente.') {
 
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
 
-        this.modalAgregarHardware.hide();
+        this.modalEditarSer.hide();
 
-        this.ArrListaHardware = [];
-        this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
-          if (respu.length > 0) {
-            this.ArrListaHardware = respu;
-            this.AuxiliarDiv = false;
-          }
-        })
+        this.Limpiar();
 
       } else {
 

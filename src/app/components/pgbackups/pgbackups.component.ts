@@ -256,7 +256,7 @@ export class PgbackupsComponent implements OnInit {
 
   ListaCliente() {
     this.ArregloListaCliente = [];
-    this.Servicios.consultaproyect('1').subscribe(respu => {
+    this.Servicios.consultaproyect('1', '0', '0').subscribe(respu => {
       this.ArregloListaCliente = respu;
     })
   }
@@ -306,7 +306,6 @@ export class PgbackupsComponent implements OnInit {
     })
   }
   DescargarDatosPdf() {
-
     const doc = new jsPDF('l', 'px', 'a3');
 
     autoTable(doc, {
