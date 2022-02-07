@@ -91,7 +91,7 @@
                 <div class="row mt-3">
                     <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
                         <input type="text" class="form-control table-bordered" #Descripcion placeholder="Descripción"
-                            title="Descripción">
+                            title="Descripción" [(ngModel)]="LblDescripcion" (keyup)="consultaclientes(Descripcion.value)">
                     </div>
 
                     <!--Botones-->
@@ -133,9 +133,9 @@
                                 <th>Editar</th>
                                 <th>Ver</th>
                             </tr>
-                            <tr *ngFor="let ArGrilla of ArrayConsultaProyecto">
-                                <td>{{ArGrilla.Id_PRY}}</td>
-                                <td>{{ArGrilla.Nombre}}</td>
+                            <tr *ngFor="let ArGrilla of ArrayConsultaCliente">
+                                <td>{{ArGrilla.Id_Cliente}}</td>
+                                <td>{{ArGrilla.Descripcion}}</td>
 
                                 <td class="text-center">
                                     <button class="BtnClaro mrd m-auto text-center" title="Editar">
