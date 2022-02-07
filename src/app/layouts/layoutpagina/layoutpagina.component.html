@@ -22,8 +22,6 @@
           <li class="cursorPointer" (click)="VerPgTipoBackup()">
             <a href="home/Pgtipobackup">Tipo Backup</a>
           </li>
-          <li><a>Dropdown 1</a></li>
-          <li><a>Dropdown 2</a></li>
         </ul>
       </li>
 
@@ -35,17 +33,10 @@
           <li class="cursorPointer" (click)="TipoServidor(templaTipoSer, templateMensaje)"><a>Tipo<img
                 style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/servidores.png"
                 class="BtnimgTamanoPeque mr-2"></a></li>
-          <li (click)="VerPgHardware()"><a>Hardware<img src="../../../../assets/ImagenesAdminCDI/ram.png"
-                class="BtnimgTamanoPeque mr-2"></a></li>
         </ul>
       </li>
 
-      <li class="titulopopup services cursorPointer">
-        <a>Clientes <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/clientes.png"
-            class="BtnimgTamanoPeque mr-2"></a>
-      </li>
-
-      <li class="titulopopup services cursorPointer">
+      <li class="titulopopup services cursorPointer" (click)="VerPgProyectos()">
         <a>Proyectos</a> <img src="../../../assets/ImagenesAdminCDI/proyecto.png" style="margin-left: 5px;"
           class="BtnimgTamanoPeque mr-2">
       </li>

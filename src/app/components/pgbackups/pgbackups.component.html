@@ -234,7 +234,8 @@
         <div class="row Texto text-center">
 
             <div class="col-sm-6 mt-3">
-                <select class="form-select" placeholder="Estado" [disabled]="DisableAgregarReguistroBck == false" [(ngModel)]="IdEstado">
+                <select class="form-select" placeholder="Estado" [disabled]="DisableAgregarReguistroBck == false"
+                    [(ngModel)]="IdEstado">
                     <option value="2">Seleccione estado</option>
                     <option value="0">Error</option>
                     <option value="1">Exitoso</option>
@@ -245,7 +246,8 @@
                 <input type="text" class="form-control text-center" placeholder="Fecha" [(ngModel)]="Fecha" disabled>
             </div>
             <div class="row displayCenter col-12 mt-3 p-3">
-                <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregarRegistroBackup(templateMensaje)">
+                <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
+                    (click)="AgregarRegistroBackup(templateMensaje)">
                     <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                     Guardar
                 </button>

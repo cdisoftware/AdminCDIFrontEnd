@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PghardwareComponent } from './pghardware.component';
+import { PgproyectosComponent } from './pgproyectos.component';
 
-describe('PghardwareComponent', () => {
-  let component: PghardwareComponent;
-  let fixture: ComponentFixture<PghardwareComponent>;
+describe('PgproyectosComponent', () => {
+  let component: PgproyectosComponent;
+  let fixture: ComponentFixture<PgproyectosComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PghardwareComponent ]
+      declarations: [ PgproyectosComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PghardwareComponent);
+    fixture = TestBed.createComponent(PgproyectosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

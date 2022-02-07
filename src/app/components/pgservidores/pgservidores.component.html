@@ -47,12 +47,14 @@
                 Limpiar
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf(templateMensaje)">
+            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF"
+                (click)="DescargarDatosPdf(templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
                 Descargar PDF
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel" (click)="BtnExportarExcel(templateMensaje)">
+            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
+                (click)="BtnExportarExcel(templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
                 Descarga excel
             </button>
@@ -99,12 +101,14 @@
                     <td>{{ArGrilla.Fecha_Ult_Mod}}</td>
 
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="Editarbackup(templateEditarServidor, ArGrilla)">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                            (click)="EditarServidor(templateEditarServidor, ArGrilla)">
                             <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Ver"  (click)="VerDetalle(templateVerDetalles, ArGrilla)">
+                        <button class="BtnClaro mrd m-auto text-center" title="Ver"
+                            (click)="VerDetalle(templateVerDetalles, templateMensaje, ArGrilla)">
                             <img src="../../../../assets/ImagenesAdminCDI/ojo.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
@@ -172,7 +176,7 @@
                     <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidor">
                         <option value="0">Seleccione tipo servidor</option>
                         <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
-                            {{arRespu.Descripcion}}
+                            {{arRespu.Descripcion}}</option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">
@@ -216,33 +220,78 @@
             <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
         </button>
     </div>
-    <div class="mrd mld" id="htmlData_">
+    <div class="mrd mld">
         <div class="row texto text-center">
-            <!--Para el editar-->
-        </div>
-        <div class="row texto text-center">
-            <div class="col-sm-12 mt-3">
-                <table class="table table-bordered text-center tablaAjuste">
-                    <tr style="background-color: teal; color: #000000;">
-                        <th colspan="4">Detalles servidor</th>
-                    </tr>
-                    <tr>
-                        <th class="cursorPointer">Usuario</th>
-                        <th class="cursorPointer">Contraseña</th>
-                        <th class="cursorPointer">Servidor donde se ubica</th>
-                        <th class="cursorPointer">Editar</th>
-                    </tr>
-                    <tr>
-                        <td>{{LblUsuario}}</td>
-                        <td>{{LblPasswordVer}}</td>
-                        <td>{{LblServidor}}</td>
-                        <td><button class="BtnClaro mrd m-auto text-center" title="Editar">
-                                <img src="../../../../assets/ImagenesAdminCDI/editar.png"
-                                    class="BtnimgTamanoPeque mr-2">
-                            </button>
-                        </td>
-                    </tr>
-                </table>
+            <div class="row texto text-center" id="htmlData_">
+                <div class="col-sm-6 mt-3">
+                    <table class="table table-bordered text-center tablaAjuste">
+                        <tr style="background-color: teal; color: #000000;">
+                            <th colspan="4">Detalles servidor</th>
+                        </tr>
+                        <tr>
+                            <th class="cursorPointer">Usuario</th>
+                            <th class="cursorPointer">Contraseña</th>
+                            <th class="cursorPointer">Servidor donde se ubica</th>
+                            <th class="cursorPointer">Editar</th>
+                        </tr>
+                        <tr>
+                            <td>{{LblUsuario}}</td>
+                            <td>{{LblPasswordVer}}</td>
+                            <td>{{LblServidor}}</td>
+                            <td><button class="BtnClaro mrd m-auto text-center" title="Editar"
+                                    (click)="EditarServ(templateEditarServidorVerDetalles)">
+                                    <img src="../../../../assets/ImagenesAdminCDI/editar.png"
+                                        class="BtnimgTamanoPeque mr-2">
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-sm-6 mt-3">
+                    <table class="table table-bordered text-center tablaAjuste">
+                        <tr style="background-color: teal; color: #000000;">
+                            <th colspan="4">Detalles Hardware</th>
+                        </tr>
+                        <tr>
+                            <th class="cursorPointer">Disco duro</th>
+                            <th class="cursorPointer">Ram</th>
+                            <th class="cursorPointer">Procesador</th>
+                            <th class="cursorPointer">Editar</th>
+                        </tr>
+                        <tr *ngFor="let ArGrilla of ArrListaHardware">
+                            <td>{{ArGrilla.DiscoDuro}}</td>
+                            <td>{{ArGrilla.RAM}}</td>
+                            <td>{{ArGrilla.Procesador}}</td>
+                            <td><button class="BtnClaro mrd m-auto text-center" title="Editar"
+                                    (click)="Editar(templateEditarHARDWARE, ArGrilla)">
+                                    <img src="../../../../assets/ImagenesAdminCDI/editar.png"
+                                        class="BtnimgTamanoPeque mr-2">
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="col-sm-12" *ngIf="AuxiliarDiv == true">
+                        <button class="btn btn-dark col-sm-2 mrd" title="Nuevo" style="margin-bottom: 10px;"
+                            (click)="AbrirpopapHardware(templateAgregarHARDWARE)">
+                            <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
+                            Ingresar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!---Botones--->
+            <div class="row displayCenter col-12 mt-3" style="margin-bottom: 10px;">
+                <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargaPDF()">
+                    <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
+                    Descargar PDF
+                </button>
+
+                <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modal.dismiss('Cross click')">
+                    <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                    Cancelar
+                </button>
             </div>
         </div>
     </div>
@@ -289,13 +338,149 @@
                     <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidorEdit">
                         <option value="{{Id_TipoServidorEdit}}">{{Id_TipoServidorEdit}}</option>
                         <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
-                            {{arRespu.Descripcion}}
+                            {{arRespu.Descripcion}}</option>
                     </select>
                 </div>
+
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
+                        (click)="UpdateServDos(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarServidor.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #templateAgregarHARDWARE>
+    <div class="modal-header">
+        <th class="titulopopup">AGREGAR HARDWARE</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalAgregarHardware.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+
+                <div class="col-12 mt-3">
+                    <input type="text" placeholder="Disco duro" class="form-control" title="Disco duro"
+                        [(ngModel)]="LblDiscoDuro">
+                </div>
+
+                <div class="col-12 mt-3">
+                    <input type="text" placeholder="Ram" class="form-control" title="Ram" [(ngModel)]="LblRam">
+                </div>
+
+                <div class="col-12 mt-3">
+                    <input type="text" placeholder="Procesador" class="form-control" title="Procesador"
+                        [(ngModel)]="LblProcesador">
+                </div>
+
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="InsetHardware(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregarHardware.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+
+<ng-template #templateEditarHARDWARE>
+    <div class="modal-header">
+        <th class="titulopopup">EDITAR HARDWARE</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalEditarHardware.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+
+                <div class="col-12 mt-3">
+                    <input type="text" placeholder="Disco duro" class="form-control" title="Disco duro"
+                        [(ngModel)]="LblDiscoDuroEdit">
+                </div>
+
+                <div class="col-12 mt-3">
+                    <input type="text" placeholder="Ram" class="form-control" title="Ram" [(ngModel)]="LblRamEdit">
+                </div>
+
+                <div class="col-12 mt-3">
+                    <input type="text" placeholder="Procesador" class="form-control" title="Procesador"
+                        [(ngModel)]="LblProcesadorEdit">
+                </div>
+
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="updateHardware(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarHardware.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+
+<ng-template #templateEditarServidorVerDetalles>
+    <div class="modal-header">
+        <th class="titulopopup">EDITAR SERVIDOR DETALLES</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalEditarSer.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+
+                <!--Para el popap de editar en ver detalles-->
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAlojaEdit">
-                        <option value="0">Seleccione servidor aloja</option>
-                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
+                        <option value="{{IdServidorAlojaEdit}}">{{LblServidor}}</option>
+                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}</option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">
@@ -303,18 +488,19 @@
                         [(ngModel)]="LblUsuariosEdit" title="Usuario">
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="password" value="" placeholder="Contraseña" class="col-sm-6 text-center form-control"
+                    <input type="text" value="" placeholder="Contraseña" class="col-sm-6 text-center form-control"
                         [(ngModel)]="LblPasswordEdit" autocomplete="off" title="Contraseña">
                 </div>
+                <!--Para el popap de editar en ver detalles-->
+
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
-                        (click)="AgregarServidor(templateMensaje)">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateSerVer(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
 
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarServidor.hide();">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarSer.hide();">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>

@@ -1,0 +1,324 @@
+<div class="container bg-white pt-5 pb-5">
+    <!--Proyecto-->
+    <div class="row justify-content-center ">
+        <div class="col-sm-6 m-0">
+            <div class="row justify-content-center ">
+                <h5 class="col-12 tituloformulario">Proyectos</h5>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                    <input type="text" class="form-control table-bordered" #Nombre placeholder="Nombre" title="Nombre"
+                        [(ngModel)]="LblNombre" (keyup)="consultaproyectos(Nombre.value, Cliente.value)">
+                </div>
+
+                <div class="col-sm-6 m-0 mb-3 ">
+                    <select class="form-select" title="Seleccionar Cliente" #Cliente
+                        (change)="consultaproyectos(Nombre.value, Cliente.value)" [(ngModel)]="IdCliente">
+                        <option value="0" selected>Seleccione Cliente</option>
+                        <option value="{{arRespu.Id_Cliente}}" *ngFor="let arRespu of Arraylistacliente">
+                            {{arRespu.Descripcion}}</option>
+                    </select>
+                </div>
+
+                <!--Botones-->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="LimpiarProyectos()">
+                        <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
+                        Limpiar
+                    </button>
+
+                    <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF"
+                        (click)="DescargarDatosPdfProyecto()">
+                        <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
+                        Descargar PDF
+                    </button>
+
+                    <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
+                        (click)="BtnExportarExcelProyecto(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png"
+                            class="BtnimgTamanoPeque mr-2">
+                        Descarga excel
+                    </button>
+
+                    <button class="btn btn-dark col-sm-2 mrd" title="Nuevo"
+                        (click)="BtnNuevoProyecto(templateAgregarproyecto)">
+                        <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
+                        Agregar
+                    </button>
+                </div>
+                <!--Fin botones-->
+
+                <!--Grilla-->
+                <div class="col-sm-12 mt-5">
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <th colspan="10">Proyectos</th>
+                        </tr>
+                        <tr>
+                            <th class="cursorPointer">Identificador</th>
+                            <th class="cursorPointer">Nombre</th>
+                            <th class="cursorPointer">Cliente</th>
+
+                            <th>Editar</th>
+                            <th>Ver</th>
+                        </tr>
+                        <tr *ngFor="let ArGrilla of ArrayConsultaProyecto">
+                            <td>{{ArGrilla.Id_PRY}}</td>
+                            <td>{{ArGrilla.Nombre}}</td>
+                            <td>{{ArGrilla.DescripcionCliente}}</td>
+
+                            <td class="text-center">
+                                <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                                    (click)="BtnEditProyecto(templateEditarProyecto, ArGrilla)">
+                                    <img src="../../../../assets/ImagenesAdminCDI/editar.png"
+                                        class="BtnimgTamanoPeque mr-2">
+                                </button>
+                            </td>
+                            <td class="text-center">
+                                <button class="BtnClaro mrd m-auto text-center" title="Ver">
+                                    <img src="../../../../assets/ImagenesAdminCDI/ojo.png"
+                                        class="BtnimgTamanoPeque mr-2">
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--fin Grilla-->
+            </div>
+        </div>
+
+        <!--Cliente-->
+        <div class="col-sm-6 m-0">
+            <div class="col-sm-12 m-0">
+                <div class="row justify-content-center">
+                    <h5 class="col-12 tituloformulario">Clientes</h5>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                        <input type="text" class="form-control table-bordered" #Descripcion placeholder="Descripción"
+                            title="Descripción" [(ngModel)]="LblDescripcion"
+                            (keyup)="consultaclientes(Descripcion.value)">
+                    </div>
+
+                    <!--Botones-->
+                    <div class="row displayCenter col-12 mt-3">
+                        <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="LimpiarClientes();">
+                            <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
+                            Limpiar
+                        </button>
+
+                        <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF"
+                            (click)="DescargarDatosPdfCliente()">
+                            <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png"
+                                class="BtnimgTamanoPeque mr-2">
+                            Descargar PDF
+                        </button>
+
+                        <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
+                            (click)="BtnExportarExcelCliente(LblDescripcion, templateMensaje)">
+                            <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png"
+                                class="BtnimgTamanoPeque mr-2">
+                            Descarga excel
+                        </button>
+
+                        <button class="btn btn-dark col-sm-2 mrd" title="Nuevo"
+                            (click)="BtnNuevoCliente(templateAgregarcliente)">
+                            <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
+                            Agregar
+                        </button>
+                    </div>
+                    <!--Fin botones-->
+
+                    <!--Grilla-->
+                    <div class="col-sm-12 mt-5">
+                        <table class="table table-bordered text-center">
+                            <tr>
+                                <th colspan="10">Clientes</th>
+                            </tr>
+                            <tr>
+                                <th class="cursorPointer">Identificador</th>
+                                <th class="cursorPointer">Descripción</th>
+
+                                <th>Editar</th>
+                            </tr>
+                            <tr *ngFor="let ArGrilla of ArrayConsultaCliente">
+                                <td>{{ArGrilla.Id_Cliente}}</td>
+                                <td>{{ArGrilla.Descripcion}}</td>
+
+                                <td class="text-center">
+                                    <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="BtnEditCliente(templateEditarCliente, ArGrilla)">
+                                        <img src="../../../../assets/ImagenesAdminCDI/editar.png"
+                                            class="BtnimgTamanoPeque mr-2">
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!--fin Grilla-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12">
+            <p class="pModals">{{ lblModalMsaje }}</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateAgregarproyecto>
+    <div class="modal-header">
+        <th class="titulopopup">AGREGAR PROYECTO</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalAgregarproyecto.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                    <input type="text" class="form-control table-bordered" [(ngModel)]="LblNombreAgrega"
+                        placeholder="Nombre" title="Nombre proyecto">
+                </div>
+                <div class="col-sm-6 m-0 mb-3 ">
+                    <select class="form-select" title="Seleccionar Cliente" [(ngModel)]="IdClienteAgrega">
+                        <option value="0" selected>Seleccione Cliente</option>
+                        <option value="{{arRespu.Id_Cliente}}" *ngFor="let arRespu of Arraylistacliente">
+                            {{arRespu.Descripcion}}</option>
+                    </select>
+                </div>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
+                        (click)="AgregarProyecto(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregarproyecto.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateAgregarcliente>
+    <div class="modal-header">
+        <th class="titulopopup">AGREGAR CLIENTE</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalAgregarcliente.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                    <textarea id="form10" class="md-textarea form-control textarea" placeholder="Descripción"
+                        title="Descripción" rows="3" [(ngModel)]="LblDescripcionAgrega"></textarea>
+                </div>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregarCliente(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregarcliente.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateEditarProyecto>
+    <div class="modal-header">
+        <p class="titulopopup">EDITAR PROYECTO</p>
+        <button type="button" class="bot" aria-label="Close" (click)="modalEditaproyecto.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                    <input type="text" class="form-control table-bordered" [(ngModel)]="LblNombreEdit"
+                        placeholder="Nombre" title="Nombre proyecto">
+                </div>
+                <div class="col-sm-6 m-0 mb-3 ">
+                    <select class="form-select" title="Seleccionar Cliente" [(ngModel)]="IdClienteEdit">
+                        <option value="{{arRespu.Id_Cliente}}" *ngFor="let arRespu of Arraylistacliente">
+                            {{arRespu.Descripcion}}</option>
+                    </select>
+                </div>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateProyecto(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditaproyecto.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateEditarCliente>
+    <div class="modal-header">
+        <p class="titulopopup">EDITAR CLIENTE</p>
+        <button type="button" class="bot" aria-label="Close" (click)="modalEditarcliente.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                    <textarea id="form10" class="md-textarea form-control textarea" placeholder="Descripción"
+                        title="Descripción" rows="3" [(ngModel)]="LblDescripcionEdit"></textarea>
+                </div>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateCliente(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarcliente.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
