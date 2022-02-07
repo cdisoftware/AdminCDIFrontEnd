@@ -88,4 +88,10 @@ export class MetodosGlobalesService {
   consultacliente(BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'consultacliente',BodyPost);
   }
+  insertaproyecto(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertaproyecto/'+bandera,BodyPost);
+  }
+  insertarcliente(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertarcliente/'+bandera,BodyPost);
+  }
 }

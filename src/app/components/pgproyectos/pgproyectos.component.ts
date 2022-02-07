@@ -22,15 +22,34 @@ export class PgproyectosComponent implements OnInit {
     private cookies: CookieService
   ) { }
 
+  //Variables modal mensaje
+  modalMensaje: BsModalRef;
+  lblModalMsaje: string;
+
   //Variables consulta proyecto
   ArrayConsultaProyecto: any;
   LblNombre: string;
   IdCliente: string;
+  //Agregar proyecto
+  modalAgregarproyecto: BsModalRef;
+  LblNombreAgrega: string;
+  IdClienteAgrega: string;
   //Variables lista cliente
   Arraylistacliente: any;
+
   //Variables consulta cliente
   ArrayConsultaCliente: any;
   LblDescripcion: string;
+      //Variables agregar
+      modalAgregarcliente: BsModalRef;
+      LblDescripcionAgrega: string;
+
+  //Variables Fecha
+  Dia = new Date().getDate();
+  Mes = new Date().getMonth() + 1;
+  Año = new Date().getFullYear();
+
+  Fecha: string = this.Año + '-' + this.Mes + '-' + this.Dia;
 
   ngOnInit(): void {
     this.consultaproyectos(this.LblNombre, this.IdCliente);
@@ -38,6 +57,9 @@ export class PgproyectosComponent implements OnInit {
 
     this.consultaclientes(this.LblDescripcion);
     this.listacliente();
+
+    //Agrega
+    this.IdClienteAgrega = '0';
   }
   //Consultas
   consultaproyectos(Nombre: string, IdCliente: string) {
@@ -66,7 +88,7 @@ export class PgproyectosComponent implements OnInit {
       }
     })
   }
-  LimpiarProyectos(){
+  LimpiarProyectos() {
     this.LblNombre = '';
     this.IdCliente = '0';
     this.consultaproyectos(this.LblNombre, this.IdCliente);
@@ -84,12 +106,226 @@ export class PgproyectosComponent implements OnInit {
     this.Servicios.consultacliente(Consulta).subscribe(respu => {
       if (respu.length > 0) {
         this.ArrayConsultaCliente = respu;
-        console.log(respu)
       }
     })
   }
-  LimpiarClientes(){
+  LimpiarClientes() {
     this.LblDescripcion = '';
     this.consultaclientes(this.LblDescripcion);
+  }
+  //Descargar PDF Proyectos
+  DescargarDatosPdfProyecto() {
+    const doc = new jsPDF('l', 'px', 'a3');
+
+    autoTable(doc, {
+      styles: { fillColor: [216, 216, 216] },
+      columnStyles: {
+        1: { cellWidth: 288 },
+        2: { cellWidth: 288 },
+        3: { cellWidth: 288 }
+      },
+      didParseCell: function (data) {
+        var rows = data.table.body;
+        if (data.row.index === 0) {
+          data.cell.styles.fillColor = [255, 105, 105];
+        }
+      },
+      margin: { top: 10 },
+      body: [
+        ['Identificador', 'Nombre', 'Cliente'],
+      ]
+    })
+
+    this.ArrayConsultaProyecto.forEach(function (respuesta: any) {
+
+      var Res =
+        [respuesta.Id_PRY, respuesta.Nombre, respuesta.DescripcionCliente];
+
+      autoTable(doc, {
+        margin: { top: 0, bottom: 0 },
+        columnStyles: {
+          1: { cellWidth: 288 },
+          2: { cellWidth: 288 },
+          3: { cellWidth: 288 }
+        },
+        body:
+          [
+            Res
+          ]
+      })
+    });
+
+    doc.save('Registro proyectos - ' + this.Fecha + '.pdf')
+  }
+  DescargarDatosPdfCliente() {
+    const doc = new jsPDF('l', 'px', 'a3');
+
+    autoTable(doc, {
+      styles: { fillColor: [216, 216, 216] },
+      columnStyles: {
+        1: { cellWidth: 432 },
+        2: { cellWidth: 432 }
+      },
+      didParseCell: function (data) {
+        var rows = data.table.body;
+        if (data.row.index === 0) {
+          data.cell.styles.fillColor = [255, 105, 105];
+        }
+      },
+      margin: { top: 10 },
+      body: [
+        ['Identificador', 'Descripcion'],
+      ]
+    })
+
+    this.ArrayConsultaCliente.forEach(function (respuesta: any) {
+
+      var Res =
+        [respuesta.Id_Cliente, respuesta.Descripcion];
+
+      autoTable(doc, {
+        margin: { top: 0, bottom: 0 },
+        columnStyles: {
+          1: { cellWidth: 432 },
+          2: { cellWidth: 432 }
+        },
+        body:
+          [
+            Res
+          ]
+      })
+    });
+
+    doc.save('Registro clientes - ' + this.Fecha + '.pdf')
+  }
+  //Descargar EXCEL Proyecto
+  BtnExportarExcelProyecto(templateMensaje: TemplateRef<any>) {
+    var Nombre = this.LblNombre;
+    if (Nombre == undefined || Nombre == '') {
+      Nombre = '0';
+    }
+    var IdCliente = this.IdCliente
+    if (IdCliente == undefined || IdCliente == '') {
+      IdCliente = '0';
+    }
+    this.Servicios.consultaproyect('1', Nombre, IdCliente).subscribe(respu => {
+      if (respu.length > 0) {
+        let workbook = new Workbook();
+        let worksheet = workbook.addWorksheet("Registro proyectos");
+        let header = ["Identificador", "Nombre", "Cliente"];
+        worksheet.addRow(header);
+
+        for (let x1 of respu) {
+          let temp = []
+          temp.push(x1['Id_PRY'])
+          temp.push(x1['Nombre'])
+          temp.push(x1['DescripcionCliente'])
+
+          worksheet.addRow(temp)
+        }
+
+        let fname = "Registro proyectos - " + this.Fecha;
+
+        workbook.xlsx.writeBuffer().then((data) => {
+          let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          saveAs(blob, fname + '.xlsx');
+        });
+
+      } else {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
+      }
+    })
+  }
+  //Descargar EXCEL Proyecto
+  BtnExportarExcelCliente(Descripcion: string, templateMensaje: TemplateRef<any>) {
+    const Consulta = {
+      Id_Cliente: 0,
+      Descripcion: Descripcion
+    }
+    this.Servicios.consultacliente(Consulta).subscribe(respu => {
+      if (respu.length > 0) {
+        let workbook = new Workbook();
+        let worksheet = workbook.addWorksheet("REGISTRO CLIENTES");
+        let header = ["Identificador", "Descripcion"];
+        worksheet.addRow(header);
+
+        for (let x1 of respu) {
+          let temp = []
+          temp.push(x1['Id_Cliente'])
+          temp.push(x1['Descripcion'])
+
+          worksheet.addRow(temp)
+        }
+
+        let fname = "REGISTRO CLIENTES - " + this.Fecha;
+
+        workbook.xlsx.writeBuffer().then((data) => {
+          let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          saveAs(blob, fname + '.xlsx');
+        });
+
+      } else {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
+      }
+    })
+  }
+
+
+
+  //Agregar proyecto
+  BtnNuevoProyecto(templateAgregarproyecto: TemplateRef<any>) {
+    this.modalAgregarproyecto = this._modalService.show(templateAgregarproyecto)
+  }
+  AgregarProyecto(templateMensaje: TemplateRef<any>) {
+    if(this.LblNombreAgrega == undefined || this.LblNombreAgrega == '' || this.IdClienteAgrega == undefined || this.IdClienteAgrega == '0'){
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = 'No fue posible ingresar este resultado, por favor valide los datos ingresados.';
+    }else{
+      const Agregar = {
+        Nombre: this.LblNombreAgrega,
+        Id_Cliente: this.IdClienteAgrega
+      }
+      this.Servicios.insertaproyecto('3', Agregar).subscribe(respu => {
+        if (respu == 'Proyecto registrado exitosamente.') {
+          this.modalAgregarproyecto.hide();
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = respu;
+  
+          this.LimpiarProyectos();
+        }else{
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = 'No fue posible ingresar este resultado, por favor valide los datos ingresados.';
+        }
+      })
+    }
+  }
+  //Agregar cliente
+  BtnNuevoCliente(templateAgregarcliente: TemplateRef<any>) {
+    this.modalAgregarcliente = this._modalService.show(templateAgregarcliente)
+  }
+  AgregarCliente(templateMensaje: TemplateRef<any>) {
+    if(this.LblDescripcionAgrega == undefined || this.LblDescripcionAgrega == ''){
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = 'No fue posible ingresar este resultado, por favor valide los datos ingresados.';
+    }else{
+      const Agregar = {
+        Descripcion:this.LblDescripcionAgrega
+      }
+      this.Servicios.insertarcliente('3', Agregar).subscribe(respu => {
+        console.log(respu)
+        if (respu == 'Cliente registrado exitosamente.') {
+          this.modalAgregarcliente.hide();
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = respu;
+  
+          this.LimpiarClientes();
+        }else{
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = 'No fue posible ingresar este resultado, por favor valide los datos ingresados.';
+        }
+      })
+    }
   }
 }

@@ -306,7 +306,6 @@ export class PgbackupsComponent implements OnInit {
     })
   }
   DescargarDatosPdf() {
-
     const doc = new jsPDF('l', 'px', 'a3');
 
     autoTable(doc, {
