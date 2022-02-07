@@ -91,7 +91,7 @@ export class PgtipobackupComponent implements OnInit {
     }
     if (this.lblDescripcionAgregar == undefined || this.lblDescripcionAgregar == '') {
       this.modalMensaje = this._modalService.show(templateMensaje);
-      this.lblModalMsaje = "Por favor inserte";
+      this.lblModalMsaje = "Por favor ingrese una descripcion";
     } else {
       this.Servicios.insertatipobackup('3', insert).subscribe(respu => {
         this.modalMensaje = this._modalService.show(templateMensaje);
