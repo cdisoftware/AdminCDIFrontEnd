@@ -85,4 +85,7 @@ export class MetodosGlobalesService {
   actualizaservcuatro(bandera: string, IdServidorAloja: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizaservcuatro/' + bandera + '/' + IdServidorAloja, BodyPost);
   }
+  consultacliente(BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'consultacliente',BodyPost);
+  }
 }

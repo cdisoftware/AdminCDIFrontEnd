@@ -22,16 +22,20 @@ export class PgproyectosComponent implements OnInit {
     private cookies: CookieService
   ) { }
 
-  //Variables consulta
+  //Variables consulta proyecto
   ArrayConsultaProyecto: any;
   LblNombre: string;
   IdCliente: string;
+  //Variables consulta cliente
+  ArrayConsultaCliente: any;
+  LblDescripcion: string;
 
   ngOnInit(): void {
     this.consultaproyectos(this.LblNombre, this.IdCliente);
+    this.consultaclientes(this.LblDescripcion);
   }
-
-  consultaproyectos(Nombre: string, IdCliente: string){
+  //Consultas
+  consultaproyectos(Nombre: string, IdCliente: string) {
     if (Nombre == undefined || Nombre == '') {
       Nombre = '0';
     }
@@ -42,6 +46,21 @@ export class PgproyectosComponent implements OnInit {
     this.Servicios.consultaproyect('1', Nombre, IdCliente).subscribe(respu => {
       if (respu.length > 0) {
         this.ArrayConsultaProyecto = respu;
+      }
+    })
+  }
+  consultaclientes(Descripcion: string) {
+    if (Descripcion == undefined || Descripcion == '') {
+      Descripcion = '0';
+    }
+    const Consulta = {
+      Id_Cliente: 0,
+      Descripcion: Descripcion
+    }
+    this.ArrayConsultaCliente = [];
+    this.Servicios.consultacliente(Consulta).subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArrayConsultaCliente = respu;
         console.log(respu)
       }
     })
