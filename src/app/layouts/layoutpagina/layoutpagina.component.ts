@@ -4,7 +4,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Console } from 'console';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -33,7 +32,8 @@ export class LayoutpaginaComponent implements OnInit {
     private cookies: CookieService,
     private modalServiceDos: NgbModal,
     private Servicios: MetodosGlobalesService) { }
-
+  //Variables nombre
+  NombreUsu: string = this.cookies.get('Nombre');
   ngOnInit(): void {
     this.Obtienedata();
   }
@@ -146,7 +146,6 @@ export class LayoutpaginaComponent implements OnInit {
       Id_Tipo_S: this.IdTipoServidor,
       Descripcion: this.LblDescripcionEdit
     }
-    console.log(EditTipoServidor)
     this.Servicios.actualizatiposervidor('2', EditTipoServidor).subscribe(respu => {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = respu;
