@@ -34,15 +34,26 @@ export class PgproyectosComponent implements OnInit {
   modalAgregarproyecto: BsModalRef;
   LblNombreAgrega: string;
   IdClienteAgrega: string;
+  //Edita proyecto
+  modalEditaproyecto: BsModalRef;
+  LblNombreEdit: string;
+  IdClienteEdit: string;
+  IdProyectEdit: string;
+
+
   //Variables lista cliente
   Arraylistacliente: any;
 
   //Variables consulta cliente
   ArrayConsultaCliente: any;
   LblDescripcion: string;
-      //Variables agregar
-      modalAgregarcliente: BsModalRef;
-      LblDescripcionAgrega: string;
+  //Variables agregar
+  modalAgregarcliente: BsModalRef;
+  LblDescripcionAgrega: string;
+  //Variables editar
+  modalEditarcliente: BsModalRef;
+  LblDescripcionEdit: string;
+  IdClienteEditcliente: string;
 
   //Variables Fecha
   Dia = new Date().getDate();
@@ -60,6 +71,8 @@ export class PgproyectosComponent implements OnInit {
 
     //Agrega
     this.IdClienteAgrega = '0';
+    //Edit
+    this.IdClienteEdit = '0';
   }
   //Consultas
   consultaproyectos(Nombre: string, IdCliente: string) {
@@ -92,6 +105,10 @@ export class PgproyectosComponent implements OnInit {
     this.LblNombre = '';
     this.IdCliente = '0';
     this.consultaproyectos(this.LblNombre, this.IdCliente);
+
+    //Agregar
+    this.LblNombreAgrega = '';
+    this.IdClienteAgrega = '0';
   }
 
   consultaclientes(Descripcion: string) {
@@ -279,10 +296,10 @@ export class PgproyectosComponent implements OnInit {
     this.modalAgregarproyecto = this._modalService.show(templateAgregarproyecto)
   }
   AgregarProyecto(templateMensaje: TemplateRef<any>) {
-    if(this.LblNombreAgrega == undefined || this.LblNombreAgrega == '' || this.IdClienteAgrega == undefined || this.IdClienteAgrega == '0'){
+    if (this.LblNombreAgrega == undefined || this.LblNombreAgrega == '' || this.IdClienteAgrega == undefined || this.IdClienteAgrega == '0') {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = 'No fue posible ingresar este resultado, por favor valide los datos ingresados.';
-    }else{
+    } else {
       const Agregar = {
         Nombre: this.LblNombreAgrega,
         Id_Cliente: this.IdClienteAgrega
@@ -292,9 +309,9 @@ export class PgproyectosComponent implements OnInit {
           this.modalAgregarproyecto.hide();
           this.modalMensaje = this._modalService.show(templateMensaje);
           this.lblModalMsaje = respu;
-  
+
           this.LimpiarProyectos();
-        }else{
+        } else {
           this.modalMensaje = this._modalService.show(templateMensaje);
           this.lblModalMsaje = 'No fue posible ingresar este resultado, por favor valide los datos ingresados.';
         }
@@ -306,24 +323,88 @@ export class PgproyectosComponent implements OnInit {
     this.modalAgregarcliente = this._modalService.show(templateAgregarcliente)
   }
   AgregarCliente(templateMensaje: TemplateRef<any>) {
-    if(this.LblDescripcionAgrega == undefined || this.LblDescripcionAgrega == ''){
+    if (this.LblDescripcionAgrega == undefined || this.LblDescripcionAgrega == '') {
       this.modalMensaje = this._modalService.show(templateMensaje);
-      this.lblModalMsaje = 'No fue posible ingresar este resultado, por favor valide los datos ingresados.';
-    }else{
+      this.lblModalMsaje = 'No fue posible ingresar los datos, por favor valide los datos ingresados.';
+    } else {
       const Agregar = {
-        Descripcion:this.LblDescripcionAgrega
+        Descripcion: this.LblDescripcionAgrega
       }
       this.Servicios.insertarcliente('3', Agregar).subscribe(respu => {
-        console.log(respu)
         if (respu == 'Cliente registrado exitosamente.') {
           this.modalAgregarcliente.hide();
           this.modalMensaje = this._modalService.show(templateMensaje);
           this.lblModalMsaje = respu;
-  
+
           this.LimpiarClientes();
-        }else{
+        } else {
           this.modalMensaje = this._modalService.show(templateMensaje);
-          this.lblModalMsaje = 'No fue posible ingresar este resultado, por favor valide los datos ingresados.';
+          this.lblModalMsaje = 'No fue posible ingresar los datos, por favor valide los datos ingresados.';
+        }
+      })
+    }
+  }
+
+
+
+
+
+  //Editar proyecto
+  BtnEditProyecto(templateEditarProyecto: TemplateRef<any>, Array: any) {
+    this.modalEditaproyecto = this._modalService.show(templateEditarProyecto);
+    this.LblNombreEdit = Array.Nombre;
+    this.IdClienteEdit = Array.Id_Cliente;
+    this.IdProyectEdit = Array.Id_PRY;
+  }
+  UpdateProyecto(templateMensaje: TemplateRef<any>) {
+    if (this.LblNombreEdit == undefined || this.LblNombreEdit == '' || this.IdClienteEdit == undefined || this.IdClienteEdit == '0') {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = 'No fue posible actualizar los datos, por favor valide los datos ingresados.';
+    } else {
+      const update = {
+        Id_PRY: this.IdProyectEdit,
+        Nombre: this.LblNombreEdit,
+        Id_Cliente: this.IdClienteEdit
+      }
+      this.Servicios.actualizaproyecto('2', update).subscribe(respu => {
+        if (respu == 'Proyecto actualizado exitosamente.') {
+          this.modalEditaproyecto.hide();
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = respu;
+
+          this.LimpiarProyectos();
+        } else {
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = 'No fue posible actualizar los datos, por favor valide los datos ingresados.';
+        }
+      })
+    }
+  }
+  //Editar cliente
+  BtnEditCliente(templateEditarCliente: TemplateRef<any>, Array: any) {
+    this.modalEditarcliente = this._modalService.show(templateEditarCliente);
+    this.LblDescripcionEdit = Array.Descripcion;
+    this.IdClienteEditcliente = Array.Id_Cliente
+  }
+  UpdateCliente(templateMensaje: TemplateRef<any>) {
+    if (this.LblDescripcionEdit == undefined || this.LblDescripcionEdit == '') {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = 'No fue posible actualizar los datos, por favor valide los datos ingresados.';
+    } else {
+      const update = {
+        Id_Cliente: this.IdClienteEditcliente,
+        Descripcion: this.LblDescripcionEdit
+      }
+      this.Servicios.actualizacliente('2', update).subscribe(respu => {
+        if (respu == 'Cliente actualizado exitosamente.') {
+          this.modalEditarcliente.hide();
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = respu;
+
+          this.LimpiarClientes();
+        } else {
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = 'No fue posible actualizar los datos, por favor valide los datos ingresados.';
         }
       })
     }
