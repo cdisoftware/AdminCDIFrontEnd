@@ -13,9 +13,9 @@
 
                 <div class="col-sm-6 m-0 mb-3 ">
                     <select class="form-select" title="Seleccionar Cliente" #Cliente
-                        (change)="consultaproyectos(Nombre.value, Cliente.value)">
+                        (change)="consultaproyectos(Nombre.value, Cliente.value)" [(ngModel)]="IdCliente">
                         <option value="0" selected>Seleccione Cliente</option>
-                        <!--<option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>-->
+                        <option value="{{arRespu.Id_Cliente}}" *ngFor="let arRespu of Arraylistacliente">{{arRespu.Descripcion}}</option>
                     </select>
                 </div>
 
@@ -85,7 +85,7 @@
         <!--Cliente-->
         <div class="col-sm-6 m-0">
             <div class="col-sm-12 m-0">
-                <div class="row justify-content-center ">
+                <div class="row justify-content-center">
                     <h5 class="col-12 tituloformulario">Clientes</h5>
                 </div>
                 <div class="row mt-3">

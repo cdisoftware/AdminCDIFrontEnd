@@ -26,13 +26,18 @@ export class PgproyectosComponent implements OnInit {
   ArrayConsultaProyecto: any;
   LblNombre: string;
   IdCliente: string;
+  //Variables lista cliente
+  Arraylistacliente: any;
   //Variables consulta cliente
   ArrayConsultaCliente: any;
   LblDescripcion: string;
 
   ngOnInit(): void {
     this.consultaproyectos(this.LblNombre, this.IdCliente);
+    this.IdCliente = '0';
+    
     this.consultaclientes(this.LblDescripcion);
+    this.listacliente();
   }
   //Consultas
   consultaproyectos(Nombre: string, IdCliente: string) {
@@ -46,6 +51,18 @@ export class PgproyectosComponent implements OnInit {
     this.Servicios.consultaproyect('1', Nombre, IdCliente).subscribe(respu => {
       if (respu.length > 0) {
         this.ArrayConsultaProyecto = respu;
+      }
+    })
+  }
+  listacliente() {
+    const Consulta = {
+      Id_Cliente: 0,
+      Descripcion: '0'
+    }
+    this.Arraylistacliente = [];
+    this.Servicios.consultacliente(Consulta).subscribe(respu => {
+      if (respu.length > 0) {
+        this.Arraylistacliente = respu;
       }
     })
   }
