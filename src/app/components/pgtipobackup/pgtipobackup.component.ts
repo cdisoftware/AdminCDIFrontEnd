@@ -55,10 +55,7 @@ export class PgtipobackupComponent implements OnInit {
     };
     this.ArrayGrilla = [];
     this.Servicios.consultatipobck(consulta).subscribe(respu => {
-      console.log(consulta);
-
       this.ArrayGrilla = respu;
-
     });
   }
   //editar tipo backup
@@ -68,15 +65,27 @@ export class PgtipobackupComponent implements OnInit {
     this.lblDescripcionEditar = ArGrilla.Descripcion;
   }
 
-  UpdateTipoBck() {
+  UpdateTipoBck(templateMensaje: TemplateRef<any>) {
+    if (this.lblDescripcionEditar == '' || this.lblDescripcionEditar == undefined) {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = "Por favor complete los campos a agregar";
+    } else {
+      const update = {
+        Id_Tipo_BCK: this.idTipoBackupEditar,
+        Descripcion: this.lblDescripcionEditar
+      }
 
-    const update = {
-      IdTipoBackup: this.idTipoBackupEditar,
-      Descripcion: this.lblDescripcion
+      this.Servicios.actualizatipobackup('2', update).subscribe(respu => {
+
+        if (respu == 'Tipo_Backup actualizado exitosamente.') {
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = respu;
+          this.modalEditarTipoBackup.hide();
+          this.limpiar();
+        }
+      });
     }
-    this.Servicios.actualizatipobackup('2', update).subscribe(respu => {
-      console.log(respu);
-    });
+
   }
 
   //agregar tipo backup
@@ -96,9 +105,15 @@ export class PgtipobackupComponent implements OnInit {
       this.Servicios.insertatipobackup('3', insert).subscribe(respu => {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
+        this.modalAgregarTipoBackup.hide();
+        this.limpiar();
       });
     }
 
+  }
+  limpiar() {
+    this.lblDescripcion = '';
+    this.consultaTipoBackup(this.lblDescripcion);
   }
 
 }
