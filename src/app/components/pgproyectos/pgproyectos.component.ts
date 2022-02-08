@@ -62,7 +62,16 @@ export class PgproyectosComponent implements OnInit {
 
   Fecha: string = this.Año + '-' + this.Mes + '-' + this.Dia;
 
+  //Variables grilla dinamica
+  IdClienteGrillaDinamica: string;
+  IdProyectoGrillaDinamica: string;
+  ArrayGrilla: any;
+  NomCliente: string;
+  NomProyecto: string;
+  AuxiliarTablaDinamica: boolean;
+
   ngOnInit(): void {
+    this.AuxiliarTablaDinamica = false;
     this.consultaproyectos(this.LblNombre, this.IdCliente);
     this.IdCliente = '0';
 
@@ -109,6 +118,8 @@ export class PgproyectosComponent implements OnInit {
     //Agregar
     this.LblNombreAgrega = '';
     this.IdClienteAgrega = '0';
+
+    this.AuxiliarTablaDinamica = false;
   }
 
   consultaclientes(Descripcion: string) {
@@ -408,5 +419,28 @@ export class PgproyectosComponent implements OnInit {
         }
       })
     }
+  }
+
+
+
+  //Verdetalles con grilla dinamica
+  GrillaDinamica(templateMensaje: TemplateRef<any>, Array: any) {
+    this.IdClienteGrillaDinamica = Array.Id_Cliente;
+    this.IdProyectoGrillaDinamica = Array.Id_PRY;
+    this.LimpiarClientes();
+
+    this.ArrayGrilla = [];
+    this.Servicios.consgrilaproyectbck(this.IdProyectoGrillaDinamica).subscribe(respu => {
+      if(respu.length > 0){
+        this.AuxiliarTablaDinamica = true;
+
+        this.NomCliente = respu[0].Cliente;
+        this.NomProyecto = respu[0].NombreProyecto;
+        this.ArrayGrilla = respu;
+      }else{
+        this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = 'No cuenta con backups asociados.';
+      }
+    })
   }
 }
