@@ -111,6 +111,7 @@ export class PgproyectosComponent implements OnInit {
     })
   }
   LimpiarProyectos() {
+    this.IdClienteGrillaDinamica = '';
     this.LblNombre = '';
     this.IdCliente = '0';
     this.consultaproyectos(this.LblNombre, this.IdCliente);
@@ -431,15 +432,16 @@ export class PgproyectosComponent implements OnInit {
 
     this.ArrayGrilla = [];
     this.Servicios.consgrilaproyectbck(this.IdProyectoGrillaDinamica).subscribe(respu => {
-      if(respu.length > 0){
+      if (respu.length > 0) {
         this.AuxiliarTablaDinamica = true;
 
         this.NomCliente = respu[0].Cliente;
         this.NomProyecto = respu[0].NombreProyecto;
         this.ArrayGrilla = respu;
-      }else{
+      } else {
+        this.AuxiliarTablaDinamica = false;
         this.modalMensaje = this._modalService.show(templateMensaje);
-          this.lblModalMsaje = 'No cuenta con backups asociados.';
+        this.lblModalMsaje = 'No cuenta con backups asociados.';
       }
     })
   }
