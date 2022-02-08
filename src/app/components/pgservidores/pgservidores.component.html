@@ -336,9 +336,7 @@
                 </div>
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidorEdit">
-                        <option value="{{Id_TipoServidorEdit}}">{{Id_TipoServidorEdit}}</option>
-                        <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
-                            {{arRespu.Descripcion}}</option>
+                        <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">{{arRespu.Descripcion}}</option>
                     </select>
                 </div>
 
@@ -479,7 +477,6 @@
                 <!--Para el popap de editar en ver detalles-->
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAlojaEdit">
-                        <option value="{{IdServidorAlojaEdit}}">{{LblServidor}}</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}</option>
                     </select>
                 </div>

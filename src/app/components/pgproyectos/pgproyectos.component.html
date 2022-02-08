@@ -63,9 +63,14 @@
                             <th>Ver</th>
                         </tr>
                         <tr *ngFor="let ArGrilla of ArrayConsultaProyecto">
-                            <td>{{ArGrilla.Id_PRY}}</td>
-                            <td>{{ArGrilla.Nombre}}</td>
-                            <td>{{ArGrilla.DescripcionCliente}}</td>
+                            <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica" style="background-color: #1ABC9C;">{{ArGrilla.Id_PRY}}</td>
+                            <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Id_PRY}}</td>
+
+                            <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica" style="background-color: #1ABC9C;">{{ArGrilla.Nombre}}</td>
+                            <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Nombre}}</td>
+
+                            <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica" style="background-color: #1ABC9C;">{{ArGrilla.DescripcionCliente}}</td>
+                            <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.DescripcionCliente}}</td>
 
                             <td class="text-center">
                                 <button class="BtnClaro mrd m-auto text-center" title="Editar"

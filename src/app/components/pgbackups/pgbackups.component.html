@@ -184,10 +184,6 @@
                             {{arRespu.Descripcion}}</option>
                     </select>
                 </div>
-                <div class="col-6 mt-3">
-                    <input type="text" value="" [(ngModel)]="Fecha" placeholder="Fecha"
-                        class="col-sm-6 text-center form-control" title="Fecha" disabled>
-                </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
                     <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregarBck(templateMensaje)">
@@ -232,19 +228,17 @@
             </div>
         </div>
         <div class="row Texto text-center">
-
-            <div class="col-sm-6 mt-3">
-                <select class="form-select" placeholder="Estado" [disabled]="DisableAgregarReguistroBck == false"
-                    [(ngModel)]="IdEstado">
-                    <option value="2">Seleccione estado</option>
-                    <option value="0">Error</option>
-                    <option value="1">Exitoso</option>
-                </select>
+            <div class="col-sm-12 mt-3 displayFlexbetween">
+                <div class="col-sm-6 mt-3">
+                    <select class="form-select" placeholder="Estado" [disabled]="DisableAgregarReguistroBck == false"
+                        [(ngModel)]="IdEstado">
+                        <option value="2">Seleccione estado</option>
+                        <option value="0">Error</option>
+                        <option value="1">Exitoso</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="col-sm-6 mt-3">
-                <input type="text" class="form-control text-center" placeholder="Fecha" [(ngModel)]="Fecha" disabled>
-            </div>
             <div class="row displayCenter col-12 mt-3 p-3">
                 <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
                     (click)="AgregarRegistroBackup(templateMensaje)">
@@ -303,7 +297,6 @@
                 </div>
                 <div class="col-sm-6 mt-3">
                     <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdClientee">
-                        <option value="{{IdClientee}}">{{Clientee}}</option>
                         <option *ngFor="let arRespu of ArregloListaCliente" value="{{arRespu.Id_PRY}}">
                             {{arRespu.Nombre}}</option>
                     </select>
@@ -314,7 +307,6 @@
                 </div>
                 <div class="col-sm-6 mt-3">
                     <select class="form-select" title="Seleccione periodicidad" [(ngModel)]="Periodicidad">
-                        <option value="{{Periodicidad}}">{{Periodicidad}}</option>
                         <option value="DIARIO">DIARIO</option>
                         <option value="VIERNES">VIERNES</option>
                         <option value="QUINCENAL">QUINCENAL</option>
@@ -323,22 +315,16 @@
                 </div>
                 <div class="col-sm-6 mt-3">
                     <select class="form-select" title="Seleccionar servidor" [(ngModel)]="IdServidor">
-                        <option value="{{IdServidor}}">{{Servidor}}</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                         </option>
                     </select>
                 </div>
                 <div class="col-sm-6 mt-3">
                     <select class="form-select" title="Seleccionar el tipo backup" [(ngModel)]="IdTipoBackup">
-                        <option value="{{IdTipoBackup}}">{{TipoBackupEdit}}</option>
                         <option value="{{arRespu.Id_Tipo_BCK}}" *ngFor="let arRespu of ArregloListaTipoBackup">
                             {{arRespu.Descripcion}}</option>
                     </select>
 
-                </div>
-                <div class="col-sm-6 mt-3">
-                    <input type="text" value="" [(ngModel)]="Fecha" placeholder="Fecha"
-                        class="col-sm-6 text-center form-control" title="Fecha" disabled>
                 </div>
 
                 <!---Botones--->

@@ -56,16 +56,13 @@ export class PgbackupsComponent implements OnInit {
   modalEditar: BsModalRef;
 
   NombreBackup: string;
-  Clientee: string;
   Ambiente: string;
   Periodicidad: string;
   Servidor: string;
   TipoBackup: string;
   Usuario: string;
-  FechaUlt: string;
   IdClientee: string;
   IdServidor: string;
-  TipoBackupEdit: string;
   IdTipoBackup: string;
   IdBackupEdit: string;
 
@@ -415,14 +412,10 @@ export class PgbackupsComponent implements OnInit {
     this.IdBackupEdit = Array.Id_B;
     this.IdClientee = Array.Id_PRY;
     this.NombreBackup = Array.Nombre;
-    this.Clientee = Array.NombreProyecto;
     this.Ambiente = Array.Ambiente;
     this.Periodicidad = Array.Periodicidad;
-    this.Servidor = Array.NombreServidor;
     this.TipoBackup = Array.Descripcion;
-    this.FechaUlt = Array.Fecha_Ult_Mod;
     this.IdServidor = Array.Id_Servidor;
-    this.TipoBackupEdit = Array.Descripcion;
     this.IdTipoBackup = Array.Id_Tipo_BCK;
   }
 
@@ -442,6 +435,7 @@ export class PgbackupsComponent implements OnInit {
       this.lblModalMsaje = respu;
 
       if (respu == "Registro ingresado exitosamente.") {
+        this.DisableAgregarReguistroBck = false;
         this.LblObservaciones = '';
         this.IdEstado = '2';
         const ConsultaRegistroBck =
@@ -456,6 +450,10 @@ export class PgbackupsComponent implements OnInit {
             this.ArregloGrillaReguistroBck = respu;
           }
         })
+      } else {
+        this.DisableAgregarReguistroBck = false;
+        this.LblObservaciones = '';
+        this.IdEstado = '2';
       }
     })
   }
