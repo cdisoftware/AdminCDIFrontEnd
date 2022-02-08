@@ -135,7 +135,6 @@ export class PgservidoresComponent implements OnInit {
     this.LblObservacionEdit = '';
     this.LblUsuariosEdit = '';
     this.LblPasswordEdit = '';
-    this.IdServidorAlojaEdit = '';
 
 
     this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
@@ -173,7 +172,6 @@ export class PgservidoresComponent implements OnInit {
     this.LblObservacionEdit = '';
     this.LblUsuariosEdit = '';
     this.LblPasswordEdit = '';
-    this.IdServidorAlojaEdit = '';
 
     this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
   }
@@ -400,7 +398,7 @@ export class PgservidoresComponent implements OnInit {
     this.LblSOEdit = Array.SO;
     this.LblSoftwareEdit = Array.Software;
     this.IdEstadoAgregarEdit = Array.Estado;
-    this.Id_TipoServidorEdit = Array.TipoServidor;//Falta editar tiene que traer el id no el nombre
+    this.Id_TipoServidorEdit = Array.IdTipoServidor;
     this.LblObservacionEdit = Array.Observacion;
     this.LblUsuariosEdit = Array.Usuario_Ser;
     this.LblPasswordEdit = Array.Password;

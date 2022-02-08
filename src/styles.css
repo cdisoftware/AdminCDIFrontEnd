@@ -1,3 +1,6 @@
+body::-webkit-scrollbar {
+    width: 0px;               /* width of the entire scrollbar */
+  }
 :root {
     --main-bg-color-red: #DB0019;
     --main-bg-color-redOscuro: #8A0010;
