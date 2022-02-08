@@ -75,12 +75,34 @@
                                 </button>
                             </td>
                             <td class="text-center">
-                                <button class="BtnClaro mrd m-auto text-center" title="Ver">
+                                <button class="BtnClaro mrd m-auto text-center" title="Ver"
+                                    (click)="GrillaDinamica(templateMensaje, ArGrilla)">
                                     <img src="../../../../assets/ImagenesAdminCDI/ojo.png"
                                         class="BtnimgTamanoPeque mr-2">
                                 </button>
                             </td>
                         </tr>
+                    </table>
+
+                    <table class="mt-5 table table-bordered text-center" *ngIf="AuxiliarTablaDinamica == true">
+                        <caption>backups asociados</caption>
+                        <tr>
+                            <th colspan="3" style="background-color: #1ABC9C; color: white;">BACKUPS ASOCIADOS</th>
+                        </tr>
+                        <tr>
+                            <th>CLIENTE</th>
+                            <th>PROYECTO</th>
+                            <th>BACKUPS</th>
+                        </tr>
+                        <tr>
+                            <td rowspan="20">{{NomCliente}}</td>
+                            <td rowspan="20">{{NomProyecto}}</td>
+                        </tr>
+                        <ng-container *ngFor="let ArGrilla of ArrayGrilla">
+                            <tr>
+                                <td>{{ArGrilla.BackupAsociado}}</td>
+                            </tr>
+                        </ng-container>
                     </table>
                 </div>
                 <!--fin Grilla-->
@@ -142,11 +164,25 @@
                                 <th>Editar</th>
                             </tr>
                             <tr *ngFor="let ArGrilla of ArrayConsultaCliente">
-                                <td>{{ArGrilla.Id_Cliente}}</td>
-                                <td>{{ArGrilla.Descripcion}}</td>
+                                <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
+                                    style="background-color: #1ABC9C;">{{ArGrilla.Id_Cliente}}</td>
+                                <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Id_Cliente}}</td>
 
-                                <td class="text-center">
-                                    <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="BtnEditCliente(templateEditarCliente, ArGrilla)">
+                                <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
+                                    style="background-color: #1ABC9C;">{{ArGrilla.Descripcion}}</td>
+                                <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Descripcion}}</td>
+
+                                <td class="text-center" *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
+                                    style="background-color: #1ABC9C;">
+                                    <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                                        (click)="BtnEditCliente(templateEditarCliente, ArGrilla)">
+                                        <img src="../../../../assets/ImagenesAdminCDI/editar.png"
+                                            class="BtnimgTamanoPeque mr-2">
+                                    </button>
+                                </td>
+                                <td class="text-center" *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">
+                                    <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                                        (click)="BtnEditCliente(templateEditarCliente, ArGrilla)">
                                         <img src="../../../../assets/ImagenesAdminCDI/editar.png"
                                             class="BtnimgTamanoPeque mr-2">
                                     </button>

@@ -100,4 +100,7 @@ export class MetodosGlobalesService {
   actualizacliente(bandera: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizacliente/' + bandera, BodyPost);
   }
+  consgrilaproyectbck(IdProyecto: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consgrilaproyectbck/' + IdProyecto);
+  }
 }
