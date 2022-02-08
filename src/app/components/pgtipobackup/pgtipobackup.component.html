@@ -12,7 +12,7 @@
 
     <!--Botones-->
     <div class="row displayCenter col-12 mt-3">
-      <button class="btn btn-dark col-sm-2 mrd" title="Limpiar">
+      <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="limpiar()">
         <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2" />
         Limpiar
       </button>
@@ -127,7 +127,7 @@
         </div>
         <!---Botones--->
         <div class="row displayCenter col-12 mt-3">
-          <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateTipoBck()">
+          <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateTipoBck(templateMensajeEditar)">
             <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2" />
             Guardar..
           </button>
@@ -144,11 +144,11 @@
   <br />
 </ng-template>
 
-<!-- Mensaje alerta editar
+<!-- Mensaje alerta editar-->
 <ng-template #templateMensajeEditar>
   <div class="modaBody">
       <div class="col-12">
-          <p class="pModals">{{ lblModalMsjEdit }}</p>
+          <p class="pModals">{{ lblModalMsaje }}</p>
       </div>
   </div>
   <div class="row text-center">
@@ -159,4 +159,4 @@
       </div>
   </div>
   <br>
-</ng-template>-->
+</ng-template>
