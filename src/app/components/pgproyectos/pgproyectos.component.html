@@ -3,7 +3,7 @@
     <div class="row justify-content-center ">
         <div class="col-sm-6 m-0">
             <div class="row justify-content-center ">
-                <h5 class="col-12 tituloformulario">Proyectos</h5>
+                <p class="col-12 tituloformulario">Proyectos</p>
             </div>
             <div class="row mt-3">
                 <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
@@ -112,15 +112,21 @@
         <!--Cliente-->
         <div class="col-sm-6 m-0">
             <div class="col-sm-12 m-0">
-                <div class="row justify-content-center">
-                    <h5 class="col-12 tituloformulario">Clientes</h5>
+                <div class="w-100 ContenedorDerecha">
+                    <div class="row float-right">
+                        <p class="col-12 tituloformulario">Clientes</p>
+                    </div>
+
                 </div>
-                <div class="row mt-3">
-                    <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                <div class="w-100 ContenedorDerecha">
+                    <div class="col-sm-6 m-0 mb-3 mt-3 float-right">
                         <input type="text" class="form-control table-bordered" #Descripcion placeholder="Descripción"
                             title="Descripción" [(ngModel)]="LblDescripcion"
                             (keyup)="consultaclientes(Descripcion.value)">
                     </div>
+                </div>
+                <div class="row mt-3">
+
 
                     <!--Botones-->
                     <div class="row displayCenter col-12 mt-3">

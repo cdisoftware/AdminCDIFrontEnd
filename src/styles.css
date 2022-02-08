@@ -148,8 +148,8 @@
 .tituloformulario{ 
     font-weight: bold;    
     font-style: #333333;
+    font-size: 20px;
 }
-
 .textarea {
     resize: none;
 }

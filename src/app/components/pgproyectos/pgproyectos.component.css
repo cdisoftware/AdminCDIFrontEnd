@@ -1,0 +1,4 @@
+.ContenedorDerecha{
+    display: flex;
+    justify-content: right;
+}
