@@ -221,30 +221,20 @@
     </div>
     <div class="mrd mld" id="htmlData_">
         <div class="row texto text-center">
-            <div class="col-sm-9 mt-3">
+            <div class="col-sm-8 mt-3">
                 <textarea id="form10" class="md-textarea form-control textarea" placeholder="Observaciones"
-                    [disabled]="DisableAgregarReguistroBck == false" rows="3" [(ngModel)]="LblObservaciones"></textarea>
+                 rows="3" [(ngModel)]="LblObservaciones"></textarea>
             </div>
-            <div class="col-sm-3 mt-3">
-                <button class="btn btn-dark col-sm-12" id="BotonAgregarRegistroBackup" title="Nuevo"
-                    (click)="DesbloqqueaCamposRegistrobck()">
-                    <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
-                    Nuevo
-                </button>
+            <div class="col-sm-4 mt-3">
+                <select class="form-select mt-3" placeholder="Estado"
+                    [(ngModel)]="IdEstado">
+                    <option value="2">Seleccione estado</option>
+                    <option value="0">Error</option>
+                    <option value="1">Exitoso</option>
+                </select>
             </div>
         </div>
         <div class="row Texto text-center">
-            <div class="col-sm-12 mt-3 displayFlexbetween">
-                <div class="col-sm-6 mt-3">
-                    <select class="form-select" placeholder="Estado" [disabled]="DisableAgregarReguistroBck == false"
-                        [(ngModel)]="IdEstado">
-                        <option value="2">Seleccione estado</option>
-                        <option value="0">Error</option>
-                        <option value="1">Exitoso</option>
-                    </select>
-                </div>
-            </div>
-
             <div class="row displayCenter col-12 mt-3 p-3">
                 <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
                     (click)="AgregarRegistroBackup(templateMensaje)">
