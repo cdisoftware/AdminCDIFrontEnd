@@ -84,6 +84,7 @@
                     <th (click)="OrdenarFecha_Ult_Mod()" class="cursorPointer">Fecha Ultima Mod</th>
                     <th>Editar</th>
                     <th>Ver</th>
+                    <th>Eliminar</th>
                 </tr>
                 <tr *ngFor="let ArGrilla of ArregloGrilla">
                     <td>{{ArGrilla.IpServidor}}</td>
@@ -104,6 +105,11 @@
                         <button class="BtnClaro mrd m-auto text-center" title="Ver"
                             (click)="VerDetalle(templateVerDetalles, ArGrilla)">
                             <img src="../../../../assets/ImagenesAdminCDI/ojo.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar">
+                            <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
                 </tr>
@@ -215,30 +221,20 @@
     </div>
     <div class="mrd mld" id="htmlData_">
         <div class="row texto text-center">
-            <div class="col-sm-9 mt-3">
+            <div class="col-sm-8 mt-3">
                 <textarea id="form10" class="md-textarea form-control textarea" placeholder="Observaciones"
-                    [disabled]="DisableAgregarReguistroBck == false" rows="3" [(ngModel)]="LblObservaciones"></textarea>
+                 rows="3" [(ngModel)]="LblObservaciones"></textarea>
             </div>
-            <div class="col-sm-3 mt-3">
-                <button class="btn btn-dark col-sm-12" id="BotonAgregarRegistroBackup" title="Nuevo"
-                    (click)="DesbloqqueaCamposRegistrobck()">
-                    <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
-                    Nuevo
-                </button>
+            <div class="col-sm-4 mt-3">
+                <select class="form-select mt-3" placeholder="Estado"
+                    [(ngModel)]="IdEstado">
+                    <option value="2">Seleccione estado</option>
+                    <option value="0">Error</option>
+                    <option value="1">Exitoso</option>
+                </select>
             </div>
         </div>
         <div class="row Texto text-center">
-            <div class="col-sm-12 mt-3 displayFlexbetween">
-                <div class="col-sm-6 mt-3">
-                    <select class="form-select" placeholder="Estado" [disabled]="DisableAgregarReguistroBck == false"
-                        [(ngModel)]="IdEstado">
-                        <option value="2">Seleccione estado</option>
-                        <option value="0">Error</option>
-                        <option value="1">Exitoso</option>
-                    </select>
-                </div>
-            </div>
-
             <div class="row displayCenter col-12 mt-3 p-3">
                 <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
                     (click)="AgregarRegistroBackup(templateMensaje)">
@@ -259,19 +255,34 @@
                         <th colspan="5">REGISTRO BACKUPS</th>
                     </tr>
                     <tr>
-                        <th class="cursorPointer">BACKUP</th>
                         <th class="cursorPointer">FECHA</th>
                         <th class="cursorPointer">ESTADO</th>
                         <th class="cursorPointer">OBSERVACIONES</th>
                         <th class="cursorPointer">USUARIO</th>
+                        <th>ELIMINAR</th>
                     </tr>
                     <tr *ngFor="let ArGrilla of ArregloGrillaReguistroBck">
-                        <td>{{ArGrilla.NombreBck}}</td>
                         <td>{{ArGrilla.Fecha}}</td>
                         <td *ngIf="ArGrilla.Estado == 1">Exitoso</td>
                         <td *ngIf="ArGrilla.Estado == 0">Error</td>
                         <td>{{ArGrilla.Observaciones}}</td>
                         <td>{{ArGrilla.Nombre}}</td>
+                        <td>
+                            <button class="BtnClaro mrd m-auto text-center" title="Eliminar">
+                                <img src="../../../../assets/ImagenesAdminCDI/basura.png"
+                                    class="BtnimgTamanoPeque mr-2">
+                            </button>
+                        </td>
+                    </tr>
+                    <tr><td colspan="5">--------------------------------------------------------------------</td></tr>
+                    <tr>
+                        <th colspan="4">CLICK ELIMINAR TODOS LOS REGISTROS = </th>
+                        <td>
+                            <button class="BtnClaro mrd m-auto text-center" title="Eliminar todos los registros">
+                            <img src="../../../../assets/ImagenesAdminCDI/basura.png"
+                                class="BtnimgTamanoPeque mr-2">
+                        </button>
+                        </td>
                     </tr>
                 </table>
             </div>

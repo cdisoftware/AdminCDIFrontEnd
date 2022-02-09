@@ -84,7 +84,6 @@ export class PgbackupsComponent implements OnInit {
   ArregloListaServidor: any;
 
   //Variables agregar registro bck
-  DisableAgregarReguistroBck: boolean;
   LblObservaciones: string;
   IdEstado: string;
 
@@ -359,7 +358,6 @@ export class PgbackupsComponent implements OnInit {
   }
   VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
-    this.DisableAgregarReguistroBck = false;
     const ConsultaRegistroBck =
     {
       Fecha: '0',
@@ -419,43 +417,43 @@ export class PgbackupsComponent implements OnInit {
     this.IdTipoBackup = Array.Id_Tipo_BCK;
   }
 
-  DesbloqqueaCamposRegistrobck() {
-    this.DisableAgregarReguistroBck = true
-  }
   AgregarRegistroBackup(templateMensaje: TemplateRef<any>) {
-    const insertaregistrobck = {
-      Id_BCK: this.IdBackupSelect,
-      Fecha: this.Fecha,
-      Estado: this.IdEstado,
-      Observaciones: this.LblObservaciones,
-      Id_U: this.IdUsuarioCookies
-    }
-    this.Servicios.insertaregistbck(insertaregistrobck).subscribe(respu => {
+    if (this.LblObservaciones == undefined || this.LblObservaciones == '' || this.IdEstado == undefined || this.IdEstado == '') {
       this.modalMensaje = this._modalService.show(templateMensaje);
-      this.lblModalMsaje = respu;
-
-      if (respu == "Registro ingresado exitosamente.") {
-        this.DisableAgregarReguistroBck = false;
-        this.LblObservaciones = '';
-        this.IdEstado = '2';
-        const ConsultaRegistroBck =
-        {
-          Fecha: '0',
-          Estado: 2,
-          Usuario: 0
-        }
-        this.ArregloGrillaReguistroBck = [];
-        this.Servicios.consultaregistbck(this.IdBackupSelect, ConsultaRegistroBck).subscribe(respu => {
-          if (respu.length > 0) {
-            this.ArregloGrillaReguistroBck = respu;
-          }
-        })
-      } else {
-        this.DisableAgregarReguistroBck = false;
-        this.LblObservaciones = '';
-        this.IdEstado = '2';
+      this.lblModalMsaje = "Por favor complete los campos a agregar";
+    } else {
+      const insertaregistrobck = {
+        Id_BCK: this.IdBackupSelect,
+        Fecha: this.Fecha,
+        Estado: this.IdEstado,
+        Observaciones: this.LblObservaciones,
+        Id_U: this.IdUsuarioCookies
       }
-    })
+      this.Servicios.insertaregistbck(insertaregistrobck).subscribe(respu => {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+
+        if (respu == "Registro ingresado exitosamente.") {
+          this.LblObservaciones = '';
+          this.IdEstado = '2';
+          const ConsultaRegistroBck =
+          {
+            Fecha: '0',
+            Estado: 2,
+            Usuario: 0
+          }
+          this.ArregloGrillaReguistroBck = [];
+          this.Servicios.consultaregistbck(this.IdBackupSelect, ConsultaRegistroBck).subscribe(respu => {
+            if (respu.length > 0) {
+              this.ArregloGrillaReguistroBck = respu;
+            }
+          })
+        } else {
+          this.LblObservaciones = '';
+          this.IdEstado = '2';
+        }
+      })
+    }
   }
 
   ListaTipoServidor() {
