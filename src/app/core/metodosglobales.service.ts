@@ -103,4 +103,33 @@ export class MetodosGlobalesService {
   consgrilaproyectbck(IdProyecto: string) {
     return this.http.get<any[]>(this.url_servidor + 'consgrilaproyectbck/' + IdProyecto);
   }
+
+  
+  eliminaservidor(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminaservidor/' + bandera, BodyPost);
+  }
+  eliminabackup(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminabackup/' + bandera, BodyPost);
+  }
+  eliminaproyect(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminaproyect/' + bandera, BodyPost);
+  }
+  eliminausuario(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminausuario/' + bandera, BodyPost);
+  }
+  eliminaclient(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminaclient/' + bandera, BodyPost);
+  }
+  eliminahardserv(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminahardserv/' + bandera, BodyPost);
+  }
+  eliminatiposerv(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminatiposerv/' + bandera, BodyPost);
+  }
+  eliminatipobck(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminatipobck/' + bandera, BodyPost);
+  }
+  eliminaregistbck(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminaregistbck/' + bandera, BodyPost);
+  }
 }

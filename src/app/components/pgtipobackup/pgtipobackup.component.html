@@ -54,6 +54,12 @@
               <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2" />
             </button>
           </td>
+          <td class="text-center">
+            <button class="BtnClaro mrd m-auto text-center" title="Editar"
+              (click)="BorrarTb(templateMensaje, ArGrilla)">
+              <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2" />
+            </button>
+          </td>
         </tr>
       </table>
     </div>
@@ -63,33 +69,33 @@
 
 <ng-template #templateAgregar>
   <div class="modal-header">
-      <th class="titulopopup">AGREGAR TIPO BACKUP</th>
-      <button type="button" class="bot" aria-label="Close" (click)="modalAgregarTipoBackup.hide()">
-          <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
-      </button>
+    <th class="titulopopup">AGREGAR TIPO BACKUP</th>
+    <button type="button" class="bot" aria-label="Close" (click)="modalAgregarTipoBackup.hide()">
+      <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+    </button>
   </div>
   <div class="modaBody">
-      <div class="col-sm-12 mt-3 row displayCenter">
-          <li class="row col-sm-12 displayCenter">
-            <div class="col-sm-12 mt-6">
-              <textarea id="form10" class="form-control" rows="6" placeholder="Descripcion" rows="3"
-                [(ngModel)]="lblDescripcionAgregar"></textarea>
-            </div>
-            <!---Botones--->
-            <div class="row displayCenter col-12 mt-3">
-              <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="guardarTipoBackup(templateMensaje)">
-                <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2" />
-                Guardar..
-              </button>
-    
-              <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregarTipoBackup.hide()">
-                <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2" />
-                Cancelar
-              </button>
-            </div>
-          </li>
-      </div>
-      <br>
+    <div class="col-sm-12 mt-3 row displayCenter">
+      <li class="row col-sm-12 displayCenter">
+        <div class="col-sm-12 mt-6">
+          <textarea id="form10" class="form-control" rows="6" placeholder="Descripcion" rows="3"
+            [(ngModel)]="lblDescripcionAgregar"></textarea>
+        </div>
+        <!---Botones--->
+        <div class="row displayCenter col-12 mt-3">
+          <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="guardarTipoBackup(templateMensaje)">
+            <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2" />
+            Guardar..
+          </button>
+
+          <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregarTipoBackup.hide()">
+            <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2" />
+            Cancelar
+          </button>
+        </div>
+      </li>
+    </div>
+    <br>
   </div>
   <br>
 </ng-template>
@@ -97,16 +103,16 @@
 <!-- Mensaje alerta agregar-->
 <ng-template #templateMensaje>
   <div class="modaBody">
-      <div class="col-12">
-          <p class="pModals">{{ lblModalMsaje }}</p>
-      </div>
+    <div class="col-12">
+      <p class="pModals">{{ lblModalMsaje }}</p>
+    </div>
   </div>
   <div class="row text-center">
-      <div class="col-0">
-          <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
-              Aceptar
-          </button>
-      </div>
+    <div class="col-0">
+      <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+        Aceptar
+      </button>
+    </div>
   </div>
   <br>
 </ng-template>
@@ -147,16 +153,16 @@
 <!-- Mensaje alerta editar-->
 <ng-template #templateMensajeEditar>
   <div class="modaBody">
-      <div class="col-12">
-          <p class="pModals">{{ lblModalMsaje }}</p>
-      </div>
+    <div class="col-12">
+      <p class="pModals">{{ lblModalMsaje }}</p>
+    </div>
   </div>
   <div class="row text-center">
-      <div class="col-0">
-          <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
-              Aceptar
-          </button>
-      </div>
+    <div class="col-0">
+      <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+        Aceptar
+      </button>
+    </div>
   </div>
   <br>
 </ng-template>

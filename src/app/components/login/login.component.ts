@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
   loading = false;
 
   // variable usuario login
-  user: string = 'Admin00';
+  user: string = 'Wbernal1003';
   // variable contraseña login
-  passw: string = 'Admin00';
+  passw: string = '1003WSBG';
 
   constructor(
     private fb: FormBuilder,
@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
         this.cookies.set("IdUsuario", respu[0].Id_U);
         this.cookies.set("Nombre", respu[0].Nombre);
         this.cookies.set("Apellido", respu[0].Apellido);
+        this.cookies.set("UserAdmin", respu[0].UserAdmin);
         this.fakeLoading();
       }
     });
