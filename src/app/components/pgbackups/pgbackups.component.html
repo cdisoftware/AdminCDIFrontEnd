@@ -6,14 +6,14 @@
         <!--Ayuda IP-->
         <div class="col-sm-8 m-0 mb-3 displayFlexbetween">
             <input type="text" class="form-control table-bordered" #Ip placeholder="IP" title="IP" [(ngModel)]="LblIp"
-                (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneCliente.value)">
+                (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)">
         </div>
         <!--Fin ayuda-->
 
         <!--Tipo lista-->
         <div class="col-sm-4 m-0 mb-3 ">
             <select class="form-select" title="Seleccionar usuario" [(ngModel)]="IdUsuario" #Selecusuario
-                (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneCliente.value)'>
+                (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)'>
                 <option value="0" selected>Seleccione usuario</option>
                 <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>
             </select>
@@ -22,8 +22,8 @@
 
         <!--Tipo lista-->
         <div class="col-sm-4 m-0 mb-3 ">
-            <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdCliente" #SelecioneCliente
-                (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneCliente.value)'>
+            <select class="form-select" title="Seleccionar proyecto" [(ngModel)]="IdCliente" #SelecioneProyecto
+                (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)'>
                 <option value="0" selected>Seleccione cliente</option>
                 <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">{{arRespu.Nombre}}
                 </option>
@@ -35,7 +35,7 @@
         <div class="col-sm-8 m-0 mb-3 displayFlexbetween">
             <input type="text" class="form-control" placeholder="Nombre" #Nombre title="Nombre backup"
                 [(ngModel)]="NombreBCK"
-                (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneCliente.value)">
+                (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)">
         </div>
         <!--Fin ayuda-->
 
@@ -76,7 +76,7 @@
                 <tr>
                     <th (click)="OrdenarIpServidor()" class="cursorPointer">Ip</th>
                     <th (click)="OrdenarNombre()" class="cursorPointer">Nombre</th>
-                    <th (click)="OrdenarNombreProyecto()" class="cursorPointer">Cliente</th>
+                    <th (click)="OrdenarNombreProyecto()" class="cursorPointer">Proyecto</th>
                     <th (click)="OrdenarAmbiente()" class="cursorPointer">Ambiente</th>
                     <th (click)="OrdenarDescripcion()" class="cursorPointer">Tipo</th>
                     <th (click)="OrdenarPeriodicidad()" class="cursorPointer">Periodicidad</th>
@@ -108,7 +108,8 @@
                         </button>
                     </td>
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar">
+                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                        (click)="EliminarRegBCK(templateMensaje, ArGrilla)">
                             <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
@@ -155,7 +156,7 @@
                         title="Nombre Kackup" [(ngModel)]="LblAgregarNombre" required>
                 </div>
                 <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdAgregarCliente" required>
+                    <select class="form-select" title="Seleccionar proyecto" [(ngModel)]="IdAgregarCliente" required>
                         <option value="0">Seleccione cliente</option>
                         <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">
                             {{arRespu.Nombre}}</option>
@@ -267,10 +268,10 @@
                         <td *ngIf="ArGrilla.Estado == 0">Error</td>
                         <td>{{ArGrilla.Observaciones}}</td>
                         <td>{{ArGrilla.Nombre}}</td>
-                        <td>
-                            <button class="BtnClaro mrd m-auto text-center" title="Eliminar">
-                                <img src="../../../../assets/ImagenesAdminCDI/basura.png"
-                                    class="BtnimgTamanoPeque mr-2">
+                        <td class="text-center">
+                            <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                            (click)="EliminarRegistroBakup(templateMensaje, ArGrilla)">
+                                <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                             </button>
                         </td>
                     </tr>
@@ -278,7 +279,7 @@
                     <tr>
                         <th colspan="4">CLICK ELIMINAR TODOS LOS REGISTROS = </th>
                         <td>
-                            <button class="BtnClaro mrd m-auto text-center" title="Eliminar todos los registros">
+                            <button class="BtnClaro mrd m-auto text-center" title="Eliminar todos los registros" (click)="EliminarRegistrosBakup(templateMensaje, ArregloGrillaReguistroBck[0].Id_BCK)">
                             <img src="../../../../assets/ImagenesAdminCDI/basura.png"
                                 class="BtnimgTamanoPeque mr-2">
                         </button>
@@ -307,7 +308,7 @@
                         title="Nombre Kackup" [(ngModel)]="NombreBackup">
                 </div>
                 <div class="col-sm-6 mt-3">
-                    <select class="form-select" title="Seleccionar cliente" [(ngModel)]="IdClientee">
+                    <select class="form-select" title="Seleccionar proyecto" [(ngModel)]="IdClientee">
                         <option *ngFor="let arRespu of ArregloListaCliente" value="{{arRespu.Id_PRY}}">
                             {{arRespu.Nombre}}</option>
                     </select>

@@ -501,4 +501,63 @@ export class PgbackupsComponent implements OnInit {
       }
     })
   }
+
+  EliminarRegBCK(templateMensaje: TemplateRef<any>, Arr: any) {
+    const datosupdate =
+    {
+      Id_B: Arr.Id_B,
+      Nombre: Arr.Nombre
+    }
+    this.Servicios.eliminabackup('4', datosupdate).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      this.Limpiar();
+    })
+  }
+  EliminarRegistroBakup(templateMensaje: TemplateRef<any>, Arr: any) {
+    const deleteregistros =
+    {
+      Id_BCK: Arr.Id_BCK,
+      Fecha: Arr.Fecha
+    }
+    this.Servicios.eliminaregistbck('4', deleteregistros).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      const ConsultaRegistroBck =
+      {
+        Fecha: '0',
+        Estado: 2,
+        Usuario: 0
+      }
+      this.ArregloGrillaReguistroBck = [];
+      this.Servicios.consultaregistbck(this.IdBackupSelect, ConsultaRegistroBck).subscribe(respu => {
+        if (respu.length > 0) {
+          this.ArregloGrillaReguistroBck = respu;
+        }
+      })
+    })
+  }
+  EliminarRegistrosBakup(templateMensaje: TemplateRef<any>, Arr: any) {
+    const deleteregistros =
+    {
+      Id_BCK: Arr,
+      Fecha: '0'
+    }
+    this.Servicios.eliminaregistbck('4', deleteregistros).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      const ConsultaRegistroBck =
+      {
+        Fecha: '0',
+        Estado: 2,
+        Usuario: 0
+      }
+      this.ArregloGrillaReguistroBck = [];
+      this.Servicios.consultaregistbck(this.IdBackupSelect, ConsultaRegistroBck).subscribe(respu => {
+        if (respu.length > 0) {
+          this.ArregloGrillaReguistroBck = respu;
+        }
+      })
+    })
+  }
 }

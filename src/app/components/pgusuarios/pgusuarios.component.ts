@@ -31,6 +31,7 @@ export class PgusuariosComponent implements OnInit {
   LblAgregarUsuario: string;
   LblAgregarPasword: string;
   LblAgregarCedula: string;
+  LblUserAdmin: string;
 
   //Variables editar
   modalEditar: BsModalRef;
@@ -40,6 +41,8 @@ export class PgusuariosComponent implements OnInit {
   LblEditUsuario: string;
   LblEditPasword: string;
   LblEditCedula: string;
+  LblEditUserAdmin: string;
+
 
   //Variables Fecha
   Dia = new Date().getDate();
@@ -56,6 +59,8 @@ export class PgusuariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.ListaUsuario(this.LblNombre, this.LblApellido, this.LblCedula);
+    this.LblUserAdmin = '2';
+    this.LblEditUserAdmin = '2';
   }
 
   //Limpiar
@@ -70,6 +75,7 @@ export class PgusuariosComponent implements OnInit {
     this.LblAgregarUsuario = '';
     this.LblAgregarPasword = '';
     this.LblAgregarCedula = '';
+    this.LblUserAdmin = '2';
 
     //Limpiar campos editar
     this.IdEditIdentificador = '';
@@ -78,6 +84,7 @@ export class PgusuariosComponent implements OnInit {
     this.LblEditUsuario = '';
     this.LblEditPasword = '';
     this.LblEditCedula = '';
+    this.LblEditUserAdmin = '2';
 
     this.ListaUsuario(this.LblNombre, this.LblApellido, this.LblCedula);
   }
@@ -112,7 +119,7 @@ export class PgusuariosComponent implements OnInit {
   AgregarBck(templateMensaje: TemplateRef<any>) {
     if (this.LblAgregarNombre == undefined || this.LblAgregarNombre == '' || this.LblAgregarApellido == undefined || this.LblAgregarApellido == '' ||
       this.LblAgregarUsuario == undefined || this.LblAgregarUsuario == '' || this.LblAgregarPasword == undefined || this.LblAgregarPasword == '' ||
-      this.LblAgregarCedula == undefined || this.LblAgregarCedula == '') {
+      this.LblAgregarCedula == undefined || this.LblAgregarCedula == '' || this.LblUserAdmin == undefined || this.LblUserAdmin == '0') {
 
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = "Por favor complete los campos a agregar";
@@ -123,7 +130,8 @@ export class PgusuariosComponent implements OnInit {
         Apellido: this.LblAgregarApellido,
         Usuario: this.LblAgregarUsuario,
         Password: this.LblAgregarPasword,
-        Cedula: this.LblAgregarCedula
+        Cedula: this.LblAgregarCedula,
+        UserAdmin: this.LblUserAdmin
       }
       this.Servicios.insertausuario('3', datosinsert).subscribe(respu => {
         if (respu.length > 0) {
@@ -145,6 +153,7 @@ export class PgusuariosComponent implements OnInit {
     this.LblEditUsuario = ArGrilla.Usuario;
     this.LblEditPasword = ArGrilla.Password;
     this.LblEditCedula = ArGrilla.Cedula;
+    this.LblEditUserAdmin = ArGrilla.UserAdmin;
   }
   Update(templateMensaje: TemplateRef<any>) {
     const datosupdate = {
@@ -153,7 +162,8 @@ export class PgusuariosComponent implements OnInit {
       Apellido: this.LblEditApellido,
       Usuario: this.LblEditUsuario,
       Password: this.LblEditPasword,
-      Cedula: this.LblEditCedula
+      Cedula: this.LblEditCedula,
+      UserAdmin: this.LblEditUserAdmin
     }
     console.log(datosupdate)
     this.Servicios.actualizausuario('2', datosupdate).subscribe(respu => {
@@ -221,7 +231,7 @@ export class PgusuariosComponent implements OnInit {
       this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
     }
   }
-  
+
   //Descargar Excel
   BtnExportarExcel(Nombre: string, Apellido: string, LblCedula: string, templateMensaje: TemplateRef<any>) {
     if (Nombre == undefined || Nombre == '') {
@@ -269,6 +279,20 @@ export class PgusuariosComponent implements OnInit {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
       }
+    })
+  }
+
+  //Eliminar registro
+  EliminaRegistro(templateMensaje: TemplateRef<any>, Arr: any) {
+    const datosupdate =
+    {
+      Id_U: Arr.Id_U,
+      Nombre: Arr.Nombre
+    }
+    this.Servicios.eliminausuario('4', datosupdate).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      this.Limpiar();
     })
   }
 }

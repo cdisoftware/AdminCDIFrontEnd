@@ -1,7 +1,7 @@
 <nav class="navbar">
   <!-- LOGO -->
   <div class="logo">
-    <img style="margin-left: 5px" src="../../../../assets/ImagenesAdminCDI/usuario.png" class="BtnimgUsuario mr-2"/>
+    <img style="margin-left: 5px" src="../../../../assets/ImagenesAdminCDI/usuario.png" class="BtnimgUsuario mr-2" />
     Hola, {{NombreUsu}} Bienvenido
   </div>
   <!-- NAVIGATION MENU -->
@@ -41,14 +41,17 @@
           class="BtnimgTamanoPeque mr-2">
       </li>
 
-      <li class="titulopopup services cursorPointer" (click)="VerPgUsuarios()">
+      <li *ngIf="AminUser=='1'" class="titulopopup services cursorPointer" (click)="VerPgUsuarios()">
         <a>Usuarios <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/usuarios.png"
+            class="BtnimgTamanoPeque mr-2"></a>
+      </li>
+      <li *ngIf="AminUser=='0'" class="titulopopup services cursorPointer" (click)="VerPgUsuarios()">
+        <a>My usuario <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/usuario.png"
             class="BtnimgTamanoPeque mr-2"></a>
       </li>
 
       <li class="cursorPointer" (click)="Cerrar()">
-        <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 5px;"
-          class="BtnimgUsuario mr-2">
+        <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 5px;" class="BtnimgUsuario mr-2">
 
       </li>
     </div>
@@ -126,13 +129,21 @@
           <th class="cursorPointer">Identificador</th>
           <th class="cursorPointer">Descripción</th>
           <th class="cursorPointer">Editar</th>
+          <th class="cursorPointer">Eliminar</th>
         </tr>
         <tr *ngFor="let ArGrilla of ArregloGrillaTipoServidor">
           <td>{{ArGrilla.Id_Tipo_S}}</td>
           <td style="word-wrap:break-word">{{ArGrilla.Descripcion}}</td>
-          <td><button class="BtnClaro mrd m-auto text-center" title="Editar"
+          <td>
+            <button class="BtnClaro mrd m-auto text-center" title="Editar"
               (click)="EditarTipoServidor(templateEditartiposervidor, ArGrilla)">
               <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
+            </button>
+          </td>
+          <td>
+            <button class="BtnClaro mrd m-auto text-center" title="Editar"
+              (click)="EliminaTs(templateMensaje, ArGrilla)">
+              <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
             </button>
           </td>
         </tr>

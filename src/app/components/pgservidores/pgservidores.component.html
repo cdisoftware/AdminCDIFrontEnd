@@ -85,6 +85,7 @@
 
                     <th>Editar</th>
                     <th>Ver</th>
+                    <th>Eliminar</th>
                 </tr>
                 <tr *ngFor="let ArGrilla of ArregloGrilla">
                     <td>{{ArGrilla.Ip_S}}</td>
@@ -110,6 +111,12 @@
                         <button class="BtnClaro mrd m-auto text-center" title="Ver"
                             (click)="VerDetalle(templateVerDetalles, templateMensaje, ArGrilla)">
                             <img src="../../../../assets/ImagenesAdminCDI/ojo.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                            (click)="EliminaServidor(templateMensaje, ArGrilla)">
+                            <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
                 </tr>
@@ -239,7 +246,7 @@
                             <td>{{LblPasswordVer}}</td>
                             <td>{{LblServidor}}</td>
                             <td><button class="BtnClaro mrd m-auto text-center" title="Editar"
-                                    (click)="EditarServ(templateEditarServidorVerDetalles)">
+                                    (click)="EditarServ(templateEditarServidorVerDetalles, LblServidor)">
                                     <img src="../../../../assets/ImagenesAdminCDI/editar.png"
                                         class="BtnimgTamanoPeque mr-2">
                                 </button>
@@ -258,14 +265,23 @@
                             <th class="cursorPointer">Ram</th>
                             <th class="cursorPointer">Procesador</th>
                             <th class="cursorPointer">Editar</th>
+                            <th class="cursorPointer">Eliminar</th>
                         </tr>
                         <tr *ngFor="let ArGrilla of ArrListaHardware">
                             <td>{{ArGrilla.DiscoDuro}}</td>
                             <td>{{ArGrilla.RAM}}</td>
                             <td>{{ArGrilla.Procesador}}</td>
-                            <td><button class="BtnClaro mrd m-auto text-center" title="Editar"
+                            <td>
+                                <button class="BtnClaro mrd m-auto text-center" title="Editar"
                                     (click)="Editar(templateEditarHARDWARE, ArGrilla)">
                                     <img src="../../../../assets/ImagenesAdminCDI/editar.png"
+                                        class="BtnimgTamanoPeque mr-2">
+                                </button>
+                            </td>
+                            <td>
+                                <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                                    (click)="EliminaHardwareServidor(templateMensaje, ArGrilla)">
+                                    <img src="../../../../assets/ImagenesAdminCDI/basura.png"
                                         class="BtnimgTamanoPeque mr-2">
                                 </button>
                             </td>
@@ -336,14 +352,14 @@
                 </div>
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidorEdit">
-                        <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">{{arRespu.Descripcion}}</option>
+                        <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
+                            {{arRespu.Descripcion}}</option>
                     </select>
                 </div>
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
-                        (click)="UpdateServDos(templateMensaje)">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateServDos(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
@@ -477,7 +493,9 @@
                 <!--Para el popap de editar en ver detalles-->
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAlojaEdit">
-                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}</option>
+                        <option value="0">N/A</option>
+                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
+                        </option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">

@@ -34,6 +34,8 @@ export class LayoutpaginaComponent implements OnInit {
     private Servicios: MetodosGlobalesService) { }
   //Variables nombre
   NombreUsu: string = this.cookies.get('Nombre');
+  //Variables admin
+  AminUser: string = this.cookies.get('UserAdmin');
   ngOnInit(): void {
     this.Obtienedata();
   }
@@ -165,6 +167,19 @@ export class LayoutpaginaComponent implements OnInit {
           }
         })
       }
+    })
+  }
+
+  //Eliminar
+  EliminaTs(templateMensaje: TemplateRef<any>, Array: any) {
+    const deletecliente =
+    {
+      Id_Tipo_S: Array.Id_Tipo_S,
+      Descripcion: Array.Descripcion
+    }
+    this.Servicios.eliminatiposerv('4', deletecliente).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
     })
   }
 }

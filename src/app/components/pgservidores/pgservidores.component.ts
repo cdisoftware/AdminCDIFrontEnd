@@ -402,7 +402,11 @@ export class PgservidoresComponent implements OnInit {
     this.LblObservacionEdit = Array.Observacion;
     this.LblUsuariosEdit = Array.Usuario_Ser;
     this.LblPasswordEdit = Array.Password;
-    this.IdServidorAlojaEdit = Array.Servidor_Aloja;
+    if (Array.Servidor_Aloja == undefined || Array.Servidor_Aloja == '') {
+      this.IdServidorAlojaEdit = '0';
+    } else {
+      this.IdServidorAlojaEdit = Array.Servidor_Aloja;
+    }
   }
   UpdateServDos(templateMensaje: TemplateRef<any>) {
     const Update = {
@@ -522,10 +526,15 @@ export class PgservidoresComponent implements OnInit {
 
 
   //EditarVerDetalles servidor
-  EditarServ(templateEditarServidorVerDetalles: TemplateRef<any>) {
+  EditarServ(templateEditarServidorVerDetalles: TemplateRef<any>, ServidorAlo: string) {
     this.modalEditarSer = this._modalService.show(templateEditarServidorVerDetalles);
     this.LblUsuariosEdit = this.LblUsuario;
     this.LblPasswordEdit = this.LblPasswordVer;
+    if (ServidorAlo == undefined || ServidorAlo == '') {
+      this.IdServidorAlojaEdit = '0';
+    } else {
+      this.IdServidorAlojaEdit = ServidorAlo;
+    }
   }
   UpdateSerVer(templateMensaje: TemplateRef<any>) {
     const update = {
@@ -539,6 +548,7 @@ export class PgservidoresComponent implements OnInit {
       Observacion: "0",
       Usuario_Ser: this.LblUsuariosEdit,
       Password: this.LblPasswordEdit,
+      ServicioAloja: this.IdServidorAlojaEdit,
       Id_U: this.IdUsuarioCookies,
       Fecha_Ult_Mod: this.Fecha
     }
@@ -583,5 +593,37 @@ export class PgservidoresComponent implements OnInit {
         doc.save('Detalles servidor.pdf');//Agregar el nombre de el servidor mas la fecha
       })
     }
+  }
+
+
+
+  //Eliminar servidor
+  EliminaServidor(templateMensaje: TemplateRef<any>, Arr: any) {
+    const delet = {
+      Id_S: Arr.Id_S,
+      Nombre: Arr.Nombre
+    }
+    this.Servicios.eliminaservidor('4', delet).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      this.Limpiar();
+    })
+  }
+  EliminaHardwareServidor(templateMensaje: TemplateRef<any>, Arr: any) {
+    console.log(Arr)
+    const delet = {
+      Id_S: Arr.IdentificadorServidor
+    }
+    this.Servicios.eliminahardserv('4', delet).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      this.ArrListaHardware = [];
+      this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
+        if (respu.length > 0) {
+          this.ArrListaHardware = respu;
+          this.AuxiliarDiv = false;
+        }
+      })
+    })
   }
 }

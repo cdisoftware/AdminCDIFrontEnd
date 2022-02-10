@@ -8,6 +8,7 @@ import jsPDF from 'jspdf';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import html2canvas from 'html2canvas';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-pgproyectos',
@@ -349,6 +350,7 @@ export class PgproyectosComponent implements OnInit {
           this.lblModalMsaje = respu;
 
           this.LimpiarClientes();
+          this.LblDescripcionAgrega = '';
         } else {
           this.modalMensaje = this._modalService.show(templateMensaje);
           this.lblModalMsaje = 'No fue posible ingresar los datos, por favor valide los datos ingresados.';
@@ -435,7 +437,7 @@ export class PgproyectosComponent implements OnInit {
       if (respu.length > 0) {
         this.AuxiliarTablaDinamica = true;
 
-        this.NomCliente = respu[0].Cliente;
+        this.NomCliente = respu[0].NomCliente;
         this.NomProyecto = respu[0].NombreProyecto;
         this.ArrayGrilla = respu;
       } else {
@@ -443,6 +445,32 @@ export class PgproyectosComponent implements OnInit {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = 'No cuenta con backups asociados.';
       }
+    })
+  }
+
+  EliminarProyecto(templateMensaje: TemplateRef<any>, Array: any) {
+    const deleteproyectos =
+    {
+      Id_PRY: Array.Id_PRY,
+      Nombre: Array.Nombre
+    }
+    this.Servicios.eliminaproyect('4', deleteproyectos).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      this.LimpiarProyectos();
+    })
+  }
+
+  EliminarCliente(templateMensaje: TemplateRef<any>, Array: any) {
+    const deletecliente =
+    {
+      Id_Cliente: Array.Id_Cliente,
+      Descripcion: Array.Descripcion
+    }
+    this.Servicios.eliminaclient('4', deletecliente).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      this.LimpiarClientes();
     })
   }
 }
