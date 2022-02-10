@@ -30,12 +30,14 @@
                 Limpiar
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf(templateMensaje)">
+            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF"
+                (click)="DescargarDatosPdf(templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
                 Descargar PDF
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel" (click)="BtnExportarExcel(Nombre.value, Apellido.value, Cedula.value, templateMensaje)">
+            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
+                (click)="BtnExportarExcel(Nombre.value, Apellido.value, Cedula.value, templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
                 Descarga excel
             </button>
@@ -60,7 +62,9 @@
                     <th class="cursorPointer">Usuario</th>
                     <th class="cursorPointer">Contraseña</th>
                     <th class="cursorPointer">Cedula</th>
+                    <th class="cursorPointer">Tipo Usuario</th>
                     <th>Editar</th>
+                    <th>Eliminar</th>
                 </tr>
                 <tr *ngFor="let ArGrilla of ArregloGrillaUsuario">
                     <td>{{ArGrilla.Nombre}}</td>
@@ -68,9 +72,18 @@
                     <td>{{ArGrilla.Usuario}}</td>
                     <td>{{ArGrilla.Password}}</td>
                     <td>{{ArGrilla.Cedula}}</td>
+                    <td *ngIf="ArGrilla.UserAdmin == 1">Administrador</td>
+                    <td *ngIf="ArGrilla.UserAdmin == 0">Usuario</td>
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="BtnEdit(templateEditar, ArGrilla)">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                            (click)="BtnEdit(templateEditar, ArGrilla)">
                             <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                        (click)="EliminaRegistro(templateMensaje, ArGrilla)">
+                            <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
                 </tr>
@@ -133,6 +146,14 @@
                         [(ngModel)]="LblAgregarCedula">
                 </div>
 
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar proyecto" [(ngModel)]="LblUserAdmin">
+                        <option value="2" selected>Seleccione tipo de usuario</option>
+                        <option value="1" selected>Administrador</option>
+                        <option value="0" selected>Usuario</option>
+                    </select>
+                </div>
+
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
                     <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregarBck(templateMensaje)">
@@ -187,7 +208,13 @@
                     <input type="text" placeholder="Cedula" class="col-sm-6 text-center form-control" title="Cedula"
                         [(ngModel)]="LblEditCedula">
                 </div>
-
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar proyecto" [(ngModel)]="LblEditUserAdmin">
+                        <option value="2" selected>Seleccione tipo de usuario</option>
+                        <option value="1" selected>Administrador</option>
+                        <option value="0" selected>Usuario</option>
+                    </select>
+                </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
                     <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="Update(templateMensaje)">

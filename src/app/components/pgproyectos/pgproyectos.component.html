@@ -61,6 +61,7 @@
 
                             <th>Editar</th>
                             <th>Ver</th>
+                            <th>Eliminar</th>
                         </tr>
                         <tr *ngFor="let ArGrilla of ArrayConsultaProyecto">
                             <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica" style="background-color: #1ABC9C;">{{ArGrilla.Id_PRY}}</td>
@@ -72,18 +73,48 @@
                             <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica" style="background-color: #1ABC9C;">{{ArGrilla.DescripcionCliente}}</td>
                             <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.DescripcionCliente}}</td>
 
-                            <td class="text-center">
+                            <td class="text-center"  *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica" style="background-color: #1ABC9C;">
                                 <button class="BtnClaro mrd m-auto text-center" title="Editar"
                                     (click)="BtnEditProyecto(templateEditarProyecto, ArGrilla)">
                                     <img src="../../../../assets/ImagenesAdminCDI/editar.png"
                                         class="BtnimgTamanoPeque mr-2">
                                 </button>
                             </td>
-                            <td class="text-center">
+                            <td class="text-center"  *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">
+                                <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                                    (click)="BtnEditProyecto(templateEditarProyecto, ArGrilla)">
+                                    <img src="../../../../assets/ImagenesAdminCDI/editar.png"
+                                        class="BtnimgTamanoPeque mr-2">
+                                </button>
+                            </td>
+
+
+                            <td class="text-center" *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica" style="background-color: #1ABC9C;">
                                 <button class="BtnClaro mrd m-auto text-center" title="Ver"
                                     (click)="GrillaDinamica(templateMensaje, ArGrilla)">
                                     <img src="../../../../assets/ImagenesAdminCDI/ojo.png"
                                         class="BtnimgTamanoPeque mr-2">
+                                </button>
+                            </td>
+                            <td class="text-center" *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">
+                                <button class="BtnClaro mrd m-auto text-center" title="Ver"
+                                    (click)="GrillaDinamica(templateMensaje, ArGrilla)">
+                                    <img src="../../../../assets/ImagenesAdminCDI/ojo.png"
+                                        class="BtnimgTamanoPeque mr-2">
+                                </button>
+                            </td>
+
+
+                            <td class="text-center" *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica" style="background-color: #1ABC9C;">
+                                <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                                (click)="EliminarProyecto(templateMensaje, ArGrilla)">
+                                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
+                                </button>
+                            </td>
+                            <td class="text-center" *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">
+                                <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                                (click)="EliminarProyecto(templateMensaje, ArGrilla)">
+                                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                                 </button>
                             </td>
                         </tr>
@@ -196,6 +227,20 @@
                                         (click)="BtnEditCliente(templateEditarCliente, ArGrilla)">
                                         <img src="../../../../assets/ImagenesAdminCDI/editar.png"
                                             class="BtnimgTamanoPeque mr-2">
+                                    </button>
+                                </td>
+
+                                <td class="text-center" *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica" style="background-color: #1ABC9C;">
+                                    <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                                    (click)="EliminarCliente(templateMensaje, ArGrilla)">
+                                        <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
+                                    </button>
+                                </td>
+
+                                <td class="text-center" *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">
+                                    <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                                    (click)="EliminarCliente(templateMensaje, ArGrilla)">
+                                        <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                                     </button>
                                 </td>
                             </tr>

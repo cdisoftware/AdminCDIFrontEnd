@@ -116,4 +116,17 @@ export class PgtipobackupComponent implements OnInit {
     this.consultaTipoBackup(this.lblDescripcion);
   }
 
+  //Borrar
+  BorrarTb(templateMensaje: TemplateRef<any>, Array: any) {
+    console.log(Array)
+    const deletetb =
+    {
+      Id_Tipo_BCK: Array.Id_Tipo_BCK,
+      Descripcion: Array.Descripcion
+    }
+    this.Servicios.eliminatipobck('4', deletetb).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+    })
+  }
 }
