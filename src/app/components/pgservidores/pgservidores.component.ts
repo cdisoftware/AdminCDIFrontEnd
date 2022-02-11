@@ -595,6 +595,18 @@ export class PgservidoresComponent implements OnInit {
     }
   }
 
+  AbrirPopas(templateEditarHARDWARE: TemplateRef<any>, templateEditarServidorVerDetalles: TemplateRef<any>, ServidorAlo: string) {
+
+    this.ArrListaHardware = [];
+    this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
+      this.Editar(templateEditarHARDWARE, respu);
+      this.EditarServ(templateEditarServidorVerDetalles, ServidorAlo);
+      if (respu.length > 0) {
+        this.ArrListaHardware = respu;
+        this.AuxiliarDiv = false;
+      }
+    })
+  }
 
 
   //Eliminar servidor

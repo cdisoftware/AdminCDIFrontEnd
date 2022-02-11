@@ -13,7 +13,14 @@ export class PgusuarioComponent implements OnInit {
   //Variables obtienen info
   Nombre: string =  this.cookies.get('Nombre');
   Apellido: string =  this.cookies.get('Apellido');
+  UjusteGuarda: boolean = false;
   ngOnInit(): void {
   }
 
+  True(){
+    this.UjusteGuarda = true;
+  }
+  False(){
+    this.UjusteGuarda = false;
+  }
 }
