@@ -1,0 +1,29 @@
+.portada{
+    
+    background: url(../../../assets/ImagenesAdminCDI/PlantillaUsuario.jpg) no-repeat fixed center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    width: 100% ;
+    text-align: center;
+ }
+ .Bienvenido{
+     font-weight: bold;
+     font-size: 20px;
+     text-align: justify;
+     color: black;
+ }
+ .Titulo{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    color: black;
+ }
+ .InputCamposUsuario{
+    font-size: 28px;
+    color: #191c1d;
+
+    background: rgba(240,243,244,0.2);
+ }

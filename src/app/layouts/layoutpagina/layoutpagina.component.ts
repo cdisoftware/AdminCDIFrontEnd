@@ -4,7 +4,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-layoutpagina',
@@ -78,6 +77,9 @@ export class LayoutpaginaComponent implements OnInit {
   }
   VerPgUsuarios() {
     this.router.navigate(['home/PgUsuarios']);
+  }
+  VerPgUsuario() {
+    this.router.navigate(['home/PgUsuario']);
   }
 
 
