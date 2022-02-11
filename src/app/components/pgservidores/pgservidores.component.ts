@@ -83,6 +83,7 @@ export class PgservidoresComponent implements OnInit {
   LblUsuariosEdit: string;
   LblPasswordEdit: string;
   IdServidorAlojaEdit: string;
+  IdServidorServ: string;
 
   //Variables agregar hardware
   AuxiliarDiv: boolean;
@@ -209,7 +210,8 @@ export class PgservidoresComponent implements OnInit {
 
   //Popap agregar
   BtnNuevo(templateAgregar: TemplateRef<any>) {
-    this.modalAgregar = this._modalService.show(templateAgregar)
+    this.modalAgregar = this._modalService.show(templateAgregar);
+    this.modalAgregar.setClass('modal-lg');
     this.LblPassword = '';
   }
   AgregarServidor(templateMensaje: TemplateRef<any>) {
@@ -393,6 +395,8 @@ export class PgservidoresComponent implements OnInit {
   //Editar Servidor
   EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
     this.modalEditarServidor = this._modalService.show(templateEditarServidor);
+    this.modalEditarServidor.setClass('modal-lg');
+    this.IdServidorServ = Array.Id_S;
     this.LblIpServidorEdit = Array.Ip_S;
     this.LblNombreEdit = Array.Nombre;
     this.LblSOEdit = Array.SO;
@@ -410,7 +414,7 @@ export class PgservidoresComponent implements OnInit {
   }
   UpdateServDos(templateMensaje: TemplateRef<any>) {
     const Update = {
-      Id_S: 29,
+      Id_S: this.IdServidorServ,
       Ip_S: this.LblIpServidorEdit,
       Nombre: this.LblNombreEdit,
       SO: this.LblSOEdit,
@@ -422,7 +426,7 @@ export class PgservidoresComponent implements OnInit {
       Password: "0",
       ServicioAloja: 0,
       Id_U: this.IdUsuarioCookies,
-      Fecha_Ult_Mod: this.Fecha
+      Fecha_Ult_Mod: this.Fecha,
     }
     this.Servicios.actualizaservdos('2', Update).subscribe(respu => {
       if (respu == 'Servidor actualizado exitosamente.') {
@@ -482,93 +486,10 @@ export class PgservidoresComponent implements OnInit {
 
   }
 
-  //Popap editar hardware
-  Editar(templateEditarHARDWARE: TemplateRef<any>, Array: any) {
-    this.modalEditarHardware = this._modalService.show(templateEditarHARDWARE);
-
-    this.LblDiscoDuroEdit = Array.DiscoDuro;
-    this.LblRamEdit = Array.RAM;
-    this.LblProcesadorEdit = Array.Procesador;
-  }
-  updateHardware(templateMensaje: TemplateRef<any>) {
-    const Update = {
-      Id_S: this.IdServidor,
-      DiscoDuro: this.LblDiscoDuroEdit,
-      RAM: this.LblRamEdit,
-      Procesador: this.LblProcesadorEdit
-    }
-    this.Servicios.actualizachardserv('2', Update).subscribe(respu => {
-      if (respu == 'Hardware de servidor actualizado exitosamente.') {
-
-        this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = respu;
-
-        this.modalEditarHardware.hide();
-
-        this.ArrListaHardware = [];
-        this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
-          if (respu.length > 0) {
-            this.ArrListaHardware = respu;
-            this.AuxiliarDiv = false;
-          }
-        })
-
-      } else {
-
-        this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = 'Por favor verefique los datos a actualizar.';
-      }
-    })
-  }
 
 
 
 
-
-  //EditarVerDetalles servidor
-  EditarServ(templateEditarServidorVerDetalles: TemplateRef<any>, ServidorAlo: string) {
-    this.modalEditarSer = this._modalService.show(templateEditarServidorVerDetalles);
-    this.LblUsuariosEdit = this.LblUsuario;
-    this.LblPasswordEdit = this.LblPasswordVer;
-    if (ServidorAlo == undefined || ServidorAlo == '') {
-      this.IdServidorAlojaEdit = '0';
-    } else {
-      this.IdServidorAlojaEdit = ServidorAlo;
-    }
-  }
-  UpdateSerVer(templateMensaje: TemplateRef<any>) {
-    const update = {
-      Id_S: this.IdServidor,
-      Ip_S: "0",
-      Nombre: "0",
-      SO: "0",
-      Software: "0",
-      Estado: 0,
-      Id_Tipo_S: 0,
-      Observacion: "0",
-      Usuario_Ser: this.LblUsuariosEdit,
-      Password: this.LblPasswordEdit,
-      ServicioAloja: this.IdServidorAlojaEdit,
-      Id_U: this.IdUsuarioCookies,
-      Fecha_Ult_Mod: this.Fecha
-    }
-    this.Servicios.actualizaservcuatro('4', '11', update).subscribe(respu => {
-      if (respu == 'Servidor actualizado exitosamente.') {
-
-        this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = respu;
-
-        this.modalEditarSer.hide();
-
-        this.Limpiar();
-
-      } else {
-
-        this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = 'Por favor verefique los datos a ingresar.';
-      }
-    })
-  }
 
   //Descargar pdf de ver detalles
   DescargaPDF() {
@@ -593,19 +514,6 @@ export class PgservidoresComponent implements OnInit {
         doc.save('Detalles servidor.pdf');//Agregar el nombre de el servidor mas la fecha
       })
     }
-  }
-
-  AbrirPopas(templateEditarHARDWARE: TemplateRef<any>, templateEditarServidorVerDetalles: TemplateRef<any>, ServidorAlo: string) {
-
-    this.ArrListaHardware = [];
-    this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
-      this.Editar(templateEditarHARDWARE, respu);
-      this.EditarServ(templateEditarServidorVerDetalles, ServidorAlo);
-      if (respu.length > 0) {
-        this.ArrListaHardware = respu;
-        this.AuxiliarDiv = false;
-      }
-    })
   }
 
 

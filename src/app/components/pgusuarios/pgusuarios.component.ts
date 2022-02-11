@@ -115,6 +115,7 @@ export class PgusuariosComponent implements OnInit {
   //Agregar
   BtnNuevo(templateAgregar: TemplateRef<any>) {
     this.modalAgregar = this._modalService.show(templateAgregar);
+    this.modalAgregar.setClass('modal-lg');
   }
   AgregarBck(templateMensaje: TemplateRef<any>) {
     if (this.LblAgregarNombre == undefined || this.LblAgregarNombre == '' || this.LblAgregarApellido == undefined || this.LblAgregarApellido == '' ||
@@ -147,6 +148,7 @@ export class PgusuariosComponent implements OnInit {
   //Editar
   BtnEdit(templateEditar: TemplateRef<any>, ArGrilla: any) {
     this.modalEditar = this._modalService.show(templateEditar);
+    this.modalEditar.setClass('modal-lg');
     this.IdEditIdentificador = ArGrilla.Id_U;
     this.LblEditNombre = ArGrilla.Nombre;
     this.LblEditApellido = ArGrilla.Apellido;
