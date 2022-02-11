@@ -10,6 +10,7 @@ import { PgtipobackupComponent } from './components/pgtipobackup/pgtipobackup.co
 import { HomeComponent } from './components/home/home.component';
 import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.component';
 import { PgproyectosComponent } from './components/pgproyectos/pgproyectos.component';
+import { PgusuarioComponent } from './components/pgusuario/pgusuario.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,11 @@ const routes: Routes = [
       {
         path: 'PgProyectos',
         component: PgproyectosComponent,
+
+      },
+      {
+        path: 'PgUsuario',
+        component: PgusuarioComponent,
 
       }
     ],
