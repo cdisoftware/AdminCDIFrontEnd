@@ -69,7 +69,7 @@ export class PgservidoresComponent implements OnInit {
   LblUsuario: string;
   LblPasswordVer: string;
   LblServidor: string;
-  ArrListaHardware: any;
+  ArrListaVerdetalles: any;
 
   //Variables editar servidor
   modalEditarServidor: BsModalRef;
@@ -80,9 +80,6 @@ export class PgservidoresComponent implements OnInit {
   IdEstadoAgregarEdit: string;
   Id_TipoServidorEdit: string;
   LblObservacionEdit: string;
-  LblUsuariosEdit: string;
-  LblPasswordEdit: string;
-  IdServidorAlojaEdit: string;
   IdServidorServ: string;
 
   //Variables agregar hardware
@@ -93,14 +90,16 @@ export class PgservidoresComponent implements OnInit {
   LblRam: string;
   LblProcesador: string;
 
-  //Variables agregar hardware
-  modalEditarHardware: BsModalRef;
+  //Variables editar detalle servidor
+  modalEditarDetalle: BsModalRef;
   LblDiscoDuroEdit: string;
   LblRamEdit: string;
   LblProcesadorEdit: string;
+  IdServidorAlojaEdit: string;
+  LblUsuariosEdit: string;
+  LblPasswordEdit: string;
+  IdServidorEditDetalle: string;
 
-  //Variables editar servidor
-  modalEditarSer: BsModalRef;
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
@@ -270,21 +269,17 @@ export class PgservidoresComponent implements OnInit {
   VerDetalle(templateVerDetalles: TemplateRef<any>, templateMensaje: TemplateRef<any>, ArGrilla: any) {
     this.AuxiliarDiv = false;
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
-    this.ArrListaHardware = [];
-    this.Servicios.consultahardware(ArGrilla.Id_S, '0', '0', '0').subscribe(respu => {
+    this.ArrListaVerdetalles = [];
+    this.Servicios.consdetallserv('1', ArGrilla.Id_S).subscribe(respu => {
       if (respu.length > 0) {
-        this.ArrListaHardware = respu;
+        this.ArrListaVerdetalles = respu;
         this.AuxiliarDiv = false;
       } else {
         this.AuxiliarDiv = true;
         this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = 'No existe hardware inscrito para este servidor, por favor ingreselo';
+        this.lblModalMsaje = 'No existe hardware inscrito para este servidor, por favor ingreselo.';
       }
     })
-    this.LblUsuario = ArGrilla.Usuario_Ser;
-    this.LblPasswordVer = ArGrilla.Password;
-    this.LblServidor = ArGrilla.NombreServidorAloja;
-    this.IdServidor = ArGrilla.Id_S;
   }
 
   //Descargar Pdf
@@ -468,10 +463,10 @@ export class PgservidoresComponent implements OnInit {
 
         this.modalAgregarHardware.hide();
 
-        this.ArrListaHardware = [];
+        this.ArrListaVerdetalles = [];
         this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
           if (respu.length > 0) {
-            this.ArrListaHardware = respu;
+            this.ArrListaVerdetalles = respu;
             this.AuxiliarDiv = false;
           }
         })
@@ -537,13 +532,52 @@ export class PgservidoresComponent implements OnInit {
     this.Servicios.eliminahardserv('4', delet).subscribe(respu => {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = respu;
-      this.ArrListaHardware = [];
+      this.ArrListaVerdetalles = [];
       this.Servicios.consultahardware(this.IdServidor, '0', '0', '0').subscribe(respu => {
         if (respu.length > 0) {
-          this.ArrListaHardware = respu;
+          this.ArrListaVerdetalles = respu;
           this.AuxiliarDiv = false;
         }
       })
+    })
+  }
+
+
+  //Editar Ver detalles
+  AbrirPopap(templateEditarVerDetalles: TemplateRef<any>, Arr: any) {
+    this.modalEditarDetalle = this._modalService.show(templateEditarVerDetalles);
+    this.IdServidorEditDetalle = Arr.Id_S;
+    this.LblDiscoDuroEdit = Arr.DiscoDuro;
+    this.LblRamEdit = Arr.RAM;
+    this.LblProcesadorEdit = Arr.Procesador;
+    this.LblUsuariosEdit = Arr.Usuario_Ser;
+    this.LblPasswordEdit = Arr.Password;
+    if (Arr.Servidor_Aloja == undefined || Arr.Servidor_Aloja == '') {
+      this.IdServidorAlojaEdit = '0';
+    } else {
+      this.IdServidorAlojaEdit = Arr.Servidor_Aloja;
+    }
+  }
+  EditarVerDetalles(templateMensaje: TemplateRef<any>) {
+    const UpdateSerDetalles = {
+      Id_S: this.IdServidorEditDetalle,
+      DiscoDuro: this.LblDiscoDuroEdit,
+      RAM: this.LblRamEdit,
+      Procesador: this.LblProcesadorEdit,
+      Usuario_Ser: this.LblUsuariosEdit,
+      Password: this.LblPasswordEdit,
+      Servidor_Aloja: this.IdServidorAlojaEdit,
+      Id_U: this.cookies.get('IdUsuario'),
+      Fecha_Ult_Mod: this.Fecha
+    }
+    this.Servicios.updatedetllserv(UpdateSerDetalles).subscribe(respu => {
+      this.modalEditarDetalle.hide();
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+    })
+    this.ArrListaVerdetalles = [];
+    this.Servicios.consdetallserv('1', this.IdServidorEditDetalle).subscribe(respu => {
+      this.ArrListaVerdetalles = respu;
     })
   }
 }
