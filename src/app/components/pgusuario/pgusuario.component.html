@@ -18,8 +18,12 @@
             <div class="col-sm-7">
             </div>
             <div class="col-sm-1">
-                <img class="mt-3 BtnimgTamanoPeque cursorPointer"
-                    src="../../../../assets/ImagenesAdminCDI/configuracionesPgUsu.png" alt="Cinque Terre">
+                <img *ngIf="UjusteGuarda == false" class="mt-3 BtnimgTamanoPeque cursorPointer"
+                    src="../../../../assets/ImagenesAdminCDI/configuracionesPgUsu.png" alt="Cinque Terre" (click)="True()">
+
+                    
+                    <img *ngIf="UjusteGuarda == true" class="mt-3 BtnimgTamanoPeque cursorPointer"
+                    src="../../../../assets/ImagenesAdminCDI/GuardarIMGusu.png" alt="Cinque Terre" (click)="False()">
             </div>
         </div>
         <div class="row" style="background: rgba(240,243,244,0.6);"><!---->
