@@ -230,7 +230,7 @@
     <div class="mrd mld">
         <div class="row texto text-center">
             <div class="row texto text-center" id="htmlData_">
-                <div class="col-sm-6 mt-3">
+                <div class="col-sm-5 mt-3">
                     <table class="table table-bordered text-center tablaAjuste">
                         <tr style="background-color: teal; color: #000000;">
                             <th colspan="4">Detalles servidor</th>
@@ -245,8 +245,8 @@
                             <td>{{LblUsuario}}</td>
                             <td>{{LblPasswordVer}}</td>
                             <td>{{LblServidor}}</td>
-                            <td><button class="BtnClaro mrd m-auto text-center" title="Editar"
-                                    (click)="EditarServ(templateEditarServidorVerDetalles, LblServidor)">
+                            <td>
+                                <button class="BtnClaro mrd m-auto text-center" title="Editar">
                                     <img src="../../../../assets/ImagenesAdminCDI/editar.png"
                                         class="BtnimgTamanoPeque mr-2">
                                 </button>
@@ -254,8 +254,7 @@
                         </tr>
                     </table>
                 </div>
-
-                <div class="col-sm-6 mt-3">
+                <div class="col-sm-5 mt-3">
                     <table class="table table-bordered text-center tablaAjuste">
                         <tr style="background-color: teal; color: #000000;">
                             <th colspan="4">Detalles Hardware</th>
@@ -272,8 +271,7 @@
                             <td>{{ArGrilla.RAM}}</td>
                             <td>{{ArGrilla.Procesador}}</td>
                             <td>
-                                <button class="BtnClaro mrd m-auto text-center" title="Editar"
-                                    (click)="Editar(templateEditarHARDWARE, ArGrilla)">
+                                <button class="BtnClaro mrd m-auto text-center" title="Editar">
                                     <img src="../../../../assets/ImagenesAdminCDI/editar.png"
                                         class="BtnimgTamanoPeque mr-2">
                                 </button>
@@ -461,7 +459,7 @@
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="updateHardware(templateMensaje)">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
@@ -510,7 +508,7 @@
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateSerVer(templateMensaje)">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>

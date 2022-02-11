@@ -234,7 +234,8 @@ export class PgbackupsComponent implements OnInit {
   }
 
   BtnNuevo(templateAgregar: TemplateRef<any>) {
-    this.modalAgregar = this._modalService.show(templateAgregar)
+    this.modalAgregar = this._modalService.show(templateAgregar);
+    this.modalAgregar.setClass('modal-lg');
   }
 
   ListaUsuario() {
@@ -406,7 +407,8 @@ export class PgbackupsComponent implements OnInit {
   }
 
   Editarbackup(templateEditarBackup: TemplateRef<any>, Array: any) {
-    this.modalVer = this._modalService.show(templateEditarBackup)
+    this.modalVer = this._modalService.show(templateEditarBackup);
+    this.modalVer.setClass('modal-lg');
     this.IdBackupEdit = Array.Id_B;
     this.IdClientee = Array.Id_PRY;
     this.NombreBackup = Array.Nombre;
