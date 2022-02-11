@@ -125,4 +125,11 @@ export class MetodosGlobalesService {
   eliminaregistbck(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'eliminaregistbck/' + bandera, BodyPost);
   }
+
+  consdetallserv(bandera: string, IdServidor: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consdetallserv/' + bandera + '/' + IdServidor);
+  }
+  updatedetllserv(BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'updatedetllserv',BodyPost);
+  }
 }
