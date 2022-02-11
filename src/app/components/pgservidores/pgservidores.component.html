@@ -70,7 +70,7 @@
         <div class="col-sm-12 mt-5">
             <table class="table table-bordered text-center">
                 <tr>
-                    <th colspan="10">Servidores</th>
+                    <th colspan="12">Servidores</th>
                 </tr>
                 <tr>
                     <th class="cursorPointer">Ip</th>
@@ -230,54 +230,39 @@
     <div class="mrd mld">
         <div class="row texto text-center">
             <div class="row texto text-center" id="htmlData_">
-                <div class="col-sm-5 mt-3">
+                <div class="col-sm-12 mt-3">
                     <table class="table table-bordered text-center tablaAjuste">
-                        <tr style="background-color: teal; color: #000000;">
-                            <th colspan="4">Detalles servidor</th>
+                        <tr>
+                            <th colspan="3" style="background-color: teal; color: #000000;">Detalles servidor</th>
+                            <th></th>
+                            <th colspan="4" style="background-color: teal; color: #000000;">Detalles hardware</th>
                         </tr>
                         <tr>
                             <th class="cursorPointer">Usuario</th>
                             <th class="cursorPointer">Contraseña</th>
                             <th class="cursorPointer">Servidor donde se ubica</th>
                             <th class="cursorPointer">Editar</th>
+                            <th class="cursorPointer">Disco duro</th>
+                            <th class="cursorPointer">Ram</th>
+                            <th class="cursorPointer">Procesador</th>
+                            <th class="cursorPointer">Eliminar</th>
                         </tr>
-                        <tr>
-                            <td>{{LblUsuario}}</td>
-                            <td>{{LblPasswordVer}}</td>
-                            <td>{{LblServidor}}</td>
+                        <tr *ngFor="let ArGrilla of ArrListaVerdetalles">
+                            <td>{{ArGrilla.Usuario_Ser}}</td>
+                            <td>{{ArGrilla.Password}}</td>
+                            <td>{{ArGrilla.NombreServidorAloja}}</td>
                             <td>
-                                <button class="BtnClaro mrd m-auto text-center" title="Editar">
+                                <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                                    (click)="AbrirPopap(templateEditarVerDetalles, ArGrilla)">
                                     <img src="../../../../assets/ImagenesAdminCDI/editar.png"
                                         class="BtnimgTamanoPeque mr-2">
                                 </button>
                             </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-sm-5 mt-3">
-                    <table class="table table-bordered text-center tablaAjuste">
-                        <tr style="background-color: teal; color: #000000;">
-                            <th colspan="4">Detalles Hardware</th>
-                        </tr>
-                        <tr>
-                            <th class="cursorPointer">Disco duro</th>
-                            <th class="cursorPointer">Ram</th>
-                            <th class="cursorPointer">Procesador</th>
-                            <th class="cursorPointer">Editar</th>
-                            <th class="cursorPointer">Eliminar</th>
-                        </tr>
-                        <tr *ngFor="let ArGrilla of ArrListaHardware">
                             <td>{{ArGrilla.DiscoDuro}}</td>
                             <td>{{ArGrilla.RAM}}</td>
                             <td>{{ArGrilla.Procesador}}</td>
                             <td>
-                                <button class="BtnClaro mrd m-auto text-center" title="Editar">
-                                    <img src="../../../../assets/ImagenesAdminCDI/editar.png"
-                                        class="BtnimgTamanoPeque mr-2">
-                                </button>
-                            </td>
-                            <td>
-                                <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                                <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
                                     (click)="EliminaHardwareServidor(templateMensaje, ArGrilla)">
                                     <img src="../../../../assets/ImagenesAdminCDI/basura.png"
                                         class="BtnimgTamanoPeque mr-2">
@@ -285,14 +270,15 @@
                             </td>
                         </tr>
                     </table>
+                </div>
 
-                    <div class="col-sm-12" *ngIf="AuxiliarDiv == true">
-                        <button class="btn btn-dark col-sm-2 mrd" title="Nuevo" style="margin-bottom: 10px;"
-                            (click)="AbrirpopapHardware(templateAgregarHARDWARE)">
-                            <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
-                            Ingresar
-                        </button>
-                    </div>
+
+                <div class="col-sm-12" *ngIf="AuxiliarDiv == true">
+                    <button class="btn btn-dark col-sm-2 mrd" title="Nuevo" style="margin-bottom: 10px;"
+                        (click)="AbrirpopapHardware(templateAgregarHARDWARE)">
+                        <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
+                        Ingresar
+                    </button>
                 </div>
             </div>
             <!---Botones--->
@@ -432,10 +418,10 @@
 </ng-template>
 
 
-<ng-template #templateEditarHARDWARE>
+<ng-template #templateEditarVerDetalles>
     <div class="modal-header">
-        <th class="titulopopup">EDITAR HARDWARE</th>
-        <button type="button" class="bot" aria-label="Close" (click)="modalEditarHardware.hide();">
+        <th class="titulopopup">EDITAR</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalEditarDetalle.hide();">
             <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
         </button>
     </div>
@@ -457,38 +443,6 @@
                         [(ngModel)]="LblProcesadorEdit">
                 </div>
 
-                <!---Botones--->
-                <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
-                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
-                        Guardar..
-                    </button>
-
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarHardware.hide();">
-                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
-                        Cancelar
-                    </button>
-                </div>
-            </li>
-        </div>
-        <br>
-    </div>
-    <br>
-</ng-template>
-
-
-<ng-template #templateEditarServidorVerDetalles>
-    <div class="modal-header">
-        <th class="titulopopup">EDITAR SERVIDOR DETALLES</th>
-        <button type="button" class="bot" aria-label="Close" (click)="modalEditarSer.hide();">
-            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
-        </button>
-    </div>
-    <div class="modaBody">
-        <div class="col-sm-12 mt-3 row displayCenter">
-            <li class="row col-sm-12 displayCenter">
-
-                <!--Para el popap de editar en ver detalles-->
                 <div class="col-6 mt-3">
                     <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAlojaEdit">
                         <option value="0">N/A</option>
@@ -504,16 +458,15 @@
                     <input type="text" value="" placeholder="Contraseña" class="col-sm-6 text-center form-control"
                         [(ngModel)]="LblPasswordEdit" autocomplete="off" title="Contraseña">
                 </div>
-                <!--Para el popap de editar en ver detalles-->
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="EditarVerDetalles(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
 
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarSer.hide();">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarDetalle.hide();">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
