@@ -78,9 +78,9 @@
                     <th class="cursorPointer">Sistema Operativo</th>
                     <th class="cursorPointer">Software</th>
                     <th class="cursorPointer">Estado</th>
-                    <th class="cursorPointer">Ultima mod</th>
                     <th class="cursorPointer">Observación</th>
                     <th class="cursorPointer">Tipo Servidor</th>
+                    <th class="cursorPointer">Ultima mod</th>
                     <th class="cursorPointer">Fecha ultima Mod</th>
 
                     <th>Editar</th>
@@ -93,12 +93,12 @@
                     <td>{{ArGrilla.SO}}</td>
                     <td>{{ArGrilla.Software}}</td>
 
-                    <td *ngIf="ArGrilla.Estado == 1">Exitoso</td>
-                    <td *ngIf="ArGrilla.Estado == 0">Error</td>
+                    <td *ngIf="ArGrilla.Estado == 1">Activo</td>
+                    <td *ngIf="ArGrilla.Estado == 0">Inactivo</td>
 
-                    <td>{{ArGrilla.UsuarioUltMod}}</td>
                     <td>{{ArGrilla.Observacion}}</td>
                     <td>{{ArGrilla.TipoServidor}}</td>
+                    <td>{{ArGrilla.UsuarioUltMod}}</td>
                     <td>{{ArGrilla.Fecha_Ult_Mod}}</td>
 
                     <td class="text-center">

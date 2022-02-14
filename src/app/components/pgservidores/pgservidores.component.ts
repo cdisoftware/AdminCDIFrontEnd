@@ -270,6 +270,7 @@ export class PgservidoresComponent implements OnInit {
     this.AuxiliarDiv = false;
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
     this.ArrListaVerdetalles = [];
+    this.IdServidor = ArGrilla.Id_S;
     this.Servicios.consdetallserv('1', ArGrilla.Id_S).subscribe(respu => {
       if (respu.length > 0) {
         this.ArrListaVerdetalles = respu;
