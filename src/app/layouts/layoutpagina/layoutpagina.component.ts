@@ -1,9 +1,10 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, Inject, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-layoutpagina',
@@ -26,6 +27,7 @@ export class LayoutpaginaComponent implements OnInit {
   IdTipoServidor: string;
 
   constructor(
+    @Inject(DOCUMENT) private document: any,
     private _modalService: BsModalService,
     public router: Router,
     private cookies: CookieService,
@@ -35,8 +37,11 @@ export class LayoutpaginaComponent implements OnInit {
   NombreUsu: string = this.cookies.get('Nombre');
   //Variables admin
   AminUser: string = this.cookies.get('UserAdmin');
+
+  elem: any;
   ngOnInit(): void {
     this.Obtienedata();
+    this.elem = document.documentElement;
   }
 
   Obtienedata() {
@@ -55,6 +60,7 @@ export class LayoutpaginaComponent implements OnInit {
     this.cookies.set('Nombre', '');
     this.cookies.set('Apellido', '');
     this.cookies.set('IdUsuario', '');
+    this.closeFullscreen();
   }
 
   VerPgBackup() {
@@ -183,6 +189,23 @@ export class LayoutpaginaComponent implements OnInit {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = respu;
     })
+  }
+
+  //Close
+   /* Close fullscreen */
+   closeFullscreen() {
+    if (this.document.exitFullscreen) {
+      this.document.exitFullscreen();
+    } else if (this.document.mozCancelFullScreen) {
+      /* Firefox */
+      this.document.mozCancelFullScreen();
+    } else if (this.document.webkitExitFullscreen) {
+      /* Chrome, Safari and Opera */
+      this.document.webkitExitFullscreen();
+    } else if (this.document.msExitFullscreen) {
+      /* IE/Edge */
+      this.document.msExitFullscreen();
+    }
   }
 }
 
