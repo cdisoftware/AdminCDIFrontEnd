@@ -157,7 +157,8 @@ export class PgproyectosComponent implements OnInit {
       didParseCell: function (data) {
         var rows = data.table.body;
         if (data.row.index === 0) {
-          data.cell.styles.fillColor = [255, 105, 105];
+          data.cell.styles.fillColor = [0, 80, 80];
+          data.cell.styles.textColor = [255, 255, 255];
         }
       },
       margin: { top: 10 },
@@ -199,7 +200,8 @@ export class PgproyectosComponent implements OnInit {
       didParseCell: function (data) {
         var rows = data.table.body;
         if (data.row.index === 0) {
-          data.cell.styles.fillColor = [255, 105, 105];
+          data.cell.styles.fillColor = [0, 80, 80];
+          data.cell.styles.textColor = [255, 255, 255];
         }
       },
       margin: { top: 10 },
