@@ -286,7 +286,6 @@ export class PgservidoresComponent implements OnInit {
   //Descargar Pdf
   DescargarDatosPdf(templateMensaje: TemplateRef<any>) {
     const doc = new jsPDF('l', 'px', 'a3');
-
     autoTable(doc, {
       styles: { fillColor: [236, 240, 241] },
       columnStyles: {
@@ -304,6 +303,7 @@ export class PgservidoresComponent implements OnInit {
         var rows = data.table.body;
         if (data.row.index === 0) {
           data.cell.styles.fillColor = [0, 80, 80];
+          data.cell.styles.textColor = [255, 255, 255];
         }
       },
       margin: { top: 10 },
@@ -493,6 +493,8 @@ export class PgservidoresComponent implements OnInit {
     const options = {
       background: 'white',
       scale: 3
+
+
     };
 
 
