@@ -62,7 +62,6 @@ export class LoginComponent implements OnInit {
         this.cookies.set("Usuario", respu[0].Usuario);
         this.cookies.set("Password", respu[0].Password);
         this.fakeLoading();
-        this.openFullscreen();
       }
     });
   }
@@ -85,21 +84,5 @@ export class LoginComponent implements OnInit {
       //lo direccionamos al home
       this.router.navigate(['home']);
     }, 500);
-  }
-
-  //Pantalla completa
-  openFullscreen() {
-    if (this.elem.requestFullscreen) {
-      this.elem.requestFullscreen();
-    } else if (this.elem.mozRequestFullScreen) {
-      /* Firefox */
-      this.elem.mozRequestFullScreen();
-    } else if (this.elem.webkitRequestFullscreen) {
-      /* Chrome, Safari and Opera */
-      this.elem.webkitRequestFullscreen();
-    } else if (this.elem.msRequestFullscreen) {
-      /* IE/Edge */
-      this.elem.msRequestFullscreen();
-    }
   }
 }
