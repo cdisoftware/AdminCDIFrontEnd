@@ -17,12 +17,12 @@
         Limpiar
       </button>
 
-      <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF">
+      <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF">
         <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2" />
         Descargar PDF
       </button>
 
-      <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel">
+      <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Exportar Excel">
         <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2" />
         Descarga excel
       </button>
