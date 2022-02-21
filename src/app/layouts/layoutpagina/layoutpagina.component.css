@@ -51,7 +51,7 @@ li {
   position: absolute; /*WITH RESPECT TO PARENT*/
   display: none;
   border-radius: 8px;
-  top: 35px;
+  top: 25px;
 }
 .dropdown li + li {
   margin-top: 10px;
@@ -109,7 +109,7 @@ li {
   margin-top: 10px;
 }
 .dropdownCerrar .li {
-  padding: 0.5em 1em;
+  padding: 0.5em 7px;
   width: 8em;
   text-align: center;
 }
