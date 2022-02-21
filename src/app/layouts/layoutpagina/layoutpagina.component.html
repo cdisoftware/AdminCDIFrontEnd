@@ -19,7 +19,7 @@
 
         <!-- DROPDOWN MENU -->
         <ul class="dropdown">
-          <li class="cursorPointer" (click)="VerPgTipoBackup()">
+          <li class="li cursorPointer" (click)="VerPgTipoBackup()">
             <a href="home/Pgtipobackup">Tipo Backup</a>
           </li>
         </ul>
@@ -30,7 +30,7 @@
             class="BtnimgTamanoPeque mr-2"></a>
         <!-- DROPDOWN MENU -->
         <ul class="dropdown">
-          <li class="cursorPointer" (click)="TipoServidor(templaTipoSer, templateMensaje)"><a>Tipo<img
+          <li class="li cursorPointer" (click)="TipoServidor(templaTipoSer, templateMensaje)"><a>Tipo<img
                 style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/servidores.png"
                 class="BtnimgTamanoPeque mr-2"></a></li>
         </ul>
@@ -45,15 +45,23 @@
         <a>Usuarios <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/usuarios.png"
             class="BtnimgTamanoPeque mr-2"></a>
       </li>
-      <li class="titulopopup services cursorPointer" (click)="VerPgUsuario()">
-        <a>{{NombreUsu}}<img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/usuario.png"
-            class="BtnimgTamanoPeque mr-2"></a>
+
+      <li class="services titulopopup cursorPointer">
+        <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/flechahaciaabajo.png"
+          class="BtnimgTamanoPeque mr-2">
+        <ul class="dropdown">
+          <li class="services cursorPointer" (click)="VerPgUsuario()">
+            <img src="../../../assets/ImagenesAdminCDI/usuario.png" style="margin-left: 5px;"
+              class="BtnimgTamanoPeque mr-2">
+          </li>
+          <li class="services cursorPointer" (click)="Cerrar()">
+            <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 5px;"
+              class="BtnimgTamanoPeque mr-2">
+          </li>
+          
+        </ul>
       </li>
 
-      <li class="cursorPointer" (click)="Cerrar()">
-        <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 5px;" class="BtnimgUsuario mr-2">
-
-      </li>
     </div>
   </ul>
 </nav>
