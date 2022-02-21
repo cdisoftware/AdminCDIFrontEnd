@@ -59,9 +59,14 @@ li {
 .dropdown li + li {
   margin-top: 10px;
 }
-.dropdown li {
+.dropdown .li {
   padding: 0.5em 1em;
   width: 8em;
+  text-align: center;
+}
+.dropdown .OpUsu {
+  padding: 0.5em 1em;
+  width: 2em;
   text-align: center;
 }
 .dropdown li:hover {
