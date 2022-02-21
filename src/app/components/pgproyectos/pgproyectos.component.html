@@ -21,23 +21,23 @@
                 </div>
 
                 <!--Botones-->
-                <div class="row displayCenter col-12 mt-3">
+                <div class="row displayCenter col-12 mt-4">
                     <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="LimpiarProyectos()">
                         <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
                         Limpiar
                     </button>
 
-                    <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF"
+                    <button *ngIf="ArrayConsultaProyecto.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF"
                         (click)="DescargarDatosPdfProyecto()">
                         <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
-                        Descargar PDF
+                        PDF
                     </button>
 
-                    <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
+                    <button *ngIf="ArrayConsultaProyecto.length > 0" class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
                         (click)="BtnExportarExcelProyecto(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png"
                             class="BtnimgTamanoPeque mr-2">
-                        Descarga excel
+                        Excel
                     </button>
 
                     <button class="btn btn-dark col-sm-2 mrd" title="Nuevo"
@@ -171,18 +171,18 @@
                             Limpiar
                         </button>
 
-                        <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF"
+                        <button *ngIf="ArrayConsultaCliente.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF"
                             (click)="DescargarDatosPdfCliente()">
                             <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png"
                                 class="BtnimgTamanoPeque mr-2">
-                            Descargar PDF
+                            PDF
                         </button>
 
-                        <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
+                        <button *ngIf="ArrayConsultaCliente.length > 0" class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
                             (click)="BtnExportarExcelCliente(LblDescripcion, templateMensaje)">
                             <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png"
                                 class="BtnimgTamanoPeque mr-2">
-                            Descarga excel
+                            Excel
                         </button>
 
                         <button class="btn btn-dark col-sm-2 mrd" title="Nuevo"
