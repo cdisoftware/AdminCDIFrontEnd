@@ -212,13 +212,26 @@
 
 
 
-
 <ng-template #templateVerDetalles let-modal>
     <div class="modal-header">
-        <p class="titulopopup">VER</p>
-        <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
-        </button>
+        <div class="row col-sm-11 text-center titulopopup">
+            <div class="col-sm-3">
+                {{IpBackupVer}}
+            </div>
+            <div class="col-sm-3">
+                {{NombreBackupVer}}
+            </div>
+            <div class="col-sm-3">
+                {{PeriodicidadVer}}
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png"
+                    class="btnEquis">
+            </button>
+        </div>
+        
     </div>
     <div class="mrd mld" id="htmlData_">
         <div class="row texto text-center">
