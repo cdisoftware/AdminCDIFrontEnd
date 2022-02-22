@@ -100,6 +100,9 @@ export class PgservidoresComponent implements OnInit {
   LblPasswordEdit: string;
   IdServidorEditDetalle: string;
 
+  //Titulos ver
+  IpServidorVer: string;
+  NombreServidorVer: string;
 
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
@@ -267,6 +270,9 @@ export class PgservidoresComponent implements OnInit {
 
   //Ver detalle
   VerDetalle(templateVerDetalles: TemplateRef<any>, templateMensaje: TemplateRef<any>, ArGrilla: any) {
+
+    this.IpServidorVer = ArGrilla.Ip_S;
+    this.NombreServidorVer = ArGrilla.Nombre;
     this.AuxiliarDiv = false;
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
     this.ArrListaVerdetalles = [];
