@@ -70,6 +70,11 @@ export class PgbackupsComponent implements OnInit {
   modalVer: BsModalRef;
   IdBackupSelect: number;
 
+   //Titulos ver
+   IpBackupVer:string;
+   NombreBackupVer: string;
+   PeriodicidadVer: string;
+
   //Variables consultareguistri backup
   ArregloGrillaReguistroBck: any;
 
@@ -359,6 +364,9 @@ export class PgbackupsComponent implements OnInit {
 
   }
   VerDetalle(templateVerDetalles: TemplateRef<any>, ArGrilla: any) {
+    this.IpBackupVer = ArGrilla.IpServidor
+    this.NombreBackupVer = ArGrilla.Nombre;
+    this.PeriodicidadVer = ArGrilla.Periodicidad;
     this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
     const ConsultaRegistroBck =
     {
