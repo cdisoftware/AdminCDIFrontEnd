@@ -222,10 +222,20 @@
 
 <ng-template #templateVerDetalles let-modal>
     <div class="modal-header">
-        <p class="titulopopup">VER</p>
-        <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
-        </button>
+        <div class="row col-sm-11 text-center titulopopup">
+            <div class="col-sm-6">
+                {{IpServidorVer}}
+            </div>
+            <div class="col-sm-6">
+                {{NombreServidorVer}}
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png"
+                    class="btnEquis">
+            </button>
+        </div>
     </div>
     <div class="mrd mld">
         <div class="row texto text-center">
@@ -233,24 +243,25 @@
                 <div class="col-sm-12 mt-3">
                     <table class="table table-bordered text-center tablaAjuste">
                         <tr>
-                            <th colspan="3" style="background-color: teal; color: #000000;">Detalles servidor</th>
-                            <th></th>
-                            <th colspan="4" style="background-color: teal; color: #000000;">Detalles hardware</th>
+                            <th colspan="9" style="background-color: teal; color: #000000;">Detalles servidor</th>
                         </tr>
                         <tr>
                             <th class="cursorPointer">Usuario</th>
                             <th class="cursorPointer">Contraseña</th>
                             <th class="cursorPointer">Ubicacion</th>
-                            <th class="cursorPointer">Editar</th>
                             <th class="cursorPointer">Disco duro</th>
                             <th class="cursorPointer">Ram</th>
                             <th class="cursorPointer">Procesador</th>
+                            <th class="cursorPointer">Editar</th>
                             <th class="cursorPointer">Eliminar</th>
                         </tr>
                         <tr *ngFor="let ArGrilla of ArrListaVerdetalles">
                             <td>{{ArGrilla.Usuario_Ser}}</td>
                             <td>{{ArGrilla.Password}}</td>
                             <td>{{ArGrilla.NombreServidorAloja}}</td>
+                            <td>{{ArGrilla.DiscoDuro}}</td>
+                            <td>{{ArGrilla.RAM}}</td>
+                            <td>{{ArGrilla.Procesador}}</td>
                             <td>
                                 <button class="BtnClaro mrd m-auto text-center" title="Editar"
                                     (click)="AbrirPopap(templateEditarVerDetalles, ArGrilla)">
@@ -258,9 +269,6 @@
                                         class="BtnimgTamanoPeque mr-2">
                                 </button>
                             </td>
-                            <td>{{ArGrilla.DiscoDuro}}</td>
-                            <td>{{ArGrilla.RAM}}</td>
-                            <td>{{ArGrilla.Procesador}}</td>
                             <td>
                                 <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
                                     (click)="EliminaHardwareServidor(templateMensaje, ArGrilla)">
@@ -461,7 +469,8 @@
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="EditarVerDetalles(templateMensaje)">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
+                        (click)="EditarVerDetalles(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
