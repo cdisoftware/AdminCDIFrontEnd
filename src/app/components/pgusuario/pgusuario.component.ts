@@ -22,7 +22,7 @@ export class PgusuarioComponent implements OnInit {
   ApellidoEdit: string = this.Apellido;
   Usuario: string = this.cookies.get('Usuario');
   Password: string = this.cookies.get('Password');
-  UjusteGuarda: boolean = true;
+  UjusteGuarda: boolean = false;
 
   //variables modal mensajes
   lblModalMsaje: string;

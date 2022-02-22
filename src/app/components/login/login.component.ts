@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       RESPUESTA: '0',
     };
     this.Servicios.consultavalidlogin(consultalogin).subscribe(respu => {
-      if (respu == '"El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion"') {
+      if (respu == '"El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion"' || respu.length == 0) {
         this.error();
         this.form.reset();
       } else {
