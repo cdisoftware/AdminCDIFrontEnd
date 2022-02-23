@@ -5,16 +5,20 @@
 
     <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="ingresar()">
       <img src="./assets/ImagenesAdminCDI/user.png" width="50%">
-      <h1>Login</h1>
+      <br>
+      <h1 style="font-weight: bold;">Bienvenidos</h1>
       <mat-form-field class="ancho" appearance="fill">
         <mat-label>Usuario</mat-label>
-        <input type="text" matInput autocomplete="off" placeholder="Usuario" formControlName="usuario" [(ngModel)]="user">
+        <input type="text" matInput autocomplete="off" placeholder="Usuario" formControlName="usuario"
+          [(ngModel)]="user">
       </mat-form-field>
       <mat-form-field class="ancho" appearance="fill">
         <mat-label>Contraseña</mat-label>
-        <input type="password" matInput autocomplete="off" formControlName="password" placeholder="Password" [(ngModel)]="passw">
+        <input type="password" matInput autocomplete="off" formControlName="password" placeholder="Password"
+          [(ngModel)]="passw">
       </mat-form-field>
-      <button type="submit" class="ancho button" mat-raised-button color="primary" [disabled]="form.invalid">Iniciar Sesión</button>
+      <button type="submit" class="ancho button" mat-raised-button color="primary" [disabled]="form.invalid">Iniciar
+        Sesión</button>
     </form>
   </div>
 </div>
