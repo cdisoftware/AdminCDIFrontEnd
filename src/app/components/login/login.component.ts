@@ -26,10 +26,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private _snackBar: MatSnackBar,
     private router: Router,
-    private layautPrincipal: LayautprincipalComponent,
-    private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
-    private modalServiceDos: NgbModal,
     private cookies: CookieService
   ) {
     this.form = this.fb.group({
