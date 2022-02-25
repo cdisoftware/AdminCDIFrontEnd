@@ -38,10 +38,8 @@ export class LayoutpaginaComponent implements OnInit {
   //Variables admin
   AminUser: string = this.cookies.get('UserAdmin');
 
-  elem: any;
   ngOnInit(): void {
     this.Obtienedata();
-    this.elem = document.documentElement;
   }
 
   Obtienedata() {
