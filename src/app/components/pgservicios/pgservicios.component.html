@@ -30,10 +30,11 @@
         </div>
     </div>
 </div>
+<hr>
 <div class="row">
     <div class="col-sm-1"></div>
-    <div class="col-sm-1 mt-4">
-        <select class="form-select" title="Seleccionar Prioridad" #Prioridadvalueagregar [(ngModel)]="IdInicioListas">
+    <div class="col-sm-2 mt-4">
+        <select class="form-select" title="Seleccionar Prioridad" #Prioridadvalueagregar [(ngModel)]="IdPrioridad">
             <option value="0">Prioridad</option>
             <option value="BAJA">BAJA</option>
             <option value="MEDIA">MEDIA</option>
@@ -41,33 +42,43 @@
             <option value="URGENTE">URGENTE</option>
         </select>
     </div>
-    <div class="col-sm-1 mt-4">
-        <select class="form-select" title="Seleccionar Integrador" #Integradorvalueagregar [(ngModel)]="IdInicioListas">
+    <div class="col-sm-2 mt-4">
+        <select class="form-select" title="Seleccionar Integrador" [(ngModel)]="IdIntegrador">
             <option value="0" selected>Integrador</option>
+            <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>
         </select>
     </div>
     <div class="col-sm-2 mt-4">
-        <input type="text" class="form-control table-bordered" #SPvalueagregar placeholder="SP"
+        <input type="text" class="form-control table-bordered" placeholder="SP" [(ngModel)]="SP"
             title="Stored Procedures">
     </div>
     <div class="col-sm-2 mt-4">
-        <input type="text" class="form-control table-bordered" #Excevalueagregar placeholder="Exce" title="Exce">
+        <input type="text" class="form-control table-bordered" placeholder="Exce" title="Exce" [(ngModel)]="Exce">
     </div>
-    <div class="col-sm-1 mt-4">
-        <select class="form-select" title="Seleccionar Prioridad" #Tipovalueagregar [(ngModel)]="IdInicioListas">
-            <option value="0" selected>Prioridad</option>
+    <div class="col-sm-2 mt-4">
+        <select class="form-select" title="Seleccionar Prioridad" [(ngModel)]="IdTipoServicio">
+            <option value="0" selected>Servicio</option>
             <option value="Consulta" selected>Consulta</option>
             <option value="Inserta" selected>Inserta</option>
             <option value="Actualización" selected>Actualización</option>
             <option value="Delete" selected>Delete</option>
         </select>
     </div>
+    <div class="col-sm-1"></div>
+</div>
+<div class="row mt-2" style="justify-content: center;">
+    <div class="col-sm-1"></div>
+
     <div class="col-sm-3">
-        <textarea class="md-textarea form-control textarea" #Observacionvalueagregar placeholder="Observación"
-            title="Observación" rows="3"></textarea>
+        <textarea class="md-textarea form-control textarea" placeholder="Observación" [(ngModel)]="Observacion"
+            title="Observación" rows="2"></textarea>
     </div>
-    <div class="col-sm-1 mt-4">
-        <button class="BtnClaro mrd m-auto text-center" title="Agregar">
+    <div class="col-sm-3">
+        <textarea class="md-textarea form-control textarea" placeholder="Observaciónes" [(ngModel)]="Observaciones"
+            title="Observación" rows="2"></textarea>
+    </div>
+    <div class="col-sm-1 mt-2">
+        <button class="BtnClaro mrd m-auto text-center" title="Agregar" (click)="AgregaServicio()">
             <img src="../../../../assets/ImagenesAdminCDI/AgregarServicio.png" class="BtnimgTamanoPeque">
         </button>
     </div>
@@ -78,17 +89,17 @@
         <th colspan="15">Servicios</th>
     </tr>
     <tr>
-        <th class="cursorPointer">Prioridad</th>
-        <th class="cursorPointer">Fecha Asignación</th>
-        <th class="cursorPointer">Integrador</th>
-        <th class="cursorPointer">Stored Procedures</th>
-        <th class="cursorPointer">Exce</th>
-        <th class="cursorPointer">Tipo servicio</th>
-        <th class="cursorPointer">Estado</th>
-        <th class="cursorPointer">Asignado por:</th>
-        <th class="cursorPointer">Fecha solución</th>
-        <th class="cursorPointer">Observación</th>
-        <th class="cursorPointer">Observaciones</th>
+        <th class="cursorPointer" (click)="Ordenarprioridad()">Prioridad</th>
+        <th class="cursorPointer" (click)="OrdenarFechaAsignacion()">Fecha Asignación</th>
+        <th class="cursorPointer" (click)="OrdenarIntegrador()">Integrador</th>
+        <th class="cursorPointer" (click)="OrdenarSp()">Stored Procedures</th>
+        <th class="cursorPointer" (click)="OrdenarExce()">Exce</th>
+        <th class="cursorPointer" (click)="OrdenaTipoServicio()">Tipo servicio</th>
+        <th class="cursorPointer" (click)="OrdenaEstado()">Estado</th>
+        <th class="cursorPointer" (click)="OrdenaAsiganadopor()">Asignado por:</th>
+        <th class="cursorPointer" (click)="OrdenaFechaSolucion()">Fecha solución</th>
+        <th class="cursorPointer" (click)="OrdenaObservacion()">Observación</th>
+        <th class="cursorPointer" (click)="OrdenaObservaciones()">Observaciones</th>
 
 
         <th>Ver</th>
