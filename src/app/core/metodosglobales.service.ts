@@ -140,4 +140,10 @@ export class MetodosGlobalesService {
   consultservicios(IdProyecto: string, TipoServicio: string, Prioridad: string, NombreSp: string) {
     return this.http.get<any[]>(this.url_servidor + 'consultservicios/' + IdProyecto + '/' + TipoServicio + '/' + Prioridad + '/' + NombreSp);
   }
+  public postFileImagen(imagenParaSubir: File) {
+    const formData = new FormData();
+    formData.append('file', imagenParaSubir, imagenParaSubir.name);
+    return this.http.post(this.url_servidor + 'uploadFile', formData);
+  }
+
 }
