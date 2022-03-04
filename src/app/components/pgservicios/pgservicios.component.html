@@ -1,0 +1,426 @@
+<div class="container bg-white mt-5">
+    <div class="row justify-content-center ">
+        <div class="row justify-content-center ">
+            <p class="col-11 tituloformulario">Servicios {{NombreProyecto}}</p>
+            <div class="col-sm-1 m-0 mb-3 displayFlexbetween">
+                <img (click)="BtnInfo(templateMensaje)" src="../../../../assets/ImagenesAdminCDI/informacion.png"
+                    class="cursorPointer BtnimgInfo" title="Ayuda">
+            </div>
+        </div>
+        <div class="row mt-3">
+
+            <div class="col-sm-5 m-0 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" #TipoServiciovalue placeholder="Tipo servicio"
+                    [(ngModel)]="Tiposervidor" title="Tipo servicio"
+                    (keyup)="Grilla(TipoServiciovalue.value, Prioridadvalue.value, NombreSpValue.value)">
+            </div>
+
+            <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" #Prioridadvalue placeholder="Prioridad"
+                    [(ngModel)]="Prioridad" title="Prioridad"
+                    (keyup)="Grilla(TipoServiciovalue.value, Prioridadvalue.value, NombreSpValue.value)">
+            </div>
+        </div>
+        <div class="row" style="justify-content: center;">
+            <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" #NombreSpValue placeholder="Nombre SP"
+                    [(ngModel)]="Sp" title="Nombre SP"
+                    (keyup)="Grilla(TipoServiciovalue.value, Prioridadvalue.value, NombreSpValue.value)">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-1 mt-4">
+        <select class="form-select" title="Seleccionar Prioridad" #Prioridadvalueagregar [(ngModel)]="IdInicioListas">
+            <option value="0">Prioridad</option>
+            <option value="BAJA">BAJA</option>
+            <option value="MEDIA">MEDIA</option>
+            <option value="ALTA">ALTA</option>
+            <option value="URGENTE">URGENTE</option>
+        </select>
+    </div>
+    <div class="col-sm-1 mt-4">
+        <select class="form-select" title="Seleccionar Integrador" #Integradorvalueagregar [(ngModel)]="IdInicioListas">
+            <option value="0" selected>Integrador</option>
+        </select>
+    </div>
+    <div class="col-sm-2 mt-4">
+        <input type="text" class="form-control table-bordered" #SPvalueagregar placeholder="SP"
+            title="Stored Procedures">
+    </div>
+    <div class="col-sm-2 mt-4">
+        <input type="text" class="form-control table-bordered" #Excevalueagregar placeholder="Exce" title="Exce">
+    </div>
+    <div class="col-sm-1 mt-4">
+        <select class="form-select" title="Seleccionar Prioridad" #Tipovalueagregar [(ngModel)]="IdInicioListas">
+            <option value="0" selected>Prioridad</option>
+            <option value="Consulta" selected>Consulta</option>
+            <option value="Inserta" selected>Inserta</option>
+            <option value="Actualización" selected>Actualización</option>
+            <option value="Delete" selected>Delete</option>
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <textarea class="md-textarea form-control textarea" #Observacionvalueagregar placeholder="Observación"
+            title="Observación" rows="3"></textarea>
+    </div>
+    <div class="col-sm-1 mt-4">
+        <button class="BtnClaro mrd m-auto text-center" title="Agregar">
+            <img src="../../../../assets/ImagenesAdminCDI/AgregarServicio.png" class="BtnimgTamanoPeque">
+        </button>
+    </div>
+</div>
+<table class="table table-bordered mt-3 text-center margenesTabla">
+
+    <tr>
+        <th colspan="15">Servicios</th>
+    </tr>
+    <tr>
+        <th class="cursorPointer">Prioridad</th>
+        <th class="cursorPointer">Fecha Asignación</th>
+        <th class="cursorPointer">Integrador</th>
+        <th class="cursorPointer">Stored Procedures</th>
+        <th class="cursorPointer">Exce</th>
+        <th class="cursorPointer">Tipo servicio</th>
+        <th class="cursorPointer">Estado</th>
+        <th class="cursorPointer">Asignado por:</th>
+        <th class="cursorPointer">Fecha solución</th>
+        <th class="cursorPointer">Observación</th>
+        <th class="cursorPointer">Observaciones</th>
+
+
+        <th>Ver</th>
+        <th>Editar</th>
+        <th>Probar</th>
+        <th>Eliminar</th>
+    </tr>
+    <tbody *ngFor="let ArGrilla of ArrayGrilla">
+        <tr *ngIf="ArGrilla.Prioridad == 'BAJA' && ArGrilla.Estado == 0" class="BAJA">
+            <td>{{ArGrilla.Prioridad}}</td>
+            <td>{{ArGrilla.FechaAsignacion}}</td>
+            <td>{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>{{ArGrilla.EXEC_SP}}</td>
+            <td>{{ArGrilla.TipoServicio}}</td>
+            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td>{{ArGrilla.FechaSolucion}}</td>
+            <td>{{ArGrilla.Observacion}}</td>
+            <td>{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <a href="https://web.postman.co/workspace/My-Workspace~0175bdaf-c58a-46c1-8a72-4ae953fe8659/request/create?requestId=d83fa598-89b3-4cb2-9eea-df1cfa8476b5"
+                    target="_blank">
+                    <img src="../../../../assets/ImagenesAdminCDI/postman.png" class="BtnimgTamanoPeque">
+                </a>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="ArGrilla.Prioridad == 'BAJA' && ArGrilla.Estado == 1" class="BAJA OK">
+            <td>{{ArGrilla.Prioridad}}</td>
+            <td>{{ArGrilla.FechaAsignacion}}</td>
+            <td>{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>{{ArGrilla.EXEC_SP}}</td>
+            <td>{{ArGrilla.TipoServicio}}</td>
+            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td>{{ArGrilla.FechaSolucion}}</td>
+            <td>{{ArGrilla.Observacion}}</td>
+            <td>{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <a href="https://web.postman.co/workspace/My-Workspace~0175bdaf-c58a-46c1-8a72-4ae953fe8659/request/create?requestId=d83fa598-89b3-4cb2-9eea-df1cfa8476b5"
+                    target="_blank">
+                    <img src="../../../../assets/ImagenesAdminCDI/postman.png" class="BtnimgTamanoPeque">
+                </a>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+        </tr>
+
+
+        <tr *ngIf="ArGrilla.Prioridad == 'MEDIA' && ArGrilla.Estado == 0" class="MEDIA">
+            <td>{{ArGrilla.Prioridad}}</td>
+            <td>{{ArGrilla.FechaAsignacion}}</td>
+            <td>{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>{{ArGrilla.EXEC_SP}}</td>
+            <td>{{ArGrilla.TipoServicio}}</td>
+            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td>{{ArGrilla.FechaSolucion}}</td>
+            <td>{{ArGrilla.Observacion}}</td>
+            <td>{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <a href="https://web.postman.co/workspace/My-Workspace~0175bdaf-c58a-46c1-8a72-4ae953fe8659/request/create?requestId=d83fa598-89b3-4cb2-9eea-df1cfa8476b5"
+                    target="_blank">
+                    <img src="../../../../assets/ImagenesAdminCDI/postman.png" class="BtnimgTamanoPeque">
+                </a>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="ArGrilla.Prioridad == 'MEDIA' && ArGrilla.Estado == 1" class="MEDIA OK">
+            <td>{{ArGrilla.Prioridad}}</td>
+            <td>{{ArGrilla.FechaAsignacion}}</td>
+            <td>{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>{{ArGrilla.EXEC_SP}}</td>
+            <td>{{ArGrilla.TipoServicio}}</td>
+            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td>{{ArGrilla.FechaSolucion}}</td>
+            <td>{{ArGrilla.Observacion}}</td>
+            <td>{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <a href="https://web.postman.co/workspace/My-Workspace~0175bdaf-c58a-46c1-8a72-4ae953fe8659/request/create?requestId=d83fa598-89b3-4cb2-9eea-df1cfa8476b5"
+                    target="_blank">
+                    <img src="../../../../assets/ImagenesAdminCDI/postman.png" class="BtnimgTamanoPeque">
+                </a>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+        </tr>
+
+        <tr *ngIf="ArGrilla.Prioridad == 'ALTA' && ArGrilla.Estado == 0" class="ALTA">
+            <td>{{ArGrilla.Prioridad}}</td>
+            <td>{{ArGrilla.FechaAsignacion}}</td>
+            <td>{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>{{ArGrilla.EXEC_SP}}</td>
+            <td>{{ArGrilla.TipoServicio}}</td>
+            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td>{{ArGrilla.FechaSolucion}}</td>
+            <td>{{ArGrilla.Observacion}}</td>
+            <td>{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <a href="https://web.postman.co/workspace/My-Workspace~0175bdaf-c58a-46c1-8a72-4ae953fe8659/request/create?requestId=d83fa598-89b3-4cb2-9eea-df1cfa8476b5"
+                    target="_blank">
+                    <img src="../../../../assets/ImagenesAdminCDI/postman.png" class="BtnimgTamanoPeque">
+                </a>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="ArGrilla.Prioridad == 'ALTA' && ArGrilla.Estado == 1" class="ALTA OK">
+            <td>{{ArGrilla.Prioridad}}</td>
+            <td>{{ArGrilla.FechaAsignacion}}</td>
+            <td>{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>{{ArGrilla.EXEC_SP}}</td>
+            <td>{{ArGrilla.TipoServicio}}</td>
+            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td>{{ArGrilla.FechaSolucion}}</td>
+            <td>{{ArGrilla.Observacion}}</td>
+            <td>{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <a href="https://web.postman.co/workspace/My-Workspace~0175bdaf-c58a-46c1-8a72-4ae953fe8659/request/create?requestId=d83fa598-89b3-4cb2-9eea-df1cfa8476b5"
+                    target="_blank">
+                    <img src="../../../../assets/ImagenesAdminCDI/postman.png" class="BtnimgTamanoPeque">
+                </a>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+        </tr>
+
+        <tr *ngIf="ArGrilla.Prioridad == 'URGENTE' && ArGrilla.Estado == 0" class="URGENTE">
+            <td>{{ArGrilla.Prioridad}}</td>
+            <td>{{ArGrilla.FechaAsignacion}}</td>
+            <td>{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>{{ArGrilla.EXEC_SP}}</td>
+            <td>{{ArGrilla.TipoServicio}}</td>
+            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td>{{ArGrilla.FechaSolucion}}</td>
+            <td>{{ArGrilla.Observacion}}</td>
+            <td>{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <a href="https://web.postman.co/workspace/My-Workspace~0175bdaf-c58a-46c1-8a72-4ae953fe8659/request/create?requestId=d83fa598-89b3-4cb2-9eea-df1cfa8476b5"
+                    target="_blank">
+                    <img src="../../../../assets/ImagenesAdminCDI/postman.png" class="BtnimgTamanoPeque">
+                </a>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="ArGrilla.Prioridad == 'URGENTE' && ArGrilla.Estado == 1" class="URGENTE OK">
+            <td>{{ArGrilla.Prioridad}}</td>
+            <td>{{ArGrilla.FechaAsignacion}}</td>
+            <td>{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>{{ArGrilla.EXEC_SP}}</td>
+            <td>{{ArGrilla.TipoServicio}}</td>
+            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td>{{ArGrilla.FechaSolucion}}</td>
+            <td>{{ArGrilla.Observacion}}</td>
+            <td>{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <a href="https://web.postman.co/workspace/My-Workspace~0175bdaf-c58a-46c1-8a72-4ae953fe8659/request/create?requestId=d83fa598-89b3-4cb2-9eea-df1cfa8476b5"
+                    target="_blank">
+                    <img src="../../../../assets/ImagenesAdminCDI/postman.png" class="BtnimgTamanoPeque">
+                </a>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12 displayFlexbetween" style="justify-content: center;">
+            <table class="TableInfo table table-bordered" border="1">
+                <tr>
+                    <th style="width: 200px; height: 50px; background-color: #28B463;"></th>
+                    <th style="text-align: center;"> Prioridad baja</th>
+                </tr>
+                <tr>
+                    <th style="width: 200px; height: 50px; background-color: #F1C40F;"></th>
+                    <th style="text-align: center;"> Prioridad alta</th>
+                </tr>
+                <tr>
+                    <th style="width: 200px; height: 50px; background-color: #E67E22;"></th>
+                    <th style="text-align: center;"> Prioridad urgente</th>
+                </tr>
+                <tr>
+                    <th style="width: 200px; height: 50px; background-color: #E74C3C;"></th>
+                    <th style="text-align: center;"> Prioridad media</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>

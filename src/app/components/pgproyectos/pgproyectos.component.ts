@@ -7,8 +7,7 @@ import autoTable from 'jspdf-autotable';
 import jsPDF from 'jspdf';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
-import html2canvas from 'html2canvas';
-import { Console } from 'console';
+import { LayoutpaginaComponent } from 'src/app/layouts/layoutpagina/layoutpagina.component';
 
 @Component({
   selector: 'app-pgproyectos',
@@ -20,7 +19,8 @@ export class PgproyectosComponent implements OnInit {
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
     private modalServiceDos: NgbModal,
-    private cookies: CookieService
+    private cookies: CookieService,
+    private paguina: LayoutpaginaComponent
   ) { }
 
   //Variables modal mensaje
@@ -474,5 +474,10 @@ export class PgproyectosComponent implements OnInit {
       this.lblModalMsaje = respu;
       this.LimpiarClientes();
     })
+  }
+
+  IrAServicios(Array: any){
+    var IdProyecto = Array.Id_PRY;
+    this.paguina.VerPgServicios(IdProyecto);
   }
 }
