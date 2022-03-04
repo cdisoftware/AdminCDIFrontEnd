@@ -1,0 +1,41 @@
+.margenesTabla{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.BAJA{
+    background-color: #28B463;
+}
+.BAJA.OK{
+    background-color: #fff!important;
+}
+
+.MEDIA{
+    background-color: #F1C40F;
+}
+.MEDIA.OK{
+    background-color: #fff!important;
+}
+
+.ALTA{
+    background-color: #E67E22;
+}
+.ALTA.OK{
+    background-color: #fff!important;
+}
+
+.URGENTE{
+    background-color: #E74C3C;
+}
+.URGENTE.OK{
+    background-color: #fff!important;
+}
+
+
+.TableInfo{ 
+border-radius: 50%;
+}
+.BtnimgInfo{
+width: 35px;
+height: 35px;
+}

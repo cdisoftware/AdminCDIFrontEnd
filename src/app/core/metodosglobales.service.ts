@@ -125,6 +125,8 @@ export class MetodosGlobalesService {
   eliminaregistbck(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'eliminaregistbck/' + bandera, BodyPost);
   }
+
+
   consdetallserv(bandera: string, IdServidor: string) {
     return this.http.get<any[]>(this.url_servidor + 'consdetallserv/' + bandera + '/' + IdServidor);
   }
@@ -133,5 +135,9 @@ export class MetodosGlobalesService {
   }
   actualizainfousuario(bandera: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizainfousuario/'+ bandera,BodyPost);
+  }
+
+  consultservicios(IdProyecto: string, TipoServicio: string, Prioridad: string, NombreSp: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consultservicios/' + IdProyecto + '/' + TipoServicio + '/' + Prioridad + '/' + NombreSp);
   }
 }

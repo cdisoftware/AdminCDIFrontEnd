@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.component';
 import { PgproyectosComponent } from './components/pgproyectos/pgproyectos.component';
 import { PgusuarioComponent } from './components/pgusuario/pgusuario.component';
+import { PgserviciosComponent } from './components/pgservicios/pgservicios.component';
 
 
 const routes: Routes = [
@@ -49,6 +50,11 @@ const routes: Routes = [
       {
         path: 'PgUsuario',
         component: PgusuarioComponent,
+
+      },
+      {
+        path: 'PgServicios/:Id',
+        component: PgserviciosComponent,
 
       }
     ],
