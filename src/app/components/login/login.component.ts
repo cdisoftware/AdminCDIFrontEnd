@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       RESPUESTA: '0',
     };
     this.Servicios.consultavalidlogin(consultalogin).subscribe(respu => {
-      if (respu == '"El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion"' || respu.length == 0) {
+         if (respu == '"El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion"') {
         this.error();
         this.form.reset();
       } else {
@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
         this.cookies.set("UserAdmin", respu[0].UserAdmin);
         this.cookies.set("Usuario", respu[0].Usuario);
         this.cookies.set("Password", respu[0].Password);
+        //this.cookies.set("UrlFoto", respu[0].UrlFoto);
         this.fakeLoading();
       }
     });

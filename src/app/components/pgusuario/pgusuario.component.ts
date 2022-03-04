@@ -17,6 +17,7 @@ export class PgusuarioComponent implements OnInit {
   //Variables obtienen info
   Nombre: string = this.cookies.get('Nombre');
   Apellido: string = this.cookies.get('Apellido');
+  ImgPerfil: string = this.cookies.get('UrlFoto');
 
   NombreEdit: string = this.Nombre;
   ApellidoEdit: string = this.Apellido;
@@ -57,8 +58,9 @@ export class PgusuarioComponent implements OnInit {
 
 
   cargandoImagen(event: any, templateMensaje: TemplateRef<any>) {
-
-
+    if (this.ImgPerfil == undefined || this.ImgPerfil == null || this.ImgPerfil == '') {
+      this.ImgPerfil = '../../../../assets/ImagenesAdminCDI/ImgDefaulUusario.png';
+    }
     if (!(/\.(jpg|png)$/i).test(event.target.files[0].name)) {
 
       this.modalMensaje = this._modalService.show(templateMensaje);
