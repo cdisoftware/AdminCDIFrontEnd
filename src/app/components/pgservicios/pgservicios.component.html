@@ -30,10 +30,11 @@
         </div>
     </div>
 </div>
+<hr>
 <div class="row">
     <div class="col-sm-1"></div>
-    <div class="col-sm-1 mt-4">
-        <select class="form-select" title="Seleccionar Prioridad" #Prioridadvalueagregar [(ngModel)]="IdInicioListas">
+    <div class="col-sm-2 mt-4">
+        <select class="form-select" title="Seleccionar Prioridad" #Prioridadvalueagregar [(ngModel)]="IdPrioridad">
             <option value="0">Prioridad</option>
             <option value="BAJA">BAJA</option>
             <option value="MEDIA">MEDIA</option>
@@ -41,33 +42,43 @@
             <option value="URGENTE">URGENTE</option>
         </select>
     </div>
-    <div class="col-sm-1 mt-4">
-        <select class="form-select" title="Seleccionar Integrador" #Integradorvalueagregar [(ngModel)]="IdInicioListas">
+    <div class="col-sm-2 mt-4">
+        <select class="form-select" title="Seleccionar Integrador" [(ngModel)]="IdIntegrador">
             <option value="0" selected>Integrador</option>
+            <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>
         </select>
     </div>
     <div class="col-sm-2 mt-4">
-        <input type="text" class="form-control table-bordered" #SPvalueagregar placeholder="SP"
+        <input type="text" class="form-control table-bordered" placeholder="SP" [(ngModel)]="SP"
             title="Stored Procedures">
     </div>
     <div class="col-sm-2 mt-4">
-        <input type="text" class="form-control table-bordered" #Excevalueagregar placeholder="Exce" title="Exce">
+        <input type="text" class="form-control table-bordered" placeholder="Exce" title="Exce" [(ngModel)]="Exce">
     </div>
-    <div class="col-sm-1 mt-4">
-        <select class="form-select" title="Seleccionar Prioridad" #Tipovalueagregar [(ngModel)]="IdInicioListas">
-            <option value="0" selected>Prioridad</option>
+    <div class="col-sm-2 mt-4">
+        <select class="form-select" title="Seleccionar Prioridad" [(ngModel)]="IdTipoServicio">
+            <option value="0" selected>Servicio</option>
             <option value="Consulta" selected>Consulta</option>
             <option value="Inserta" selected>Inserta</option>
             <option value="Actualización" selected>Actualización</option>
             <option value="Delete" selected>Delete</option>
         </select>
     </div>
+    <div class="col-sm-1"></div>
+</div>
+<div class="row mt-2" style="justify-content: center;">
+    <div class="col-sm-1"></div>
+
     <div class="col-sm-3">
-        <textarea class="md-textarea form-control textarea" #Observacionvalueagregar placeholder="Observación"
-            title="Observación" rows="3"></textarea>
+        <textarea class="md-textarea form-control textarea" placeholder="Observación" [(ngModel)]="Observacion"
+            title="Observación" rows="2"></textarea>
+    </div>
+    <div class="col-sm-3">
+        <textarea class="md-textarea form-control textarea" placeholder="Observaciónes" [(ngModel)]="Observaciones"
+            title="Observación" rows="2"></textarea>
     </div>
     <div class="col-sm-1 mt-4">
-        <button class="BtnClaro mrd m-auto text-center" title="Agregar">
+        <button class="BtnClaro mrd m-auto text-center" title="Agregar" (click)="AgregaServicio()">
             <img src="../../../../assets/ImagenesAdminCDI/AgregarServicio.png" class="BtnimgTamanoPeque">
         </button>
     </div>
