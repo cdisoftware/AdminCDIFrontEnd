@@ -145,5 +145,7 @@ export class MetodosGlobalesService {
     formData.append('file', imagenParaSubir, imagenParaSubir.name);
     return this.http.post(this.url_servidor + 'uploadFile', formData);
   }
-
+  insertaservicio(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertaservicio/' + bandera, BodyPost);
+  }
 }
