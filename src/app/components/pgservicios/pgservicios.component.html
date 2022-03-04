@@ -77,7 +77,7 @@
         <textarea class="md-textarea form-control textarea" placeholder="Observaciónes" [(ngModel)]="Observaciones"
             title="Observación" rows="2"></textarea>
     </div>
-    <div class="col-sm-1 mt-4">
+    <div class="col-sm-1 mt-2">
         <button class="BtnClaro mrd m-auto text-center" title="Agregar" (click)="AgregaServicio()">
             <img src="../../../../assets/ImagenesAdminCDI/AgregarServicio.png" class="BtnimgTamanoPeque">
         </button>
@@ -89,17 +89,17 @@
         <th colspan="15">Servicios</th>
     </tr>
     <tr>
-        <th class="cursorPointer">Prioridad</th>
-        <th class="cursorPointer">Fecha Asignación</th>
-        <th class="cursorPointer">Integrador</th>
-        <th class="cursorPointer">Stored Procedures</th>
-        <th class="cursorPointer">Exce</th>
-        <th class="cursorPointer">Tipo servicio</th>
-        <th class="cursorPointer">Estado</th>
-        <th class="cursorPointer">Asignado por:</th>
-        <th class="cursorPointer">Fecha solución</th>
-        <th class="cursorPointer">Observación</th>
-        <th class="cursorPointer">Observaciones</th>
+        <th class="cursorPointer" (click)="Ordenarprioridad()">Prioridad</th>
+        <th class="cursorPointer" (click)="OrdenarFechaAsignacion()">Fecha Asignación</th>
+        <th class="cursorPointer" (click)="OrdenarIntegrador()">Integrador</th>
+        <th class="cursorPointer" (click)="OrdenarSp()">Stored Procedures</th>
+        <th class="cursorPointer" (click)="OrdenarExce()">Exce</th>
+        <th class="cursorPointer" (click)="OrdenaTipoServicio()">Tipo servicio</th>
+        <th class="cursorPointer" (click)="OrdenaEstado()">Estado</th>
+        <th class="cursorPointer" (click)="OrdenaAsiganadopor()">Asignado por:</th>
+        <th class="cursorPointer" (click)="OrdenaFechaSolucion()">Fecha solución</th>
+        <th class="cursorPointer" (click)="OrdenaObservacion()">Observación</th>
+        <th class="cursorPointer" (click)="OrdenaObservaciones()">Observaciones</th>
 
 
         <th>Ver</th>

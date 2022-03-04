@@ -10,8 +10,13 @@ import { CookieService } from "ngx-cookie-service";
   styleUrls: ['./pgservicios.component.css']
 })
 export class PgserviciosComponent implements OnInit {
+
   //Usuario
   IdUsuarioCookies: string = this.cookies.get('IdUsuario');
+
+  //VARIABLES GLOBALES
+  AuxOrganizar: boolean;
+
   //Variables modal mensaje
   modalMensaje: BsModalRef;
   //Variables inicio de paguina
@@ -29,11 +34,11 @@ export class PgserviciosComponent implements OnInit {
   Observacion: string = '';
   Observaciones: string = '';
 
+
   //Variables filtros
   Tiposervidor: string;
   Prioridad: string;
   Sp: string;
-
   //Variables Fecha
   Dia = new Date().getDate();
   Mes = new Date().getMonth() + 1;
@@ -43,6 +48,7 @@ export class PgserviciosComponent implements OnInit {
 
   //ListaUsario
   ArregloListaUsuario: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private Servicios: MetodosGlobalesService,
@@ -57,6 +63,7 @@ export class PgserviciosComponent implements OnInit {
 
     this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
     this.ListaUsuario();
+
   }
 
   Grilla(TipoServicio: string, Prioridad: string, Sp: string) {
@@ -113,6 +120,105 @@ export class PgserviciosComponent implements OnInit {
       this.Servicios.insertaservicio('3', InsertaServ).subscribe(respu => {
         this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
       })
+    }
+  }
+  Ordenarprioridad() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { Prioridad: string; }, b: { Prioridad: string; }) => a.Prioridad.localeCompare(b.Prioridad));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { Prioridad: string; }, b: { Prioridad: string; }) => b.Prioridad.localeCompare(a.Prioridad));
+    }
+  }
+  OrdenarFechaAsignacion() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { FechaAsignacion: string; }, b: { FechaAsignacion: string; }) => a.FechaAsignacion.localeCompare(b.FechaAsignacion));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { FechaAsignacion: string; }, b: { FechaAsignacion: string; }) => b.FechaAsignacion.localeCompare(a.FechaAsignacion));
+    }
+  }
+  OrdenarIntegrador() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { NombreIntegrador: string; }, b: { NombreIntegrador: string; }) => a.NombreIntegrador.localeCompare(b.NombreIntegrador));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { NombreIntegrador: string; }, b: { NombreIntegrador: string; }) => b.NombreIntegrador.localeCompare(a.NombreIntegrador));
+    }
+  }
+  OrdenarSp() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { StoredProcedures: string; }, b: { StoredProcedures: string; }) => a.StoredProcedures.localeCompare(b.StoredProcedures));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { StoredProcedures: string; }, b: { StoredProcedures: string; }) => b.StoredProcedures.localeCompare(a.StoredProcedures));
+    }
+  }
+  OrdenarExce() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { EXEC_SP: string; }, b: { EXEC_SP: string; }) => a.EXEC_SP.localeCompare(b.EXEC_SP));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { EXEC_SP: string; }, b: { EXEC_SP: string; }) => b.EXEC_SP.localeCompare(a.EXEC_SP));
+    }
+  }
+  OrdenaTipoServicio() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { TipoServicio: string; }, b: { TipoServicio: string; }) => a.TipoServicio.localeCompare(b.TipoServicio));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { TipoServicio: string; }, b: { TipoServicio: string; }) => b.TipoServicio.localeCompare(a.TipoServicio));
+    }
+  }
+  OrdenaEstado() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { Estado: string; }, b: { Estado: string; }) => a.Estado.localeCompare(b.Estado));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { Estado: string; }, b: { Estado: string; }) => b.Estado.localeCompare(a.Estado));
+    }
+  }
+  OrdenaAsiganadopor() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { NombreUsuarioAsigna: string; }, b: { NombreUsuarioAsigna: string; }) => a.NombreUsuarioAsigna.localeCompare(b.NombreUsuarioAsigna));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { NombreUsuarioAsigna: string; }, b: { NombreUsuarioAsigna: string; }) => b.NombreUsuarioAsigna.localeCompare(a.NombreUsuarioAsigna));
+    }
+  }
+  OrdenaFechaSolucion() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { FechaSolucion: string; }, b: { FechaSolucion: string; }) => a.FechaSolucion.localeCompare(b.FechaSolucion));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { FechaSolucion: string; }, b: { FechaSolucion: string; }) => b.FechaSolucion.localeCompare(a.FechaSolucion));
+    }
+  }
+  OrdenaObservacion() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { Observacion: string; }, b: { Observacion: string; }) => a.Observacion.localeCompare(b.Observacion));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { Observacion: string; }, b: { Observacion: string; }) => b.Observacion.localeCompare(a.Observacion));
+    }
+  }
+  OrdenaObservaciones() {
+    if (this.AuxOrganizar == true) {
+      this.AuxOrganizar = false;
+      this.ArrayGrilla.sort((a: { Observaciones: string; }, b: { Observaciones: string; }) => a.Observaciones.localeCompare(b.Observaciones));
+    } else {
+      this.AuxOrganizar = true;
+      this.ArrayGrilla.sort((a: { Observaciones: string; }, b: { Observaciones: string; }) => b.Observaciones.localeCompare(a.Observaciones));
     }
   }
 
