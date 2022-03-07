@@ -1,9 +1,4 @@
 <div class="portada">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <div class="container pt-5 pb-5">
         <div class="row" style="background: rgba(240,243,244,0.2);">
             <p class="Titulo mt-3">Hola, bienvenido {{Nombre}} {{Apellido}}</p>
@@ -62,26 +57,24 @@
                     alt="Cinque Terre">
 
                 <div class="col-12 mt-3">
-                    <button class="btn btn-light col-sm-4 mrd mt-3" title="Exportar Excel">
+                    <input *ngIf="ButtonsInput==true" name="file-input1" id="file-input1" type="file" class="custom-file-input"
+                        (change)="cargandoImagen($event, templateMensaje)"
+                        title="Las propiedades de la imagen deben ser peso máximo 1 MG y de tipo JPG o PNG" />
+
+                    <button *ngIf="ButtonsInput==true" class="btn btn-light col-sm-4 mrd mt-3" title="Exportar Excel"
+                        (click)="VerButons()">
+                        Cancelar
+                    </button>
+                    <button *ngIf="ButtonsImg == true && ImgPerfil!='http://192.168.3.186:8092/ImgDefaulUsario.png'" class="btn btn-light col-sm-4 mrd mt-3" title="Exportar Excel"
+                        (click)="VerFile()">
                         Agregar
                         <img src="../../../../assets/ImagenesAdminCDI/subirIMG.png" style="margin-left: 5px;"
                             class="BtnimgTamanoPeque mr-2">
                     </button>
-
-                    <input name="file-input1" id="file-input1" type="file"
-                        (change)="cargandoImagen($event, templateMensaje)"
-                        title="Las propiedades de la imagen deben ser peso máximo 1 MG y de tipo JPG o PNG" />
-
-
-                    <button class="btn btn-light col-sm-4 mrd mt-3" title="Exportar Excel">
+                    <button *ngIf="ButtonsImg == true" class="btn btn-light col-sm-4 mrd mt-3" title="Exportar Excel"
+                        (click)="VerFile()">
                         Editar
                         <img src="../../../../assets/ImagenesAdminCDI/editIMG.png" style="margin-left: 5px;"
-                            class="BtnimgTamanoPeque mr-2">
-                    </button>
-
-                    <button class="btn btn-light col-sm-4 mrd mt-3" title="Nuevo">
-                        Borrar
-                        <img src="../../../../assets/ImagenesAdminCDI/deleteIMG.png" style="margin-left: 5px;"
                             class="BtnimgTamanoPeque mr-2">
                     </button>
                 </div>
