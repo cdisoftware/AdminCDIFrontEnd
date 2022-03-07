@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { LayautprincipalComponent } from 'src/app/layouts/layautprincipal/layautprincipal.component';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -21,6 +18,8 @@ export class LoginComponent implements OnInit {
   user: string = '';
   // variable contraseña login
   passw: string = '';
+  //Variable img
+  ImgPerfil: string;
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +47,7 @@ export class LoginComponent implements OnInit {
       RESPUESTA: '0',
     };
     this.Servicios.consultavalidlogin(consultalogin).subscribe(respu => {
-         if (respu == '"El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion"') {
+      if (respu == '"El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion"') {
         this.error();
         this.form.reset();
       } else {
@@ -58,7 +57,16 @@ export class LoginComponent implements OnInit {
         this.cookies.set("UserAdmin", respu[0].UserAdmin);
         this.cookies.set("Usuario", respu[0].Usuario);
         this.cookies.set("Password", respu[0].Password);
-        //this.cookies.set("UrlFoto", respu[0].UrlFoto);
+
+        console.log(respu[0].UrlFoto);
+        if (respu[0].UrlFoto == undefined || respu[0].UrlFoto == null || respu[0].UrlFoto == '') {
+          this.ImgPerfil = 'http://192.168.3.186:8092/ImgDefaulUsario.png';
+          this.cookies.set("UrlFoto", this.ImgPerfil);
+
+          console.log(this.ImgPerfil);
+        } else {
+          this.cookies.set("UrlFoto", respu[0].UrlFoto);
+        }
         this.fakeLoading();
       }
     });

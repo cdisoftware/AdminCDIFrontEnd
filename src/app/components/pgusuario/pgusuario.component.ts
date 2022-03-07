@@ -15,6 +15,7 @@ export class PgusuarioComponent implements OnInit {
     private _modalService: BsModalService) { }
 
   //Variables obtienen info
+  IdUsuariokookies: string = this.cookies.get('IdUsuario');
   Nombre: string = this.cookies.get('Nombre');
   Apellido: string = this.cookies.get('Apellido');
   ImgPerfil: string = this.cookies.get('UrlFoto');
@@ -31,7 +32,13 @@ export class PgusuarioComponent implements OnInit {
   //variables modal mensajes
   lblModalMsaje: string;
   modalMensaje: BsModalRef;
+
+  //Variables fecha
+  ButtonsInput: boolean = false;
+  ButtonsImg: boolean = true;
+
   ngOnInit(): void {
+
   }
 
   True() {
@@ -58,9 +65,6 @@ export class PgusuarioComponent implements OnInit {
 
 
   cargandoImagen(event: any, templateMensaje: TemplateRef<any>) {
-    if (this.ImgPerfil == undefined || this.ImgPerfil == null || this.ImgPerfil == '') {
-      this.ImgPerfil = '../../../../assets/ImagenesAdminCDI/ImgDefaulUusario.png';
-    }
     if (!(/\.(jpg|png)$/i).test(event.target.files[0].name)) {
 
       this.modalMensaje = this._modalService.show(templateMensaje);
@@ -73,9 +77,17 @@ export class PgusuarioComponent implements OnInit {
       this.Servicios.postFileImagen(event.target.files[0]).subscribe(
         response => {
           if (response == 'Archivo Subido Correctamente') {
-
             this.imgRuedaForm = 'http://192.168.3.186:8092/' + event.target.files[0].name;
-            console.log(this.imgRuedaForm)
+
+            const ActualizaImg = {
+              UrlFoto: this.imgRuedaForm
+            }
+            this.Servicios.modificaimagen(this.IdUsuariokookies, ActualizaImg).subscribe(respu => {
+              console.log(this.imgRuedaForm)
+              this.modalMensaje = this._modalService.show(templateMensaje);
+              this.lblModalMsaje = respu;
+            });
+
           } else {
             this.lblModalMsaje = 'No hemos podido subir la imagen, intenta nuevamente';
             this.modalMensaje = this._modalService.show(templateMensaje);
@@ -88,6 +100,16 @@ export class PgusuarioComponent implements OnInit {
         }
       );
     }
+  }
+
+  VerFile(){
+    this.ButtonsInput = true;
+    this.ButtonsImg = false;
+  }
+
+  VerButons(){
+    this.ButtonsInput = false;
+    this.ButtonsImg = true;
   }
 
 }

@@ -148,4 +148,7 @@ export class MetodosGlobalesService {
   insertaservicio(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'insertaservicio/' + bandera, BodyPost);
   }
+  modificaimagen(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'modificaimagen/' + bandera, BodyPost);
+  }
 }
