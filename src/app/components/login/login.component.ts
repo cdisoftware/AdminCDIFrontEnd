@@ -57,16 +57,6 @@ export class LoginComponent implements OnInit {
         this.cookies.set("UserAdmin", respu[0].UserAdmin);
         this.cookies.set("Usuario", respu[0].Usuario);
         this.cookies.set("Password", respu[0].Password);
-
-        console.log(respu[0].UrlFoto);
-        if (respu[0].UrlFoto == undefined || respu[0].UrlFoto == null || respu[0].UrlFoto == '') {
-          this.ImgPerfil = 'http://192.168.3.186:8092/ImgDefaulUsario.png';
-          this.cookies.set("UrlFoto", this.ImgPerfil);
-
-          console.log(this.ImgPerfil);
-        } else {
-          this.cookies.set("UrlFoto", respu[0].UrlFoto);
-        }
         this.fakeLoading();
       }
     });
