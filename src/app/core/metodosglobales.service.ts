@@ -151,4 +151,7 @@ export class MetodosGlobalesService {
   modificaimagen(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'modificaimagen/' + bandera, BodyPost);
   }
+  consultainfouser(IdUsuario: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consultainfouser/' + IdUsuario);
+  }
 }

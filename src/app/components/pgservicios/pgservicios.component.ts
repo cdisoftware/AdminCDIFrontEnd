@@ -49,6 +49,9 @@ export class PgserviciosComponent implements OnInit {
   //ListaUsario
   ArregloListaUsuario: any;
 
+  //Ver agregar
+  Veragregar: boolean = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private Servicios: MetodosGlobalesService,
@@ -115,10 +118,21 @@ export class PgserviciosComponent implements OnInit {
         Estado: 0,
         IdUsuarioAsigna: this.IdUsuarioCookies,
         Observacion: this.Observacion,
+        Observaciones: this.Observaciones,
         Prioridad: this.IdPrioridad
       }
       this.Servicios.insertaservicio('3', InsertaServ).subscribe(respu => {
         this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
+
+        if(respu == 'Servicio creado correctamente.'){
+          this.IdIntegrador = '0';
+          this.SP = '';
+          this.Exce = '';
+          this.IdTipoServicio = '0';
+          this.Observacion = '';
+          this.Observaciones = '';
+          this.IdPrioridad = '0';
+        }
       })
     }
   }
@@ -243,6 +257,13 @@ export class PgserviciosComponent implements OnInit {
 
   BtnInfo(templateMensaje: TemplateRef<any>) {
     this.modalMensaje = this._modalService.show(templateMensaje)
+  }
+  BtnVerAgregar(){
+    this.Veragregar = true;
+  }
+
+  BtnOcultarAgregar(){
+    this.Veragregar = false;
   }
 
 }
