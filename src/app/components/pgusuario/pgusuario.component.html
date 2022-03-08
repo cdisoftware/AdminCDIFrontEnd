@@ -3,8 +3,6 @@
         <div class="row" style="background: rgba(240,243,244,0.2);">
             <p class="Titulo mt-3">Hola, bienvenido {{Nombre}} {{Apellido}}</p>
             <br>
-            <br>
-            <br>
         </div>
         <div class="row" style="background: rgba(240,243,244,0.4);">
             <div class="col-sm-4">
@@ -65,7 +63,7 @@
                         (click)="VerButons()">
                         Cancelar
                     </button>
-                    <button *ngIf="ButtonsImg == true && ImgPerfil!='http://192.168.3.186:8092/ImgDefaulUsario.png'" class="btn btn-light col-sm-4 mrd mt-3" title="Exportar Excel"
+                    <button *ngIf="ButtonsImg == true && ImgPerfil=='http://192.168.3.186:8092/ImgDefaulUsario.png'" class="btn btn-light col-sm-4 mrd mt-3" title="Exportar Excel"
                         (click)="VerFile()">
                         Agregar
                         <img src="../../../../assets/ImagenesAdminCDI/subirIMG.png" style="margin-left: 5px;"

@@ -262,4 +262,8 @@ export class PgserviciosComponent implements OnInit {
     this.Veragregar = true;
   }
 
+  BtnOcultarAgregar(){
+    this.Veragregar = false;
+  }
+
 }

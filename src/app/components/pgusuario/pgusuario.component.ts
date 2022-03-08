@@ -18,7 +18,7 @@ export class PgusuarioComponent implements OnInit {
   IdUsuariokookies: string = this.cookies.get('IdUsuario');
   Nombre: string = this.cookies.get('Nombre');
   Apellido: string = this.cookies.get('Apellido');
-  ImgPerfil: string = this.cookies.get('UrlFoto');
+  ImgPerfil: string;
 
   NombreEdit: string = this.Nombre;
   ApellidoEdit: string = this.Apellido;
@@ -38,7 +38,17 @@ export class PgusuarioComponent implements OnInit {
   ButtonsImg: boolean = true;
 
   ngOnInit(): void {
+    this.TraenfoUser();
+  }
 
+  TraenfoUser() {
+    this.Servicios.consultainfouser(this.IdUsuariokookies).subscribe(respu => {
+      if (respu[0].UrlFoto == undefined || respu[0].UrlFoto == null || respu[0].UrlFoto == '') {
+        this.ImgPerfil = 'http://192.168.3.186:8092/ImgDefaulUsario.png';
+      } else {
+        this.ImgPerfil =  respu[0].UrlFoto;
+      }
+    });
   }
 
   True() {
@@ -83,9 +93,11 @@ export class PgusuarioComponent implements OnInit {
               UrlFoto: this.imgRuedaForm
             }
             this.Servicios.modificaimagen(this.IdUsuariokookies, ActualizaImg).subscribe(respu => {
-              console.log(this.imgRuedaForm)
               this.modalMensaje = this._modalService.show(templateMensaje);
               this.lblModalMsaje = respu;
+
+              this.TraenfoUser();
+              this.VerButons();
             });
 
           } else {
@@ -102,12 +114,12 @@ export class PgusuarioComponent implements OnInit {
     }
   }
 
-  VerFile(){
+  VerFile() {
     this.ButtonsInput = true;
     this.ButtonsImg = false;
   }
 
-  VerButons(){
+  VerButons() {
     this.ButtonsInput = false;
     this.ButtonsImg = true;
   }
