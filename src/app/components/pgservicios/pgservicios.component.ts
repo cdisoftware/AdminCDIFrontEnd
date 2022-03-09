@@ -52,6 +52,9 @@ export class PgserviciosComponent implements OnInit {
   //Ver agregar
   Veragregar: boolean = false;
 
+  //Modal Ver detalles
+  modalVerdetalles: BsModalRef;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private Servicios: MetodosGlobalesService,
