@@ -269,7 +269,7 @@ export class PgserviciosComponent implements OnInit {
     this.Veragregar = false;
   }
 
-  AbrirPopapVerDetalles(templateDetallesServidor: TemplateRef<any>){
+  AbrirPopapVerDetalles(templateDetallesServidor: TemplateRef<any>, Arr: any){
     this.modalVerdetalles = this._modalService.show(templateDetallesServidor);
     this.modalVerdetalles.setClass('modal-lg');
   }
