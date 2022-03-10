@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CookieService } from "ngx-cookie-service";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-pgservicios',
@@ -55,11 +56,16 @@ export class PgserviciosComponent implements OnInit {
   //Modal Ver detalles
   modalVerdetalles: BsModalRef;
 
+  //VARIABLES VER DETALLES
+  VerDetallesServicios: string;
+  pRUEBA: string;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private Servicios: MetodosGlobalesService,
     private _modalService: BsModalService,
-    private cookies: CookieService
+    private cookies: CookieService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -127,7 +133,7 @@ export class PgserviciosComponent implements OnInit {
       this.Servicios.insertaservicio('3', InsertaServ).subscribe(respu => {
         this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
 
-        if(respu == 'Servicio creado correctamente.'){
+        if (respu == 'Servicio creado correctamente.') {
           this.IdIntegrador = '0';
           this.SP = '';
           this.Exce = '';
@@ -261,16 +267,45 @@ export class PgserviciosComponent implements OnInit {
   BtnInfo(templateMensaje: TemplateRef<any>) {
     this.modalMensaje = this._modalService.show(templateMensaje)
   }
-  BtnVerAgregar(){
+  BtnVerAgregar() {
     this.Veragregar = true;
   }
 
-  BtnOcultarAgregar(){
+  BtnOcultarAgregar() {
     this.Veragregar = false;
   }
 
-  AbrirPopapVerDetalles(templateDetallesServidor: TemplateRef<any>, Arr: any){
+  AbrirPopapVerDetalles(templateDetallesServidor: TemplateRef<any>, Arr: any) {
+    console.log(Arr)
+    this.VerDetallesServicios = Arr.DatosServicio;
+
+    this.ConsumeServicio('GET', Arr.ConsumeServicio, '', Arr.UrlServicio).subscribe(respu => {
+      console.log(respu)
+      var Cadena = JSON.stringify(respu);
+      var newJsonUno = Cadena.replace('[', "[" + '\n');
+      var newJsonDos = newJsonUno.replace('{', " {" + '\n');//Mas 1 espacios
+      var newJsonTres = newJsonDos.replace('",', '",' + '\n');
+
+      var newJsonCuatro = newJsonTres.replace('},', " }," + '\n' + '\n');
+      this.pRUEBA = newJsonCuatro;
+    })
     this.modalVerdetalles = this._modalService.show(templateDetallesServidor);
     this.modalVerdetalles.setClass('modal-lg');
+  }
+  ConsumeServicio(TipoServicio: string, NombreSerAndParametros: string, TipoPostPut: any, UrlServicio: string) {
+    var URLServidor = UrlServicio;
+    if (TipoServicio == 'GET') {
+      return this.http.get<any[]>(URLServidor + NombreSerAndParametros);
+    }
+    if (TipoServicio == 'POST') {
+      return this.http.post<any[]>(URLServidor + NombreSerAndParametros, TipoPostPut);
+    }
+    if (TipoServicio == 'PUT') {
+      return this.http.put<any[]>(URLServidor + NombreSerAndParametros, TipoPostPut);
+    }
+    if (TipoServicio == 'DELETE') {
+      return this.http.post<any[]>(URLServidor + NombreSerAndParametros, TipoPostPut);
+    }
+    return this.http.get<any[]>(URLServidor + NombreSerAndParametros);
   }
 }
