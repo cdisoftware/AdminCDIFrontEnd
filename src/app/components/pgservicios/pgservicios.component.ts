@@ -4,6 +4,7 @@ import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CookieService } from "ngx-cookie-service";
 import { HttpClient } from '@angular/common/http';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-pgservicios',
@@ -56,9 +57,12 @@ export class PgserviciosComponent implements OnInit {
   //Modal Ver detalles
   modalVerdetalles: BsModalRef;
 
+  //Modal Editar
+  modalEditar: BsModalRef;
+
   //VARIABLES VER DETALLES
   VerDetallesServicios: string;
-  pRUEBA: string;
+  RespuServicio: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -275,37 +279,66 @@ export class PgserviciosComponent implements OnInit {
     this.Veragregar = false;
   }
 
-  AbrirPopapVerDetalles(templateDetallesServidor: TemplateRef<any>, Arr: any) {
+  AbrirPopapVerDetalles(templateDetallesServicio: TemplateRef<any>, Arr: any) {
     console.log(Arr)
     this.VerDetallesServicios = Arr.DatosServicio;
 
-    this.ConsumeServicio('GET', Arr.ConsumeServicio, '', Arr.UrlServicio).subscribe(respu => {
-      console.log(respu)
-      var Cadena = JSON.stringify(respu);
-      var newJsonUno = Cadena.replace('[', "[" + '\n');
-      var newJsonDos = newJsonUno.replace('{', " {" + '\n');//Mas 1 espacios
-      var newJsonTres = newJsonDos.replace('",', '",' + '\n');
+    this.ConsumeServicio(Arr.TipoServicio, Arr.ConsumeServicio, '', Arr.UrlServicio).subscribe(respu => {
 
-      var newJsonCuatro = newJsonTres.replace('},', " }," + '\n' + '\n');
-      this.pRUEBA = newJsonCuatro;
+      var Temp: string;
+      for (var i = 0; i < respu.length; i++) {
+        Temp = JSON.stringify(respu[i]);
+        var newString = Temp.replace('{', '{\n');
+        var newindef = newString.replace('undefined', '');
+        this.RespuServicio = this.RespuServicio + newindef + '\n';
+        this.RespuServicio = this.RespuServicio + '\n';
+      }
+      /*
+            var TextoTexteArea = document.getElementById('ResultadoConsultaServicio');
+            TextoTexteArea.value = respu.join("\n");
+      
+           */
     })
-    this.modalVerdetalles = this._modalService.show(templateDetallesServidor);
+    this.modalVerdetalles = this._modalService.show(templateDetallesServicio);
     this.modalVerdetalles.setClass('modal-lg');
   }
   ConsumeServicio(TipoServicio: string, NombreSerAndParametros: string, TipoPostPut: any, UrlServicio: string) {
     var URLServidor = UrlServicio;
-    if (TipoServicio == 'GET') {
+    if (TipoServicio == 'CONSULTA') {
       return this.http.get<any[]>(URLServidor + NombreSerAndParametros);
     }
-    if (TipoServicio == 'POST') {
+    if (TipoServicio == 'INSERTA') {
       return this.http.post<any[]>(URLServidor + NombreSerAndParametros, TipoPostPut);
     }
-    if (TipoServicio == 'PUT') {
+    if (TipoServicio == 'ACTUALIZACION') {
       return this.http.put<any[]>(URLServidor + NombreSerAndParametros, TipoPostPut);
     }
     if (TipoServicio == 'DELETE') {
       return this.http.post<any[]>(URLServidor + NombreSerAndParametros, TipoPostPut);
     }
     return this.http.get<any[]>(URLServidor + NombreSerAndParametros);
+  }
+
+
+  //Editar servicio
+  IdServidorEdita: string;
+  SpEdit: string;
+  ExecEdit: string;
+  IdTipoServicioEdit: string;
+  LblObservacionEdit: string;
+  LblObservacionesEdit: string;
+  IdPrioridadEdit: string;
+  EditServ(templateDetallesServidor: TemplateRef<any>, Arr: any) {
+    console.log(Arr);
+    this.IdServidorEdita = Arr.IdIntegrador;
+    this.SpEdit = Arr.StoredProcedures;
+    this.ExecEdit = Arr.EXEC_SP;
+    this.IdTipoServicioEdit = Arr.TipoServicio;
+    this.LblObservacionEdit = Arr.Observacion;
+    this.LblObservacionesEdit = Arr.Observaciones;
+    this.IdPrioridadEdit = Arr.Prioridad;
+
+    this.modalEditar = this._modalService.show(templateDetallesServidor);
+    this.modalEditar.setClass('modal-lg');
   }
 }
