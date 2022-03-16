@@ -12,7 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./pgservicios.component.css']
 })
 export class PgserviciosComponent implements OnInit {
-  @ViewChild('templateVerDetalles', {static: false}) contenidoDelModal: any;
+  @ViewChild('templateVerDetalles', { static: false }) contenidoDelModal: any;
   ngAfterViewInit() {
     this.VerPendientesDesarollo();
   }
@@ -399,7 +399,30 @@ export class PgserviciosComponent implements OnInit {
   }
 
   //Verdesarollador
+  ArrayConsultaServiciosPendientes: any;
   VerPendientesDesarollo() {
-    this.modalServiceDos.open(this.contenidoDelModal, { size: 'xl'});
+    this.Servicios.consdesrrllopendient(this.IdUsuarioCookies, this.IdProyecto).subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArrayConsultaServiciosPendientes = respu;
+        this.modalServiceDos.open(this.contenidoDelModal, { size: 'xl' });
+      }
+    })
+  }
+
+  //AbrirPoparServicioEcho
+  modalSerEcho: BsModalRef;
+  LblDatosServicio: string;
+  LblObservacion: string;
+  LblObservaciones: string;
+  LblConsumeservicio: string;
+  AbrirPopapServicioEcho(templateServicioEcho: TemplateRef<any>, Arr: any) {
+    this.LblDatosServicio = '';
+    this.LblObservacion = Arr.Observacion;
+    this.LblObservaciones = Arr.Observaciones;
+    this.LblConsumeservicio = '';
+
+    this.modalSerEcho = this._modalService.show(templateServicioEcho);
+    this.modalSerEcho.setClass('modal-lg');
+    this.modalServiceDos.dismissAll();
   }
 }

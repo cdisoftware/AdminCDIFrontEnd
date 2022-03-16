@@ -32,8 +32,9 @@
 </div>
 <div style="justify-content: center; margin: auto;" class="row" *ngIf="Veragregar == false">
     <hr style="width: 100%; float: left;">
-    <img (click)="BtnVerAgregar()" style="width: 3%;" src="../../../../assets/ImagenesAdminCDI/abajo.png"
-        class="cursorPointer BtnimgDesplegar" title="Desplegar">
+    <img (click)="BtnVerAgregar()" style="width: 49px; height: 34px;"
+        src="../../../../assets/ImagenesAdminCDI/abajo.png" class="cursorPointer BtnimgDesplegar"
+        title="Desplegar para agregar nuevo servicio">
 </div>
 
 <div class="row" *ngIf="Veragregar == true">
@@ -90,8 +91,9 @@
 </div>
 <div style="justify-content: center; margin: auto;" class="row" *ngIf="Veragregar == true">
     <hr style="width: 100%; float: left;">
-    <img (click)="BtnOcultarAgregar()" style="width: 3%;" src="../../../../assets/ImagenesAdminCDI/arriba.png"
-        class="cursorPointer BtnimgDesplegar" title="Desplegar">
+    <img (click)="BtnOcultarAgregar()" style="width: 49px; height: 34px;"
+        src="../../../../assets/ImagenesAdminCDI/arriba.png" class="cursorPointer BtnimgDesplegar"
+        title="Dejar de ver la opcion de agregar">
 </div>
 <table class="table table-bordered mt-3 text-center margenesTabla">
 
@@ -586,17 +588,92 @@
 
 <ng-template #templateVerDetalles let-modal>
     <div class="modal-header">
-        <div class="col-sm-1">
-            <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png"
-                    class="btnEquis">
-            </button>
-        </div>
-
+        <p class="titulopopup">Desarrollos pendientes</p>
+        <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
     </div>
     <div class="mrd mld" id="htmlData_">
         <div class="row texto text-center">
-            
+            <table class="table table-bordered mt-3 text-center">
+                <tr>
+                    <th>Prioridad</th>
+                    <th>StoredProcedures</th>
+                    <th>Proyecto</th>
+                    <th>Fecha de asignacion</th>
+                    <th>Tipo Servicio</th>
+                    <th>Observacion</th>
+                    <th>Observaciones</th>
+                    <th>Echo</th>
+                </tr>
+                <tr *ngFor="let ArGrilla of ArrayConsultaServiciosPendientes">
+                    <td>{{ArGrilla.Prioridad}}</td>
+                    <td>{{ArGrilla.StoredProcedures}}</td>
+                    <td>{{ArGrilla.NombreProyecto}}</td>
+                    <td>{{ArGrilla.FechaAsignacion}}</td>
+                    <td>{{ArGrilla.TipoServicio}}</td>
+                    <td>{{ArGrilla.Observacion}}</td>
+                    <td>{{ArGrilla.Observaciones}}</td>
+                    <td>
+                        <img src="../../../assets/ImagenesAdminCDI/Echo.png" class="ImgDesaroloPendiente"
+                            (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla)">
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
+</ng-template>
+
+
+
+<ng-template #templateServicioEcho>
+    <div class="modal-header">
+        <th class="titulopopup">Servicio</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalSerEcho.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>Datos servicio</p>
+                        <textarea class="md-textarea form-control textarea" title="Datos de el servicio">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>Observación</p>
+                        <textarea class="md-textarea form-control textarea" title="Observación" [(ngModel)]="LblObservacion">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <p>Observaciónes</p>
+                        <textarea class="md-textarea form-control textarea" title="Observaciones" [(ngModel)]="LblObservaciones">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <p>Consume servicio</p>
+                        <textarea class="md-textarea form-control textarea" title="Consume servicio">
+                    </textarea>
+                    </div>
+                </div>
+
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalSerEcho.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
 </ng-template>
