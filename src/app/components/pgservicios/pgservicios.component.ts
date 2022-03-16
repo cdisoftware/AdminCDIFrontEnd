@@ -4,7 +4,6 @@ import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CookieService } from "ngx-cookie-service";
 import { HttpClient } from '@angular/common/http';
-import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-pgservicios',
@@ -21,6 +20,9 @@ export class PgserviciosComponent implements OnInit {
 
   //Variables modal mensaje
   modalMensaje: BsModalRef;
+  lblModalMsaje: string;
+  VerMensaje: boolean = false;
+
   //Variables inicio de paguina
   NombreProyecto: string;
   //Variables consulta proyecto
@@ -279,9 +281,10 @@ export class PgserviciosComponent implements OnInit {
     this.Veragregar = false;
   }
 
+  NombreSp: string;
   AbrirPopapVerDetalles(templateDetallesServicio: TemplateRef<any>, Arr: any) {
-    console.log(Arr)
     this.VerDetallesServicios = Arr.DatosServicio;
+    this.NombreSp = Arr.StoredProcedures;
 
     this.ConsumeServicio(Arr.TipoServicio, Arr.ConsumeServicio, '', Arr.UrlServicio).subscribe(respu => {
 
@@ -321,7 +324,8 @@ export class PgserviciosComponent implements OnInit {
 
 
   //Editar servicio
-  IdServidorEdita: string;
+  IdServicioEdit: string;
+  IdIntegradorEdit: string;
   SpEdit: string;
   ExecEdit: string;
   IdTipoServicioEdit: string;
@@ -329,8 +333,8 @@ export class PgserviciosComponent implements OnInit {
   LblObservacionesEdit: string;
   IdPrioridadEdit: string;
   EditServ(templateDetallesServidor: TemplateRef<any>, Arr: any) {
-    console.log(Arr);
-    this.IdServidorEdita = Arr.IdIntegrador;
+    this.IdServicioEdit = Arr.IdServicios;
+    this.IdIntegradorEdit = Arr.IdIntegrador;
     this.SpEdit = Arr.StoredProcedures;
     this.ExecEdit = Arr.EXEC_SP;
     this.IdTipoServicioEdit = Arr.TipoServicio;
@@ -340,5 +344,48 @@ export class PgserviciosComponent implements OnInit {
 
     this.modalEditar = this._modalService.show(templateDetallesServidor);
     this.modalEditar.setClass('modal-lg');
+  }
+  UpdateServicio(templateMensaje: TemplateRef<any>) {
+    const Update = {
+      IdServicios: this.IdServicioEdit,
+      IdProyecto: 0,
+      FechaAsignacion: this.Fecha,
+      IdIntegrador: this.IdIntegradorEdit,
+      StoredProcedures: this.SpEdit,
+      EXEC_SP: this.ExecEdit,
+      TipoServicio: this.IdTipoServicioEdit,
+      Estado: 0,
+      IdUsuarioAsigna: this.IdUsuarioCookies,
+      Observacion: this.LblObservacionEdit,
+      Observaciones: this.LblObservacionesEdit,
+      Prioridad: this.IdPrioridadEdit
+    }
+
+    this.Servicios.insertaservicio('2', Update).subscribe(respu => {
+      if ('Servicio actualizado correctamente.') {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+        this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
+        this.modalEditar.hide();
+      } else {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'No fue posible actualizar el servicio, por favor comuníquese con soporte técnico';
+        this.lblModalMsaje = respu;
+        this.modalEditar.hide();
+      }
+    })
+  }
+
+  //Eliminar servicio
+  Eliminaservicio(Arr: any, templateMensaje: TemplateRef<any>) {
+    const Delete = {
+      IdServicios: Arr.IdServicios,
+      StoredProcedures: Arr.StoredProcedures
+    }
+    this.Servicios.eliminaservicio('4', Delete).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
+    })
   }
 }

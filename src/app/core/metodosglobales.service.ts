@@ -154,4 +154,10 @@ export class MetodosGlobalesService {
   consultainfouser(IdUsuario: string) {
     return this.http.get<any[]>(this.url_servidor + 'consultainfouser/' + IdUsuario);
   }
+  actualizaservicio(bandera: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizaservicio/'+ bandera, BodyPost);
+  }
+  eliminaservicio(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminaservicio/' + bandera, BodyPost);
+  }
 }
