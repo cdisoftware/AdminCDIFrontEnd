@@ -271,6 +271,7 @@ export class PgserviciosComponent implements OnInit {
 
 
   BtnInfo(templateMensaje: TemplateRef<any>) {
+    this.VerMensaje = true;
     this.modalMensaje = this._modalService.show(templateMensaje)
   }
   BtnVerAgregar() {
@@ -346,6 +347,7 @@ export class PgserviciosComponent implements OnInit {
     this.modalEditar.setClass('modal-lg');
   }
   UpdateServicio(templateMensaje: TemplateRef<any>) {
+    this.VerMensaje = false;
     const Update = {
       IdServicios: this.IdServicioEdit,
       IdProyecto: 0,
@@ -378,6 +380,7 @@ export class PgserviciosComponent implements OnInit {
 
   //Eliminar servicio
   Eliminaservicio(Arr: any, templateMensaje: TemplateRef<any>) {
+    this.VerMensaje = false;
     const Delete = {
       IdServicios: Arr.IdServicios,
       StoredProcedures: Arr.StoredProcedures
