@@ -1,9 +1,10 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CookieService } from "ngx-cookie-service";
 import { HttpClient } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-pgservicios',
@@ -11,6 +12,10 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./pgservicios.component.css']
 })
 export class PgserviciosComponent implements OnInit {
+  @ViewChild('templateVerDetalles', {static: false}) contenidoDelModal: any;
+  ngAfterViewInit() {
+    this.VerPendientesDesarollo();
+  }
 
   //Usuario
   IdUsuarioCookies: string = this.cookies.get('IdUsuario');
@@ -71,7 +76,8 @@ export class PgserviciosComponent implements OnInit {
     private Servicios: MetodosGlobalesService,
     private _modalService: BsModalService,
     private cookies: CookieService,
-    private http: HttpClient
+    private http: HttpClient,
+    private modalServiceDos: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -390,5 +396,10 @@ export class PgserviciosComponent implements OnInit {
       this.lblModalMsaje = respu;
       this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
     })
+  }
+
+  //Verdesarollador
+  VerPendientesDesarollo() {
+    this.modalServiceDos.open(this.contenidoDelModal, { size: 'xl'});
   }
 }
