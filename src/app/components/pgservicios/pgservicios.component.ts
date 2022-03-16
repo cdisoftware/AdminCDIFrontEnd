@@ -20,6 +20,9 @@ export class PgserviciosComponent implements OnInit {
 
   //Variables modal mensaje
   modalMensaje: BsModalRef;
+  lblModalMsaje: string;
+  VerMensaje: boolean = false;
+
   //Variables inicio de paguina
   NombreProyecto: string;
   //Variables consulta proyecto
@@ -56,9 +59,12 @@ export class PgserviciosComponent implements OnInit {
   //Modal Ver detalles
   modalVerdetalles: BsModalRef;
 
+  //Modal Editar
+  modalEditar: BsModalRef;
+
   //VARIABLES VER DETALLES
   VerDetallesServicios: string;
-  pRUEBA: string;
+  RespuServicio: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -275,37 +281,111 @@ export class PgserviciosComponent implements OnInit {
     this.Veragregar = false;
   }
 
-  AbrirPopapVerDetalles(templateDetallesServidor: TemplateRef<any>, Arr: any) {
-    console.log(Arr)
+  NombreSp: string;
+  AbrirPopapVerDetalles(templateDetallesServicio: TemplateRef<any>, Arr: any) {
     this.VerDetallesServicios = Arr.DatosServicio;
+    this.NombreSp = Arr.StoredProcedures;
 
-    this.ConsumeServicio('GET', Arr.ConsumeServicio, '', Arr.UrlServicio).subscribe(respu => {
-      console.log(respu)
-      var Cadena = JSON.stringify(respu);
-      var newJsonUno = Cadena.replace('[', "[" + '\n');
-      var newJsonDos = newJsonUno.replace('{', " {" + '\n');//Mas 1 espacios
-      var newJsonTres = newJsonDos.replace('",', '",' + '\n');
+    this.ConsumeServicio(Arr.TipoServicio, Arr.ConsumeServicio, '', Arr.UrlServicio).subscribe(respu => {
 
-      var newJsonCuatro = newJsonTres.replace('},', " }," + '\n' + '\n');
-      this.pRUEBA = newJsonCuatro;
+      var Temp: string;
+      for (var i = 0; i < respu.length; i++) {
+        Temp = JSON.stringify(respu[i]);
+        var newString = Temp.replace('{', '{\n');
+        var newindef = newString.replace('undefined', '');
+        this.RespuServicio = this.RespuServicio + newindef + '\n';
+        this.RespuServicio = this.RespuServicio + '\n';
+      }
+      /*
+            var TextoTexteArea = document.getElementById('ResultadoConsultaServicio');
+            TextoTexteArea.value = respu.join("\n");
+      
+           */
     })
-    this.modalVerdetalles = this._modalService.show(templateDetallesServidor);
+    this.modalVerdetalles = this._modalService.show(templateDetallesServicio);
     this.modalVerdetalles.setClass('modal-lg');
   }
   ConsumeServicio(TipoServicio: string, NombreSerAndParametros: string, TipoPostPut: any, UrlServicio: string) {
     var URLServidor = UrlServicio;
-    if (TipoServicio == 'GET') {
+    if (TipoServicio == 'CONSULTA') {
       return this.http.get<any[]>(URLServidor + NombreSerAndParametros);
     }
-    if (TipoServicio == 'POST') {
+    if (TipoServicio == 'INSERTA') {
       return this.http.post<any[]>(URLServidor + NombreSerAndParametros, TipoPostPut);
     }
-    if (TipoServicio == 'PUT') {
+    if (TipoServicio == 'ACTUALIZACION') {
       return this.http.put<any[]>(URLServidor + NombreSerAndParametros, TipoPostPut);
     }
     if (TipoServicio == 'DELETE') {
       return this.http.post<any[]>(URLServidor + NombreSerAndParametros, TipoPostPut);
     }
     return this.http.get<any[]>(URLServidor + NombreSerAndParametros);
+  }
+
+
+  //Editar servicio
+  IdServicioEdit: string;
+  IdIntegradorEdit: string;
+  SpEdit: string;
+  ExecEdit: string;
+  IdTipoServicioEdit: string;
+  LblObservacionEdit: string;
+  LblObservacionesEdit: string;
+  IdPrioridadEdit: string;
+  EditServ(templateDetallesServidor: TemplateRef<any>, Arr: any) {
+    this.IdServicioEdit = Arr.IdServicios;
+    this.IdIntegradorEdit = Arr.IdIntegrador;
+    this.SpEdit = Arr.StoredProcedures;
+    this.ExecEdit = Arr.EXEC_SP;
+    this.IdTipoServicioEdit = Arr.TipoServicio;
+    this.LblObservacionEdit = Arr.Observacion;
+    this.LblObservacionesEdit = Arr.Observaciones;
+    this.IdPrioridadEdit = Arr.Prioridad;
+
+    this.modalEditar = this._modalService.show(templateDetallesServidor);
+    this.modalEditar.setClass('modal-lg');
+  }
+  UpdateServicio(templateMensaje: TemplateRef<any>) {
+    const Update = {
+      IdServicios: this.IdServicioEdit,
+      IdProyecto: 0,
+      FechaAsignacion: this.Fecha,
+      IdIntegrador: this.IdIntegradorEdit,
+      StoredProcedures: this.SpEdit,
+      EXEC_SP: this.ExecEdit,
+      TipoServicio: this.IdTipoServicioEdit,
+      Estado: 0,
+      IdUsuarioAsigna: this.IdUsuarioCookies,
+      Observacion: this.LblObservacionEdit,
+      Observaciones: this.LblObservacionesEdit,
+      Prioridad: this.IdPrioridadEdit
+    }
+
+    this.Servicios.insertaservicio('2', Update).subscribe(respu => {
+      if ('Servicio actualizado correctamente.') {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+        this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
+        this.modalEditar.hide();
+      } else {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'No fue posible actualizar el servicio, por favor comuníquese con soporte técnico';
+        this.lblModalMsaje = respu;
+        this.modalEditar.hide();
+      }
+    })
+  }
+
+  //Eliminar servicio
+  Eliminaservicio(Arr: any, templateMensaje: TemplateRef<any>) {
+    const Delete = {
+      IdServicios: Arr.IdServicios,
+      StoredProcedures: Arr.StoredProcedures
+    }
+    this.Servicios.eliminaservicio('4', Delete).subscribe(respu => {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
+    })
   }
 }
