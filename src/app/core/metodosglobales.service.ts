@@ -160,4 +160,8 @@ export class MetodosGlobalesService {
   eliminaservicio(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'eliminaservicio/' + bandera, BodyPost);
   }
+  consdesrrllopendient(IdIntegrador: string, IdProyecto: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consdesrrllopendient/' + IdIntegrador + '/' + IdProyecto);
+  }
+
 }
