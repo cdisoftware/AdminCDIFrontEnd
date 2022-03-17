@@ -4,31 +4,17 @@
     margin-right: auto;
 }
 .BAJA{
-    background-color: #28B463;
+    background-color: #F0B27A;
 }
 .BAJA.OK{
-    background-color: #fff!important;
-}
-
-.MEDIA{
-    background-color: #F1C40F;
-}
-.MEDIA.OK{
-    background-color: #fff!important;
+    background-color: #27AE60!important;
 }
 
 .ALTA{
-    background-color: #E67E22;
+    background-color: #B03A2E;
 }
 .ALTA.OK{
-    background-color: #fff!important;
-}
-
-.URGENTE{
-    background-color: #E74C3C;
-}
-.URGENTE.OK{
-    background-color: #fff!important;
+    background-color: #27AE60!important;
 }
 
 
