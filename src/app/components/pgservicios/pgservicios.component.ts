@@ -378,7 +378,6 @@ export class PgserviciosComponent implements OnInit {
       } else {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = 'No fue posible actualizar el servicio, por favor comuníquese con soporte técnico';
-        this.lblModalMsaje = respu;
         this.modalEditar.hide();
       }
     })
@@ -401,6 +400,7 @@ export class PgserviciosComponent implements OnInit {
   //Verdesarollador
   ArrayConsultaServiciosPendientes: any;
   VerPendientesDesarollo() {
+    this.ArrayConsultaServiciosPendientes = [];
     this.Servicios.consdesrrllopendient(this.IdUsuarioCookies, this.IdProyecto).subscribe(respu => {
       if (respu.length > 0) {
         this.ArrayConsultaServiciosPendientes = respu;
@@ -416,13 +416,47 @@ export class PgserviciosComponent implements OnInit {
   LblObservaciones: string;
   LblConsumeservicio: string;
   AbrirPopapServicioEcho(templateServicioEcho: TemplateRef<any>, Arr: any) {
-    this.LblDatosServicio = '';
+    this.LblDatosServicio = Arr.DatosServicio;
     this.LblObservacion = Arr.Observacion;
     this.LblObservaciones = Arr.Observaciones;
-    this.LblConsumeservicio = '';
+    this.LblConsumeservicio = Arr.ConsumeServicio;
+
+    //Servicio echo
+    this.IdServicio = Arr.IdServicios;
 
     this.modalSerEcho = this._modalService.show(templateServicioEcho);
     this.modalSerEcho.setClass('modal-lg');
     this.modalServiceDos.dismissAll();
+  }
+  CerrarServicioEcho() {
+    this.modalSerEcho.hide();
+    this.VerPendientesDesarollo();
+  }
+
+  //Update servicio echo
+  IdServicio: string;
+  ServicioEcho(templateMensaje: TemplateRef<any>) {
+    if (this.LblObservacion == '' || this.LblObservacion == undefined || this.LblDatosServicio == '' || this.LblDatosServicio == undefined
+      || this.LblObservaciones == '' || this.LblObservaciones == undefined || this.LblConsumeservicio == '' || this.LblConsumeservicio == undefined) {
+      this.VerMensaje = false;
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = 'Por favor llene todos los campo a agregar.';
+    } else {
+      const Echo = {
+        IdServicios: this.IdServicio,
+        IdProyecto: this.IdProyecto,
+        FechaSolucion: this.Fecha,
+        Observacion: this.LblObservacion,
+        DatosServicio: this.LblDatosServicio,
+        Observaciones: this.LblObservaciones,
+        ConsumeServicio: this.LblConsumeservicio,
+        UrlServicio: ""
+      }
+      this.Servicios.updateserviciorealizado('2', Echo).subscribe(respu => {
+        this.modalSerEcho.hide();
+        this.VerPendientesDesarollo();
+        this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
+      })
+    }
   }
 }

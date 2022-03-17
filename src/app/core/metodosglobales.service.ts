@@ -163,5 +163,7 @@ export class MetodosGlobalesService {
   consdesrrllopendient(IdIntegrador: string, IdProyecto: string) {
     return this.http.get<any[]>(this.url_servidor + 'consdesrrllopendient/' + IdIntegrador + '/' + IdProyecto);
   }
-
+  updateserviciorealizado(bandera: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'updateserviciorealizado/'+ bandera, BodyPost);
+  }
 }
