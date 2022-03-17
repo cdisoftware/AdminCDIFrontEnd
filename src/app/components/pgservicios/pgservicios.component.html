@@ -43,9 +43,7 @@
         <select class="form-select" title="Seleccionar Prioridad" #Prioridadvalueagregar [(ngModel)]="IdPrioridad">
             <option value="0">Prioridad</option>
             <option value="BAJA">BAJA</option>
-            <option value="MEDIA">MEDIA</option>
             <option value="ALTA">ALTA</option>
-            <option value="URGENTE">URGENTE</option>
         </select>
     </div>
     <div class="col-sm-2 mt-4">
@@ -198,85 +196,6 @@
         </tr>
 
 
-        <tr *ngIf="ArGrilla.Prioridad == 'MEDIA' && ArGrilla.Estado == 0" class="MEDIA">
-            <td>{{ArGrilla.Prioridad}}</td>
-            <td>{{ArGrilla.FechaAsignacion}}</td>
-            <td>{{ArGrilla.NombreIntegrador}}</td>
-            <td>{{ArGrilla.StoredProcedures}}</td>
-            <td>
-                <div class="col-sm-12">
-                    <textarea class="md-textarea form-control textarea" title="Exec" rows="2" disabled="true">
-                        {{ArGrilla.EXEC_SP}}
-                    </textarea>
-                </div>
-            </td>
-            <td>{{ArGrilla.TipoServicio}}</td>
-            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
-            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
-            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
-            <td>{{ArGrilla.FechaSolucion}}</td>
-            <td>{{ArGrilla.Observacion}}</td>
-            <td>{{ArGrilla.Observaciones}}</td>
-
-            <td>
-                <button (click)="AbrirPopapVerDetalles(templateDetallesServicio, ArGrilla)"
-                    *ngIf="ArGrilla.Estado == 1">
-                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
-                </button>
-            </td>
-            <td>
-                <button (click)="EditServ(templateEditServicio, ArGrilla)">
-                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
-                </button>
-            </td>
-
-            <td>
-                <button>
-                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque"
-                        (click)="Eliminaservicio(ArGrilla, templateMensaje)">
-                </button>
-            </td>
-        </tr>
-        <tr *ngIf="ArGrilla.Prioridad == 'MEDIA' && ArGrilla.Estado == 1" class="MEDIA OK">
-            <td>{{ArGrilla.Prioridad}}</td>
-            <td>{{ArGrilla.FechaAsignacion}}</td>
-            <td>{{ArGrilla.NombreIntegrador}}</td>
-            <td>{{ArGrilla.StoredProcedures}}</td>
-            <td>
-                <div class="col-sm-12">
-                    <textarea class="md-textarea form-control textarea" title="Exec" rows="2" disabled="true">
-                        {{ArGrilla.EXEC_SP}}
-                    </textarea>
-                </div>
-            </td>
-            <td>{{ArGrilla.TipoServicio}}</td>
-            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
-            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
-            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
-            <td>{{ArGrilla.FechaSolucion}}</td>
-            <td>{{ArGrilla.Observacion}}</td>
-            <td>{{ArGrilla.Observaciones}}</td>
-
-            <td>
-                <button (click)="AbrirPopapVerDetalles(templateDetallesServicio, ArGrilla)"
-                    *ngIf="ArGrilla.Estado == 1">
-                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
-                </button>
-            </td>
-            <td>
-                <button (click)="EditServ(templateEditServicio, ArGrilla)">
-                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
-                </button>
-            </td>
-
-            <td>
-                <button>
-                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque"
-                        (click)="Eliminaservicio(ArGrilla, templateMensaje)">
-                </button>
-            </td>
-        </tr>
-
         <tr *ngIf="ArGrilla.Prioridad == 'ALTA' && ArGrilla.Estado == 0" class="ALTA">
             <td>{{ArGrilla.Prioridad}}</td>
             <td>{{ArGrilla.FechaAsignacion}}</td>
@@ -356,84 +275,6 @@
             </td>
         </tr>
 
-        <tr *ngIf="ArGrilla.Prioridad == 'URGENTE' && ArGrilla.Estado == 0" class="URGENTE">
-            <td>{{ArGrilla.Prioridad}}</td>
-            <td>{{ArGrilla.FechaAsignacion}}</td>
-            <td>{{ArGrilla.NombreIntegrador}}</td>
-            <td>{{ArGrilla.StoredProcedures}}</td>
-            <td>
-                <div class="col-sm-12">
-                    <textarea class="md-textarea form-control textarea" title="Exec" rows="2" disabled="true">
-                        {{ArGrilla.EXEC_SP}}
-                    </textarea>
-                </div>
-            </td>
-            <td>{{ArGrilla.TipoServicio}}</td>
-            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
-            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
-            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
-            <td>{{ArGrilla.FechaSolucion}}</td>
-            <td>{{ArGrilla.Observacion}}</td>
-            <td>{{ArGrilla.Observaciones}}</td>
-
-            <td>
-                <button (click)="AbrirPopapVerDetalles(templateDetallesServicio, ArGrilla)"
-                    *ngIf="ArGrilla.Estado == 1">
-                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
-                </button>
-            </td>
-            <td>
-                <button (click)="EditServ(templateEditServicio, ArGrilla)">
-                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
-                </button>
-            </td>
-
-            <td>
-                <button>
-                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque"
-                        (click)="Eliminaservicio(ArGrilla, templateMensaje)">
-                </button>
-            </td>
-        </tr>
-        <tr *ngIf="ArGrilla.Prioridad == 'URGENTE' && ArGrilla.Estado == 1" class="URGENTE OK">
-            <td>{{ArGrilla.Prioridad}}</td>
-            <td>{{ArGrilla.FechaAsignacion}}</td>
-            <td>{{ArGrilla.NombreIntegrador}}</td>
-            <td>{{ArGrilla.StoredProcedures}}</td>
-            <td>
-                <div class="col-sm-12">
-                    <textarea class="md-textarea form-control textarea" title="Exec" rows="2" disabled="true">
-                        {{ArGrilla.EXEC_SP}}
-                    </textarea>
-                </div>
-            </td>
-            <td>{{ArGrilla.TipoServicio}}</td>
-            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
-            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
-            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
-            <td>{{ArGrilla.FechaSolucion}}</td>
-            <td>{{ArGrilla.Observacion}}</td>
-            <td>{{ArGrilla.Observaciones}}</td>
-
-            <td>
-                <button (click)="AbrirPopapVerDetalles(templateDetallesServicio, ArGrilla)"
-                    *ngIf="ArGrilla.Estado == 1">
-                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
-                </button>
-            </td>
-            <td>
-                <button (click)="EditServ(templateEditServicio, ArGrilla)">
-                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
-                </button>
-            </td>
-
-            <td>
-                <button>
-                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque"
-                        (click)="Eliminaservicio(ArGrilla, templateMensaje)">
-                </button>
-            </td>
-        </tr>
     </tbody>
 </table>
 
@@ -552,9 +393,7 @@
                             [(ngModel)]="IdPrioridadEdit">
                             <option value="0">Prioridad</option>
                             <option value="BAJA">BAJA</option>
-                            <option value="MEDIA">MEDIA</option>
                             <option value="ALTA">ALTA</option>
-                            <option value="URGENTE">URGENTE</option>
                         </select>
                     </div>
                     <div class="col-sm-6 mt-4">
@@ -604,7 +443,7 @@
                     <th>Tipo Servicio</th>
                     <th>Observacion</th>
                     <th>Observaciones</th>
-                    <th>Echo</th>
+                    <th>Hecho</th>
                 </tr>
                 <tr *ngFor="let ArGrilla of ArrayConsultaServiciosPendientes">
                     <td>{{ArGrilla.Prioridad}}</td>
@@ -639,22 +478,26 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <p>Datos servicio</p>
-                        <textarea class="md-textarea form-control textarea" title="Datos de el servicio" [(ngModel)]="LblDatosServicio">
+                        <textarea class="md-textarea form-control textarea" title="Datos de el servicio"
+                            [(ngModel)]="LblDatosServicio">
                     </textarea>
                     </div>
                     <div class="col-sm-6">
                         <p>Observación</p>
-                        <textarea class="md-textarea form-control textarea" title="Observación" [(ngModel)]="LblObservacion">
+                        <textarea class="md-textarea form-control textarea" title="Observación"
+                            [(ngModel)]="LblObservacion">
                     </textarea>
                     </div>
                     <div class="col-sm-6 mt-3">
                         <p>Observaciónes</p>
-                        <textarea class="md-textarea form-control textarea" title="Observaciones" [(ngModel)]="LblObservaciones">
+                        <textarea class="md-textarea form-control textarea" title="Observaciones"
+                            [(ngModel)]="LblObservaciones">
                     </textarea>
                     </div>
                     <div class="col-sm-6 mt-3">
                         <p>Consume servicio</p>
-                        <textarea class="md-textarea form-control textarea" title="Consume servicio" [(ngModel)]="LblConsumeservicio">
+                        <textarea class="md-textarea form-control textarea" title="Consume servicio"
+                            [(ngModel)]="LblConsumeservicio">
                     </textarea>
                     </div>
                 </div>
