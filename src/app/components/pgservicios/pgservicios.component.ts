@@ -505,7 +505,7 @@ export class PgserviciosComponent implements OnInit {
         DatosServicio: this.LblDatosServicio,
         Observaciones: this.LblObservaciones,
         ConsumeServicio: this.LblConsumeservicio,
-        UrlServicio: 'http://' + this.LblServidorAlojaServicio + ':' + this.NumeroPuerto + '/' + this.LblPatch
+        UrlServicio: 'http://' + this.LblServidorAlojaServicio + ':' + this.NumeroPuerto + '/' + this.LblPatch + '/'
       }
       this.Servicios.updateserviciorealizado('1', Echo).subscribe(respu => {
       })
