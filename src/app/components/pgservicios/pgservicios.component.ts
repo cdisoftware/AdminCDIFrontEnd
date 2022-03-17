@@ -13,8 +13,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PgserviciosComponent implements OnInit {
   @ViewChild('templateVerDetalles', { static: false }) contenidoDelModal: any;
-  ngAfterViewInit() {
-    this.VerPendientesDesarollo();
+  ngAfterViewInit(templateMensaje: TemplateRef<any>) {
+    var num: number = 1;
+    this.VerPendientesDesarollo(templateMensaje, num);
   }
 
   //Usuario
@@ -87,7 +88,7 @@ export class PgserviciosComponent implements OnInit {
 
     this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
     this.ListaUsuario();
-
+    this.ListaTipoServidor();
   }
 
   Grilla(TipoServicio: string, Prioridad: string, Sp: string) {
@@ -126,7 +127,6 @@ export class PgserviciosComponent implements OnInit {
     if (this.IdIntegrador == '0' || this.IdIntegrador == undefined || this.SP == '' || this.SP == undefined || this.Exce == '' || this.Exce == undefined ||
       this.IdTipoServicio == '0' || this.IdTipoServicio == undefined || this.Observacion == '' || this.Observacion == undefined || this.IdPrioridad == '' ||
       this.IdPrioridad == undefined) {
-      console.log('Agrege todos los campos')
     } else {
       const InsertaServ = {
         IdServicios: 0,
@@ -399,12 +399,18 @@ export class PgserviciosComponent implements OnInit {
 
   //Verdesarollador
   ArrayConsultaServiciosPendientes: any;
-  VerPendientesDesarollo() {
+  VerPendientesDesarollo(templateMensaje: TemplateRef<any>, num: number) {
     this.ArrayConsultaServiciosPendientes = [];
     this.Servicios.consdesrrllopendient(this.IdUsuarioCookies, this.IdProyecto).subscribe(respu => {
       if (respu.length > 0) {
         this.ArrayConsultaServiciosPendientes = respu;
         this.modalServiceDos.open(this.contenidoDelModal, { size: 'xl' });
+      } else {
+        if (num != 1) {
+          this.VerMensaje = false;
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = 'No tienes desarrollos pendientes por ahora (^◡^ ).';
+        }
       }
     })
   }
@@ -415,7 +421,15 @@ export class PgserviciosComponent implements OnInit {
   LblObservacion: string;
   LblObservaciones: string;
   LblConsumeservicio: string;
+  LblUrl: string;
   AbrirPopapServicioEcho(templateServicioEcho: TemplateRef<any>, Arr: any) {
+    this.LblUrl = Arr.UrlServicio;
+    var NewUrl = this.LblUrl.split("/");
+    this.LblPatch = NewUrl[3];
+    var NewServer = NewUrl[2].split(":");
+    this.LblServidorAlojaServicio = NewServer[0]
+    this.NumeroPuerto = NewServer[1];
+
     this.LblDatosServicio = Arr.DatosServicio;
     this.LblObservacion = Arr.Observacion;
     this.LblObservaciones = Arr.Observaciones;
@@ -428,13 +442,16 @@ export class PgserviciosComponent implements OnInit {
     this.modalSerEcho.setClass('modal-lg');
     this.modalServiceDos.dismissAll();
   }
-  CerrarServicioEcho() {
+  CerrarServicioEcho(templateMensaje: TemplateRef<any>) {
     this.modalSerEcho.hide();
-    this.VerPendientesDesarollo();
+    this.VerPendientesDesarollo(templateMensaje, 2);
   }
 
   //Update servicio echo
   IdServicio: string;
+  LblServidorAlojaServicio: string;
+  NumeroPuerto: string;
+  LblPatch: string;
   ServicioEcho(templateMensaje: TemplateRef<any>) {
     if (this.LblObservacion == '' || this.LblObservacion == undefined || this.LblDatosServicio == '' || this.LblDatosServicio == undefined
       || this.LblObservaciones == '' || this.LblObservaciones == undefined || this.LblConsumeservicio == '' || this.LblConsumeservicio == undefined) {
@@ -454,8 +471,43 @@ export class PgserviciosComponent implements OnInit {
       }
       this.Servicios.updateserviciorealizado('2', Echo).subscribe(respu => {
         this.modalSerEcho.hide();
-        this.VerPendientesDesarollo();
+        this.VerPendientesDesarollo(templateMensaje, 2);
         this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
+      })
+    }
+  }
+
+  ArregloListaServidor: any;
+  ListaTipoServidor() {
+    this.ArregloListaServidor = [];
+    this.Servicios.consultaservidors('1', '0', '0', '2', '0').subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaServidor = respu;
+      }
+    })
+  }
+
+  GuardarURL(templateMensaje: TemplateRef<any>) {
+    if (
+      this.LblServidorAlojaServicio == '' || this.LblServidorAlojaServicio == undefined
+      || this.NumeroPuerto == '0' || this.NumeroPuerto == undefined || this.NumeroPuerto == ''
+      || this.LblPatch == '' || this.LblPatch == undefined
+    ) {
+      this.VerMensaje = false;
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = 'Por favor llene todos los campo a editar.';
+    } else {
+      const Echo = {
+        IdServicios: this.IdServicio,
+        IdProyecto: this.IdProyecto,
+        FechaSolucion: this.Fecha,
+        Observacion: this.LblObservacion,
+        DatosServicio: this.LblDatosServicio,
+        Observaciones: this.LblObservaciones,
+        ConsumeServicio: this.LblConsumeservicio,
+        UrlServicio: 'http://' + this.LblServidorAlojaServicio + ':' + this.NumeroPuerto + '/' + this.LblPatch
+      }
+      this.Servicios.updateserviciorealizado('1', Echo).subscribe(respu => {
       })
     }
   }
