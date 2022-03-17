@@ -629,7 +629,7 @@
 <ng-template #templateServicioEcho>
     <div class="modal-header">
         <th class="titulopopup">Servicio</th>
-        <button type="button" class="bot" aria-label="Close" (click)="modalSerEcho.hide();">
+        <button type="button" class="bot" aria-label="Close" (click)="CerrarServicioEcho();">
             <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
         </button>
     </div>
@@ -639,7 +639,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <p>Datos servicio</p>
-                        <textarea class="md-textarea form-control textarea" title="Datos de el servicio">
+                        <textarea class="md-textarea form-control textarea" title="Datos de el servicio" [(ngModel)]="LblDatosServicio">
                     </textarea>
                     </div>
                     <div class="col-sm-6">
@@ -654,19 +654,19 @@
                     </div>
                     <div class="col-sm-6 mt-3">
                         <p>Consume servicio</p>
-                        <textarea class="md-textarea form-control textarea" title="Consume servicio">
+                        <textarea class="md-textarea form-control textarea" title="Consume servicio" [(ngModel)]="LblConsumeservicio">
                     </textarea>
                     </div>
                 </div>
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="ServicioEcho(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
 
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalSerEcho.hide();">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="CerrarServicioEcho();">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
