@@ -457,7 +457,7 @@ export class PgserviciosComponent implements OnInit {
       || this.LblObservaciones == '' || this.LblObservaciones == undefined || this.LblConsumeservicio == '' || this.LblConsumeservicio == undefined) {
       this.VerMensaje = false;
       this.modalMensaje = this._modalService.show(templateMensaje);
-      this.lblModalMsaje = 'Por favor llene todos los campo a agregar.';
+      this.lblModalMsaje = 'Por favor llene todos los campo a agregar ¯\_( ͡❛ ͜ʖ ͡❛)_/¯.';
     } else {
       const Echo = {
         IdServicios: this.IdServicio,
@@ -495,7 +495,7 @@ export class PgserviciosComponent implements OnInit {
     ) {
       this.VerMensaje = false;
       this.modalMensaje = this._modalService.show(templateMensaje);
-      this.lblModalMsaje = 'Por favor llene todos los campo a editar.';
+      this.lblModalMsaje = 'Por favor llene todos los campo a editar ¯\_( ͡❛ ͜ʖ ͡❛)_/¯.';
     } else {
       const Echo = {
         IdServicios: this.IdServicio,
