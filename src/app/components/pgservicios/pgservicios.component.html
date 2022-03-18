@@ -33,13 +33,30 @@
         </div>
     </div>
 </div>
-<div style="justify-content: center; margin: auto;" class="row" *ngIf="Veragregar == false">
+<!--Botones-->
+<div class="row displayCenter col-12 mt-3">
+    <button class="btn btn-dark col-sm-2 mrd" title="Limpiar">
+        <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
+        Limpiar
+    </button>
+
+    <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" >
+        <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
+        Descargar PDF
+    </button>
+
+    <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Exportar Excel">
+        <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
+        Descarga excel
+    </button>
+</div>
+<!--Fin botones-->
+<div style="justify-content: center; margin: auto;" class="row mt-2" *ngIf="Veragregar == false">
     <hr style="width: 100%; float: left;">
     <img (click)="BtnVerAgregar()" style="width: 49px; height: 34px;"
         src="../../../../assets/ImagenesAdminCDI/abajo.png" class="cursorPointer BtnimgDesplegar"
         title="Desplegar para agregar nuevo servicio">
 </div>
-
 <div class="row" *ngIf="Veragregar == true">
     <div class="col-sm-1"></div>
     <div class="col-sm-2 mt-4">
