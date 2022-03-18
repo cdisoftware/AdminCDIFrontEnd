@@ -39,3 +39,7 @@ height: 35px;
     color: #F7F9F9;
     font-weight: bolder;
 }
+.TexteAreaPosyPut{
+    height: 150px;
+    resize: none;
+}

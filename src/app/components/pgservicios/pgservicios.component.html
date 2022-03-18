@@ -40,7 +40,7 @@
         Limpiar
     </button>
 
-    <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" >
+    <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF">
         <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
         Descargar PDF
     </button>
@@ -477,7 +477,7 @@
                     <td>{{ArGrilla.Observaciones}}</td>
                     <td>
                         <img src="../../../assets/ImagenesAdminCDI/Echo.png" class="ImgDesaroloPendiente"
-                            (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla)">
+                            (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">
                     </td>
                 </tr>
             </table>
@@ -544,15 +544,16 @@
                                     <p class="mt-2" style="font-weight: bolder;  color: #F7F9F9;">:</p>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="number" class="form-control colorInputUrl" title="Puerto" style="text-align: center;"
-                                        [(ngModel)]="NumeroPuerto">
+                                    <input type="number" class="form-control colorInputUrl" title="Puerto"
+                                        style="text-align: center;" [(ngModel)]="NumeroPuerto">
                                 </div>
                                 <div class="col-sm-1"
                                     style="justify-content: center; text-align: center; margin: auto;">
                                     <p class="mt-2" style="font-weight: bolder; color: #F7F9F9;">/</p>
                                 </div>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control colorInputUrl" title="Patch" [(ngModel)]="LblPatch">
+                                    <input type="text" class="form-control colorInputUrl" title="Patch"
+                                        [(ngModel)]="LblPatch">
                                 </div>
                                 <div class="col-sm-1 mt-2">
                                     <img src="../../../../assets/ImagenesAdminCDI/disqueteUrl.png"
@@ -572,6 +573,111 @@
 
                     <button class="btn btn-dark col-sm-3 mrd" title="Cancelar"
                         (click)="CerrarServicioEcho(templateMensaje);">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateServicioEchoPostPut>
+    <div class="modal-header">
+        <th class="titulopopup">Servicio</th>
+        <button type="button" class="bot" aria-label="Close" (click)="CerrarServicioEchoPostPut(templateMensaje);">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>Datos servicio</p>
+                        <textarea class="md-textarea form-control textarea" title="Datos de el servicio"
+                            [(ngModel)]="LblDatosServicio">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>Observación</p>
+                        <textarea class="md-textarea form-control textarea" title="Observación"
+                            [(ngModel)]="LblObservacion">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <p>Observaciónes</p>
+                        <textarea class="md-textarea form-control textarea" title="Observaciones"
+                            [(ngModel)]="LblObservaciones">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <p>Consume servicio en url</p>
+                        <textarea class="md-textarea form-control textarea" title="Consume servicio"
+                            [(ngModel)]="LblConsumeservicio">
+                        </textarea>
+                    </div>
+                    <hr class="mt-2">
+                    <div class="col-sm-3 mt-3"></div>
+                    <div class="col-sm-6 mt-3" style="justify-content: center; text-align: center; margin: auto;">
+                        <p style="font-weight: bolder;">Consume servicio en body</p>
+                        <textarea class="md-textarea form-control TexteAreaPosyPut" title="Consume servicio" [(ngModel)]="LblPostPut">
+                        </textarea>
+                    </div>
+                    <div class="col-sm-3 mt-3"></div>
+                </div>
+                <hr class="mt-2">
+                <table class="table table-bordered mt-2">
+                    <tr>
+                        <th style="background-color: #008080;">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <p style="font-weight: bolder; color: #F7F9F9;" class="mt-2">http://</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select class="form-select colorInputUrl" title="Seleccionar servidor"
+                                        [(ngModel)]="LblServidorAlojaServicio">
+                                        <option value="{{arRespu.Ip_S}}" *ngFor="let arRespu of ArregloListaServidor">
+                                            {{arRespu.Nombre}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-1"
+                                    style="justify-content: center; text-align: center; margin: auto;">
+                                    <p class="mt-2" style="font-weight: bolder;  color: #F7F9F9;">:</p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control colorInputUrl" title="Puerto"
+                                        style="text-align: center;" [(ngModel)]="NumeroPuerto">
+                                </div>
+                                <div class="col-sm-1"
+                                    style="justify-content: center; text-align: center; margin: auto;">
+                                    <p class="mt-2" style="font-weight: bolder; color: #F7F9F9;">/</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control colorInputUrl" title="Patch"
+                                        [(ngModel)]="LblPatch">
+                                </div>
+                                <div class="col-sm-1 mt-2">
+                                    <img src="../../../../assets/ImagenesAdminCDI/disqueteUrl.png"
+                                        class="cursorPointer BtnimgTamanoPeque mr-2"
+                                        (click)="GuardarURL(templateMensaje)">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="ServicioEcho(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar"
+                        (click)="CerrarServicioEchoPostPut(templateMensaje);">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
