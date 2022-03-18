@@ -292,23 +292,37 @@ export class PgserviciosComponent implements OnInit {
   AbrirPopapVerDetalles(templateDetallesServicio: TemplateRef<any>, Arr: any) {
     this.VerDetallesServicios = Arr.DatosServicio;
     this.NombreSp = Arr.StoredProcedures;
+    if (Arr.TipoServicio == 'CONSULTA') {
+      this.ConsumeServicio(Arr.TipoServicio, Arr.ConsumeServicio, '', Arr.UrlServicio).subscribe(respu => {
 
-    this.ConsumeServicio(Arr.TipoServicio, Arr.ConsumeServicio, '', Arr.UrlServicio).subscribe(respu => {
+        var Temp: string;
+        for (var i = 0; i < respu.length; i++) {
+          Temp = JSON.stringify(respu[i]);
+          var newString = Temp.replace('{', '{\n');
+          var newindef = newString.replace('undefined', '');
+          this.RespuServicio = this.RespuServicio + newindef + '\n';
+          this.RespuServicio = this.RespuServicio + '\n';
+        }
+        /*
+              var TextoTexteArea = document.getElementById('ResultadoConsultaServicio');
+              TextoTexteArea.value = respu.join("\n");
+        
+             */
+      })
+    } else if (Arr.TipoServicio == 'ACTUALIZACION' || Arr.TipoServicio == 'INSERTA' || Arr.TipoServicio == 'DELETE') {
 
-      var Temp: string;
-      for (var i = 0; i < respu.length; i++) {
-        Temp = JSON.stringify(respu[i]);
-        var newString = Temp.replace('{', '{\n');
-        var newindef = newString.replace('undefined', '');
-        this.RespuServicio = this.RespuServicio + newindef + '\n';
-        this.RespuServicio = this.RespuServicio + '\n';
-      }
-      /*
-            var TextoTexteArea = document.getElementById('ResultadoConsultaServicio');
-            TextoTexteArea.value = respu.join("\n");
-      
-           */
-    })
+      this.ConsumeServicio(Arr.TipoServicio, Arr.ConsumeServicio, '', Arr.UrlServicio).subscribe(respu => {
+
+        var Temp: string;
+        for (var i = 0; i < respu.length; i++) {
+          Temp = JSON.stringify(respu[i]);
+          var newString = Temp.replace('{', '{\n');
+          var newindef = newString.replace('undefined', '');
+          this.RespuServicio = this.RespuServicio + newindef + '\n';
+          this.RespuServicio = this.RespuServicio + '\n';
+        }
+      })
+    }
     this.modalVerdetalles = this._modalService.show(templateDetallesServicio);
     this.modalVerdetalles.setClass('modal-lg');
   }
@@ -422,7 +436,8 @@ export class PgserviciosComponent implements OnInit {
   LblObservaciones: string;
   LblConsumeservicio: string;
   LblUrl: string;
-  AbrirPopapServicioEcho(templateServicioEcho: TemplateRef<any>, Arr: any) {
+  AbrirPopapServicioEcho(templateServicioEcho: TemplateRef<any>, Arr: any, templateServicioEchoPostPut: TemplateRef<any>) {
+    console.log(Arr)
     this.LblUrl = Arr.UrlServicio;
     var NewUrl = this.LblUrl.split("/");
     this.LblPatch = NewUrl[3];
@@ -436,14 +451,26 @@ export class PgserviciosComponent implements OnInit {
     this.LblConsumeservicio = Arr.ConsumeServicio;
 
     //Servicio echo
-    this.IdServicio = Arr.IdServicios;
+    if (Arr.TipoServicio == 'CONSULTA') {
+      this.IdServicio = Arr.IdServicios;
 
-    this.modalSerEcho = this._modalService.show(templateServicioEcho);
-    this.modalSerEcho.setClass('modal-lg');
-    this.modalServiceDos.dismissAll();
+      this.modalSerEcho = this._modalService.show(templateServicioEcho);
+      this.modalSerEcho.setClass('modal-lg');
+      this.modalServiceDos.dismissAll();
+    } else if (Arr.TipoServicio == 'ACTUALIZACION' || Arr.TipoServicio == 'INSERTA' || Arr.TipoServicio == 'DELETE') {
+      this.IdServicio = Arr.IdServicios;
+
+      this.modalSerEchoPostPut = this._modalService.show(templateServicioEchoPostPut);
+      this.modalSerEchoPostPut.setClass('modal-lg');
+      this.modalServiceDos.dismissAll();
+    }
   }
   CerrarServicioEcho(templateMensaje: TemplateRef<any>) {
     this.modalSerEcho.hide();
+    this.VerPendientesDesarollo(templateMensaje, 2);
+  }
+  CerrarServicioEchoPostPut(templateMensaje: TemplateRef<any>) {
+    this.modalSerEchoPostPut.hide();
     this.VerPendientesDesarollo(templateMensaje, 2);
   }
 
@@ -452,6 +479,7 @@ export class PgserviciosComponent implements OnInit {
   LblServidorAlojaServicio: string;
   NumeroPuerto: string;
   LblPatch: string;
+  LblPostPut: string = '';
   ServicioEcho(templateMensaje: TemplateRef<any>) {
     if (this.LblObservacion == '' || this.LblObservacion == undefined || this.LblDatosServicio == '' || this.LblDatosServicio == undefined
       || this.LblObservaciones == '' || this.LblObservaciones == undefined || this.LblConsumeservicio == '' || this.LblConsumeservicio == undefined) {
@@ -459,6 +487,12 @@ export class PgserviciosComponent implements OnInit {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = 'Por favor llene todos los campo a agregar ¯\_( ͡❛ ͜ʖ ͡❛)_/¯.';
     } else {
+      var ConsumeServicioLLena: string;
+      if (this.LblPostPut != '' || this.LblPostPut != undefined) {
+        ConsumeServicioLLena = this.LblConsumeservicio + "||" + this.LblPostPut
+      } else {
+        ConsumeServicioLLena = this.LblConsumeservicio
+      }
       const Echo = {
         IdServicios: this.IdServicio,
         IdProyecto: this.IdProyecto,
@@ -466,13 +500,17 @@ export class PgserviciosComponent implements OnInit {
         Observacion: this.LblObservacion,
         DatosServicio: this.LblDatosServicio,
         Observaciones: this.LblObservaciones,
-        ConsumeServicio: this.LblConsumeservicio,
+        ConsumeServicio: ConsumeServicioLLena,
         UrlServicio: ""
       }
       this.Servicios.updateserviciorealizado('2', Echo).subscribe(respu => {
-        this.modalSerEcho.hide();
-        this.VerPendientesDesarollo(templateMensaje, 2);
+        if (this.LblPostPut != '' || this.LblPostPut != undefined) {
+          this.CerrarServicioEcho(templateMensaje);
+        } else {
+          this.CerrarServicioEchoPostPut(templateMensaje);
+        }
         this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
+        this.LblPostPut = '';
       })
     }
   }
@@ -510,5 +548,8 @@ export class PgserviciosComponent implements OnInit {
       this.Servicios.updateserviciorealizado('1', Echo).subscribe(respu => {
       })
     }
+  }
+  modalSerEchoPostPut: BsModalRef;
+  ValidaSiEsPostPut() {
   }
 }
