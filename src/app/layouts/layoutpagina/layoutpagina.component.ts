@@ -80,6 +80,9 @@ export class LayoutpaginaComponent implements OnInit {
   VerPgUsuario() {
     this.router.navigate(['home/PgUsuario']);
   }
+  VerPgETB() {
+    this.router.navigate(['home/PgEtb']);
+  }
   VerPgServicios(Id: string) {
     this.router.navigate(['home/PgServicios/'+Id]);
   }
