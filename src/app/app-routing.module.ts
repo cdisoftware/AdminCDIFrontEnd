@@ -12,6 +12,7 @@ import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.componen
 import { PgproyectosComponent } from './components/pgproyectos/pgproyectos.component';
 import { PgusuarioComponent } from './components/pgusuario/pgusuario.component';
 import { PgserviciosComponent } from './components/pgservicios/pgservicios.component';
+import { PgetbComponent } from './components/pgetb/pgetb.component';
 
 
 const routes: Routes = [
@@ -50,6 +51,11 @@ const routes: Routes = [
       {
         path: 'PgUsuario',
         component: PgusuarioComponent,
+
+      },
+      {
+        path: 'PgEtb',
+        component: PgetbComponent,
 
       },
       {
