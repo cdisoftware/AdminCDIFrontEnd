@@ -137,7 +137,7 @@
         <th>Eliminar</th>
     </tr>
     <tbody *ngFor="let ArGrilla of ArrayGrilla">
-        <tr *ngIf="ArGrilla.Prioridad == 'BAJA' && ArGrilla.Estado == 0" class="BAJA">
+        <tr *ngIf="ArGrilla.Prioridad == 'BAJA' && ArGrilla.Estado == 0" class="cursorPointer BAJA" (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">
             <td>{{ArGrilla.Prioridad}}</td>
             <td>{{ArGrilla.FechaAsignacion}}</td>
             <td>{{ArGrilla.NombreIntegrador}}</td>
@@ -216,7 +216,7 @@
         </tr>
 
 
-        <tr *ngIf="ArGrilla.Prioridad == 'ALTA' && ArGrilla.Estado == 0" class="ALTA">
+        <tr *ngIf="ArGrilla.Prioridad == 'ALTA' && ArGrilla.Estado == 0" class="cursorPointer ALTA" (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">
             <td>{{ArGrilla.Prioridad}}</td>
             <td>{{ArGrilla.FechaAsignacion}}</td>
             <td>{{ArGrilla.NombreIntegrador}}</td>
