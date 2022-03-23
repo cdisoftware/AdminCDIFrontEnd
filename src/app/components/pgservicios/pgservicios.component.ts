@@ -389,6 +389,7 @@ export class PgserviciosComponent implements OnInit {
         this.lblModalMsaje = respu;
         this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
         this.modalEditar.hide();
+        this.LimpiaCampos();
       } else {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = 'No fue posible actualizar el servicio, por favor comuníquese con soporte técnico';
@@ -426,6 +427,7 @@ export class PgserviciosComponent implements OnInit {
           this.lblModalMsaje = 'No tienes desarrollos pendientes por ahora (^◡^ ).';
         }
       }
+      this.LimpiaCampos();
     })
   }
 
@@ -434,10 +436,10 @@ export class PgserviciosComponent implements OnInit {
   LblDatosServicio: string;
   LblObservacion: string;
   LblObservaciones: string;
+  LblConsumeservicioArr: any;
   LblConsumeservicio: string;
   LblUrl: string;
   AbrirPopapServicioEcho(templateServicioEcho: TemplateRef<any>, Arr: any, templateServicioEchoPostPut: TemplateRef<any>) {
-    console.log(Arr)
     this.LblUrl = Arr.UrlServicio;
     var NewUrl = this.LblUrl.split("/");
     this.LblPatch = NewUrl[3];
@@ -448,7 +450,13 @@ export class PgserviciosComponent implements OnInit {
     this.LblDatosServicio = Arr.DatosServicio;
     this.LblObservacion = Arr.Observacion;
     this.LblObservaciones = Arr.Observaciones;
-    this.LblConsumeservicio = Arr.ConsumeServicio;
+    if (Arr.TipoServicio != 'CONSULTA') {
+      this.LblConsumeservicioArr = Arr.ConsumeServicio.split("||");
+      this.LblConsumeservicio = this.LblConsumeservicioArr[0];
+      this.LblPostPut = this.LblConsumeservicioArr[1];
+    } else {
+      this.LblConsumeservicio = Arr.ConsumeServicio;
+    }
 
     //Servicio echo
     if (Arr.TipoServicio == 'CONSULTA') {
@@ -468,10 +476,12 @@ export class PgserviciosComponent implements OnInit {
   CerrarServicioEcho(templateMensaje: TemplateRef<any>) {
     this.modalSerEcho.hide();
     this.VerPendientesDesarollo(templateMensaje, 2);
+    this.LimpiaCampos();
   }
   CerrarServicioEchoPostPut(templateMensaje: TemplateRef<any>) {
     this.modalSerEchoPostPut.hide();
     this.VerPendientesDesarollo(templateMensaje, 2);
+    this.LimpiaCampos();
   }
 
   //Update servicio echo
@@ -487,11 +497,11 @@ export class PgserviciosComponent implements OnInit {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = 'Por favor llene todos los campo a agregar ¯\_( ͡❛ ͜ʖ ͡❛)_/¯.';
     } else {
-      var ConsumeServicioLLena: string;
-      if (this.LblPostPut != '' || this.LblPostPut != undefined) {
-        ConsumeServicioLLena = this.LblConsumeservicio + "||" + this.LblPostPut
-      } else {
+      var ConsumeServicioLLena: string = '';
+      if (this.LblPostPut == '' || this.LblPostPut == undefined) {
         ConsumeServicioLLena = this.LblConsumeservicio
+      }else{
+        ConsumeServicioLLena = this.LblConsumeservicio + "||" + this.LblPostPut
       }
       const Echo = {
         IdServicios: this.IdServicio,
@@ -503,14 +513,18 @@ export class PgserviciosComponent implements OnInit {
         ConsumeServicio: ConsumeServicioLLena,
         UrlServicio: ""
       }
+      console.log(Echo)
       this.Servicios.updateserviciorealizado('2', Echo).subscribe(respu => {
         if (this.LblPostPut != '' || this.LblPostPut != undefined) {
           this.CerrarServicioEcho(templateMensaje);
+          this.LimpiaCampos();
         } else {
           this.CerrarServicioEchoPostPut(templateMensaje);
+          this.LimpiaCampos();
         }
         this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
         this.LblPostPut = '';
+        this.LimpiaCampos();
       })
     }
   }
@@ -551,5 +565,27 @@ export class PgserviciosComponent implements OnInit {
   }
   modalSerEchoPostPut: BsModalRef;
   ValidaSiEsPostPut() {
+  }
+
+  LimpiaCampos() {
+    this.IdServicioEdit = '';
+    this.IdIntegradorEdit = '';
+    this.SpEdit = '';
+    this.ExecEdit = '';
+    this.IdTipoServicioEdit = '';
+    this.LblObservacionEdit = '';
+    this.LblObservacionesEdit = '';
+    this.IdPrioridadEdit = '';
+    this.LblDatosServicio = '';
+    this.LblObservacion = '';
+    this.LblObservaciones = '';
+    this.LblConsumeservicioArr = [];
+    this.LblConsumeservicio = '';
+    this.LblUrl = '';
+    this.IdServicio = '';
+    this.LblServidorAlojaServicio = '';
+    this.NumeroPuerto = '';
+    this.LblPatch = '';
+    this.LblPostPut = '';
   }
 }
