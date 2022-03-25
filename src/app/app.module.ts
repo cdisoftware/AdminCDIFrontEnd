@@ -21,6 +21,7 @@ import { PgproyectosComponent } from './components/pgproyectos/pgproyectos.compo
 import { PgusuarioComponent } from './components/pgusuario/pgusuario.component';
 import { PgserviciosComponent } from './components/pgservicios/pgservicios.component';
 import { PgetbComponent } from './components/pgetb/pgetb.component';
+import { PgvpnComponent } from './components/pgvpn/pgvpn.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PgetbComponent } from './components/pgetb/pgetb.component';
     PgproyectosComponent,
     PgusuarioComponent,
     PgserviciosComponent,
-    PgetbComponent
+    PgetbComponent,
+    PgvpnComponent
   ],
   imports: [
     ModalModule.forRoot(),
