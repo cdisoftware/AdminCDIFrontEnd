@@ -13,6 +13,7 @@ import { PgproyectosComponent } from './components/pgproyectos/pgproyectos.compo
 import { PgusuarioComponent } from './components/pgusuario/pgusuario.component';
 import { PgserviciosComponent } from './components/pgservicios/pgservicios.component';
 import { PgetbComponent } from './components/pgetb/pgetb.component';
+import { PgvpnComponent } from './components/pgvpn/pgvpn.component';
 
 
 const routes: Routes = [
@@ -56,6 +57,11 @@ const routes: Routes = [
       {
         path: 'PgEtb',
         component: PgetbComponent,
+
+      },
+      {
+        path: 'PgVpn',
+        component: PgvpnComponent,
 
       },
       {
