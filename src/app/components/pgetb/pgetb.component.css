@@ -7,10 +7,7 @@
 }
 .TresD{
     transform:
-    perspective(750px)
-    translate3d(0px, 0px, -250px)
-    rotateX(0deg)
-    scale(0.9, 0.9);
+    translate3d(0px, 0px, -250px);
   border-radius: 20px;
   
   box-shadow: 0 70px 40px -20px rgba(0, 0, 0, 0.2);
