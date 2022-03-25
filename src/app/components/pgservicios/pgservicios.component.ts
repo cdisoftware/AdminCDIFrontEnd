@@ -5,6 +5,10 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CookieService } from "ngx-cookie-service";
 import { HttpClient } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Workbook } from "exceljs";
+import { saveAs } from 'file-saver';
+import autoTable from 'jspdf-autotable'
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-pgservicios',
@@ -500,7 +504,7 @@ export class PgserviciosComponent implements OnInit {
       var ConsumeServicioLLena: string = '';
       if (this.LblPostPut == '' || this.LblPostPut == undefined) {
         ConsumeServicioLLena = this.LblConsumeservicio
-      }else{
+      } else {
         ConsumeServicioLLena = this.LblConsumeservicio + "||" + this.LblPostPut
       }
       const Echo = {
@@ -513,7 +517,6 @@ export class PgserviciosComponent implements OnInit {
         ConsumeServicio: ConsumeServicioLLena,
         UrlServicio: ""
       }
-      console.log(Echo)
       this.Servicios.updateserviciorealizado('2', Echo).subscribe(respu => {
         if (this.LblPostPut != '' || this.LblPostPut != undefined) {
           this.CerrarServicioEcho(templateMensaje);
@@ -587,5 +590,130 @@ export class PgserviciosComponent implements OnInit {
     this.NumeroPuerto = '';
     this.LblPatch = '';
     this.LblPostPut = '';
+    this.Tiposervidor = '';
+    this.Prioridad = '';
+    this.Sp = '';
+    this.Grilla(this.Tiposervidor, this.Prioridad, this.Sp);
+  }
+
+  DescargarExcel(templateMensaje: TemplateRef<any>) {
+    var TipoSer = this.Tiposervidor;
+    var Prio = this.Prioridad;
+    var SP = this.Sp;
+    if (TipoSer == undefined || TipoSer == '') {
+      TipoSer = '0';
+    }
+
+    if (Prio == undefined || Prio == '') {
+      Prio = '0';
+    }
+
+    if (SP == undefined || SP == '') {
+      SP = '0';
+    }
+    this.Servicios.consultservicios(this.IdProyecto, TipoSer, Prio, SP).subscribe(respu => {
+      console.log(respu)
+      if (respu.length > 0) {
+        let workbook = new Workbook();
+        let worksheet = workbook.addWorksheet("Registro servicios");
+        let header = ["Prioridad", "Fecha Asignación", "Integrador", "Stored Procedures", "Exec", "Tipo servicio", "Estado", "Asignado por", "Fecha solución", "Observación", "Observaciones"];
+        worksheet.addRow(header);
+
+        for (let x1 of respu) {
+          let temp = []
+          temp.push(x1['Prioridad'])
+          temp.push(x1['FechaAsignacion'])
+          temp.push(x1['NombreIntegrador'])
+          temp.push(x1['StoredProcedures'])
+          temp.push(x1['TipoServicio'])
+          temp.push(x1['EXEC_SP'])
+          if (x1.Estado == 1) {
+            temp.push('Ok')
+          } else {
+            temp.push('Pendiente')
+          }
+          temp.push(x1['NombreUsuarioAsigna'])
+          temp.push(x1['FechaSolucion'])
+          temp.push(x1['Observacion'])
+          temp.push(x1['Observaciones'])
+
+          worksheet.addRow(temp)
+        }
+
+        let fname = "Registro servicios - " + this.NombreProyecto + ' - ' + this.Fecha;
+
+        workbook.xlsx.writeBuffer().then((data) => {
+          let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          saveAs(blob, fname + '.xlsx');
+        });
+
+      } else {
+        this.VerMensaje = false;
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
+      }
+    })
+  }
+  DescargarDatosPdf() {
+    const doc = new jsPDF('l', 'px', 'a3');
+
+    autoTable(doc, {
+      styles: { fillColor: [216, 216, 216] },
+      columnStyles: {
+        1: { cellWidth: 78 },
+        2: { cellWidth: 78 },
+        3: { cellWidth: 78 },
+        4: { cellWidth: 78 },
+        5: { cellWidth: 78 },
+        6: { cellWidth: 78 },
+        7: { cellWidth: 78 },
+        8: { cellWidth: 78 },
+        9: { cellWidth: 78 },
+        10: { cellWidth: 78 },
+        11: { cellWidth: 78 }
+      },
+      didParseCell: function (data) {
+        var rows = data.table.body;
+        if (data.row.index === 0) {
+          data.cell.styles.fillColor = [0, 80, 80];
+          data.cell.styles.textColor = [255, 255, 255];
+        }
+      },
+      margin: { top: 10 },
+      body: [
+        ["Prioridad", "Fecha Asignación", "Integrador", "Stored Procedures", "Exec", "Tipo servicio", "Estado", "Asignado por", "Fecha solución", "Observación", "Observaciones"],
+      ]
+    })
+
+    this.ArrayGrilla.forEach(function (respuesta: any) {
+
+      var Res =
+        [respuesta.Prioridad, respuesta.FechaAsignacion, respuesta.NombreIntegrador, respuesta.StoredProcedures, respuesta.TipoServicio, respuesta.EXEC_SP, respuesta.Estado
+          , respuesta.NombreUsuarioAsigna, respuesta.FechaSolucion, respuesta.Observacion, respuesta.Observaciones];
+
+      autoTable(doc, {
+        margin: { top: 0, bottom: 0 },
+        columnStyles: {
+          1: { cellWidth: 78 },
+        2: { cellWidth: 78 },
+        3: { cellWidth: 78 },
+        4: { cellWidth: 78 },
+        5: { cellWidth: 78 },
+        6: { cellWidth: 78 },
+        7: { cellWidth: 78 },
+        8: { cellWidth: 78 },
+        9: { cellWidth: 78 },
+        10: { cellWidth: 78 },
+        11: { cellWidth: 78 }
+        },
+        body:
+          [
+            Res
+          ]
+      })
+    });
+
+    doc.save('Registro servicios - ' + this.NombreProyecto + ' - ' + this.Fecha + '.pdf')
+
   }
 }
