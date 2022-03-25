@@ -35,17 +35,17 @@
 </div>
 <!--Botones-->
 <div class="row displayCenter col-12 mt-3">
-    <button class="btn btn-dark col-sm-2 mrd" title="Limpiar">
+    <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="LimpiaCampos()">
         <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
         Limpiar
     </button>
 
-    <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF">
+    <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf()">
         <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
         Descargar PDF
     </button>
 
-    <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Exportar Excel">
+    <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Exportar Excel" (click)="DescargarExcel(templateMensaje)">
         <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
         Descarga excel
     </button>
@@ -137,10 +137,10 @@
         <th>Eliminar</th>
     </tr>
     <tbody *ngFor="let ArGrilla of ArrayGrilla">
-        <tr *ngIf="ArGrilla.Prioridad == 'BAJA' && ArGrilla.Estado == 0" class="cursorPointer BAJA" (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">
-            <td>{{ArGrilla.Prioridad}}</td>
-            <td>{{ArGrilla.FechaAsignacion}}</td>
-            <td>{{ArGrilla.NombreIntegrador}}</td>
+        <tr *ngIf="ArGrilla.Prioridad == 'BAJA' && ArGrilla.Estado == 0" class="cursorPointer BAJA">
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Prioridad}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.FechaAsignacion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.NombreIntegrador}}</td>
             <td>{{ArGrilla.StoredProcedures}}</td>
             <td>
                 <div class="col-sm-12">
@@ -149,13 +149,13 @@
                     </textarea>
                 </div>
             </td>
-            <td>{{ArGrilla.TipoServicio}}</td>
-            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.TipoServicio}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)" *ngIf="ArGrilla.Estado == 0">Pendiente</td>
             <td *ngIf="ArGrilla.Estado == 1">Ok</td>
-            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
-            <td>{{ArGrilla.FechaSolucion}}</td>
-            <td>{{ArGrilla.Observacion}}</td>
-            <td>{{ArGrilla.Observaciones}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.FechaSolucion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Observacion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Observaciones}}</td>
 
             <td>
                 <button (click)="AbrirPopapVerDetalles(templateDetallesServicio, ArGrilla)"
@@ -216,10 +216,10 @@
         </tr>
 
 
-        <tr *ngIf="ArGrilla.Prioridad == 'ALTA' && ArGrilla.Estado == 0" class="cursorPointer ALTA" (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">
-            <td>{{ArGrilla.Prioridad}}</td>
-            <td>{{ArGrilla.FechaAsignacion}}</td>
-            <td>{{ArGrilla.NombreIntegrador}}</td>
+        <tr *ngIf="ArGrilla.Prioridad == 'ALTA' && ArGrilla.Estado == 0" class="cursorPointer ALTA">
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Prioridad}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.FechaAsignacion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.NombreIntegrador}}</td>
             <td>{{ArGrilla.StoredProcedures}}</td>
             <td>
                 <div class="col-sm-12">
@@ -228,13 +228,13 @@
                     </textarea>
                 </div>
             </td>
-            <td>{{ArGrilla.TipoServicio}}</td>
-            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
-            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
-            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
-            <td>{{ArGrilla.FechaSolucion}}</td>
-            <td>{{ArGrilla.Observacion}}</td>
-            <td>{{ArGrilla.Observaciones}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.TipoServicio}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)" *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)" *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.FechaSolucion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Observacion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Observaciones}}</td>
 
             <td>
                 <button (click)="AbrirPopapVerDetalles(templateDetallesServicio, ArGrilla)"
