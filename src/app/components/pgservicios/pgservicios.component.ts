@@ -504,6 +504,7 @@ export class PgserviciosComponent implements OnInit {
       var ConsumeServicioLLena: string = '';
       if (this.LblPostPut == '' || this.LblPostPut == undefined) {
         ConsumeServicioLLena = this.LblConsumeservicio
+        this.LblPostPut = '';
       } else {
         ConsumeServicioLLena = this.LblConsumeservicio + "||" + this.LblPostPut
       }
@@ -518,7 +519,7 @@ export class PgserviciosComponent implements OnInit {
         UrlServicio: ""
       }
       this.Servicios.updateserviciorealizado('2', Echo).subscribe(respu => {
-        if (this.LblPostPut != '' || this.LblPostPut != undefined) {
+        if (this.LblPostPut == '' || this.LblPostPut == undefined) {
           this.CerrarServicioEcho(templateMensaje);
           this.LimpiaCampos();
         } else {
@@ -695,16 +696,16 @@ export class PgserviciosComponent implements OnInit {
         margin: { top: 0, bottom: 0 },
         columnStyles: {
           1: { cellWidth: 78 },
-        2: { cellWidth: 78 },
-        3: { cellWidth: 78 },
-        4: { cellWidth: 78 },
-        5: { cellWidth: 78 },
-        6: { cellWidth: 78 },
-        7: { cellWidth: 78 },
-        8: { cellWidth: 78 },
-        9: { cellWidth: 78 },
-        10: { cellWidth: 78 },
-        11: { cellWidth: 78 }
+          2: { cellWidth: 78 },
+          3: { cellWidth: 78 },
+          4: { cellWidth: 78 },
+          5: { cellWidth: 78 },
+          6: { cellWidth: 78 },
+          7: { cellWidth: 78 },
+          8: { cellWidth: 78 },
+          9: { cellWidth: 78 },
+          10: { cellWidth: 78 },
+          11: { cellWidth: 78 }
         },
         body:
           [
