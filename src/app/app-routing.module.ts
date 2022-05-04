@@ -14,6 +14,8 @@ import { PgusuarioComponent } from './components/pgusuario/pgusuario.component';
 import { PgserviciosComponent } from './components/pgservicios/pgservicios.component';
 import { PgetbComponent } from './components/pgetb/pgetb.component';
 import { PgvpnComponent } from './components/pgvpn/pgvpn.component';
+import { ConsactividadesComponent } from './components/consactividades/consactividades.component';
+import { PgregtroactividadesComponent } from './components/pgregtroactividades/pgregtroactividades.component';
 
 
 const routes: Routes = [
@@ -68,7 +70,18 @@ const routes: Routes = [
         path: 'PgServicios/:Id',
         component: PgserviciosComponent,
 
-      }
+      },
+      {
+        path: 'consactividades',
+        component: ConsactividadesComponent,
+
+      },
+      {
+        path: 'pgregtroactividades',
+        component: PgregtroactividadesComponent,
+
+      },
+
     ],
   },
 
@@ -89,4 +102,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserAnimationsModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
