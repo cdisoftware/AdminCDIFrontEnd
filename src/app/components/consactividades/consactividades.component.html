@@ -1,0 +1,87 @@
+<div class="container bg-white pt-5 pb-5">
+    <div class="row justify-content-center ">
+        <p class="col-12 tituloformulario">Consulta Actividades Diarias</p>
+    </div>
+    <div class="row mt-3">
+        <!--Ayuda Nombre-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #NombreServidor placeholder="Usuario"
+                title="Usuario">
+        </div>
+        <!--Fin ayuda-->
+        <!--Ayuda SO-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="date" class="form-control table-bordered" #SO placeholder="Fecha" title="Fecha">
+        </div>
+        <!--Fin ayuda-->
+
+        <!--Ayuda SO-->
+        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #SO placeholder="Proyecto" title="Proyecto">
+        </div>
+        <!--Fin ayuda-->
+
+        <!--Tipo lista Estado-->
+        <div class="col-sm-6 m-0 mb-3 ">
+            <select class="form-select" title="Seleccionar Tarea" #Estado>
+                <option selected>Seleccionar Tarea</option>
+                <option value="1">Tarea 1</option>
+                <option value="2">Tarea 2</option>
+                <option value="3">Tarea 3</option>
+                <option value="4">Tarea 4</option>
+                <option value="5">Tarea 5</option>
+            </select>
+        </div>
+        <!--Fin Tipo lista-->
+
+
+        <!--Botones-->
+        <div class="row displayCenter col-12 mt-3">
+            <button class="btn btn-dark col-sm-2 mrd" title="Limpiar">
+                <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
+                Limpiar
+            </button>
+
+            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF">
+                <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
+                Descargar PDF
+            </button>
+
+            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel">
+                <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
+                Descarga excel
+            </button>
+
+
+        </div>
+        <!--Fin botones-->
+
+        <!--Grilla-->
+        <div class="col-sm-12 mt-5">
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th colspan="12">Actividades</th>
+                </tr>
+                <tr>
+                    <th class="cursorPointer">Funcionario</th>
+                    <th class="cursorPointer">Fecha</th>
+                    <th class="cursorPointer">Proyecto</th>
+                    <th class="cursorPointer">Tipo Tarea</th>
+                    <th class="cursorPointer">Descripcion</th>
+                    <th class="cursorPointer">Tiempo</th>
+
+                </tr>
+                <tr>
+                    <td>Diana Torres Rozo</td>
+                    <td>04/05/2022</td>
+                    <td>Comfenalco</td>
+                    <td>Soporte</td>
+                    <td>Actualiza tramite</td>
+                    <td>30</td>
+
+                </tr>
+            </table>
+        </div>
+        <!--fin Grilla-->
+    </div>
+</div>
