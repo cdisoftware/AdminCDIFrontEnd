@@ -84,7 +84,7 @@
                     <td>30</td>
 
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Editar">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="BtnEditarActividad(templateeditaractividad)">
                             <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
@@ -104,10 +104,10 @@
 
 
 
-<ng-template>
+<ng-template #templateeditaractividad>
     <div class="modal-header">
         <th class="titulopopup">EDITAR</th>
-        <button type="button" class="bot" aria-label="Close">
+        <button type="button" class="bot" aria-label="Close" (click)="modalEditarActividad.hide();">
             <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
         </button>
     </div>
@@ -152,7 +152,7 @@
                         Guardar..
                     </button>
 
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarActividad.hide();">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
