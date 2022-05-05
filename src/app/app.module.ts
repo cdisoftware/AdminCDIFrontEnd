@@ -24,6 +24,7 @@ import { PgetbComponent } from './components/pgetb/pgetb.component';
 import { PgvpnComponent } from './components/pgvpn/pgvpn.component';
 import { ConsactividadesComponent } from './components/consactividades/consactividades.component';
 import { PgregtroactividadesComponent } from './components/pgregtroactividades/pgregtroactividades.component';
+import { PgrolesComponent } from './components/pgroles/pgroles.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PgregtroactividadesComponent } from './components/pgregtroactividades/p
     PgetbComponent,
     PgvpnComponent,
     ConsactividadesComponent,
-    PgregtroactividadesComponent
+    PgregtroactividadesComponent,
+    PgrolesComponent
   ],
   imports: [
     ModalModule.forRoot(),
