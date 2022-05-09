@@ -21,16 +21,37 @@ export class PgrolesComponent implements OnInit {
     private cookies: CookieService) { }
 
   ngOnInit(): void {
-    console.log('Pasa')
     this.ListaRoles();
   }
 
+  //Nuevo Rol
+  modalNuevoRol: BsModalRef;
+  AbrirPopap(templateAgregarRol: TemplateRef<any>) {
+    this.modalNuevoRol = this.modalService.show(templateAgregarRol)
+  }
+
+
+
+
   ArrRoles: any = [];
+  IdRol: string = '0';
   ListaRoles() {
     this.Servicios.conslistrol('1').subscribe(respu => {
-      console.log(respu)
       this.ArrRoles = [];
       this.ArrRoles = respu;
     })
+  }
+
+  ArrPermisoRol: any = [];
+  ListaPermisosRol(IdRol: string) {
+    if (IdRol != '0' || IdRol != undefined) {
+      this.Servicios.conspermisosrol('1', IdRol, '0').subscribe(respu => {
+        console.log(respu)
+        this.ArrPermisoRol = [];
+        this.ArrPermisoRol = respu;
+      })
+    } else {
+      this.ArrPermisoRol = [];
+    }
   }
 }

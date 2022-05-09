@@ -10,19 +10,21 @@
             <p class="tituloformulario">INFORMACIÓN ROL</p>
         </div>
 
-        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-            <select class="form-select" title="Seleccionar un rol">
+        <div class="col-sm-6 m-0 mb-5 displayFlexbetween">
+            <select class="form-select" title="Seleccionar un rol" [(ngModel)]="IdRol"
+                (change)='ListaPermisosRol(IdRol)'>
                 <option value="0" selected>Seleccione rol...</option>
                 <option value="{{arRespu.IdRol}}" *ngFor="let arRespu of ArrRoles">{{arRespu.NombreRol}}</option>
             </select>
             <div class="col-1" style="margin-left: 5px;">
-                <button id="pass" class="bot BtnimgTamano" title="Agregar un nuevo rol">
+                <button id="pass" class="bot BtnimgTamano" title="Agregar un nuevo rol"
+                    (click)="AbrirPopap(templateAgregarRol)">
                     <img class="BtnimgTamano" src="../../../../assets/ImagenesAdminCDI/AgregarServicio.png">
                 </button>
             </div>
         </div>
 
-        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+        <div class="col-sm-6 m-0 mb-5 displayFlexbetween">
             <input type="text" class="form-control table-bordered" readonly title="Nombre del rol actual">
 
             <div class="col-1" style="margin-left: 5px;">
@@ -31,5 +33,52 @@
                 </button>
             </div>
         </div>
+        <!--Titulos-->
+
+
+        <div class="col-sm-12 m-0 mb-3 displayFlexbetween">
+            <p class="tituloformulario">PERMISOS MÓDULO</p>
+        </div>
+
+        <div class="row col-6">
+            <div class="row col-sm-12 mb-2" *ngFor="let arRespu of ArrPermisoRol">
+                <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center">
+                    <input type="checkbox" class="m-auto">
+                </div>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control" disabled value="{{arRespu.NombreModulo}}">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+<ng-template #templateAgregarRol>
+    <div class="row col-12 m-3 ">
+        <p class="titulopopup text-center col-sm-10">INSERTAR ROL</p>
+        <div class="col-sm-2">
+            <button type="button" class="bot" aria-label="Close" (click)="modalNuevoRol.hide();">
+                <img id="imgActual" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+            </button>
+        </div>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3">
+            <li class="row col-sm-12 espacioul" style="width: 100%">
+                <div class="col-sm-12">
+                    <p>Escriba el rol a agregar</p>
+                </div>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-sm-0 mt-2" style="justify-content: center; align-items: center;">
+                    <button class="col-sm-3 btn btn-dark" style="margin: auto;">Guardar</button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>

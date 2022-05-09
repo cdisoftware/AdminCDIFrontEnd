@@ -172,4 +172,7 @@ export class MetodosGlobalesService {
   conslistrol(bandera: string) {
     return this.http.get<any[]>(this.url_servidor + 'conslistrol/' + bandera);
   }
+  conspermisosrol(bandera: string, IdRol: string, NombreRol: string) {
+    return this.http.get<any[]>(this.url_servidor + 'conspermisosrol/' + bandera + '/' + IdRol + '/' + NombreRol);
+  }
 }
