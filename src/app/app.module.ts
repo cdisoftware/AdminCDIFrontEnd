@@ -12,6 +12,7 @@ import { SharedModule } from './components/shared/shared.module';
 import { PgbackupsComponent } from './components/pgbackups/pgbackups.component';
 import { LayoutpaginaComponent } from './layouts/layoutpagina/layoutpagina.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule, HashLocationStrategy, LocationStrategy  } from "@angular/common";
 
 import { PgtipobackupComponent } from './components/pgtipobackup/pgtipobackup.component';
 
@@ -19,6 +20,12 @@ import { HomeComponent } from './components/home/home.component';
 import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.component';
 import { PgproyectosComponent } from './components/pgproyectos/pgproyectos.component';
 import { PgusuarioComponent } from './components/pgusuario/pgusuario.component';
+import { PgserviciosComponent } from './components/pgservicios/pgservicios.component';
+import { PgetbComponent } from './components/pgetb/pgetb.component';
+import { PgvpnComponent } from './components/pgvpn/pgvpn.component';
+import { ConsactividadesComponent } from './components/consactividades/consactividades.component';
+import { PgregtroactividadesComponent } from './components/pgregtroactividades/pgregtroactividades.component';
+import { PgrolesComponent } from './components/pgroles/pgroles.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +39,13 @@ import { PgusuarioComponent } from './components/pgusuario/pgusuario.component';
     HomeComponent,
     PgusuariosComponent,
     PgproyectosComponent,
-    PgusuarioComponent
+    PgusuarioComponent,
+    PgserviciosComponent,
+    PgetbComponent,
+    PgvpnComponent,
+    ConsactividadesComponent,
+    PgregtroactividadesComponent,
+    PgrolesComponent
   ],
   imports: [
     ModalModule.forRoot(),
@@ -44,7 +57,7 @@ import { PgusuarioComponent } from './components/pgusuario/pgusuario.component';
     SharedModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [{provide : LocationStrategy , useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

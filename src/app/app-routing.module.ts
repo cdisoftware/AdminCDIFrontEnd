@@ -11,6 +11,12 @@ import { HomeComponent } from './components/home/home.component';
 import { PgusuariosComponent } from './components/pgusuarios/pgusuarios.component';
 import { PgproyectosComponent } from './components/pgproyectos/pgproyectos.component';
 import { PgusuarioComponent } from './components/pgusuario/pgusuario.component';
+import { PgserviciosComponent } from './components/pgservicios/pgservicios.component';
+import { PgetbComponent } from './components/pgetb/pgetb.component';
+import { PgvpnComponent } from './components/pgvpn/pgvpn.component';
+import { ConsactividadesComponent } from './components/consactividades/consactividades.component';
+import { PgregtroactividadesComponent } from './components/pgregtroactividades/pgregtroactividades.component';
+import { PgrolesComponent } from './components/pgroles/pgroles.component';
 
 
 const routes: Routes = [
@@ -50,6 +56,36 @@ const routes: Routes = [
         path: 'PgUsuario',
         component: PgusuarioComponent,
 
+      },
+      {
+        path: 'PgEtb',
+        component: PgetbComponent,
+
+      },
+      {
+        path: 'PgVpn',
+        component: PgvpnComponent,
+
+      },
+      {
+        path: 'PgServicios/:Id',
+        component: PgserviciosComponent,
+
+      },
+      {
+        path: 'consactividades',
+        component: ConsactividadesComponent,
+
+      },
+      {
+        path: 'pgregtroactividades',
+        component: PgregtroactividadesComponent,
+
+      },
+      {
+        path: 'pgroles',
+        component: PgrolesComponent,
+
       }
     ],
   },
@@ -71,4 +107,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserAnimationsModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

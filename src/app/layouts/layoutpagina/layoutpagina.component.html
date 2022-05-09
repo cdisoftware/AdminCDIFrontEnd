@@ -20,14 +20,26 @@
         <!-- DROPDOWN MENU -->
         <ul class="dropdown">
           <li class="li cursorPointer" (click)="VerPgTipoBackup()">
-            <a href="home/Pgtipobackup">Tipo Backup</a>
+            <a>Tipo Backup</a>
           </li>
         </ul>
       </li>
 
-      <li class="services titulopopup cursorPointer" (click)="VerPgServidores()">
-        <a>Servidores <img src="../../../../assets/ImagenesAdminCDI/servidores.png"
+      <li class="services titulopopup cursorPointer">
+        <a (click)="VerPgServidores()">Servidores <img src="../../../../assets/ImagenesAdminCDI/servidores.png"
             class="BtnimgTamanoPeque mr-2"></a>
+        <!-- DROPDOWN MENU -->
+        <ul class="dropdown">
+          <li class="li cursorPointer">
+            <a (click)="VerPgETB()">ETB<img style="margin-left: 10px;"
+                src="../../../../assets/ImagenesAdminCDI/servidorETB.png" class="BtnimgTamanoPeque mr-2"></a>
+            <!-- DROPDOWN ETB -->
+          </li>
+          <li class="li cursorPointer" (click)="VerPgVPN()">
+            <a>VPN<img style="margin-left: 10px;" src="../../../../assets/ImagenesAdminCDI/vpn.png"
+                class="BtnimgTamanoPeque mr-2"></a> <!-- DROPDOWN VPN -->
+          </li>
+        </ul>
       </li>
 
       <li class="titulopopup services cursorPointer" (click)="VerPgProyectos()">
@@ -48,7 +60,7 @@
             <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 5px;"
               class="BtnimgTamanoPeque mr-2">
           </li>
-          
+
         </ul>
       </li>
 
@@ -73,4 +85,3 @@
   </div>
   <br>
 </ng-template>
-

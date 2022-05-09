@@ -1,0 +1,45 @@
+.margenesTabla{
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.BAJA{
+    background-color: #F0B27A;
+}
+.BAJA.OK{
+    background-color: #27AE60!important;
+}
+
+.ALTA{
+    background-color: #B03A2E;
+}
+.ALTA.OK{
+    background-color: #27AE60!important;
+}
+
+
+.TableInfo{ 
+border-radius: 50%;
+}
+.BtnimgInfo{
+width: 35px;
+height: 35px;
+}
+.BtnimgDesplegar{
+    width: 25px;
+    height: 25px;
+}
+.ImgDesaroloPendiente{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.colorInputUrl{
+    background-color: #008080;
+    color: #F7F9F9;
+    font-weight: bolder;
+}
+.TexteAreaPosyPut{
+    height: 150px;
+    resize: none;
+}

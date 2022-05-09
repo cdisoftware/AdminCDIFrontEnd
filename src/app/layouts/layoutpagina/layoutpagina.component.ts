@@ -38,10 +38,8 @@ export class LayoutpaginaComponent implements OnInit {
   //Variables admin
   AminUser: string = this.cookies.get('UserAdmin');
 
-  elem: any;
   ngOnInit(): void {
     this.Obtienedata();
-    this.elem = document.documentElement;
   }
 
   Obtienedata() {
@@ -61,29 +59,34 @@ export class LayoutpaginaComponent implements OnInit {
     this.cookies.set('Apellido', '');
     this.cookies.set('IdUsuario', '');
   }
-
+  VerHome() {
+    this.router.navigate(['home']);
+  }
   VerPgBackup() {
     this.router.navigate(['home/PgBackup']);
   }
   VerPgServidores() {
     this.router.navigate(['home/PgServidores']);
   }
-
   VerPgTipoBackup() {
     this.router.navigate(['home/Pgtipobackup']);
   }
   VerPgProyectos() {
     this.router.navigate(['home/PgProyectos']);
   }
-
-
-  VerHome() {
-    this.router.navigate(['home']);
-  }
   VerPgUsuarios() {
     this.router.navigate(['home/PgUsuarios']);
   }
   VerPgUsuario() {
     this.router.navigate(['home/PgUsuario']);
+  }
+  VerPgETB() {
+    this.router.navigate(['home/PgEtb']);
+  }
+  VerPgVPN() {
+    this.router.navigate(['home/PgVpn']);
+  }
+  VerPgServicios(Id: string) {
+    this.router.navigate(['home/PgServicios/'+Id]);
   }
 }

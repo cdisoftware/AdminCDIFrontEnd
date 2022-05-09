@@ -125,6 +125,8 @@ export class MetodosGlobalesService {
   eliminaregistbck(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'eliminaregistbck/' + bandera, BodyPost);
   }
+
+
   consdetallserv(bandera: string, IdServidor: string) {
     return this.http.get<any[]>(this.url_servidor + 'consdetallserv/' + bandera + '/' + IdServidor);
   }
@@ -133,5 +135,35 @@ export class MetodosGlobalesService {
   }
   actualizainfousuario(bandera: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizainfousuario/'+ bandera,BodyPost);
+  }
+
+  consultservicios(IdProyecto: string, TipoServicio: string, Prioridad: string, NombreSp: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consultservicios/' + IdProyecto + '/' + TipoServicio + '/' + Prioridad + '/' + NombreSp);
+  }
+  public postFileImagen(imagenParaSubir: File) {
+    const formData = new FormData();
+    formData.append('file', imagenParaSubir, imagenParaSubir.name);
+    return this.http.post(this.url_servidor + 'uploadFile', formData);
+  }
+  insertaservicio(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertaservicio/' + bandera, BodyPost);
+  }
+  modificaimagen(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'modificaimagen/' + bandera, BodyPost);
+  }
+  consultainfouser(IdUsuario: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consultainfouser/' + IdUsuario);
+  }
+  actualizaservicio(bandera: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizaservicio/'+ bandera, BodyPost);
+  }
+  eliminaservicio(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminaservicio/' + bandera, BodyPost);
+  }
+  consdesrrllopendient(IdIntegrador: string, IdProyecto: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consdesrrllopendient/' + IdIntegrador + '/' + IdProyecto);
+  }
+  updateserviciorealizado(bandera: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'updateserviciorealizado/'+ bandera, BodyPost);
   }
 }

@@ -1,0 +1,690 @@
+<div class="container bg-white mt-5">
+    <div class="row justify-content-center ">
+        <div class="row justify-content-center ">
+            <p class="col-11 tituloformulario">Servicios {{NombreProyecto}}</p>
+            <div class="col-sm-1 m-0 mb-3 displayFlexbetween">
+                <img (click)="BtnInfo(templateMensaje)" src="../../../../assets/ImagenesAdminCDI/informacion.png"
+                    class="cursorPointer BtnimgInfo" title="Ayuda">
+                <img (click)="VerPendientesDesarollo(templateMensaje, 2)"
+                    src="../../../../assets/ImagenesAdminCDI/NetBeans.png" class="cursorPointer BtnimgInfo"
+                    title="Ver Desarollos pendientes">
+            </div>
+        </div>
+        <div class="row mt-3">
+
+            <div class="col-sm-5 m-0 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" #TipoServiciovalue placeholder="Tipo servicio"
+                    [(ngModel)]="Tiposervidor" title="Tipo servicio"
+                    (keyup)="Grilla(TipoServiciovalue.value, Prioridadvalue.value, NombreSpValue.value)">
+            </div>
+
+            <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" #Prioridadvalue placeholder="Prioridad"
+                    [(ngModel)]="Prioridad" title="Prioridad"
+                    (keyup)="Grilla(TipoServiciovalue.value, Prioridadvalue.value, NombreSpValue.value)">
+            </div>
+        </div>
+        <div class="row" style="justify-content: center;">
+            <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" #NombreSpValue placeholder="Nombre SP"
+                    [(ngModel)]="Sp" title="Nombre SP"
+                    (keyup)="Grilla(TipoServiciovalue.value, Prioridadvalue.value, NombreSpValue.value)">
+            </div>
+        </div>
+    </div>
+</div>
+<!--Botones-->
+<div class="row displayCenter col-12 mt-3">
+    <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="LimpiaCampos()">
+        <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
+        Limpiar
+    </button>
+
+    <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf()">
+        <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
+        Descargar PDF
+    </button>
+
+    <button *ngIf="ArrayGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Exportar Excel" (click)="DescargarExcel(templateMensaje)">
+        <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
+        Descarga excel
+    </button>
+</div>
+<!--Fin botones-->
+<div style="justify-content: center; margin: auto;" class="row mt-2" *ngIf="Veragregar == false">
+    <hr style="width: 100%; float: left;">
+    <img (click)="BtnVerAgregar()" style="width: 49px; height: 34px;"
+        src="../../../../assets/ImagenesAdminCDI/abajo.png" class="cursorPointer BtnimgDesplegar"
+        title="Desplegar para agregar nuevo servicio">
+</div>
+<div class="row" *ngIf="Veragregar == true">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-2 mt-4">
+        <select class="form-select" title="Seleccionar Prioridad" #Prioridadvalueagregar [(ngModel)]="IdPrioridad">
+            <option value="0">Prioridad</option>
+            <option value="BAJA">BAJA</option>
+            <option value="ALTA">ALTA</option>
+        </select>
+    </div>
+    <div class="col-sm-2 mt-4">
+        <select class="form-select" title="Seleccionar Integrador" [(ngModel)]="IdIntegrador">
+            <option value="0" selected>Integrador</option>
+            <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>
+        </select>
+    </div>
+    <div class="col-sm-2 mt-4">
+        <input type="text" class="form-control table-bordered" placeholder="SP" [(ngModel)]="SP"
+            title="Stored Procedures">
+    </div>
+    <div class="col-sm-2 mt-4">
+        <input type="text" class="form-control table-bordered" placeholder="Exce" title="Exce" [(ngModel)]="Exce">
+    </div>
+    <div class="col-sm-2 mt-4">
+        <select class="form-select" title="Seleccionar Prioridad" [(ngModel)]="IdTipoServicio">
+            <option value="0" selected>Servicio</option>
+            <option value="CONSULTA" selected>CONSULTA</option>
+            <option value="INSERTA" selected>INSERTA</option>
+            <option value="ACTUALIZACION" selected>ACTUALIZACION</option>
+            <option value="DELETE" selected>DELETE</option>
+        </select>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+<div class="row mt-2" style="justify-content: center;" *ngIf="Veragregar == true">
+    <div class="col-sm-1"></div>
+
+    <div class="col-sm-3">
+        <textarea class="md-textarea form-control textarea" placeholder="Observación" [(ngModel)]="Observacion"
+            title="Observación" rows="2"></textarea>
+    </div>
+    <div class="col-sm-3">
+        <textarea class="md-textarea form-control textarea" placeholder="Observaciónes" [(ngModel)]="Observaciones"
+            title="Observación" rows="2"></textarea>
+    </div>
+    <div class="col-sm-1 mt-2">
+        <button class="BtnClaro mrd m-auto text-center" title="Agregar" (click)="AgregaServicio()">
+            <img src="../../../../assets/ImagenesAdminCDI/AgregarServicio.png" class="BtnimgTamanoPeque">
+        </button>
+    </div>
+</div>
+<div style="justify-content: center; margin: auto;" class="row" *ngIf="Veragregar == true">
+    <hr style="width: 100%; float: left;">
+    <img (click)="BtnOcultarAgregar()" style="width: 49px; height: 34px;"
+        src="../../../../assets/ImagenesAdminCDI/arriba.png" class="cursorPointer BtnimgDesplegar"
+        title="Dejar de ver la opcion de agregar">
+</div>
+<table class="table table-bordered mt-3 text-center margenesTabla">
+
+    <tr>
+        <th colspan="15">Servicios</th>
+    </tr>
+    <tr>
+        <th class="cursorPointer" (click)="Ordenarprioridad()">Prioridad</th>
+        <th class="cursorPointer" (click)="OrdenarFechaAsignacion()">Fecha Asignación</th>
+        <th class="cursorPointer" (click)="OrdenarIntegrador()">Integrador</th>
+        <th class="cursorPointer" (click)="OrdenarSp()">Stored Procedures</th>
+        <th class="cursorPointer" (click)="OrdenarExce()">Exec</th>
+        <th class="cursorPointer" (click)="OrdenaTipoServicio()">Tipo servicio</th>
+        <th class="cursorPointer" (click)="OrdenaEstado()">Estado</th>
+        <th class="cursorPointer" (click)="OrdenaAsiganadopor()">Asignado por:</th>
+        <th class="cursorPointer" (click)="OrdenaFechaSolucion()">Fecha solución</th>
+        <th class="cursorPointer" (click)="OrdenaObservacion()">Observación</th>
+        <th class="cursorPointer" (click)="OrdenaObservaciones()">Observaciones</th>
+
+
+        <th>Ver</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+    </tr>
+    <tbody *ngFor="let ArGrilla of ArrayGrilla">
+        <tr *ngIf="ArGrilla.Prioridad == 'BAJA' && ArGrilla.Estado == 0" class="cursorPointer BAJA">
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Prioridad}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.FechaAsignacion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>
+                <div class="col-sm-12">
+                    <textarea class="md-textarea form-control textarea" title="Exec" rows="2" disabled="true">
+                        {{ArGrilla.EXEC_SP}}
+                    </textarea>
+                </div>
+            </td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.TipoServicio}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)" *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.FechaSolucion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Observacion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button (click)="AbrirPopapVerDetalles(templateDetallesServicio, ArGrilla)"
+                    *ngIf="ArGrilla.Estado == 1">
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button (click)="EditServ(templateEditServicio, ArGrilla)">
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque"
+                        (click)="Eliminaservicio(ArGrilla, templateMensaje)">
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="ArGrilla.Prioridad == 'BAJA' && ArGrilla.Estado == 1" class="BAJA OK">
+            <td>{{ArGrilla.Prioridad}}</td>
+            <td>{{ArGrilla.FechaAsignacion}}</td>
+            <td>{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>
+                <div class="col-sm-12">
+                    <textarea class="md-textarea form-control textarea" title="Exec" rows="2" disabled="true">
+                        {{ArGrilla.EXEC_SP}}
+                    </textarea>
+                </div>
+            </td>
+            <td>{{ArGrilla.TipoServicio}}</td>
+            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td>{{ArGrilla.FechaSolucion}}</td>
+            <td>{{ArGrilla.Observacion}}</td>
+            <td>{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button (click)="AbrirPopapVerDetalles(templateDetallesServicio, ArGrilla)"
+                    *ngIf="ArGrilla.Estado == 1">
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button (click)="EditServ(templateEditServicio, ArGrilla)">
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque"
+                        (click)="Eliminaservicio(ArGrilla, templateMensaje)">
+                </button>
+            </td>
+        </tr>
+
+
+        <tr *ngIf="ArGrilla.Prioridad == 'ALTA' && ArGrilla.Estado == 0" class="cursorPointer ALTA">
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Prioridad}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.FechaAsignacion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>
+                <div class="col-sm-12">
+                    <textarea class="md-textarea form-control textarea" title="Exec" rows="2" disabled="true">
+                        {{ArGrilla.EXEC_SP}}
+                    </textarea>
+                </div>
+            </td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.TipoServicio}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)" *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)" *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.FechaSolucion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Observacion}}</td>
+            <td (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button (click)="AbrirPopapVerDetalles(templateDetallesServicio, ArGrilla)"
+                    *ngIf="ArGrilla.Estado == 1">
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button (click)="EditServ(templateEditServicio, ArGrilla)">
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque"
+                        (click)="Eliminaservicio(ArGrilla, templateMensaje)">
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="ArGrilla.Prioridad == 'ALTA' && ArGrilla.Estado == 1" class="ALTA OK">
+            <td>{{ArGrilla.Prioridad}}</td>
+            <td>{{ArGrilla.FechaAsignacion}}</td>
+            <td>{{ArGrilla.NombreIntegrador}}</td>
+            <td>{{ArGrilla.StoredProcedures}}</td>
+            <td>
+                <div class="col-sm-12">
+                    <textarea class="md-textarea form-control textarea" title="Exec" rows="2" disabled="true">
+                        {{ArGrilla.EXEC_SP}}
+                    </textarea>
+                </div>
+            </td>
+            <td>{{ArGrilla.TipoServicio}}</td>
+            <td *ngIf="ArGrilla.Estado == 0">Pendiente</td>
+            <td *ngIf="ArGrilla.Estado == 1">Ok</td>
+            <td>{{ArGrilla.NombreUsuarioAsigna}}</td>
+            <td>{{ArGrilla.FechaSolucion}}</td>
+            <td>{{ArGrilla.Observacion}}</td>
+            <td>{{ArGrilla.Observaciones}}</td>
+
+            <td>
+                <button (click)="AbrirPopapVerDetalles(templateDetallesServicio, ArGrilla)"
+                    *ngIf="ArGrilla.Estado == 1">
+                    <img src="../../../../assets/ImagenesAdminCDI/VerDatosServidor.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+            <td>
+                <button (click)="EditServ(templateEditServicio, ArGrilla)">
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque">
+                </button>
+            </td>
+
+            <td>
+                <button>
+                    <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque"
+                        (click)="Eliminaservicio(ArGrilla, templateMensaje)">
+                </button>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12 displayFlexbetween" style="justify-content: center;" *ngIf="VerMensaje == true">
+            <table class="TableInfo table table-bordered" border="1">
+                <tr>
+                    <th style="justify-content: center;" colspan="2">Pendientes</th>
+                </tr>
+                <tr>
+                    <th style="width: 200px; height: 50px; background-color: #F0B27A;"></th>
+                    <th style="text-align: center;"> Prioridad baja</th>
+                </tr>
+                <tr>
+                    <th style="width: 200px; height: 50px; background-color: #B03A2E;"></th>
+                    <th style="text-align: center;"> Prioridad alta</th>
+                </tr>
+                <tr style="justify-content: center;">
+                    <th colspan="2">Realizados</th>
+                </tr>
+                <tr>
+                    <th style="width: 200px; height: 50px; background-color: #27AE60;"></th>
+                    <th style="text-align: center;"> Realizado</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-12" *ngIf="VerMensaje == false">
+        <p class="pModals">{{ lblModalMsaje }}</p>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>
+
+
+
+
+<ng-template #templateDetallesServicio>
+    <div class="modal-header">
+        <th class="titulopopup">Detalles</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalVerdetalles.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="row">
+                    <div class="col-sm-12">
+                        {{NombreSp}}
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-sm-12">
+                            <textarea rows="10" id="ResultadoConsultaServicio" style="width: 100%;">
+                                {{RespuServicio}}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalVerdetalles.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cerrar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateEditServicio>
+    <div class="modal-header">
+        <th class="titulopopup">Editar</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalEditar.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="row">
+                    <div class="col-sm-5 mt-4">
+                        <input type="text" class="form-control" placeholder="Stored Procedures"
+                            title="Stored Procedures" [(ngModel)]="SpEdit">
+                    </div>
+                    <div class="col-sm-7 mt-4">
+                        <input type="text" class="form-control" placeholder="Exec" title="Exec stored Procedures"
+                            [(ngModel)]="ExecEdit">
+                    </div>
+                    <div class="col-sm-4 mt-4">
+                        <select class="form-select" title="Seleccionar Integrador" [(ngModel)]="IdIntegradorEdit">
+                            <option value="0" selected>Integrador</option>
+                            <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">
+                                {{arRespu.Nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 mt-4">
+                        <select class="form-select" title="Seleccionar Prioridad" [(ngModel)]="IdTipoServicioEdit">
+                            <option value="0" selected>Servicio</option>
+                            <option value="CONSULTA" selected>CONSULTA</option>
+                            <option value="INSERTA" selected>INSERTA</option>
+                            <option value="ACTUALIZACION" selected>ACTUALIZACION</option>
+                            <option value="DELETE" selected>DELETE</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 mt-4">
+                        <select class="form-select" title="Seleccionar Prioridad" #Prioridadvalueagregar
+                            [(ngModel)]="IdPrioridadEdit">
+                            <option value="0">Prioridad</option>
+                            <option value="BAJA">BAJA</option>
+                            <option value="ALTA">ALTA</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 mt-4">
+                        <textarea class="md-textarea form-control textarea" placeholder="Observación"
+                            [(ngModel)]="LblObservacionEdit" title="Observación" rows="2"></textarea>
+                    </div>
+                    <div class="col-sm-6 mt-4">
+                        <textarea class="md-textarea form-control textarea" placeholder="Observaciónes"
+                            [(ngModel)]="LblObservacionEdit" title="Observaciónes" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateServicio(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditar.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateVerDetalles let-modal>
+    <div class="modal-header">
+        <p class="titulopopup">Desarrollos pendientes</p>
+        <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="mrd mld" id="htmlData_">
+        <div class="row texto text-center">
+            <table class="table table-bordered mt-3 text-center">
+                <tr>
+                    <th>Prioridad</th>
+                    <th>StoredProcedures</th>
+                    <th>Proyecto</th>
+                    <th>Fecha de asignacion</th>
+                    <th>Tipo Servicio</th>
+                    <th>Observacion</th>
+                    <th>Observaciones</th>
+                    <th>Hecho</th>
+                </tr>
+                <tr *ngFor="let ArGrilla of ArrayConsultaServiciosPendientes">
+                    <td>{{ArGrilla.Prioridad}}</td>
+                    <td>{{ArGrilla.StoredProcedures}}</td>
+                    <td>{{ArGrilla.NombreProyecto}}</td>
+                    <td>{{ArGrilla.FechaAsignacion}}</td>
+                    <td>{{ArGrilla.TipoServicio}}</td>
+                    <td>{{ArGrilla.Observacion}}</td>
+                    <td>{{ArGrilla.Observaciones}}</td>
+                    <td>
+                        <img src="../../../assets/ImagenesAdminCDI/Echo.png" class="ImgDesaroloPendiente"
+                            (click)="AbrirPopapServicioEcho(templateServicioEcho, ArGrilla, templateServicioEchoPostPut)">
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</ng-template>
+
+
+
+<ng-template #templateServicioEcho>
+    <div class="modal-header">
+        <th class="titulopopup">Servicio</th>
+        <button type="button" class="bot" aria-label="Close" (click)="CerrarServicioEcho(templateMensaje);">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>Datos servicio</p>
+                        <textarea class="md-textarea form-control textarea" title="Datos de el servicio"
+                            [(ngModel)]="LblDatosServicio">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>Observación</p>
+                        <textarea class="md-textarea form-control textarea" title="Observación"
+                            [(ngModel)]="LblObservacion">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <p>Observaciónes</p>
+                        <textarea class="md-textarea form-control textarea" title="Observaciones"
+                            [(ngModel)]="LblObservaciones">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <p>Consume servicio</p>
+                        <textarea class="md-textarea form-control textarea" title="Consume servicio"
+                            [(ngModel)]="LblConsumeservicio">
+                    </textarea>
+                    </div>
+                </div>
+                <hr class="mt-2">
+                <table class="table table-bordered mt-2">
+                    <tr>
+                        <th style="background-color: #008080;">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <p style="font-weight: bolder; color: #F7F9F9;" class="mt-2">http://</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select class="form-select colorInputUrl" title="Seleccionar servidor"
+                                        [(ngModel)]="LblServidorAlojaServicio">
+                                        <option value="{{arRespu.Ip_S}}" *ngFor="let arRespu of ArregloListaServidor">
+                                            {{arRespu.Nombre}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-1"
+                                    style="justify-content: center; text-align: center; margin: auto;">
+                                    <p class="mt-2" style="font-weight: bolder;  color: #F7F9F9;">:</p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control colorInputUrl" title="Puerto"
+                                        style="text-align: center;" [(ngModel)]="NumeroPuerto">
+                                </div>
+                                <div class="col-sm-1"
+                                    style="justify-content: center; text-align: center; margin: auto;">
+                                    <p class="mt-2" style="font-weight: bolder; color: #F7F9F9;">/</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control colorInputUrl" title="Patch"
+                                        [(ngModel)]="LblPatch">
+                                </div>
+                                <div class="col-sm-1 mt-2">
+                                    <img src="../../../../assets/ImagenesAdminCDI/disqueteUrl.png"
+                                        class="cursorPointer BtnimgTamanoPeque mr-2"
+                                        (click)="GuardarURL(templateMensaje)">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="ServicioEcho(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar"
+                        (click)="CerrarServicioEcho(templateMensaje);">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateServicioEchoPostPut>
+    <div class="modal-header">
+        <th class="titulopopup">Servicio</th>
+        <button type="button" class="bot" aria-label="Close" (click)="CerrarServicioEchoPostPut(templateMensaje);">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p>Datos servicio</p>
+                        <textarea class="md-textarea form-control textarea" title="Datos de el servicio"
+                            [(ngModel)]="LblDatosServicio">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6">
+                        <p>Observación</p>
+                        <textarea class="md-textarea form-control textarea" title="Observación"
+                            [(ngModel)]="LblObservacion">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <p>Observaciónes</p>
+                        <textarea class="md-textarea form-control textarea" title="Observaciones"
+                            [(ngModel)]="LblObservaciones">
+                    </textarea>
+                    </div>
+                    <div class="col-sm-6 mt-3">
+                        <p>Consume servicio en url</p>
+                        <textarea class="md-textarea form-control textarea" title="Consume servicio"
+                            [(ngModel)]="LblConsumeservicio">
+                        </textarea>
+                    </div>
+                    <hr class="mt-2">
+                    <div class="col-sm-3 mt-3"></div>
+                    <div class="col-sm-6 mt-3" style="justify-content: center; text-align: center; margin: auto;">
+                        <p style="font-weight: bolder;">Consume servicio en body</p>
+                        <textarea class="md-textarea form-control TexteAreaPosyPut" title="Consume servicio" [(ngModel)]="LblPostPut">
+                        </textarea>
+                    </div>
+                    <div class="col-sm-3 mt-3"></div>
+                </div>
+                <hr class="mt-2">
+                <table class="table table-bordered mt-2">
+                    <tr>
+                        <th style="background-color: #008080;">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <p style="font-weight: bolder; color: #F7F9F9;" class="mt-2">http://</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <select class="form-select colorInputUrl" title="Seleccionar servidor"
+                                        [(ngModel)]="LblServidorAlojaServicio">
+                                        <option value="{{arRespu.Ip_S}}" *ngFor="let arRespu of ArregloListaServidor">
+                                            {{arRespu.Nombre}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-1"
+                                    style="justify-content: center; text-align: center; margin: auto;">
+                                    <p class="mt-2" style="font-weight: bolder;  color: #F7F9F9;">:</p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="number" class="form-control colorInputUrl" title="Puerto"
+                                        style="text-align: center;" [(ngModel)]="NumeroPuerto">
+                                </div>
+                                <div class="col-sm-1"
+                                    style="justify-content: center; text-align: center; margin: auto;">
+                                    <p class="mt-2" style="font-weight: bolder; color: #F7F9F9;">/</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control colorInputUrl" title="Patch"
+                                        [(ngModel)]="LblPatch">
+                                </div>
+                                <div class="col-sm-1 mt-2">
+                                    <img src="../../../../assets/ImagenesAdminCDI/disqueteUrl.png"
+                                        class="cursorPointer BtnimgTamanoPeque mr-2"
+                                        (click)="GuardarURL(templateMensaje)">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="ServicioEcho(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                        Guardar..
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar"
+                        (click)="CerrarServicioEchoPostPut(templateMensaje);">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
