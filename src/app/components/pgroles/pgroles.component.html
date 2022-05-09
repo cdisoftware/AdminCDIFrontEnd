@@ -13,6 +13,7 @@
         <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
             <select class="form-select" title="Seleccionar un rol">
                 <option value="0" selected>Seleccione rol...</option>
+                <option value="{{arRespu.IdRol}}" *ngFor="let arRespu of ArrRoles">{{arRespu.NombreRol}}</option>
             </select>
             <div class="col-1" style="margin-left: 5px;">
                 <button id="pass" class="bot BtnimgTamano" title="Agregar un nuevo rol">

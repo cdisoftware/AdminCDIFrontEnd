@@ -166,4 +166,10 @@ export class MetodosGlobalesService {
   updateserviciorealizado(bandera: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'updateserviciorealizado/'+ bandera, BodyPost);
   }
+
+
+  //Roles
+  conslistrol(bandera: string) {
+    return this.http.get<any[]>(this.url_servidor + 'conslistrol/' + bandera);
+  }
 }
