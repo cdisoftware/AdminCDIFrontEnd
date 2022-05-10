@@ -175,4 +175,10 @@ export class MetodosGlobalesService {
   conspermisosrol(bandera: string, IdRol: string, NombreRol: string) {
     return this.http.get<any[]>(this.url_servidor + 'conspermisosrol/' + bandera + '/' + IdRol + '/' + NombreRol);
   }
+  insertacrolmod(bandera: string, IdUsuario: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertacrolmod/' + bandera + '/' + IdUsuario, BodyPost);
+  }
+  actualizacrolmod(bandera: string, IdUsuario: string, BodyPut: string) {
+    return this.http.put<any>(this.url_servidor + 'actualizacrolmod/' + bandera + '/' + IdUsuario,BodyPut);
+  }
 }

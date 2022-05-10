@@ -29,6 +29,14 @@ export class PgrolesComponent implements OnInit {
   AbrirPopap(templateAgregarRol: TemplateRef<any>) {
     this.modalNuevoRol = this.modalService.show(templateAgregarRol)
   }
+  NuevoRol(){
+    const Insert = {
+
+    }
+    this.Servicios.insertacrolmod('3', '1', Insert).subscribe(respu => {
+      console.log(respu)
+    })
+  }
 
 
 

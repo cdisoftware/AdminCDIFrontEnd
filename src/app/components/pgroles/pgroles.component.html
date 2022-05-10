@@ -29,7 +29,7 @@
 
             <div class="col-1" style="margin-left: 5px;">
                 <button id="pass" class="bot BtnimgTamano" title="Agregar un nuevo rol">
-                    <img class="BtnimgTamano" src="../../../../assets/ImagenesAdminCDI/ojo.png">
+                    <img class="BtnimgTamano" src="../../../../assets/ImagenesAdminCDI/ojocerrar.png">
                 </button>
             </div>
         </div>
@@ -39,6 +39,18 @@
         <div class="col-sm-12 m-0 mb-3 displayFlexbetween">
             <p class="tituloformulario">PERMISOS MÓDULO</p>
         </div>
+
+        <div class="row col-6">
+            <div class="row col-sm-12 mb-2" *ngFor="let arRespu of ArrPermisoRol">
+                <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center">
+                    <input type="checkbox" class="m-auto">
+                </div>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control" disabled value="{{arRespu.NombreModulo}}">
+                </div>
+            </div>
+        </div>
+
 
         <div class="row col-6">
             <div class="row col-sm-12 mb-2" *ngFor="let arRespu of ArrPermisoRol">
