@@ -54,7 +54,6 @@ export class PgrolesComponent implements OnInit {
   ListaPermisosRol(IdRol: string) {
     if (IdRol != '0' || IdRol != undefined) {
       this.Servicios.conspermisosrol('1', IdRol, '0').subscribe(respu => {
-        console.log(respu)
         this.ArrPermisoRol = [];
         this.ArrPermisoRol = respu;
       })
