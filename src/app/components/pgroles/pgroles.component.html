@@ -65,7 +65,21 @@
     </div>
 </div>
 
-
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12">
+            <p class="pModals">{{ lblModalMsaje }}</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>
 
 <ng-template #templateAgregarRol>
     <div class="row col-12 m-3 ">
@@ -83,10 +97,10 @@
                     <p>Escriba el rol a agregar</p>
                 </div>
                 <div class="col-sm-12">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [(ngModel)]="NombreRol">
                 </div>
                 <div class="col-sm-0 mt-2" style="justify-content: center; align-items: center;">
-                    <button class="col-sm-3 btn btn-dark" style="margin: auto;">Guardar</button>
+                    <button class="col-sm-3 btn btn-dark" style="margin: auto;" (click)="NuevoRol(templateMensaje)">Guardar</button>
                 </div>
             </li>
         </div>

@@ -15,6 +15,9 @@ import { CookieService } from "ngx-cookie-service";
 })
 export class PgrolesComponent implements OnInit {
 
+  modalMensaje: BsModalRef;
+  lblModalMsaje: string;
+
   constructor(private modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
     private modalServiceDos: NgbModal,
@@ -25,17 +28,37 @@ export class PgrolesComponent implements OnInit {
   }
 
   //Nuevo Rol
+  NombreRol: string;
   modalNuevoRol: BsModalRef;
   AbrirPopap(templateAgregarRol: TemplateRef<any>) {
     this.modalNuevoRol = this.modalService.show(templateAgregarRol)
   }
-  NuevoRol(){
-    const Insert = {
-
+  NuevoRol(templateMensaje: TemplateRef<any>) {
+    if (this.NombreRol == '' || this.NombreRol == undefined) {
+      this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = 'Por favor complete los campos a agregar';
+    } else {
+      const Insert = {
+        "NombreRol": this.NombreRol,
+        "Estado": 1,
+        "IdRol": 0
+      }
+      this.Servicios.insertacrolmod('3', '0', Insert).subscribe(respu => {
+        if (respu == 'El registro ha sido adicionado correctamente.') {
+          this.modalNuevoRol.hide();
+          this.modalMensaje = this.modalService.show(templateMensaje);
+          this.lblModalMsaje = 'El registro ha sido adicionado correctamente.';
+          this.ListaRoles();
+        }
+        if (respu == 'El nombre del rol ya existe, valide la información.') {
+          this.modalNuevoRol.hide();
+          this.modalMensaje = this.modalService.show(templateMensaje);
+          this.lblModalMsaje = 'El nombre del rol ya existe, valide la información.';
+          this.ListaRoles();
+        }
+        this.NombreRol = '';
+      })
     }
-    this.Servicios.insertacrolmod('3', '1', Insert).subscribe(respu => {
-      console.log(respu)
-    })
   }
 
 
