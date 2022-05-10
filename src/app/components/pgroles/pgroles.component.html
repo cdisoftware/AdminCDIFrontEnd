@@ -29,7 +29,7 @@
 
             <div class="col-1" style="margin-left: 5px;">
                 <button id="pass" class="bot BtnimgTamano" title="Agregar un nuevo rol">
-                    <img class="BtnimgTamano" src="../../../../assets/ImagenesAdminCDI/ojo.png">
+                    <img class="BtnimgTamano" src="../../../../assets/ImagenesAdminCDI/ojocerrar.png">
                 </button>
             </div>
         </div>
@@ -50,10 +50,36 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="row col-6">
+            <div class="row col-sm-12 mb-2" *ngFor="let arRespu of ArrPermisoRol">
+                <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center">
+                    <input type="checkbox" class="m-auto">
+                </div>
+                <div class="col-sm-11">
+                    <input type="text" class="form-control" disabled value="{{arRespu.NombreModulo}}">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12">
+            <p class="pModals">{{ lblModalMsaje }}</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>
 
 <ng-template #templateAgregarRol>
     <div class="row col-12 m-3 ">
@@ -71,10 +97,10 @@
                     <p>Escriba el rol a agregar</p>
                 </div>
                 <div class="col-sm-12">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" [(ngModel)]="NombreRol">
                 </div>
                 <div class="col-sm-0 mt-2" style="justify-content: center; align-items: center;">
-                    <button class="col-sm-3 btn btn-dark" style="margin: auto;">Guardar</button>
+                    <button class="col-sm-3 btn btn-dark" style="margin: auto;" (click)="NuevoRol(templateMensaje)">Guardar</button>
                 </div>
             </li>
         </div>
