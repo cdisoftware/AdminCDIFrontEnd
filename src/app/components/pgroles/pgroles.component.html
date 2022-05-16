@@ -11,10 +11,9 @@
         </div>
 
         <div class="col-sm-6 m-0 mb-5 displayFlexbetween">
-            <select class="form-select" title="Seleccionar un rol" [(ngModel)]="IdRol"
-                (change)='ListaPermisosRol(IdRol)'>
+            <select class="form-select" title="Seleccionar un rol" #SeleccionarRol [(ngModel)]="IdRol" (change)='ListaPermisosRol(IdRol)'>
                 <option value="0" selected>Seleccione rol...</option>
-                <option value="{{arRespu.IdRol}}" *ngFor="let arRespu of ArrRoles">{{arRespu.NombreRol}}</option>
+                <option value="{{arRespu.IdRol}},{{arRespu.NombreRol}}" *ngFor="let arRespu of ArrRoles">{{arRespu.NombreRol}}</option>
             </select>
             <div class="col-1" style="margin-left: 5px;">
                 <button id="pass" class="bot BtnimgTamano" title="Agregar un nuevo rol"
@@ -25,11 +24,11 @@
         </div>
 
         <div class="col-sm-6 m-0 mb-5 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" readonly title="Nombre del rol actual">
+            <input type="text" class="form-control table-bordered" readonly title="Nombre del rol actual" [(ngModel)]="Rol">
 
             <div class="col-1" style="margin-left: 5px;">
                 <button id="pass" class="bot BtnimgTamano" title="Agregar un nuevo rol">
-                    <img class="BtnimgTamano" src="../../../../assets/ImagenesAdminCDI/ojocerrar.png">
+                    <img class="BtnimgTamano" src="../../../../assets/ImagenesAdminCDI/disquete.png">
                 </button>
             </div>
         </div>

@@ -74,7 +74,11 @@ export class PgrolesComponent implements OnInit {
   }
 
   ArrPermisoRol: any = [];
-  ListaPermisosRol(IdRol: string) {
+  Rol: string;
+  ListaPermisosRol(Arr: string) {
+    var Arreglo = [] = Arr.split(",");
+    var IdRol = Arreglo[0];
+    this.Rol = Arreglo[1];
     if (IdRol != '0' || IdRol != undefined) {
       this.Servicios.conspermisosrol('1', IdRol, '0').subscribe(respu => {
         this.ArrPermisoRol = [];
