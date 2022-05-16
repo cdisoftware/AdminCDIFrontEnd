@@ -88,4 +88,15 @@ export class PgrolesComponent implements OnInit {
       this.ArrPermisoRol = [];
     }
   }
+
+  EditaRol(){
+    const Update = {
+      NombreRol:this.Rol,
+      Estado:1,
+      IdRol:2
+    }
+    this.Servicios.actualizacrolmod('2', '1', Update).subscribe(respu => {
+      console.log(respu)
+    })
+  }
 }
