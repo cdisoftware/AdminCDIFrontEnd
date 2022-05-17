@@ -27,7 +27,7 @@
             <input type="text" class="form-control table-bordered" readonly title="Nombre del rol actual" [(ngModel)]="Rol">
 
             <div class="col-1" style="margin-left: 5px;">
-                <button id="pass" class="bot BtnimgTamano" title="Agregar un nuevo rol" (click)="EditaRol()">
+                <button id="pass" class="bot BtnimgTamano" title="Guardar información" (click)="EditaRol()">
                     <img class="BtnimgTamano" src="../../../../assets/ImagenesAdminCDI/disquete.png">
                 </button>
             </div>
@@ -40,6 +40,17 @@
         </div>
 
         <div class="row col-6">
+            <!---->
+            <div class="row col-sm-12 mb-2">
+                <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center">
+                    <input type="checkbox" class="m-auto">
+                </div>
+                <div class="col-sm-11">
+                    <p class="tituloformulario">Todos los permisos autorizados</p>
+                </div>
+            </div>
+
+
             <div class="row col-sm-12 mb-2" *ngFor="let arRespu of ArrPermisoRol">
                 <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center">
                     <input type="checkbox" class="m-auto">
