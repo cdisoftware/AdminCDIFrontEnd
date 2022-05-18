@@ -75,12 +75,26 @@ export class PgrolesComponent implements OnInit {
 
   ArrPermisoRol: any = [];
   Rol: string;
+  ArrRol: any = [];
   ListaPermisosRol(Arr: string) {
     var Arreglo = [] = Arr.split(",");
     var IdRol = Arreglo[0];
     this.Rol = Arreglo[1];
     if (IdRol != '0' || IdRol != undefined) {
       this.Servicios.conspermisosrol('1', IdRol, '0').subscribe(respu => {
+        var Arr: any = [];
+        for (var i = 0; i < respu.length; i++) {
+          var Num = respu[i].Padre;
+          if (!Arr.includes(respu[i].Padre)) {
+            Arr.push(Num)
+          }
+        }
+        for (var j = 0; j < Arr.length; j++) {
+          this.ArrRol.push({Padre: Arr[j]})
+        }
+        console.log(respu)
+        console.log(Arr)
+        console.log(this.ArrRol)
         this.ArrPermisoRol = [];
         this.ArrPermisoRol = respu;
       })
@@ -89,11 +103,11 @@ export class PgrolesComponent implements OnInit {
     }
   }
 
-  EditaRol(){
+  EditaRol() {
     const Update = {
-      NombreRol:this.Rol,
-      Estado:1,
-      IdRol:2
+      NombreRol: this.Rol,
+      Estado: 1,
+      IdRol: 2
     }
     this.Servicios.actualizacrolmod('2', '1', Update).subscribe(respu => {
       console.log(respu)
