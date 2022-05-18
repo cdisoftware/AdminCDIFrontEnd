@@ -7,6 +7,7 @@ import autoTable from 'jspdf-autotable'
 import jsPDF from 'jspdf';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from "ngx-cookie-service";
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-pgroles',
@@ -67,8 +68,8 @@ export class PgrolesComponent implements OnInit {
   ArrRoles: any = [];
   IdRol: string = '0';
   ListaRoles() {
+    this.ArrRoles = [];
     this.Servicios.conslistrol('1').subscribe(respu => {
-      this.ArrRoles = [];
       this.ArrRoles = respu;
     })
   }
@@ -77,24 +78,27 @@ export class PgrolesComponent implements OnInit {
   Rol: string;
   ArrRol: any = [];
   ListaPermisosRol(Arr: string) {
+    this.ArrRol = [];
     var Arreglo = [] = Arr.split(",");
     var IdRol = Arreglo[0];
     this.Rol = Arreglo[1];
     if (IdRol != '0' || IdRol != undefined) {
       this.Servicios.conspermisosrol('1', IdRol, '0').subscribe(respu => {
         var Arr: any = [];
+        var NombreModuloPadre: any = [];
         for (var i = 0; i < respu.length; i++) {
           var Num = respu[i].Padre;
+          var NombrePadre = respu[i].ModuloPadre;
+          if (!NombreModuloPadre.includes(respu[i].ModuloPadre)) {
+            NombreModuloPadre.push(NombrePadre)
+          }
           if (!Arr.includes(respu[i].Padre)) {
             Arr.push(Num)
           }
         }
         for (var j = 0; j < Arr.length; j++) {
-          this.ArrRol.push({Padre: Arr[j]})
+          this.ArrRol.push({Padre: Arr[j], ModuloPadre: NombreModuloPadre[j]})
         }
-        console.log(respu)
-        console.log(Arr)
-        console.log(this.ArrRol)
         this.ArrPermisoRol = [];
         this.ArrPermisoRol = respu;
       })
