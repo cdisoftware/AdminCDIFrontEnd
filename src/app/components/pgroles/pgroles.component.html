@@ -42,18 +42,21 @@
             <p class="tituloformulario">PERMISOS MÓDULO</p>
         </div>
         <div class="row col-6 mb-3" *ngFor="let ArrR of ArrRol">
-            <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center">
+            <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center" *ngIf="ArrR.PermisoRol=='0'">
                 <input type="checkbox" class="mt-1 m-auto">
+            </div>
+            <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center" *ngIf="ArrR.PermisoRol=='1'">
+                <input type="checkbox" class="mt-1 m-auto" checked>
             </div>
             <div class="col-sm-11">
                 <p class="tituloformulario">{{ArrR.ModuloPadre}}</p>
             </div>
 
-            <div *ngFor="let arRespu of ArrPermisoRol">
+            <div *ngFor="let arRespu of ArrPermisoRol; index as i">
                 <div *ngIf="arRespu.Padre == ArrR.Padre">
                     <div class="row col-sm-12 mb-2 displayFlexbetween">
                         <div class="col-sm-1 mt-1 text-center">
-                            <input type="checkbox" class="mt-2 m-auto">
+                            <input type="checkbox" class="mt-2 m-auto" (change)="ModificaRol(arRespu, i)" id="{{i}}" [checked]="arRespu.EstadoPermiso == '1'">
                         </div>
                         <div class="col-sm-11">
                             <input type="text" class="form-control" disabled value="{{arRespu.NombreModulo}}">
