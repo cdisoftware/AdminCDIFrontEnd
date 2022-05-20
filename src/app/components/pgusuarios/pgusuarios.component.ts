@@ -252,7 +252,6 @@ export class PgusuariosComponent implements OnInit {
       Apellido: Apellido,
       Cedula: LblCedula
     }
-    this.ArregloGrillaUsuario = [];
     this.Servicios.consultausuarios(ConsultaU).subscribe(respu => {
       if (respu.length > 0) {
         let workbook = new Workbook();

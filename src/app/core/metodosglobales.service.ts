@@ -178,7 +178,13 @@ export class MetodosGlobalesService {
   insertacrolmod(bandera: string, IdUsuario: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'insertacrolmod/' + bandera + '/' + IdUsuario, BodyPost);
   }
-  actualizacrolmod(bandera: string, IdUsuario: string, BodyPut: string) {
+  actualizacrolmod(bandera: string, IdUsuario: string, BodyPut: any) {
     return this.http.put<any>(this.url_servidor + 'actualizacrolmod/' + bandera + '/' + IdUsuario,BodyPut);
+  }
+  insertauserolmodifica(bandera: string, IdUsuario: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertauserolmodifica/' + bandera + '/' + IdUsuario, BodyPost);
+  }
+  actualizacpermisorol(bandera: string, IdUsuario: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizacpermisorol/' + bandera + '/' + IdUsuario, BodyPost);
   }
 }

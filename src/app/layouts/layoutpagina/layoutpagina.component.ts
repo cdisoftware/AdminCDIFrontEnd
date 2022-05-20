@@ -89,4 +89,16 @@ export class LayoutpaginaComponent implements OnInit {
   VerPgServicios(Id: string) {
     this.router.navigate(['home/PgServicios/'+Id]);
   }
+
+
+  VerActividadesDiarias() {
+    this.router.navigate(['home/consactividades']);
+  }
+  Verpgroles() {
+    this.router.navigate(['home/pgroles']);
+  }
+  VerregistroActividadesDiarias() {
+    this.router.navigate(['home/pgregtroactividades']);
+  }
+  
 }
