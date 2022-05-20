@@ -14,6 +14,8 @@ import { CookieService } from "ngx-cookie-service";
   styleUrls: ['./pgroles.component.css']
 })
 export class PgrolesComponent implements OnInit {
+  //Usuario
+  IdUsuarioCookies: string = this.cookies.get('IdUsuario');
 
   modalMensaje: BsModalRef;
   lblModalMsaje: string;
@@ -67,25 +69,72 @@ export class PgrolesComponent implements OnInit {
   ArrRoles: any = [];
   IdRol: string = '0';
   ListaRoles() {
+    this.ArrRoles = [];
     this.Servicios.conslistrol('1').subscribe(respu => {
-      this.ArrRoles = [];
       this.ArrRoles = respu;
     })
   }
 
   ArrPermisoRol: any = [];
   Rol: string;
+  ArrRol: any = [];
   ListaPermisosRol(Arr: string) {
+    this.ArrRol = [];
     var Arreglo = [] = Arr.split(",");
     var IdRol = Arreglo[0];
     this.Rol = Arreglo[1];
     if (IdRol != '0' || IdRol != undefined) {
       this.Servicios.conspermisosrol('1', IdRol, '0').subscribe(respu => {
+        var Arr: any = [];
+        var NombreModuloPadre: any = [];
+        for (var i = 0; i < respu.length; i++) {
+          var Num = respu[i].Padre;
+          var NombrePadre = respu[i].ModuloPadre;
+          if (!NombreModuloPadre.includes(respu[i].ModuloPadre)) {
+            NombreModuloPadre.push({ NombrePadre: NombrePadre, PermisoRol: respu[i].PermisoRol })
+          }
+          if (!Arr.includes(respu[i].Padre)) {
+            Arr.push(Num)
+          }
+        }
+        for (var j = 0; j < Arr.length; j++) {
+          this.ArrRol.push({ Padre: Arr[j], ModuloPadre: NombreModuloPadre[j].NombrePadre, PermisoRol: NombreModuloPadre[j].PermisoRol })
+        }
         this.ArrPermisoRol = [];
         this.ArrPermisoRol = respu;
       })
     } else {
       this.ArrPermisoRol = [];
     }
+  }
+
+  EditaRol() {
+    const Update = {
+      NombreRol: this.Rol,
+      Estado: 1,
+      IdRol: 2
+    }
+    this.Servicios.actualizacrolmod('2', this.IdUsuarioCookies, Update).subscribe(respu => {
+      console.log(respu)
+    })
+  }
+
+
+  ModificaRol(Arr: any, Id: any) {
+    var Estado: string;
+    var elementCheked = <HTMLInputElement>document.getElementById(Id);
+    if (elementCheked.checked == true) {
+      Estado = "1";
+    }else{
+      Estado = "2";
+    }
+    const Update = {
+      IdModulo: Arr.IdModulo,
+      IdRol: Arr.IdRol,
+      Estado: Estado
+    }
+    this.Servicios.actualizacpermisorol('2', this.IdUsuarioCookies, Update).subscribe(respu => {
+      console.log(respu)
+    })
   }
 }

@@ -11,9 +11,11 @@
         </div>
 
         <div class="col-sm-6 m-0 mb-5 displayFlexbetween">
-            <select class="form-select" title="Seleccionar un rol" #SeleccionarRol [(ngModel)]="IdRol" (change)='ListaPermisosRol(IdRol)'>
+            <select class="form-select" title="Seleccionar un rol" #SeleccionarRol [(ngModel)]="IdRol"
+                (change)='ListaPermisosRol(IdRol)'>
                 <option value="0" selected>Seleccione rol...</option>
-                <option value="{{arRespu.IdRol}},{{arRespu.NombreRol}}" *ngFor="let arRespu of ArrRoles">{{arRespu.NombreRol}}</option>
+                <option value="{{arRespu.IdRol}},{{arRespu.NombreRol}}" *ngFor="let arRespu of ArrRoles">
+                    {{arRespu.NombreRol}}</option>
             </select>
             <div class="col-1" style="margin-left: 5px;">
                 <button id="pass" class="bot BtnimgTamano" title="Agregar un nuevo rol"
@@ -24,10 +26,11 @@
         </div>
 
         <div class="col-sm-6 m-0 mb-5 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" readonly title="Nombre del rol actual" [(ngModel)]="Rol">
+            <input type="text" class="form-control table-bordered" readonly title="Nombre del rol actual"
+                [(ngModel)]="Rol">
 
             <div class="col-1" style="margin-left: 5px;">
-                <button id="pass" class="bot BtnimgTamano" title="Agregar un nuevo rol">
+                <button id="pass" class="bot BtnimgTamano" title="Guardar información" (click)="EditaRol()">
                     <img class="BtnimgTamano" src="../../../../assets/ImagenesAdminCDI/disquete.png">
                 </button>
             </div>
@@ -38,29 +41,32 @@
         <div class="col-sm-12 m-0 mb-3 displayFlexbetween">
             <p class="tituloformulario">PERMISOS MÓDULO</p>
         </div>
+        <div class="row col-6 mb-3" *ngFor="let ArrR of ArrRol">
+            <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center" *ngIf="ArrR.PermisoRol=='0'">
+                <input type="checkbox" class="mt-1 m-auto">
+            </div>
+            <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center" *ngIf="ArrR.PermisoRol=='1'">
+                <input type="checkbox" class="mt-1 m-auto" checked>
+            </div>
+            <div class="col-sm-11">
+                <p class="tituloformulario">{{ArrR.ModuloPadre}}</p>
+            </div>
 
-        <div class="row col-6">
-            <div class="row col-sm-12 mb-2" *ngFor="let arRespu of ArrPermisoRol">
-                <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center">
-                    <input type="checkbox" class="m-auto">
-                </div>
-                <div class="col-sm-11">
-                    <input type="text" class="form-control" disabled value="{{arRespu.NombreModulo}}">
+            <div *ngFor="let arRespu of ArrPermisoRol; index as i">
+                <div *ngIf="arRespu.Padre == ArrR.Padre">
+                    <div class="row col-sm-12 mb-2 displayFlexbetween">
+                        <div class="col-sm-1 mt-1 text-center">
+                            <input type="checkbox" class="mt-2 m-auto" (change)="ModificaRol(arRespu, i)" id="{{i}}" [checked]="arRespu.EstadoPermiso == '1'">
+                        </div>
+                        <div class="col-sm-11">
+                            <input type="text" class="form-control" disabled value="{{arRespu.NombreModulo}}">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
 
-        <div class="row col-6">
-            <div class="row col-sm-12 mb-2" *ngFor="let arRespu of ArrPermisoRol">
-                <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center">
-                    <input type="checkbox" class="m-auto">
-                </div>
-                <div class="col-sm-11">
-                    <input type="text" class="form-control" disabled value="{{arRespu.NombreModulo}}">
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -99,7 +105,8 @@
                     <input type="text" class="form-control" [(ngModel)]="NombreRol">
                 </div>
                 <div class="col-sm-0 mt-2" style="justify-content: center; align-items: center;">
-                    <button class="col-sm-3 btn btn-dark" style="margin: auto;" (click)="NuevoRol(templateMensaje)">Guardar</button>
+                    <button class="col-sm-3 btn btn-dark" style="margin: auto;"
+                        (click)="NuevoRol(templateMensaje)">Guardar</button>
                 </div>
             </li>
         </div>
