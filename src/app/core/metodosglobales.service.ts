@@ -187,4 +187,7 @@ export class MetodosGlobalesService {
   actualizacpermisorol(bandera: string, IdUsuario: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizacpermisorol/' + bandera + '/' + IdUsuario, BodyPost);
   }
+  consrolmodulo(IdRol: string, NombreModulo: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consrolmodulo/' + IdRol + '/' + NombreModulo);
+  }
 }
