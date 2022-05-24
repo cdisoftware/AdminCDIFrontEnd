@@ -106,6 +106,8 @@ export class PgrolesComponent implements OnInit {
     } else {
       this.ArrPermisoRol = [];
     }
+    console.log(this.ArrPermisoRol)
+    console.log(this.ArrRol)
   }
 
   EditaRol() {
@@ -136,5 +138,9 @@ export class PgrolesComponent implements OnInit {
     this.Servicios.actualizacpermisorol('2', this.IdUsuarioCookies, Update).subscribe(respu => {
       console.log(respu)
     })
+  }
+
+  SeleccionaTodo(){
+    
   }
 }
