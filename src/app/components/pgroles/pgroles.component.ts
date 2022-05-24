@@ -83,31 +83,35 @@ export class PgrolesComponent implements OnInit {
     var Arreglo = [] = Arr.split(",");
     var IdRol = Arreglo[0];
     this.Rol = Arreglo[1];
-    if (IdRol != '0' || IdRol != undefined) {
-      this.Servicios.conspermisosrol('1', IdRol, '0').subscribe(respu => {
-        var Arr: any = [];
-        var NombreModuloPadre: any = [];
-        for (var i = 0; i < respu.length; i++) {
-          var Num = respu[i].Padre;
-          var NombrePadre = respu[i].ModuloPadre;
-          if (!NombreModuloPadre.includes(respu[i].ModuloPadre)) {
-            NombreModuloPadre.push({ NombrePadre: NombrePadre, PermisoRol: respu[i].PermisoRol })
+    if (this.IdRol != '0') {
+      if (IdRol != '0' || IdRol != undefined) {
+        this.Servicios.conspermisosrol('1', IdRol, '0').subscribe(respu => {
+          console.log(respu)
+          var Arr: any = [];
+          var NombreModuloPadre: any = [];
+          for (var i = 0; i < respu.length; i++) {
+            var Num = respu[i].Padre;
+            var NombrePadre = respu[i].ModuloPadre;
+            if (!NombreModuloPadre.includes(respu[i].ModuloPadre)) {
+              NombreModuloPadre.push({ NombrePadre: NombrePadre, PermisoRol: respu[i].PermisoRol })
+            }
+            if (!Arr.includes(respu[i].Padre)) {
+              Arr.push(Num)
+            }
           }
-          if (!Arr.includes(respu[i].Padre)) {
-            Arr.push(Num)
+          for (var j = 0; j < Arr.length; j++) {
+            this.ArrRol.push({ Padre: Arr[j], ModuloPadre: NombreModuloPadre[j].NombrePadre, PermisoRol: NombreModuloPadre[j].PermisoRol })
           }
-        }
-        for (var j = 0; j < Arr.length; j++) {
-          this.ArrRol.push({ Padre: Arr[j], ModuloPadre: NombreModuloPadre[j].NombrePadre, PermisoRol: NombreModuloPadre[j].PermisoRol })
-        }
+          this.ArrPermisoRol = [];
+          this.ArrPermisoRol = respu;
+        })
+      } else {
         this.ArrPermisoRol = [];
-        this.ArrPermisoRol = respu;
-      })
-    } else {
+      }
+    }else{
       this.ArrPermisoRol = [];
+      this.ArrRol = [];
     }
-    console.log(this.ArrPermisoRol)
-    console.log(this.ArrRol)
   }
 
   EditaRol() {
@@ -127,7 +131,7 @@ export class PgrolesComponent implements OnInit {
     var elementCheked = <HTMLInputElement>document.getElementById(Id);
     if (elementCheked.checked == true) {
       Estado = "1";
-    }else{
+    } else {
       Estado = "2";
     }
     const Update = {
@@ -140,7 +144,7 @@ export class PgrolesComponent implements OnInit {
     })
   }
 
-  SeleccionaTodo(){
-    
+  SeleccionaTodo() {
+
   }
 }
