@@ -39,37 +39,47 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar() {
-    const consultalogin = {
-      Usuario: this.user,
-      Password: this.passw,
-      RESPUESTA: '0',
-    };
-    this.Servicios.consultavalidlogin(consultalogin).subscribe(respu => {
-      if (respu == '"El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesion"') {
-        this.error();
-        this.form.reset();
-      } else {
+    this.Servicios.consusuarioinfoconsola(this.user, this.passw).subscribe(respu => {
+      if (respu.length > 0 && respu[0] != '"No fue posible ejecutar los datos, verifique el Log para validar la inconsistencia"') {
+        console.log(respu);
         this.cookies.set("IdUsuario", respu[0].Id_U);
+        console.log(respu[0].Id_U);
         this.cookies.set("Nombre", respu[0].Nombre);
         this.cookies.set("Apellido", respu[0].Apellido);
         this.cookies.set("UserAdmin", respu[0].UserAdmin);
         this.cookies.set("Usuario", respu[0].Usuario);
         this.cookies.set("Password", respu[0].Password);
         this.fakeLoading();
+      } else {
+        var Error = '' + respu;
+        this.error(Error);
+        this.form.reset();
       }
     });
   }
 
-  error() {
-    this._snackBar.open(
-      'El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesión.',
-      '',
-      {
-        duration: 10000,
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom',
-      }
-    );
+  error(Error: string) {
+    if (Error.length > 1) {
+      this._snackBar.open(
+        Error,
+        '',
+        {
+          duration: 10000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        }
+      );
+    } else {
+      this._snackBar.open(
+        'El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesión.',
+        '',
+        {
+          duration: 10000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        }
+      );
+    }
   }
 
   fakeLoading() {

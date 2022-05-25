@@ -25,6 +25,11 @@ export class PgrolesComponent implements OnInit {
     private modalServiceDos: NgbModal,
     private cookies: CookieService) { }
 
+  //Estado rol
+  EstadoRol: boolean;
+  //Ver resultados
+  VerResult: boolean = false;
+
   ngOnInit(): void {
     this.ListaRoles();
   }
@@ -81,51 +86,70 @@ export class PgrolesComponent implements OnInit {
   ListaPermisosRol(Arr: string) {
     this.ArrRol = [];
     var Arreglo = [] = Arr.split(",");
+    if (Arreglo[2] == '2') {
+      this.EstadoRol = false;
+    } else if (Arreglo[2] == '1') {
+      this.EstadoRol = true;
+    }
     var IdRol = Arreglo[0];
     this.Rol = Arreglo[1];
-    if (IdRol != '0' || IdRol != undefined) {
-      this.Servicios.conspermisosrol('1', IdRol, '0').subscribe(respu => {
-        var Arr: any = [];
-        var NombreModuloPadre: any = [];
-        for (var i = 0; i < respu.length; i++) {
-          var Num = respu[i].Padre;
-          var NombrePadre = respu[i].ModuloPadre;
-          if (!NombreModuloPadre.includes(respu[i].ModuloPadre)) {
-            NombreModuloPadre.push({ NombrePadre: NombrePadre, PermisoRol: respu[i].PermisoRol })
+    if (this.IdRol != '0') {
+      this.VerResult = true;
+      if (IdRol != '0' || IdRol != undefined) {
+        this.Servicios.conspermisosrol('1', IdRol, '0').subscribe(respu => {
+          var Arr: any = [];
+          var NombreModuloPadre: any = [];
+          for (var i = 0; i < respu.length; i++) {
+            var Num = respu[i].Padre;
+            var NombrePadre = respu[i].ModuloPadre;
+            if (!NombreModuloPadre.includes(respu[i].ModuloPadre)) {
+              NombreModuloPadre.push({ NombrePadre: NombrePadre, EstadoPermiso: respu[i].EstadoPermiso })
+            }
+            if (!Arr.includes(respu[i].Padre)) {
+              Arr.push(Num)
+            }
           }
-          if (!Arr.includes(respu[i].Padre)) {
-            Arr.push(Num)
+          for (var j = 0; j < Arr.length; j++) {
+            this.ArrRol.push({ Padre: Arr[j], ModuloPadre: NombreModuloPadre[j].NombrePadre, EstadoPermiso: NombreModuloPadre[j].EstadoPermiso })
           }
-        }
-        for (var j = 0; j < Arr.length; j++) {
-          this.ArrRol.push({ Padre: Arr[j], ModuloPadre: NombreModuloPadre[j].NombrePadre, PermisoRol: NombreModuloPadre[j].PermisoRol })
-        }
+          this.ArrPermisoRol = [];
+          this.ArrPermisoRol = respu;
+        })
+      } else {
         this.ArrPermisoRol = [];
-        this.ArrPermisoRol = respu;
-      })
+      }
     } else {
+      this.VerResult = false;
       this.ArrPermisoRol = [];
+      this.ArrRol = [];
     }
   }
 
-  EditaRol() {
+  EditaRol(Estado: string, templateMensaje: TemplateRef<any>) {
+    var Arreglo = [] = this.IdRol.split(",");
     const Update = {
       NombreRol: this.Rol,
-      Estado: 1,
-      IdRol: 2
+      Estado: Estado,
+      IdRol: Arreglo[0]
     }
     this.Servicios.actualizacrolmod('2', this.IdUsuarioCookies, Update).subscribe(respu => {
-      console.log(respu)
+      this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      if (respu == 'El registro ha sido actualizado correctamente.') {
+        this.EstadoRol = true;
+      } else {
+        this.EstadoRol = false;
+      }
     })
   }
 
 
-  ModificaRol(Arr: any, Id: any) {
+  ModificaRol(Arr: any, Id: any, templateMensaje: TemplateRef<any>) {
     var Estado: string;
     var elementCheked = <HTMLInputElement>document.getElementById(Id);
     if (elementCheked.checked == true) {
       Estado = "1";
-    }else{
+    } else {
       Estado = "2";
     }
     const Update = {
@@ -134,6 +158,24 @@ export class PgrolesComponent implements OnInit {
       Estado: Estado
     }
     this.Servicios.actualizacpermisorol('2', this.IdUsuarioCookies, Update).subscribe(respu => {
+      this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      this.ListaPermisosRol(this.IdRol);
+    })
+  }
+
+  SeleccionaTodo(Arr: any, Id: any) {
+    var elementCheked = <HTMLInputElement>document.getElementById(Id);
+    if (elementCheked.checked == true) {
+      //Si
+      console.log('SI')
+    } else {
+      //No
+      console.log('NO')
+    }
+    var Arreglo = [] = this.IdRol.split(",");
+    var IdRol = Arreglo[0];
+    this.Servicios.consrolmodulo(IdRol, Arr.ModuloPadre).subscribe(respu => {
       console.log(respu)
     })
   }
