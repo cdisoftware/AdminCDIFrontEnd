@@ -4,74 +4,25 @@
     <img style="margin-left: 5px" src="../../../../assets/ImagenesAdminCDI/usuario.png" class="BtnimgUsuario mr-2" />
     Hola, {{NombreUsu}} Bienvenido
   </div>
-  <!-- NAVIGATION MENU -->
+
   <ul class="nav-links">
     <div class="menu">
-
-
       <li class="titulopopup services cursorPointer" (click)="VerHome()"><a class="titulopopup"><a>Home</a>
           <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/home.png"
             class="BtnimgTamanoPeque mr-2"></a>
       </li>
 
-      <li class="titulopopup services cursorPointer"><a>REGISTRO</a>
+      <li class="titulopopup services cursorPointer" *ngFor="let Menu of MenuPri"><a>{{Menu.Menu}}</a>
         <ul class="dropdown">
-          <li class="li cursorPointer" (click)="VerActividadesDiarias()">
-            <a>ACTVIDADES DIARIAS</a>
-          </li>
+          <span *ngFor="let SubMenu of SubMenu">
+            <li class="li cursorPointer" *ngIf="SubMenu.Padre == Menu.IdMenu" (click)="IrPag(SubMenu.Path)">
+              <a>{{SubMenu.NombreModulo}}</a>
+            </li>
+          </span>
         </ul>
       </li>
 
-      <li class="titulopopup services cursorPointer"> <a>ADMIN INTERNOS</a>
 
-        <!-- DROPDOWN MENU -->
-        <ul class="dropdown">
-          <li class="li cursorPointer" (click)="VerPgBackup()">
-            <a>Backups</a>
-          </li>
-
-          <li class="li cursorPointer" (click)="VerPgTipoBackup()">
-            <a>Tipo Backup</a>
-          </li>
-
-          <li class="li cursorPointer" (click)="VerPgServidores()">
-            <a>Servidores</a>
-          </li>
-          <li class="li cursorPointer" (click)="VerPgETB()">
-            <a>ETB</a>
-          </li>
-          <li class="li cursorPointer" (click)="VerPgVPN()">
-            <a>VPN</a>
-          </li>
-          <li class="li cursorPointer" (click)="VerPgProyectos()">
-            <a>Proyectos</a>
-          </li>
-        </ul>
-      </li>
-
-      <li class="titulopopup services cursorPointer"> <a>ADMIN USUARIOS</a>
-        <!-- DROPDOWN MENU -->
-        <ul class="dropdown">
-          <li class="li cursorPointer" (click)="Verpgroles()">
-            <a>ROLES</a>
-          </li>
-          <li *ngIf="AminUser=='1'" class="li cursorPointer" (click)="VerPgUsuarios()">
-            <a>Usuarios <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/usuarios.png"
-                class="BtnimgTamanoPeque mr-2"></a>
-          </li>
-        </ul>
-      </li>
-      <li class="titulopopup services cursorPointer"> <a>REPORTES</a>
-        <!-- DROPDOWN MENU -->
-        <ul class="dropdown">
-          <li class="li cursorPointer">
-            <a>SOPORTE CONTABILIDAD</a>
-          </li>
-          <li class="li cursorPointer" (click)="VerregistroActividadesDiarias()">
-            <a>ACTIVDADES DIARIAS</a>
-          </li>
-        </ul>
-      </li>
       <li class="services titulopopup cursorPointer" (click)="VerPgUsuario()">
         <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/usuario.png"
           class="BtnimgTamanoPeque mr-2">
@@ -80,7 +31,6 @@
             <img src="../../../assets/ImagenesAdminCDI/apagar.png" style="margin-left: 5px;"
               class="BtnimgTamanoPeque mr-2">
           </li>
-
         </ul>
       </li>
 
