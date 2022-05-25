@@ -46,17 +46,26 @@ export class LayoutpaginaComponent implements OnInit {
   }
 
   //Arreglo MENU
-  ArrMenu: any = [];
+  MenuPri: any = [];
+  SubMenu: any = [];
   Obtienedata() {
     if (this.cookies.get('IdUsuario') == undefined || this.cookies.get('IdUsuario') == '' || this.cookies.get('IdUsuario') == null) {
       this.Cerrar();
       window.alert("Operacion no permitida");
     } else {
-      console.log(this.IdUsuarioCookies)
       this.Servicios.consusuarioroles('1', this.IdUsuarioCookies).subscribe(respu => {
-        console.log(respu)
+        this.SubMenu = respu;
+        console.log(this.SubMenu)
         if (respu.length > 0) {
-          this.ArrMenu = respu;
+          var MenuprincipalCompara: any = [];
+          this.MenuPri = [];
+          for (var i = 0; i < respu.length; i++) {
+            if (!MenuprincipalCompara.includes(respu[i].NombrePadre)) {
+              MenuprincipalCompara.push(respu[i].NombrePadre);
+              this.MenuPri.push({Menu: respu[i].NombrePadre, IdMenu: respu[i].Padre});
+            }
+          }
+        console.log(this.MenuPri)
         } else {
           this.Cerrar();
           window.alert("El usuario no tiene roles asignados por favor comuníquese con el administrador para este le suministré uno.");
@@ -113,4 +122,7 @@ export class LayoutpaginaComponent implements OnInit {
     this.router.navigate(['home/pgregtroactividades']);
   }
 
+  IrPag(Pagina: string){
+    this.router.navigate(['home/'+Pagina+'']);
+  }
 }

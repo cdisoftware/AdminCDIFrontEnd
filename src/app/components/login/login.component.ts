@@ -39,11 +39,13 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar() {
-    this.Servicios.consusuarioinfoconsola(this.user, this.passw).subscribe(respu => {
+    const Ingreso = {
+      "Usuario": this.user,
+      "Password": this.passw
+    }
+    this.Servicios.consusuarioinfoconsola('1', Ingreso).subscribe(respu => {
       if (respu.length > 0 && respu[0] != '"No fue posible ejecutar los datos, verifique el Log para validar la inconsistencia"') {
-        console.log(respu);
         this.cookies.set("IdUsuario", respu[0].Id_U);
-        console.log(respu[0].Id_U);
         this.cookies.set("Nombre", respu[0].Nombre);
         this.cookies.set("Apellido", respu[0].Apellido);
         this.cookies.set("UserAdmin", respu[0].UserAdmin);
@@ -59,7 +61,7 @@ export class LoginComponent implements OnInit {
   }
 
   error(Error: string) {
-    if (Error.length > 1) {
+    if (Error == '"No fue posible ejecutar los datos, verifique el Log para validar la inconsistencia"') {
       this._snackBar.open(
         Error,
         '',
@@ -69,9 +71,9 @@ export class LoginComponent implements OnInit {
           verticalPosition: 'bottom',
         }
       );
-    } else {
+    } else if(Error != '"No fue posible ejecutar los datos, verifique el Log para validar la inconsistencia"'){
       this._snackBar.open(
-        'El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesión.',
+        'El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesión, o El usuario no tiene roles asignados por favor comuníquese con el administrador para este le suministré uno.',
         '',
         {
           duration: 10000,

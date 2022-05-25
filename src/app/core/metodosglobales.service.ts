@@ -198,8 +198,8 @@ export class MetodosGlobalesService {
   }
 
   //Login
-  consusuarioinfoconsola(Usuario: string, Acceso: string) {
-    return this.http.get<any[]>(this.url_servidor + 'consusuarioinfoconsola/' + Usuario + '/' + Acceso);
+  consusuarioinfoconsola(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'consusuarioinfoconsola/' + bandera, BodyPost);
   }
   //Menu
   consusuarioroles(bandera: string, IdUsuario: string) {
