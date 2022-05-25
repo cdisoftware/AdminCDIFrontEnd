@@ -12,6 +12,9 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./layoutpagina.component.css'],
 })
 export class LayoutpaginaComponent implements OnInit {
+  //Usuario
+  IdUsuarioCookies: string = this.cookies.get('IdUsuario');
+
   //Variables globales
   lblModalMsaje: string;
   modalMensaje: BsModalRef;
@@ -42,14 +45,23 @@ export class LayoutpaginaComponent implements OnInit {
     this.Obtienedata();
   }
 
+  //Arreglo MENU
+  ArrMenu: any = [];
   Obtienedata() {
-    this.cookies.get('IdUsuario');
-    this.cookies.get('Nombre');
-    this.cookies.get('Apellido');
     if (this.cookies.get('IdUsuario') == undefined || this.cookies.get('IdUsuario') == '' || this.cookies.get('IdUsuario') == null) {
       this.Cerrar();
       window.alert("Operacion no permitida");
-
+    } else {
+      console.log(this.IdUsuarioCookies)
+      this.Servicios.consusuarioroles('1', this.IdUsuarioCookies).subscribe(respu => {
+        console.log(respu)
+        if (respu.length > 0) {
+          this.ArrMenu = respu;
+        } else {
+          this.Cerrar();
+          window.alert("El usuario no tiene roles asignados por favor comuníquese con el administrador para este le suministré uno.");
+        }
+      });
     }
   }
 
@@ -87,7 +99,7 @@ export class LayoutpaginaComponent implements OnInit {
     this.router.navigate(['home/PgVpn']);
   }
   VerPgServicios(Id: string) {
-    this.router.navigate(['home/PgServicios/'+Id]);
+    this.router.navigate(['home/PgServicios/' + Id]);
   }
 
 
@@ -100,5 +112,5 @@ export class LayoutpaginaComponent implements OnInit {
   VerregistroActividadesDiarias() {
     this.router.navigate(['home/pgregtroactividades']);
   }
-  
+
 }
