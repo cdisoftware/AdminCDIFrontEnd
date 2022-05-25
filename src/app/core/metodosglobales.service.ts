@@ -190,4 +190,13 @@ export class MetodosGlobalesService {
   consrolmodulo(IdRol: string, NombreModulo: string) {
     return this.http.get<any[]>(this.url_servidor + 'consrolmodulo/' + IdRol + '/' + NombreModulo);
   }
+
+
+  //Asignacion Roles Usuario
+  consusuarioroles(bandera: string, IdUsuario: string) {
+    return this.http.get<any[]>(this.url_servidor + 'consusuarioroles/' + bandera + '/' + IdUsuario);
+  }
+  conscusuario(bandera: string, IdUsuario: string, Estado: string, IdRol: string, IdUsuarioCons: string, NombreUsuario: string) {
+    return this.http.get<any[]>(this.url_servidor + 'conscusuario/' + bandera + '/' + IdUsuario + '/' + Estado + '/' + IdRol + '/' + IdUsuarioCons + '/' + NombreUsuario);
+  }
 }

@@ -86,9 +86,9 @@ export class PgrolesComponent implements OnInit {
   ListaPermisosRol(Arr: string) {
     this.ArrRol = [];
     var Arreglo = [] = Arr.split(",");
-    if(Arreglo[2] == '2'){
+    if (Arreglo[2] == '2') {
       this.EstadoRol = false;
-    }else if(Arreglo[2] == '1'){
+    } else if (Arreglo[2] == '1') {
       this.EstadoRol = true;
     }
     var IdRol = Arreglo[0];
@@ -125,7 +125,7 @@ export class PgrolesComponent implements OnInit {
     }
   }
 
-  EditaRol(Estado: string) {
+  EditaRol(Estado: string, templateMensaje: TemplateRef<any>) {
     var Arreglo = [] = this.IdRol.split(",");
     const Update = {
       NombreRol: this.Rol,
@@ -133,16 +133,18 @@ export class PgrolesComponent implements OnInit {
       IdRol: Arreglo[0]
     }
     this.Servicios.actualizacrolmod('2', this.IdUsuarioCookies, Update).subscribe(respu => {
-      if(respu == 'El registro ha sido actualizado correctamente.'){
+      this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      if (respu == 'El registro ha sido actualizado correctamente.') {
         this.EstadoRol = true;
-      }else{
+      } else {
         this.EstadoRol = false;
       }
     })
   }
 
 
-  ModificaRol(Arr: any, Id: any) {
+  ModificaRol(Arr: any, Id: any, templateMensaje: TemplateRef<any>) {
     var Estado: string;
     var elementCheked = <HTMLInputElement>document.getElementById(Id);
     if (elementCheked.checked == true) {
@@ -156,6 +158,8 @@ export class PgrolesComponent implements OnInit {
       Estado: Estado
     }
     this.Servicios.actualizacpermisorol('2', this.IdUsuarioCookies, Update).subscribe(respu => {
+      this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
       this.ListaPermisosRol(this.IdRol);
     })
   }

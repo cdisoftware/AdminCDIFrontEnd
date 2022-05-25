@@ -1,0 +1,190 @@
+<div class="row container m-auto bg-white pt-5 pb-5">
+    <div class="row justify-content-center ">
+        <p class="col-12 tituloformulario">CREACIÓN DE USUARIOS</p>
+    </div>
+
+    <div class="row col-11 mt-3">
+        <div class="col-sm-4 m-0 mb-3 displayFlexbetween">
+            <input type="text" class="form-control table-bordered" #NombreUsuario placeholder="Nombre o usuario"
+                title="Nombre o usuario">
+        </div>
+        <div class="col-sm-4 mb-3 displayFlexbetween">
+            <select class="form-select" title="Seleccione rol" #Seleccionerolvalue>
+                <option value="0" selected>Seleccione rol....</option>
+            </select>
+        </div>
+        <div class="col-sm-4 mb-3 displayFlexbetween">
+            <select class="form-select" title="Seleccione estado" #Seleccioneestadovalue>
+                <option value="0" selected>Seleccione estado....</option>
+            </select>
+        </div>
+    </div>
+    <div class="row col-1 mt-3">
+        <button class="btn btn-dark col-sm-12" title="Nuevo usuario" (click)="NuevoCliente()">
+            <img src="../../../../assets/ImagenesAdminCDI/AgregarServicio.png" class="BtnimgTamanoPeque mr-2">
+        </button>
+    </div>
+
+    <div class="row" *ngIf="NuevoUsuario == true">
+
+        <div class="row col-12 mt-5">
+            <p class="col-12 tituloformulario">DATOS DE USUARIO</p>
+        </div>
+
+        <div class="row col-12 mt-1">
+            <input type="checkbox" class="mt-1 col-sm-1">
+            <p class="Negrita col-sm-5">¿Este usuario es directorio activo?</p>
+        </div>
+
+        <div class="row col-12 mt-1">
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <select class="form-select" title="Tipo de identificación" #Seleccionerolvalue>
+                    <option value="0" selected>Seleccione T.I...</option>
+                </select>
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="N° de identificación"
+                    placeholder="N° de identificación">
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Correo electronico"
+                    placeholder="Correo electronico">
+            </div>
+
+
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Nombres" placeholder="Nombres">
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Apellidos" placeholder="Apellidos">
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Usuario" placeholder="Usuario">
+            </div>
+
+
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Cargo" placeholder="Cargo">
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <select class="form-select" title="Estado" #Seleccioneestadovalue>
+                    <option value="0" selected>Seleccione Estado</option>
+                    <option value="1">Activo</option>
+                    <option value="2">Inactivo</option>
+                </select>
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Clave" placeholder="Clave">
+            </div>
+        </div>
+
+        <div class="row col-12 mt-1">
+            <div class="col-sm-3">
+
+            </div>
+            <button class="btn btn-dark col-sm-3" title="Guardar" style="margin-right: 5px;">
+                Guardar
+                <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+            </button>
+            <button class="btn btn-dark col-sm-3" title="Cancelar" (click)="CancelaNuevoCliente()">
+                Cancelar
+                <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="row col-12 mt-5">
+            <p class="col-12 tituloformulario">DATOS DE USUARIO</p>
+        </div>
+
+        <div class="row col-12 mt-1">
+            <input type="checkbox" class="mt-1 col-sm-1">
+            <p class="Negrita col-sm-5">¿Este usuario es directorio activo?</p>
+        </div>
+        <div class="row col-12 mt-1">
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <select class="form-select" title="Tipo de identificación" #Seleccionerolvalue>
+                    <option value="0" selected>Seleccione T.I...</option>
+                </select>
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="N° de identificación"
+                    placeholder="N° de identificación">
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Correo electronico"
+                    placeholder="Correo electronico">
+            </div>
+
+
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Nombres" placeholder="Nombres">
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Apellidos" placeholder="Apellidos">
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Usuario" placeholder="Usuario">
+            </div>
+
+
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Cargo" placeholder="Cargo">
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <select class="form-select" title="Estado" #Seleccioneestadovalue>
+                    <option value="0" selected>Seleccione Estado</option>
+                    <option value="1">Activo</option>
+                    <option value="2">Inactivo</option>
+                </select>
+            </div>
+            <div class="col-sm-4 mb-3 displayFlexbetween">
+                <input type="text" class="form-control table-bordered" title="Clave" placeholder="Clave">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 mt-3">
+            <div class="row col-5">
+                <p class="col-12 tituloformulario">ASIGNACIÓN DE ROLES</p>
+                <div class="col-sm-10 mb-3 displayFlexbetween">
+                    <select class="form-select" title="registrar rol">
+                        <option value="0" selected>Seleccione rol....</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-dark col-sm-12" title="Agregar rol">
+                        <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
+                    </button>
+                </div>
+
+                <div class="row col-sm-12">
+                    <div class="col-sm-10 m-0 mb-3 displayFlexbetween">
+                        <input type="text" readonly class="form-control table-bordered" title="Nombre rol">
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-dark col-sm-12" title="Elimina rol">
+                            <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-12 mt-1">
+        <div class="col-sm-3">
+
+        </div>
+        <button class="btn btn-dark col-sm-3" title="Guardar cambios" style="margin-right: 5px;">
+            Guardar
+            <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+        </button>
+        <button class="btn btn-dark col-sm-3" title="Cancelar">
+            Cancelar
+            <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+        </button>
+    </div>
+</div>

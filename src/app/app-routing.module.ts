@@ -17,6 +17,7 @@ import { PgvpnComponent } from './components/pgvpn/pgvpn.component';
 import { ConsactividadesComponent } from './components/consactividades/consactividades.component';
 import { PgregtroactividadesComponent } from './components/pgregtroactividades/pgregtroactividades.component';
 import { PgrolesComponent } from './components/pgroles/pgroles.component';
+import { PgAsignaRolesComponent } from './components/pg-asigna-roles/pg-asigna-roles.component';
 
 
 const routes: Routes = [
@@ -85,6 +86,11 @@ const routes: Routes = [
       {
         path: 'pgroles',
         component: PgrolesComponent,
+
+      },
+      {
+        path: 'pgasignaroles',
+        component: PgAsignaRolesComponent,
 
       }
     ],
