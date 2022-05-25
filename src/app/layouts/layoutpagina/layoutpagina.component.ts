@@ -31,7 +31,7 @@ export class LayoutpaginaComponent implements OnInit {
 
   constructor(
     @Inject(DOCUMENT) private document: any,
-    private _modalService: BsModalService,
+    private modalService: BsModalService,
     public router: Router,
     private cookies: CookieService,
     private modalServiceDos: NgbModal,
@@ -62,10 +62,10 @@ export class LayoutpaginaComponent implements OnInit {
           for (var i = 0; i < respu.length; i++) {
             if (!MenuprincipalCompara.includes(respu[i].NombrePadre)) {
               MenuprincipalCompara.push(respu[i].NombrePadre);
-              this.MenuPri.push({Menu: respu[i].NombrePadre, IdMenu: respu[i].Padre});
+              this.MenuPri.push({ Menu: respu[i].NombrePadre, IdMenu: respu[i].Padre });
             }
           }
-        console.log(this.MenuPri)
+          console.log(this.MenuPri)
         } else {
           this.Cerrar();
           window.alert("El usuario no tiene roles asignados por favor comuníquese con el administrador para este le suministré uno.");
@@ -83,7 +83,7 @@ export class LayoutpaginaComponent implements OnInit {
   VerHome() {
     this.router.navigate(['home']);
   }
-  VerPgBackup() {
+  /*VerPgBackup() {
     this.router.navigate(['home/PgBackup']);
   }
   VerPgServidores() {
@@ -98,20 +98,12 @@ export class LayoutpaginaComponent implements OnInit {
   VerPgUsuarios() {
     this.router.navigate(['home/PgUsuarios']);
   }
-  VerPgUsuario() {
-    this.router.navigate(['home/PgUsuario']);
-  }
   VerPgETB() {
     this.router.navigate(['home/PgEtb']);
   }
   VerPgVPN() {
     this.router.navigate(['home/PgVpn']);
   }
-  VerPgServicios(Id: string) {
-    this.router.navigate(['home/PgServicios/' + Id]);
-  }
-
-
   VerActividadesDiarias() {
     this.router.navigate(['home/consactividades']);
   }
@@ -121,8 +113,19 @@ export class LayoutpaginaComponent implements OnInit {
   VerregistroActividadesDiarias() {
     this.router.navigate(['home/pgregtroactividades']);
   }
-
-  IrPag(Pagina: string){
-    this.router.navigate(['home/'+Pagina+'']);
+*/
+  VerPgUsuario() {
+    this.router.navigate(['home/PgUsuario']);
+  }
+  VerPgServicios(Id: string) {
+    this.router.navigate(['home/PgServicios/' + Id]);
+  }
+  IrPag(Pagina: string, templateMensaje: TemplateRef<any>) {
+    if (Pagina == '' || Pagina == undefined) {
+      this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = 'Estamos trabajando para brindarte una mejor experiencia.';
+    } else {
+      this.router.navigate(['home/' + Pagina + '']);
+    }
   }
 }
