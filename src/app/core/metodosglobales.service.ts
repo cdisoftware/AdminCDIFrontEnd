@@ -191,12 +191,6 @@ export class MetodosGlobalesService {
     return this.http.get<any[]>(this.url_servidor + 'consrolmodulo/' + IdRol + '/' + NombreModulo);
   }
 
-
-  //Asignacion Roles Usuario
-  conscusuario(bandera: string, IdUsuario: string, Estado: string, IdRol: string, IdUsuarioCons: string, NombreUsuario: string) {
-    return this.http.get<any[]>(this.url_servidor + 'conscusuario/' + bandera + '/' + IdUsuario + '/' + Estado + '/' + IdRol + '/' + IdUsuarioCons + '/' + NombreUsuario);
-  }
-
   //Login
   consusuarioinfoconsola(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'consusuarioinfoconsola/' + bandera, BodyPost);
@@ -204,5 +198,10 @@ export class MetodosGlobalesService {
   //Menu
   consusuarioroles(bandera: string, IdUsuario: string) {
     return this.http.get<any[]>(this.url_servidor + 'consusuarioroles/' + bandera + '/' + IdUsuario);
+  }
+
+  //Asignacion Roles Usuario
+  conscusuario(bandera: string, IdUsuario: string, Estado: string, IdRol: string, IdUsuarioCons: string, NombreUsuario: string) {
+    return this.http.get<any[]>(this.url_servidor + 'conscusuario/' + bandera + '/' + IdUsuario + '/' + Estado + '/' + IdRol + '/' + IdUsuarioCons + '/' + NombreUsuario);
   }
 }

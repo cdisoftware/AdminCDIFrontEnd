@@ -5,17 +5,23 @@
 
     <div class="row col-11 mt-3">
         <div class="col-sm-4 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" #NombreUsuario placeholder="Nombre o usuario"
-                title="Nombre o usuario">
+            <input type="text" class="form-control table-bordered" placeholder="Nombre o usuario"
+                title="Nombre o usuario" [(ngModel)]="NombreUsuario"
+                (keyup)="BuscaCliente(Estado, IdRol, NombreUsuario)">
         </div>
         <div class="col-sm-4 mb-3 displayFlexbetween">
-            <select class="form-select" title="Seleccione rol" #Seleccionerolvalue>
+            <select class="form-select" title="Seleccione rol" [(ngModel)]="IdRol"
+                (change)='BuscaCliente(Estado, IdRol, NombreUsuario)'>
                 <option value="0" selected>Seleccione rol....</option>
+                <option value="{{arRespu.IdRol}}" *ngFor="let arRespu of ArrRoles">{{arRespu.NombreRol}}</option>
             </select>
         </div>
         <div class="col-sm-4 mb-3 displayFlexbetween">
-            <select class="form-select" title="Seleccione estado" #Seleccioneestadovalue>
+            <select class="form-select" title="Seleccione estado" [(ngModel)]="Estado"
+                (change)='BuscaCliente(Estado, IdRol, NombreUsuario)'>
                 <option value="0" selected>Seleccione estado....</option>
+                <option value="1">Activo</option>
+                <option value="2">Inactivo</option>
             </select>
         </div>
     </div>
@@ -25,6 +31,30 @@
         </button>
     </div>
 
+    <!--Busca usuario-->
+    <div class="row col-10 mt-3 m-auto" *ngIf="ArrBuscaCliente.length > 0">
+        <div *ngFor="let ArrUsu of ArrBuscaCliente" class="row col-12 mt-2">
+            <div class="col-11">
+                <input type="text" value="{{ ArrUsu.Nombre + ' ' + ArrUsu.Apellido+ ' - ' + ArrUsu.Usuario }}"
+                    class="col-12 form-control" title="{{ ArrUsu.Nombre + ' ' + ArrUsu.Apellido+ ' - ' + ArrUsu.Usuario }}" disabled>
+            </div>
+            <div class="col-1">
+                <button class="bot" title="Editar Usuario" (click)="SeleccionaUsuario(ArrUsu)">
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" alt="Ver" class="mt-1 BtnimgTamanoPeque">
+                </button>
+            </div>
+        </div>
+
+        <div class="row col-8 m-auto">
+            <button class="btn btn-dark col-sm-3 m-auto mt-3" title="Cancelar" (click)="CancelaBusquedaCliente()">
+                Cancelar
+                <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+            </button>
+        </div>
+    </div>
+
+
+    <!--CAMPOS AGREGA Y EDITA-->
     <div class="row" *ngIf="NuevoUsuario == true">
 
         <div class="row col-12 mt-5">
@@ -93,7 +123,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="EditaUsuario == true">
         <div class="row col-12 mt-5">
             <p class="col-12 tituloformulario">DATOS DE USUARIO</p>
         </div>
@@ -145,7 +175,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="EditaUsuario == true">
         <div class="col-sm-12 mt-3">
             <div class="row col-5">
                 <p class="col-12 tituloformulario">ASIGNACIÓN DE ROLES</p>
@@ -174,7 +204,7 @@
         </div>
     </div>
 
-    <div class="row col-12 mt-1">
+    <div class="row col-12 mt-1" *ngIf="EditaUsuario == true">
         <div class="col-sm-3">
 
         </div>
