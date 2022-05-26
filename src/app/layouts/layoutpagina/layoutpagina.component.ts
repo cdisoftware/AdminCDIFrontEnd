@@ -55,7 +55,6 @@ export class LayoutpaginaComponent implements OnInit {
     } else {
       this.Servicios.consusuarioroles('1', this.IdUsuarioCookies).subscribe(respu => {
         this.SubMenu = respu;
-        console.log(this.SubMenu)
         if (respu.length > 0) {
           var MenuprincipalCompara: any = [];
           this.MenuPri = [];
@@ -65,7 +64,6 @@ export class LayoutpaginaComponent implements OnInit {
               this.MenuPri.push({ Menu: respu[i].NombrePadre, IdMenu: respu[i].Padre });
             }
           }
-          console.log(this.MenuPri)
         } else {
           this.Cerrar();
           window.alert("El usuario no tiene roles asignados por favor comuníquese con el administrador para este le suministré uno.");
