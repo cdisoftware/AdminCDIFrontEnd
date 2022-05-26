@@ -43,11 +43,13 @@ export class PgAsignaRolesComponent implements OnInit {
   }
 
   ArrRoles: any = [];
+  ArrRolAsigna: any = [];
   IdRol: string = '0';
   ListaRoles() {
     this.ArrRoles = [];
     this.Servicios.conslistrol('1').subscribe(respu => {
       this.ArrRoles = respu;
+      this.ArrRolAsigna = respu;
     })
   }
 

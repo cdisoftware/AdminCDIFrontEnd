@@ -134,43 +134,30 @@
         </div>
         <div class="row col-12 mt-1">
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <select class="form-select" title="Tipo de identificación" #Seleccionerolvalue>
-                    <option value="0" selected>Seleccione T.I...</option>
-                </select>
-            </div>
-            <div class="col-sm-4 mb-3 displayFlexbetween">
                 <input type="text" class="form-control table-bordered" title="N° de identificación"
-                    placeholder="N° de identificación">
-            </div>
-            <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Correo electronico"
-                    placeholder="Correo electronico">
+                    placeholder="N° de identificación" [(ngModel)]="ArrSeleccioneClientes.Identificacion">
             </div>
 
 
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Nombres" placeholder="Nombres">
+                <input type="text" class="form-control table-bordered" title="Nombres" placeholder="Nombres"[(ngModel)]="ArrSeleccioneClientes.Nombre">
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Apellidos" placeholder="Apellidos">
+                <input type="text" class="form-control table-bordered" title="Apellidos" placeholder="Apellidos"[(ngModel)]="ArrSeleccioneClientes.Apellido">
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Usuario" placeholder="Usuario">
+                <input type="text" class="form-control table-bordered" title="Usuario" placeholder="Usuario"[(ngModel)]="ArrSeleccioneClientes.Usuario">
             </div>
 
-
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Cargo" placeholder="Cargo">
-            </div>
-            <div class="col-sm-4 mb-3 displayFlexbetween">
-                <select class="form-select" title="Estado" #Seleccioneestadovalue>
+                <select class="form-select" title="Estado" [(ngModel)]="ArrSeleccioneClientes.Estado">
                     <option value="0" selected>Seleccione Estado</option>
                     <option value="1">Activo</option>
                     <option value="2">Inactivo</option>
                 </select>
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Clave" placeholder="Clave">
+                <input type="text" class="form-control table-bordered" title="Clave" placeholder="Clave" [(ngModel)]="ArrSeleccioneClientes.Clave">
             </div>
         </div>
     </div>
@@ -182,6 +169,7 @@
                 <div class="col-sm-10 mb-3 displayFlexbetween">
                     <select class="form-select" title="registrar rol">
                         <option value="0" selected>Seleccione rol....</option>
+                        <option value="{{arRespu.IdRol}}" *ngFor="let arRespu of ArrRolAsigna">{{arRespu.NombreRol}}</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
