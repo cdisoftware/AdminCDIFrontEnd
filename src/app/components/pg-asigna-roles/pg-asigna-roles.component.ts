@@ -46,6 +46,7 @@ export class PgAsignaRolesComponent implements OnInit {
   }
   CancelaNuevoCliente() {
     this.NuevoUsuario = false;
+    this.ArrNuevoUser = ({ Identificacion: '', Usuario: '', Nombre: '', Apellido: '', Estado: '0', Clave: '' });
   }
 
   ArrRoles: any = [];
@@ -147,7 +148,6 @@ export class PgAsignaRolesComponent implements OnInit {
 
   ArrNuevoUser: any = ({ Identificacion: '', Usuario: '', Nombre: '', Apellido: '', Estado: '0', Clave: '' });
   UserNew(templateMensaje: TemplateRef<any>) {
-    this.NuevoUsuario = false;
     const Insert = {
       Cedula: this.ArrNuevoUser.Identificacion,
       Usuario: this.ArrNuevoUser.Usuario,
@@ -158,8 +158,15 @@ export class PgAsignaRolesComponent implements OnInit {
       Password: this.ArrNuevoUser.Clave
     }
     this.Servicios.consusuarioconsmod('3', this.IdUsuarioCookies, Insert).subscribe(respu => {
+      var res = respu.split("."); 
+      console.log(res)
+
       this.modalMensaje = this.modalService.show(templateMensaje);
-      this.lblModalMsaje = respu;
+      this.lblModalMsaje = res[0];
+      if (res[0] == 'Datos Guardados') {
+        this.NuevoUsuario = false;
+        this.ArrNuevoUser = ({ Identificacion: '', Usuario: '', Nombre: '', Apellido: '', Estado: '0', Clave: '' });
+      }
     })
   }
 }
