@@ -55,7 +55,6 @@ export class LayoutpaginaComponent implements OnInit {
     } else {
       this.Servicios.consusuarioroles('1', this.IdUsuarioCookies).subscribe(respu => {
         this.SubMenu = respu;
-        console.log(this.SubMenu)
         if (respu.length > 0) {
           var MenuprincipalCompara: any = [];
           this.MenuPri = [];
@@ -65,7 +64,6 @@ export class LayoutpaginaComponent implements OnInit {
               this.MenuPri.push({ Menu: respu[i].NombrePadre, IdMenu: respu[i].Padre });
             }
           }
-          console.log(this.MenuPri)
         } else {
           this.Cerrar();
           window.alert("El usuario no tiene roles asignados por favor comuníquese con el administrador para este le suministré uno.");
@@ -79,41 +77,14 @@ export class LayoutpaginaComponent implements OnInit {
     this.cookies.set('Nombre', '');
     this.cookies.set('Apellido', '');
     this.cookies.set('IdUsuario', '');
+    this.cookies.set("UserAdmin", '');
+    this.cookies.set("Usuario", '');
+    this.cookies.set("Password", '');
+    this.cookies.set("IdRol", '');
   }
   VerHome() {
     this.router.navigate(['home']);
   }
-  /*VerPgBackup() {
-    this.router.navigate(['home/PgBackup']);
-  }
-  VerPgServidores() {
-    this.router.navigate(['home/PgServidores']);
-  }
-  VerPgTipoBackup() {
-    this.router.navigate(['home/Pgtipobackup']);
-  }
-  VerPgProyectos() {
-    this.router.navigate(['home/PgProyectos']);
-  }
-  VerPgUsuarios() {
-    this.router.navigate(['home/PgUsuarios']);
-  }
-  VerPgETB() {
-    this.router.navigate(['home/PgEtb']);
-  }
-  VerPgVPN() {
-    this.router.navigate(['home/PgVpn']);
-  }
-  VerActividadesDiarias() {
-    this.router.navigate(['home/consactividades']);
-  }
-  Verpgroles() {
-    this.router.navigate(['home/pgroles']);
-  }
-  VerregistroActividadesDiarias() {
-    this.router.navigate(['home/pgregtroactividades']);
-  }
-*/
   VerPgUsuario() {
     this.router.navigate(['home/PgUsuario']);
   }

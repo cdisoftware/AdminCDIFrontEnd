@@ -5,17 +5,23 @@
 
     <div class="row col-11 mt-3">
         <div class="col-sm-4 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" #NombreUsuario placeholder="Nombre o usuario"
-                title="Nombre o usuario">
+            <input type="text" class="form-control table-bordered" placeholder="Nombre o usuario"
+                title="Nombre o usuario" [(ngModel)]="NombreUsuario"
+                (keyup)="BuscaCliente(Estado, IdRol, NombreUsuario)">
         </div>
         <div class="col-sm-4 mb-3 displayFlexbetween">
-            <select class="form-select" title="Seleccione rol" #Seleccionerolvalue>
+            <select class="form-select" title="Seleccione rol" [(ngModel)]="IdRol"
+                (change)='BuscaCliente(Estado, IdRol, NombreUsuario)'>
                 <option value="0" selected>Seleccione rol....</option>
+                <option value="{{arRespu.IdRol}}" *ngFor="let arRespu of ArrRoles">{{arRespu.NombreRol}}</option>
             </select>
         </div>
         <div class="col-sm-4 mb-3 displayFlexbetween">
-            <select class="form-select" title="Seleccione estado" #Seleccioneestadovalue>
+            <select class="form-select" title="Seleccione estado" [(ngModel)]="Estado"
+                (change)='BuscaCliente(Estado, IdRol, NombreUsuario)'>
                 <option value="0" selected>Seleccione estado....</option>
+                <option value="1">Activo</option>
+                <option value="2">Inactivo</option>
             </select>
         </div>
     </div>
@@ -25,6 +31,30 @@
         </button>
     </div>
 
+    <!--Busca usuario-->
+    <div class="row col-10 mt-3 m-auto" *ngIf="ArrBuscaCliente.length > 0">
+        <div *ngFor="let ArrUsu of ArrBuscaCliente" class="row col-12 mt-2">
+            <div class="col-11">
+                <input type="text" value="{{ ArrUsu.Nombre + ' ' + ArrUsu.Apellido+ ' - ' + ArrUsu.Usuario }}"
+                    class="col-12 form-control" title="{{ ArrUsu.Nombre + ' ' + ArrUsu.Apellido+ ' - ' + ArrUsu.Usuario }}" disabled>
+            </div>
+            <div class="col-1">
+                <button class="bot" title="Editar Usuario" (click)="SeleccionaUsuario(ArrUsu)">
+                    <img src="../../../../assets/ImagenesAdminCDI/editar.png" alt="Ver" class="mt-1 BtnimgTamanoPeque">
+                </button>
+            </div>
+        </div>
+
+        <div class="row col-8 m-auto">
+            <button class="btn btn-dark col-sm-3 m-auto mt-3" title="Cancelar" (click)="CancelaBusquedaCliente()">
+                Cancelar
+                <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+            </button>
+        </div>
+    </div>
+
+
+    <!--CAMPOS AGREGA Y EDITA-->
     <div class="row" *ngIf="NuevoUsuario == true">
 
         <div class="row col-12 mt-5">
@@ -38,43 +68,32 @@
 
         <div class="row col-12 mt-1">
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <select class="form-select" title="Tipo de identificación" #Seleccionerolvalue>
-                    <option value="0" selected>Seleccione T.I...</option>
-                </select>
+                <input type="text" class="form-control table-bordered" maxlength="15" minlength="3" title="N° de identificación"
+                    placeholder="N° de identificación" [(ngModel)]="ArrNuevoUser.Identificacion">
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="N° de identificación"
-                    placeholder="N° de identificación">
+                <input type="text" class="form-control table-bordered" maxlength="30" minlength="3"  title="Nombres" placeholder="Nombres"
+                [(ngModel)]="ArrNuevoUser.Nombre">
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Correo electronico"
-                    placeholder="Correo electronico">
-            </div>
-
-
-            <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Nombres" placeholder="Nombres">
+                <input type="text" class="form-control table-bordered" title="Apellidos" maxlength="30" minlength="3"  placeholder="Apellidos"
+                [(ngModel)]="ArrNuevoUser.Apellido">
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Apellidos" placeholder="Apellidos">
-            </div>
-            <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Usuario" placeholder="Usuario">
+                <input type="text" class="form-control table-bordered" title="Usuario" maxlength="15" minlength="3" placeholder="Usuario"
+                [(ngModel)]="ArrNuevoUser.Usuario">
             </div>
 
-
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Cargo" placeholder="Cargo">
-            </div>
-            <div class="col-sm-4 mb-3 displayFlexbetween">
-                <select class="form-select" title="Estado" #Seleccioneestadovalue>
+                <select class="form-select" title="Estado" [(ngModel)]="ArrNuevoUser.Estado">
                     <option value="0" selected>Seleccione Estado</option>
                     <option value="1">Activo</option>
                     <option value="2">Inactivo</option>
                 </select>
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Clave" placeholder="Clave">
+                <input type="text" class="form-control table-bordered" title="Clave" maxlength="15" minlength="3"  placeholder="Clave"
+                [(ngModel)]="ArrNuevoUser.Clave">
             </div>
         </div>
 
@@ -82,7 +101,7 @@
             <div class="col-sm-3">
 
             </div>
-            <button class="btn btn-dark col-sm-3" title="Guardar" style="margin-right: 5px;">
+            <button class="btn btn-dark col-sm-3" title="Guardar" style="margin-right: 5px;" (click)="UserNew(templateMensaje)">
                 Guardar
                 <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
             </button>
@@ -93,7 +112,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="EditaUsuario == true">
         <div class="row col-12 mt-5">
             <p class="col-12 tituloformulario">DATOS DE USUARIO</p>
         </div>
@@ -104,68 +123,56 @@
         </div>
         <div class="row col-12 mt-1">
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <select class="form-select" title="Tipo de identificación" #Seleccionerolvalue>
-                    <option value="0" selected>Seleccione T.I...</option>
-                </select>
-            </div>
-            <div class="col-sm-4 mb-3 displayFlexbetween">
                 <input type="text" class="form-control table-bordered" title="N° de identificación"
-                    placeholder="N° de identificación">
-            </div>
-            <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Correo electronico"
-                    placeholder="Correo electronico">
+                    placeholder="N° de identificación" [(ngModel)]="ArrSeleccioneClientes.Identificacion">
             </div>
 
 
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Nombres" placeholder="Nombres">
+                <input type="text" class="form-control table-bordered" title="Nombres" placeholder="Nombres"[(ngModel)]="ArrSeleccioneClientes.Nombre">
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Apellidos" placeholder="Apellidos">
+                <input type="text" class="form-control table-bordered" title="Apellidos" placeholder="Apellidos"[(ngModel)]="ArrSeleccioneClientes.Apellido">
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Usuario" placeholder="Usuario">
+                <input type="text" class="form-control table-bordered" title="Usuario" placeholder="Usuario"[(ngModel)]="ArrSeleccioneClientes.Usuario">
             </div>
 
-
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Cargo" placeholder="Cargo">
-            </div>
-            <div class="col-sm-4 mb-3 displayFlexbetween">
-                <select class="form-select" title="Estado" #Seleccioneestadovalue>
+                <select class="form-select" title="Estado" [(ngModel)]="ArrSeleccioneClientes.Estado">
                     <option value="0" selected>Seleccione Estado</option>
                     <option value="1">Activo</option>
                     <option value="2">Inactivo</option>
                 </select>
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Clave" placeholder="Clave">
+                <input type="text" class="form-control table-bordered" title="Clave" placeholder="Clave" [(ngModel)]="ArrSeleccioneClientes.Clave">
             </div>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="EditaUsuario == true">
         <div class="col-sm-12 mt-3">
             <div class="row col-5">
                 <p class="col-12 tituloformulario">ASIGNACIÓN DE ROLES</p>
                 <div class="col-sm-10 mb-3 displayFlexbetween">
-                    <select class="form-select" title="registrar rol">
+                    <select class="form-select" title="registrar rol" [(ngModel)]="IdRolAsigna">
                         <option value="0" selected>Seleccione rol....</option>
+                        <option value="{{arRespu.IdRol}}" *ngFor="let arRespu of ArrRolAsigna">{{arRespu.NombreRol}}</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
-                    <button class="btn btn-dark col-sm-12" title="Agregar rol">
+                    <button class="btn btn-dark col-sm-12" title="Agregar rol" (click)="IngresaRol(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
                     </button>
                 </div>
 
-                <div class="row col-sm-12">
+                <div class="row col-sm-12" *ngFor="let arRespu of ArrListaRolesAsignados">
                     <div class="col-sm-10 m-0 mb-3 displayFlexbetween">
-                        <input type="text" readonly class="form-control table-bordered" title="Nombre rol">
+                        <input type="text" value="{{arRespu.NombreRol}}" readonly class="form-control table-bordered" title="Nombre rol">
                     </div>
                     <div class="col-sm-2">
-                        <button class="btn btn-dark col-sm-12" title="Elimina rol">
+                        <button class="btn btn-dark col-sm-12" title="Elimina rol" (click)="EliminaRol(arRespu.IdUsuarioC, arRespu.IdRol, templateMensaje)">
                             <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </div>
@@ -174,17 +181,31 @@
         </div>
     </div>
 
-    <div class="row col-12 mt-1">
-        <div class="col-sm-3">
-
-        </div>
-        <button class="btn btn-dark col-sm-3" title="Guardar cambios" style="margin-right: 5px;">
+    <div class="row col-12 mt-1" *ngIf="EditaUsuario == true">
+        <button class="btn btn-dark col-sm-3 m-auto" title="Guardar cambios" style="margin-right: 5px;" (click)="Guardar(templateMensaje)">
             Guardar
             <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
         </button>
-        <button class="btn btn-dark col-sm-3" title="Cancelar">
-            Cancelar
-            <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
-        </button>
     </div>
 </div>
+
+
+
+
+
+
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12">
+            <p class="pModals">{{ lblModalMsaje }}</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>
