@@ -40,10 +40,10 @@
         <div class="col-sm-12 m-0 mb-3 displayFlexbetween">
             <p class="tituloformulario">PERMISOS MÓDULO</p>
         </div>
-        <div class="row col-6 mb-3" *ngFor="let ArrR of ArrRol; index as j">
+        <div class="row col-6 mb-3" *ngFor="let ArrR of ArrRol">
             <div class="col-sm-1 m-0 mb-3 displayFlexbetween text-center">
-                <input type="checkbox" class="mt-1 m-auto" id="{{j}}" (change)="SeleccionaTodo(ArrR, j)"
-                    [checked]="ArrR.EstadoPermiso == '1'">
+                <input type="checkbox" class="mt-1 m-auto" [checked]="ArrR.EstadoPermiso == '1'">
+                <!-- (change)="SeleccionaTodo(ArrR,j)"-->
             </div>
             <div class="col-sm-11">
                 <p class="tituloformulario">{{ArrR.ModuloPadre}}</p>
