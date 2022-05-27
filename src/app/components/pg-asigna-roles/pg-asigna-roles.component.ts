@@ -3,7 +3,6 @@ import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from "ngx-cookie-service";
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-pg-asigna-roles',
@@ -40,7 +39,6 @@ export class PgAsignaRolesComponent implements OnInit {
 
   ngOnInit(): void {
     this.ListaRoles();
-    console.log(this.IdRolCookies)
   }
 
   NuevoCliente() {
@@ -84,7 +82,7 @@ export class PgAsignaRolesComponent implements OnInit {
   ArrSeleccioneClientes: any = [];
   SeleccionaUsuario(Arr: any) {
     this.ArrSeleccioneClientes = Arr;
-    console.log(this.ArrSeleccioneClientes)
+    console.log(Arr)
     this.CancelaBusquedaCliente();
     this.EditaUsuario = true;
     this.ListaAsignaRol();
@@ -101,7 +99,7 @@ export class PgAsignaRolesComponent implements OnInit {
       }
       this.Servicios.insertauserolmodifica('3', this.ArrSeleccioneClientes.IdUsuarioC, this.IdUsuarioCookies, BodyInsert).subscribe(Resultado => {
         this.modalMensaje = this.modalService.show(templateMensaje);
-      this.lblModalMsaje = Resultado;
+        this.lblModalMsaje = Resultado;
         this.ListaAsignaRol();
       })
     }
@@ -129,9 +127,39 @@ export class PgAsignaRolesComponent implements OnInit {
 
   }
 
-  Guardar(templateMensaje: TemplateRef<any>){
+  Guardar(templateMensaje: TemplateRef<any>) {
     this.EditaUsuario = false;
-    this.modalMensaje = this.modalService.show(templateMensaje);
-      this.lblModalMsaje = 'Datos Guardados.';
+    //Servicio actualiza usuario
+    const Update = {
+      Cedula: this.ArrSeleccioneClientes.Identificacion,
+      Usuario: this.ArrSeleccioneClientes.Usuario,
+      Nombre: this.ArrSeleccioneClientes.Nombre,
+      Apellido: this.ArrSeleccioneClientes.Apellido,
+      Estado: this.ArrSeleccioneClientes.Estado,
+      Id_U: this.ArrSeleccioneClientes.IdUsuarioC,
+      Password: this.ArrSeleccioneClientes.Clave
+    }
+    this.Servicios.consusuarioconsmod('2', this.IdUsuarioCookies, Update).subscribe(respu => {
+      this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+    })
+  }
+
+  ArrNuevoUser: any = ({ Identificacion: '', Usuario: '', Nombre: '', Apellido: '', Estado: '0', Clave: '' });
+  UserNew(templateMensaje: TemplateRef<any>) {
+    this.NuevoUsuario = false;
+    const Insert = {
+      Cedula: this.ArrNuevoUser.Identificacion,
+      Usuario: this.ArrNuevoUser.Usuario,
+      Nombre: this.ArrNuevoUser.Nombre,
+      Apellido: this.ArrNuevoUser.Apellido,
+      Estado: this.ArrNuevoUser.Estado,
+      Id_U: '0',
+      Password: this.ArrNuevoUser.Clave
+    }
+    this.Servicios.consusuarioconsmod('3', this.IdUsuarioCookies, Insert).subscribe(respu => {
+      this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+    })
   }
 }

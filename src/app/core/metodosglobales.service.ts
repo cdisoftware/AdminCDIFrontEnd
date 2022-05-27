@@ -203,5 +203,8 @@ export class MetodosGlobalesService {
   }
   insertauserolmodifica(bandera: string, IdUsuarioRol: string, IdUsuario:string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'insertauserolmodifica/' + bandera + '/' + IdUsuarioRol + '/' +IdUsuario,BodyPost);
-  }                                   
+  }
+  consusuarioconsmod(bandera: string, IdUsuario: string, BodyPost: any) {
+    return this.http.put<any>(this.url_servidor + 'consusuarioconsmod/' + bandera + '/' + IdUsuario, BodyPost);
+  }
 }

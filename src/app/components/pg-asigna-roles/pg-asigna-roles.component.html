@@ -69,27 +69,31 @@
         <div class="row col-12 mt-1">
             <div class="col-sm-4 mb-3 displayFlexbetween">
                 <input type="text" class="form-control table-bordered" maxlength="15" minlength="3" title="N° de identificación"
-                    placeholder="N° de identificación">
+                    placeholder="N° de identificación" [(ngModel)]="ArrNuevoUser.Identificacion">
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" maxlength="30" minlength="3"  title="Nombres" placeholder="Nombres">
+                <input type="text" class="form-control table-bordered" maxlength="30" minlength="3"  title="Nombres" placeholder="Nombres"
+                [(ngModel)]="ArrNuevoUser.Nombre">
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Apellidos" maxlength="30" minlength="3"  placeholder="Apellidos">
+                <input type="text" class="form-control table-bordered" title="Apellidos" maxlength="30" minlength="3"  placeholder="Apellidos"
+                [(ngModel)]="ArrNuevoUser.Apellido">
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Usuario" maxlength="15" minlength="3" placeholder="Usuario">
+                <input type="text" class="form-control table-bordered" title="Usuario" maxlength="15" minlength="3" placeholder="Usuario"
+                [(ngModel)]="ArrNuevoUser.Usuario">
             </div>
 
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <select class="form-select" title="Estado" #Seleccioneestadovalue>
+                <select class="form-select" title="Estado" [(ngModel)]="ArrNuevoUser.Estado">
                     <option value="0" selected>Seleccione Estado</option>
                     <option value="1">Activo</option>
                     <option value="2">Inactivo</option>
                 </select>
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Clave" maxlength="15" minlength="3"  placeholder="Clave">
+                <input type="text" class="form-control table-bordered" title="Clave" maxlength="15" minlength="3"  placeholder="Clave"
+                [(ngModel)]="ArrNuevoUser.Clave">
             </div>
         </div>
 
@@ -97,7 +101,7 @@
             <div class="col-sm-3">
 
             </div>
-            <button class="btn btn-dark col-sm-3" title="Guardar" style="margin-right: 5px;">
+            <button class="btn btn-dark col-sm-3" title="Guardar" style="margin-right: 5px;" (click)="UserNew(templateMensaje)">
                 Guardar
                 <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
             </button>

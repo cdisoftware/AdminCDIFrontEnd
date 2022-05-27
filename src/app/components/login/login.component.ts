@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
       "Password": this.passw
     }
     this.Servicios.consusuarioinfoconsola('1', Ingreso).subscribe(respu => {
-      console.log(respu)
       if (respu.length > 0 && respu[0] != '"No fue posible ejecutar los datos, verifique el Log para validar la inconsistencia"') {
         this.cookies.set("IdUsuario", respu[0].Id_U);
         this.cookies.set("Nombre", respu[0].Nombre);

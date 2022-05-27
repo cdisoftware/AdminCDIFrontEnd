@@ -85,37 +85,6 @@ export class LayoutpaginaComponent implements OnInit {
   VerHome() {
     this.router.navigate(['home']);
   }
-  /*VerPgBackup() {
-    this.router.navigate(['home/PgBackup']);
-  }
-  VerPgServidores() {
-    this.router.navigate(['home/PgServidores']);
-  }
-  VerPgTipoBackup() {
-    this.router.navigate(['home/Pgtipobackup']);
-  }
-  VerPgProyectos() {
-    this.router.navigate(['home/PgProyectos']);
-  }
-  VerPgUsuarios() {
-    this.router.navigate(['home/PgUsuarios']);
-  }
-  VerPgETB() {
-    this.router.navigate(['home/PgEtb']);
-  }
-  VerPgVPN() {
-    this.router.navigate(['home/PgVpn']);
-  }
-  VerActividadesDiarias() {
-    this.router.navigate(['home/consactividades']);
-  }
-  Verpgroles() {
-    this.router.navigate(['home/pgroles']);
-  }
-  VerregistroActividadesDiarias() {
-    this.router.navigate(['home/pgregtroactividades']);
-  }
-*/
   VerPgUsuario() {
     this.router.navigate(['home/PgUsuario']);
   }
