@@ -1,8 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from "ngx-cookie-service";
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-pg-asigna-roles',
@@ -16,8 +17,14 @@ export class PgAsignaRolesComponent implements OnInit {
     private modalServiceDos: NgbModal,
     private cookies: CookieService) { }
 
+  //Modal mensaje
+  modalMensaje: BsModalRef;
+  lblModalMsaje: string;
+
   //Usuario
   IdUsuarioCookies: string = this.cookies.get('IdUsuario');
+  IdRolCookies: string = this.cookies.get('IdRol');
+
 
   //NUEVO USUARIO
   NuevoUsuario: boolean = false;
@@ -33,6 +40,7 @@ export class PgAsignaRolesComponent implements OnInit {
 
   ngOnInit(): void {
     this.ListaRoles();
+    console.log(this.IdRolCookies)
   }
 
   NuevoCliente() {
@@ -79,5 +87,51 @@ export class PgAsignaRolesComponent implements OnInit {
     console.log(this.ArrSeleccioneClientes)
     this.CancelaBusquedaCliente();
     this.EditaUsuario = true;
+    this.ListaAsignaRol();
+  }
+  IdRolAsigna: string = '0';
+  IngresaRol(templateMensaje: TemplateRef<any>) {
+    if (this.IdRolAsigna == '0') {
+      this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = 'Operacion no permitida';
+    } else {
+      const BodyInsert = {
+        IdRol: this.IdRolAsigna,
+        Estado: 1
+      }
+      this.Servicios.insertauserolmodifica('3', this.ArrSeleccioneClientes.IdUsuarioC, this.IdUsuarioCookies, BodyInsert).subscribe(Resultado => {
+        this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = Resultado;
+        this.ListaAsignaRol();
+      })
+    }
+  }
+
+  ArrListaRolesAsignados: any = [];
+  ListaAsignaRol() {
+    this.Servicios.conscusuario('2', '0', '0', '0', this.ArrSeleccioneClientes.IdUsuarioC, '0').subscribe(respu => {
+      this.ArrListaRolesAsignados = respu;
+    })
+  }
+
+
+  EliminaRol(IdUsuario: string, IdRol: string, templateMensaje: TemplateRef<any>) {
+
+    const BodyInsert = {
+      IdRol: IdRol,
+      Estado: 1
+    }
+    this.Servicios.insertauserolmodifica('2', IdUsuario, this.IdUsuarioCookies, BodyInsert).subscribe(Resultado => {
+      this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = Resultado;
+      this.ListaAsignaRol();
+    })
+
+  }
+
+  Guardar(templateMensaje: TemplateRef<any>){
+    this.EditaUsuario = false;
+    this.modalMensaje = this.modalService.show(templateMensaje);
+      this.lblModalMsaje = 'Datos Guardados.';
   }
 }

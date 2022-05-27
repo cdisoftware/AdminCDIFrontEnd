@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
         this.cookies.set("UserAdmin", respu[0].UserAdmin);
         this.cookies.set("Usuario", respu[0].Usuario);
         this.cookies.set("Password", respu[0].Password);
+        this.cookies.set("IdRol", respu[0].IdRol);
         this.fakeLoading();
       } else {
         var Error = '' + respu;

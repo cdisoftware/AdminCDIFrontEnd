@@ -181,9 +181,6 @@ export class MetodosGlobalesService {
   actualizacrolmod(bandera: string, IdUsuario: string, BodyPut: any) {
     return this.http.put<any>(this.url_servidor + 'actualizacrolmod/' + bandera + '/' + IdUsuario,BodyPut);
   }
-  insertauserolmodifica(bandera: string, IdUsuario: string, BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'insertauserolmodifica/' + bandera + '/' + IdUsuario, BodyPost);
-  }
   actualizacpermisorol(bandera: string, IdUsuario: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizacpermisorol/' + bandera + '/' + IdUsuario, BodyPost);
   }
@@ -204,4 +201,7 @@ export class MetodosGlobalesService {
   conscusuario(bandera: string, IdUsuario: string, Estado: string, IdRol: string, IdUsuarioCons: string, NombreUsuario: string) {
     return this.http.get<any[]>(this.url_servidor + 'conscusuario/' + bandera + '/' + IdUsuario + '/' + Estado + '/' + IdRol + '/' + IdUsuarioCons + '/' + NombreUsuario);
   }
+  insertauserolmodifica(bandera: string, IdUsuarioRol: string, IdUsuario:string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertauserolmodifica/' + bandera + '/' + IdUsuarioRol + '/' +IdUsuario,BodyPost);
+  }                                   
 }
