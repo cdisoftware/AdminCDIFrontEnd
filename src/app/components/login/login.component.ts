@@ -47,13 +47,19 @@ export class LoginComponent implements OnInit {
     }
     this.Servicios.consusuarioinfoconsola('1', Ingreso).subscribe(respu => {
       if (respu.length > 0 && respu[0] != '"No fue posible ejecutar los datos, verifique el Log para validar la inconsistencia"') {
-        this.cookies.set("IdUsuario", respu[0].Id_U);
-        this.cookies.set("Nombre", respu[0].Nombre);
-        this.cookies.set("Apellido", respu[0].Apellido);
-        this.cookies.set("Usuario", respu[0].Usuario);
-        this.cookies.set("Password", respu[0].Password);
-        this.cookies.set("IdRol", respu[0].IdRol);
-        this.fakeLoading();
+        if (respu[0].Id_U != 'null' && respu[0].Id_U != '0' && respu[0].Id_U != null) {
+          this.cookies.set("IdUsuario", respu[0].Id_U);
+          this.cookies.set("Nombre", respu[0].Nombre);
+          this.cookies.set("Apellido", respu[0].Apellido);
+          this.cookies.set("Usuario", respu[0].Usuario);
+          this.cookies.set("Password", respu[0].Password);
+          this.cookies.set("IdRol", respu[0].IdRol);
+          this.fakeLoading();
+        } else {
+          var Error = 'El servidor está fallando, comuníquese con soporte técnico.';
+          this.error(Error);
+          this.form.reset();
+        }
       } else {
         var Error = '' + respu;
         this.error(Error);
@@ -73,7 +79,7 @@ export class LoginComponent implements OnInit {
           verticalPosition: 'bottom',
         }
       );
-    } else if(Error != '"No fue posible ejecutar los datos, verifique el Log para validar la inconsistencia"'){
+    } else if (Error != '"No fue posible ejecutar los datos, verifique el Log para validar la inconsistencia"') {
       this._snackBar.open(
         'El usuario o contraseña son invalidos. Encuentra tu cuenta e inicia sesión, o El usuario no tiene roles asignados por favor comuníquese con el administrador para este le suministré uno.',
         '',
