@@ -79,13 +79,13 @@ export class MetodosGlobalesService {
     return this.http.put<any>(this.url_servidor + 'actualizaservdos/' + bandera, BodyPost);
   }
   consultacliente(BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'consultacliente',BodyPost);
+    return this.http.post<any>(this.url_servidor + 'consultacliente', BodyPost);
   }
   insertaproyecto(bandera: string, BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'insertaproyecto/'+bandera,BodyPost);
+    return this.http.post<any>(this.url_servidor + 'insertaproyecto/' + bandera, BodyPost);
   }
   insertarcliente(bandera: string, BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'insertarcliente/'+bandera,BodyPost);
+    return this.http.post<any>(this.url_servidor + 'insertarcliente/' + bandera, BodyPost);
   }
   actualizaproyecto(bandera: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizaproyecto/' + bandera, BodyPost);
@@ -97,7 +97,7 @@ export class MetodosGlobalesService {
     return this.http.get<any[]>(this.url_servidor + 'consgrilaproyectbck/' + IdProyecto);
   }
 
-  
+
   eliminaservidor(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'eliminaservidor/' + bandera, BodyPost);
   }
@@ -131,10 +131,10 @@ export class MetodosGlobalesService {
     return this.http.get<any[]>(this.url_servidor + 'consdetallserv/' + bandera + '/' + IdServidor);
   }
   updatedetllserv(BodyPost: any) {
-    return this.http.put<any>(this.url_servidor + 'updatedetllserv',BodyPost);
+    return this.http.put<any>(this.url_servidor + 'updatedetllserv', BodyPost);
   }
   actualizainfousuario(bandera: string, BodyPost: any) {
-    return this.http.put<any>(this.url_servidor + 'actualizainfousuario/'+ bandera,BodyPost);
+    return this.http.put<any>(this.url_servidor + 'actualizainfousuario/' + bandera, BodyPost);
   }
 
   consultservicios(IdProyecto: string, TipoServicio: string, Prioridad: string, NombreSp: string) {
@@ -155,7 +155,7 @@ export class MetodosGlobalesService {
     return this.http.get<any[]>(this.url_servidor + 'consultainfouser/' + IdUsuario);
   }
   actualizaservicio(bandera: string, BodyPost: any) {
-    return this.http.put<any>(this.url_servidor + 'actualizaservicio/'+ bandera, BodyPost);
+    return this.http.put<any>(this.url_servidor + 'actualizaservicio/' + bandera, BodyPost);
   }
   eliminaservicio(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'eliminaservicio/' + bandera, BodyPost);
@@ -164,7 +164,7 @@ export class MetodosGlobalesService {
     return this.http.get<any[]>(this.url_servidor + 'consdesrrllopendient/' + IdIntegrador + '/' + IdProyecto);
   }
   updateserviciorealizado(bandera: string, BodyPost: any) {
-    return this.http.put<any>(this.url_servidor + 'updateserviciorealizado/'+ bandera, BodyPost);
+    return this.http.put<any>(this.url_servidor + 'updateserviciorealizado/' + bandera, BodyPost);
   }
 
 
@@ -179,7 +179,7 @@ export class MetodosGlobalesService {
     return this.http.post<any>(this.url_servidor + 'insertacrolmod/' + bandera + '/' + IdUsuario, BodyPost);
   }
   actualizacrolmod(bandera: string, IdUsuario: string, BodyPut: any) {
-    return this.http.put<any>(this.url_servidor + 'actualizacrolmod/' + bandera + '/' + IdUsuario,BodyPut);
+    return this.http.put<any>(this.url_servidor + 'actualizacrolmod/' + bandera + '/' + IdUsuario, BodyPut);
   }
   actualizacpermisorol(bandera: string, IdUsuario: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'actualizacpermisorol/' + bandera + '/' + IdUsuario, BodyPost);
@@ -201,10 +201,18 @@ export class MetodosGlobalesService {
   conscusuario(bandera: string, IdUsuario: string, Estado: string, IdRol: string, IdUsuarioCons: string, NombreUsuario: string) {
     return this.http.get<any[]>(this.url_servidor + 'conscusuario/' + bandera + '/' + IdUsuario + '/' + Estado + '/' + IdRol + '/' + IdUsuarioCons + '/' + NombreUsuario);
   }
-  insertauserolmodifica(bandera: string, IdUsuarioRol: string, IdUsuario:string, BodyPost: any) {
-    return this.http.post<any>(this.url_servidor + 'insertauserolmodifica/' + bandera + '/' + IdUsuarioRol + '/' +IdUsuario,BodyPost);
+  insertauserolmodifica(bandera: string, IdUsuarioRol: string, IdUsuario: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertauserolmodifica/' + bandera + '/' + IdUsuarioRol + '/' + IdUsuario, BodyPost);
   }
   consusuarioconsmod(bandera: string, IdUsuario: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'consusuarioconsmod/' + bandera + '/' + IdUsuario, BodyPost);
   }
+  //Consulta registro Tareas
+  consregistrotareas(bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'consregistrotareas/' + bandera, BodyPost);
+  }
+  conslistatarea() {
+    return this.http.get<any[]>(this.url_servidor + 'conslistatarea');
+  }
+
 }
