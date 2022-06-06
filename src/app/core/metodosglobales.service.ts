@@ -207,12 +207,18 @@ export class MetodosGlobalesService {
   consusuarioconsmod(bandera: string, IdUsuario: string, BodyPost: any) {
     return this.http.put<any>(this.url_servidor + 'consusuarioconsmod/' + bandera + '/' + IdUsuario, BodyPost);
   }
-  //Consulta registro Tareas
+  //Registro Tareas
   consregistrotareas(bandera: string, BodyPost: any) {
     return this.http.post<any>(this.url_servidor + 'consregistrotareas/' + bandera, BodyPost);
   }
   conslistatarea() {
     return this.http.get<any[]>(this.url_servidor + 'conslistatarea');
+  }
+  insertaregtareasmod(Bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'insertaregtareasmod/' + Bandera, BodyPost);
+  }
+  actualizaregtareasmod(Bandera: string, BodyPut: any) {
+    return this.http.put<any>(this.url_servidor + 'actualizaregtareasmod/' + Bandera, BodyPut);
   }
 
 }

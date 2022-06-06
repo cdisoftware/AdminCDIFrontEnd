@@ -5,54 +5,40 @@
     <div class="row mt-3">
         <!--Ayuda Nombre-->
         <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" placeholder="Usuario"
-                title="Usuario">
+            <input type="text" class="form-control table-bordered" placeholder="Usuario" title="Usuario"
+                [(ngModel)]="nombreUsuarioCookies" (keyup)="Grilla(nombreUsuarioCookies, proyecto, tarea)" readonly>
         </div>
         <!--Fin ayuda-->
 
         <!--Tipo lista Estado-->
         <div class="col-sm-6 m-0 mb-3 ">
-            <select class="form-select" title="Seleccionar Proyecto" #Estado>
-                <option selected>Seleccionar Proyecto</option>
-                <option value="1">Proyecto 1</option>
-                <option value="2">Proyecto 2</option>
-                <option value="3">Proyecto 3</option>
-                <option value="4">Proyecto 4</option>
-                <option value="5">Proyecto 5</option>
+            <select class="form-select" title="Seleccionar Proyecto" [(ngModel)]="proyecto" required
+                (change)="Grilla(nombreUsuarioCookies, proyecto, tarea)">
+                <option value="0">Seleccionar Proyecto</option>
+                <option value="{{p.Id_PRY}}" *ngFor="let p of arProyect">
+                    {{p.Nombre}}</option>
             </select>
         </div>
         <!--Fin Tipo lista-->
 
         <!--Tipo lista Estado-->
         <div class="col-sm-6 m-0 mb-3 ">
-            <select class="form-select" title="Seleccionar Tarea" #Estado>
-                <option selected>Seleccionar Tarea</option>
-                <option value="1">Tarea 1</option>
-                <option value="2">Tarea 2</option>
-                <option value="3">Tarea 3</option>
-                <option value="4">Tarea 4</option>
-                <option value="5">Tarea 5</option>
+            <select class="form-select" title="Seleccionar Tarea" [(ngModel)]="tarea"
+                (change)="Grilla(nombreUsuarioCookies, proyecto, tarea)">
+                <option value="0" selected>Seleccionar Tarea</option>
+                <option value="{{t.IdTipoTarea}}" *ngFor="let t of arTarea">{{t.Descripcion}}</option>
+
             </select>
         </div>
         <!--Fin Tipo lista-->
-
-        <!--Ayuda SO-->
-        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" #SO placeholder="Descripcion" title="Descripcion">
-        </div>
-        <!--Fin ayuda-->
-
-        <!--Ayuda SO-->
-        <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-            <input type="number" class="form-control table-bordered" #SO placeholder="Tiempo en minutos"
-                title="Tiempo en minutos">
-        </div>
-        <!--Fin ayuda-->
-
 
         <!--Botones-->
         <div class="row displayCenter col-12 mt-3">
-            <button class="btn btn-dark col-sm-2 mrd" title="Agregar">
+            <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="Limpiar()">
+                <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
+                Limpiar
+            </button>
+            <button class="btn btn-dark col-sm-2 mrd" title="Agregar" (click)="BtnNuevo(templateAgregar)">
                 <img src="../../../../assets/ImagenesAdminCDI/AgregarServicio.png" class="BtnimgTamanoPeque mr-2">
                 Agregar
             </button>
@@ -84,7 +70,8 @@
                     <td>30</td>
 
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="BtnEditarActividad(templateeditaractividad)">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                            (click)="BtnEditarActividad(templateeditaractividad)">
                             <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
@@ -157,6 +144,84 @@
                         Cancelar
                     </button>
                 </div>
+            </li>
+        </div>
+        <br>
+    </div>
+    <br>
+</ng-template>
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12">
+            <p class="pModals">{{ lblModalMsaje }}</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
+    </div>
+    <br>
+</ng-template>
+<ng-template #templateAgregar>
+    <div class="modal-header">
+        <th class="titulopopup">AGREGAR ACTIVIDAD</th>
+        <button type="button" class="bot" aria-label="Close" (click)="modalAgregar.hide();">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
+    </div>
+    <div class="modaBody">
+        <div class="col-sm-12 mt-3 row displayCenter">
+            <li class="row col-sm-12 displayCenter">
+                <div class="col-6 mt-3">
+                    <input type="text" class="form-control table-bordered" placeholder="Usuario" title="Usuario"
+                        [(ngModel)]="nombreUsuarioCookies" (keyup)="Grilla(nombreUsuarioCookies, proyecto, tarea)"
+                        readonly>
+                </div>
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar Proyecto" [(ngModel)]="agregarProyecto" required
+                        (change)="Grilla(nombreUsuarioCookies, proyecto, tarea)">
+                        <option value="0">Seleccionar Proyecto</option>
+                        <option value="{{p.Id_PRY}}" *ngFor="let p of arProyect">
+                            {{p.Nombre}}</option>
+                    </select>
+                </div>
+
+                <div class="col-6 mt-3">
+                    <select class="form-select" title="Seleccionar Tarea" [(ngModel)]="agregarTarea"
+                        (change)="Grilla(nombreUsuarioCookies, proyecto, tarea)">
+                        <option value="0" selected>Seleccionar Tarea</option>
+                        <option value="{{t.IdTipoTarea}}" *ngFor="let t of arTarea">{{t.Descripcion}}</option>
+
+                    </select>
+                </div>
+
+                <div class="col-6 mt-3">
+                    <input type="number" class="form-control table-bordered" placeholder="Tiempo en minutos"
+                        title="Tiempo en minutos" [(ngModel)]="agregarTiempo">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <textarea id="form10" class="form-control" rows="6" placeholder="Descripcion" rows="3"
+                        [(ngModel)]="agregarDescripcion"></textarea>
+                </div>
+
+                <!---Botones--->
+                <div class="row displayCenter col-12 mt-3">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2"
+                            (click)="AgregaActividad(templateMensaje)">
+                        Guardar
+                    </button>
+
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
+                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                        Cancelar
+                    </button>
+                </div>
+
             </li>
         </div>
         <br>
