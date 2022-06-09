@@ -55,7 +55,6 @@
                             <th colspan="10">Proyectos</th>
                         </tr>
                         <tr>
-                            <th class="cursorPointer">Identificador</th>
                             <th class="cursorPointer">Nombre</th>
                             <th class="cursorPointer">Cliente</th>
 
@@ -65,10 +64,6 @@
                             <th>Eliminar</th>
                         </tr>
                         <tr *ngFor="let ArGrilla of ArrayConsultaProyecto">
-                            <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
-                                style="background-color: #1ABC9C;">{{ArGrilla.Id_PRY}}</td>
-                            <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Id_PRY}}</td>
-
                             <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
                                 style="background-color: #1ABC9C;">{{ArGrilla.Nombre}}</td>
                             <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Nombre}}</td>
@@ -224,16 +219,11 @@
                                 <th colspan="10">Clientes</th>
                             </tr>
                             <tr>
-                                <th class="cursorPointer">Identificador</th>
                                 <th class="cursorPointer">Descripción</th>
 
                                 <th>Editar</th>
                             </tr>
                             <tr *ngFor="let ArGrilla of ArrayConsultaCliente">
-                                <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
-                                    style="background-color: #1ABC9C;">{{ArGrilla.Id_Cliente}}</td>
-                                <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Id_Cliente}}</td>
-
                                 <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
                                     style="background-color: #1ABC9C;">{{ArGrilla.Descripcion}}</td>
                                 <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Descripcion}}</td>
