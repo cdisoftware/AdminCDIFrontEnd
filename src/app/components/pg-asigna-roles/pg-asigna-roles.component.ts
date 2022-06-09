@@ -140,7 +140,7 @@ export class PgAsignaRolesComponent implements OnInit {
       Id_U: this.ArrSeleccioneClientes.IdUsuarioC,
       Password: this.ArrSeleccioneClientes.Clave
     }
-    this.Servicios.consusuarioconsmod('2', this.IdUsuarioCookies, Update).subscribe(respu => {
+    this.Servicios.actualizausuarioconsmod('2', this.IdUsuarioCookies, Update).subscribe(respu => {
       this.modalMensaje = this.modalService.show(templateMensaje);
       this.lblModalMsaje = respu;
     })
@@ -157,7 +157,7 @@ export class PgAsignaRolesComponent implements OnInit {
       Id_U: '0',
       Password: this.ArrNuevoUser.Clave
     }
-    this.Servicios.consusuarioconsmod('3', this.IdUsuarioCookies, Insert).subscribe(respu => {
+    this.Servicios.insertausuarioconsmod('3', this.IdUsuarioCookies, Insert).subscribe(respu => {
       var res = respu.split("."); 
       console.log(res)
 
