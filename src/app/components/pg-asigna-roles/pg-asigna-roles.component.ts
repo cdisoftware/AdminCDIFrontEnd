@@ -166,7 +166,15 @@ export class PgAsignaRolesComponent implements OnInit {
       if (res[0] == 'Datos Guardados') {
         this.NuevoUsuario = false;
         this.ArrNuevoUser = ({ Identificacion: '', Usuario: '', Nombre: '', Apellido: '', Estado: '0', Clave: '' });
+      this.Limpiar();
       }
     })
   }
+
+  Limpiar(){
+    this.NombreUsuario = '';
+    this.IdRol = '0';
+    this.Estado = '0';
+  }
+
 }
