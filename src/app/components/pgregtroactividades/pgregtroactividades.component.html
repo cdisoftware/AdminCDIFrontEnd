@@ -65,7 +65,7 @@
                     <td>{{i.FechaRegistro}}</td>
                     <td>{{i.Proyecto}}</td>
                     <td>{{i.TipoTarea}}</td>
-                    <td>{{i.DescripcionTarea}}</td>
+                    <td style='word-break: break-all; width: 200px; white-space: initial'>{{i.DescripcionTarea}}</td>
                     <td>{{i.Tiempo}}</td>
 
                     <td class="text-center">
@@ -202,7 +202,7 @@
                         Guardar
                     </button>
 
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="LimpiaAgregarProyecto()">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>

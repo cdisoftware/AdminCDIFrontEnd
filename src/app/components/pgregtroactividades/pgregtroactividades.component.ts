@@ -94,7 +94,7 @@ export class PgregtroactividadesComponent implements OnInit {
           this.Grilla(this.usuario, this.proyecto, this.tarea);
 
           this.modalAgregar.hide();
-          this.Limpiar();
+          this.LimpiaAgregarProyecto();
         }
       })
     }
@@ -179,5 +179,13 @@ export class PgregtroactividadesComponent implements OnInit {
     this.tarea = '0';
 
     this.Grilla(this.usuario, this.proyecto, this.tarea);
+  }
+  LimpiaAgregarProyecto() {
+    this.agregarProyecto = '0';
+    this.agregarTarea = '0';
+    this.agregarTiempo = '0';
+    this.agregarDescripcion = '';
+    this.Grilla(this.usuario, this.proyecto, this.tarea);
+    this.modalAgregar.hide();
   }
 }
