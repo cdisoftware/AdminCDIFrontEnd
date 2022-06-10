@@ -23,6 +23,7 @@ export class PgregtroactividadesComponent implements OnInit {
   //Variables Agregar
   modalAgregar: BsModalRef;
 
+
   //Variables Agregar Registro
   IdAgregarProyecto: string;
 
@@ -61,6 +62,7 @@ export class PgregtroactividadesComponent implements OnInit {
       Usuario: auxUsuario
     }
     this.Servicios.consregistrotareas('1', consregistros).subscribe(respu => {
+      console.log(respu);
       this.arGrilla = respu;
     })
   }
@@ -71,15 +73,12 @@ export class PgregtroactividadesComponent implements OnInit {
   agregarDescripcion: string = '';
 
   AgregaActividad(templateMensaje: TemplateRef<any>) {
-    console.log('OK')
     if (this.agregarProyecto == '0' || this.agregarProyecto == undefined || this.agregarTarea == '0'
       || this.agregarTarea == undefined || this.agregarDescripcion == '' || this.agregarDescripcion == undefined
       || this.agregarTiempo == '0' || this.agregarTiempo == undefined) {
-console.log('entro')
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = "Complete todos los campos para completar el registro";
     } else {
-      console.log('entro 2')
       const insertActividad = {
         IdActividad: 0,
         Id_U: this.IdUsuarioCookies,
@@ -95,12 +94,56 @@ console.log('entro')
           this.Grilla(this.usuario, this.proyecto, this.tarea);
 
           this.modalAgregar.hide();
-          this.Limpiar;
+          this.Limpiar();
         }
       })
     }
-
   }
+
+  ActualizActividad(templateMensaje: TemplateRef<any>) {
+    if (this.arregloEditar.DescripcionTarea == '' || this.arregloEditar.DescripcionTarea == undefined
+      || this.arregloEditar.Tiempo == '' || this.arregloEditar.Tiempo == undefined) {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = "Complete todos los campos para completar el registro";
+    } else {
+      const actActividad = {
+        IdActividad: this.arregloEditar.IdActividad,
+        Id_U: this.IdUsuarioCookies,
+        Id_Pry: this.arregloEditar.Id_Pry,
+        IdTipoTarea: this.arregloEditar.IdTipoTarea,
+        Descripcion: this.arregloEditar.DescripcionTarea,
+        Tiempo: this.arregloEditar.Tiempo
+      }
+      this.Servicios.actualizaregtareasmod('2', actActividad).subscribe(respu => {
+        if (respu == 'Registro actualizado correctamente.') {
+          this.modalMensaje = this._modalService.show(templateMensaje);
+          this.lblModalMsaje = respu;
+          this.Grilla(this.usuario, this.proyecto, this.tarea);
+
+          this.modalEditarActividad.hide();
+          this.Limpiar();
+        }
+      })
+    }
+  }
+
+  eliminarActividad(templateMensaje: TemplateRef<any>, Arr: any) {
+    const elimActividad = {
+      IdActividad: Arr.IdActividad,
+      Id_U: this.IdUsuarioCookies,
+      Id_Pry: Arr.Id_Pry,
+      IdTipoTarea: Arr.IdTipoTarea,
+      Descripcion: Arr.DescripcionTarea,
+      Tiempo: Arr.Tiempo
+    }
+    this.Servicios.eliminaregtareamod('4', elimActividad).subscribe(respu => {
+      console.log(respu);
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = respu;
+      this.Limpiar();
+    })
+  }
+
 
   arProyect: any[];
   consultaProyecto() {
@@ -118,9 +161,12 @@ console.log('entro')
     })
   }
 
+  arregloEditar: any;
 
-  BtnEditarActividad(templateeditaractividad: TemplateRef<any>) {
-    this.modalEditarActividad = this._modalService.show(templateeditaractividad)
+  BtnEditarActividad(templateeditaractividad: TemplateRef<any>, i: any) {
+    this.modalEditarActividad = this._modalService.show(templateeditaractividad);
+    this.modalEditarActividad.setClass('modal-lg');
+    this.arregloEditar = i;
   }
 
   BtnNuevo(templateAgregar: TemplateRef<any>) {

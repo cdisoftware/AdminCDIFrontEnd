@@ -534,7 +534,7 @@ export class PgservidoresComponent implements OnInit {
     })
   }
   EliminaHardwareServidor(templateMensaje: TemplateRef<any>, Arr: any) {
-    console.log(Arr)
+
     const delet = {
       Id_S: Arr.IdentificadorServidor
     }
