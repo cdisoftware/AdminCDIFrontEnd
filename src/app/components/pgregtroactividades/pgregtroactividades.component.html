@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="col-6 mt-3">
-                    <input type="number" placeholder="Tiempo en minutos" title="Tiempo en minutos"
+                    <input type="number" min="1" pattern="^[0-9]+" placeholder="Tiempo en minutos" title="Tiempo en minutos"
                         class="col-sm-6 text-center form-control" [(ngModel)]="arregloEditar.Tiempo"  (keyup)="Limpiar()">
                 </div>
 
@@ -185,7 +185,7 @@
                 </div>
 
                 <div class="col-6 mt-3">
-                    <input type="number" class="form-control table-bordered" placeholder="Tiempo en minutos"
+                    <input type="number" min="1" pattern="^[0-9]+" class="form-control table-bordered" placeholder="Tiempo en minutos"
                         title="Tiempo en minutos" [(ngModel)]="agregarTiempo">
                 </div>
 
