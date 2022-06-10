@@ -220,5 +220,8 @@ export class MetodosGlobalesService {
   actualizaregtareasmod(Bandera: string, BodyPut: any) {
     return this.http.put<any>(this.url_servidor + 'actualizaregtareasmod/' + Bandera, BodyPut);
   }
+  eliminaregtareamod(Bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'eliminaregtareamod/' + Bandera, BodyPost);
+  }
 
 }
