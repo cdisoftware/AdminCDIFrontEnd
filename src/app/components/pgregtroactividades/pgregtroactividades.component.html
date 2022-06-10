@@ -65,7 +65,7 @@
                     <td>{{i.FechaRegistro}}</td>
                     <td>{{i.Proyecto}}</td>
                     <td>{{i.TipoTarea}}</td>
-                    <td>{{i.DescripcionTarea}}</td>
+                    <td style='word-break: break-all; width: 200px; white-space: initial'>{{i.DescripcionTarea}}</td>
                     <td>{{i.Tiempo}}</td>
 
                     <td class="text-center">
@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="col-6 mt-3">
-                    <input type="number" placeholder="Tiempo en minutos" title="Tiempo en minutos"
+                    <input type="number" min="1" pattern="^[0-9]+" placeholder="Tiempo en minutos" title="Tiempo en minutos"
                         class="col-sm-6 text-center form-control" [(ngModel)]="arregloEditar.Tiempo"  (keyup)="Limpiar()">
                 </div>
 
@@ -185,7 +185,7 @@
                 </div>
 
                 <div class="col-6 mt-3">
-                    <input type="number" class="form-control table-bordered" placeholder="Tiempo en minutos"
+                    <input type="number" min="1" pattern="^[0-9]+" class="form-control table-bordered" placeholder="Tiempo en minutos"
                         title="Tiempo en minutos" [(ngModel)]="agregarTiempo">
                 </div>
 
@@ -202,7 +202,7 @@
                         Guardar
                     </button>
 
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="LimpiaAgregarProyecto()">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
