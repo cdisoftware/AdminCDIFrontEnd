@@ -1,6 +1,6 @@
 <div class="container bg-white pt-5 pb-5">
     <div class="row justify-content-center ">
-        <p class="col-12 tituloformulario">Backups</p>
+        <p class="col-12 tituloformulario">BACKUPS</p>
     </div>
     <div class="row mt-3">
         <!--Ayuda IP-->
@@ -71,20 +71,20 @@
         <div class="col-sm-12 mt-5">
             <table class="table table-bordered text-center">
                 <tr>
-                    <th colspan="10">Backups</th>
+                    <th colspan="10">BACKUPS</th>
                 </tr>
                 <tr>
-                    <th (click)="OrdenarIpServidor()" class="cursorPointer">Ip</th>
-                    <th (click)="OrdenarNombre()" class="cursorPointer">Nombre</th>
-                    <th (click)="OrdenarNombreProyecto()" class="cursorPointer">Proyecto</th>
-                    <th (click)="OrdenarAmbiente()" class="cursorPointer">Ambiente</th>
-                    <th (click)="OrdenarDescripcion()" class="cursorPointer">Tipo</th>
-                    <th (click)="OrdenarPeriodicidad()" class="cursorPointer">Periodicidad</th>
-                    <th (click)="OrdenarUsuarioModifi()" class="cursorPointer">Usuario Mod</th>
-                    <th (click)="OrdenarFecha_Ult_Mod()" class="cursorPointer">Fecha Ultima Mod</th>
-                    <th>Editar</th>
-                    <th>Ver</th>
-                    <th>Eliminar</th>
+                    <th (click)="OrdenarIpServidor()" class="cursorPointer">IP</th>
+                    <th (click)="OrdenarNombre()" class="cursorPointer">NOMBRE</th>
+                    <th (click)="OrdenarNombreProyecto()" class="cursorPointer">PROYECTO</th>
+                    <th (click)="OrdenarAmbiente()" class="cursorPointer">AMBIENTE</th>
+                    <th (click)="OrdenarDescripcion()" class="cursorPointer">TIPO</th>
+                    <th (click)="OrdenarPeriodicidad()" class="cursorPointer">PERIODICIDAD</th>
+                    <th (click)="OrdenarUsuarioModifi()" class="cursorPointer">USUARIO MOD</th>
+                    <th (click)="OrdenarFecha_Ult_Mod()" class="cursorPointer">FECHA ULTIMA MOD</th>
+                    <th>EDITAR</th>
+                    <th>VER</th>
+                    <th>ELIMINAR</th>
                 </tr>
                 <tr *ngFor="let ArGrilla of ArregloGrilla">
                     <td>{{ArGrilla.IpServidor}}</td>
@@ -119,11 +119,6 @@
         <!--fin Grilla-->
     </div>
 </div>
-
-
-
-
-
 
 <ng-template #templateMensaje>
     <div class="modaBody">
@@ -303,8 +298,6 @@
         </div>
     </div>
 </ng-template>
-
-
 
 <ng-template #templateEditarBackup>
     <div class="modal-header">

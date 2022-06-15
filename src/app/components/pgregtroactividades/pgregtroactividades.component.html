@@ -1,6 +1,6 @@
 <div class="container bg-white pt-5 pb-5">
     <div class="row justify-content-center ">
-        <p class="col-12 tituloformulario">Registro Actividades Diarias</p>
+        <p class="col-12 tituloformulario">REGISTRO ACTIVIDADES DIARIAS</p>
     </div>
     <div class="row mt-3">
         <!--Ayuda Nombre-->
@@ -50,22 +50,22 @@
         <div class="col-sm-12 mt-5">
             <table class="table table-bordered text-center">
                 <tr>
-                    <th colspan="12">Actividades</th>
+                    <th colspan="12">ACTIVIDADES</th>
                 </tr>
                 <tr>
-                    <th class="cursorPointer">Fecha</th>
-                    <th class="cursorPointer">Proyecto</th>
-                    <th class="cursorPointer">Tarea</th>
-                    <th class="cursorPointer">Descripcion</th>
-                    <th class="cursorPointer">Tiempo</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th class="cursorPointer">FECHA</th>
+                    <th class="cursorPointer">PROYECTO</th>
+                    <th class="cursorPointer">TAREA</th>
+                    <th class="cursorPointer">DESCRIPCIÓN</th>
+                    <th class="cursorPointer">TIEMPO (MIN)</th>
+                    <th>EDITAR</th>
+                    <th>ELIMINAR</th>
                 </tr>
                 <tr *ngFor="let i of arGrilla">
                     <td>{{i.FechaRegistro}}</td>
                     <td>{{i.Proyecto}}</td>
                     <td>{{i.TipoTarea}}</td>
-                    <td style='word-break: break-all; width: 200px; white-space: initial'>{{i.DescripcionTarea}}</td>
+                    <td style='word-break: break-all; width: 600px; white-space: initial'>{{i.DescripcionTarea}}</td>
                     <td>{{i.Tiempo}}</td>
 
                     <td class="text-center">
@@ -76,7 +76,8 @@
                     </td>
 
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar" (click)="eliminarActividad(templateMensaje, i)">
+                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                            (click)="eliminarActividad(templateMensaje, i)">
                             <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
@@ -111,19 +112,21 @@
                     </select>
                 </div>
 
-                <div class="col-6 mt-3">
+                <div class="col-2 mt-3">
+                    <input type="number" min="1" pattern="^[0-9]+" placeholder="Tiempo en minutos"
+                        title="Tiempo en minutos" class="col-sm-6 text-center form-control"
+                        [(ngModel)]="arregloEditar.Tiempo" (keyup)="Limpiar()">
+                </div>
+
+                <div class="col-10 mt-3">
                     <textarea class="md-textarea form-control textarea" [(ngModel)]="arregloEditar.DescripcionTarea"
                         placeholder="Descripcion" rows="3" (keyup)="Limpiar()"></textarea>
                 </div>
 
-                <div class="col-6 mt-3">
-                    <input type="number" min="1" pattern="^[0-9]+" placeholder="Tiempo en minutos" title="Tiempo en minutos"
-                        class="col-sm-6 text-center form-control" [(ngModel)]="arregloEditar.Tiempo"  (keyup)="Limpiar()">
-                </div>
-
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="ActualizActividad(templateMensaje)">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
+                        (click)="ActualizActividad(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
@@ -185,11 +188,11 @@
                 </div>
 
                 <div class="col-6 mt-3">
-                    <input type="number" min="1" pattern="^[0-9]+" class="form-control table-bordered" placeholder="Tiempo en minutos"
-                        title="Tiempo en minutos" [(ngModel)]="agregarTiempo">
+                    <input type="number" min="1" pattern="^[0-9]+" class="form-control table-bordered"
+                        placeholder="Tiempo en minutos" title="Tiempo en minutos" [(ngModel)]="agregarTiempo">
                 </div>
 
-                <div class="col-6 mt-3">
+                <div class="col-sm-12 mt-3">
                     <textarea id="form10" class="form-control" rows="6" placeholder="Descripcion" rows="3"
                         [(ngModel)]="agregarDescripcion"></textarea>
                 </div>
