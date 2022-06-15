@@ -134,7 +134,7 @@
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="MetPru()">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
@@ -177,12 +177,10 @@
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
                     <input type="text" class="form-control table-bordered" placeholder="Usuario" title="Usuario"
-                        [(ngModel)]="nombreUsuarioCookies" (keyup)="Grilla(nombreUsuarioCookies, proyecto, tarea)"
-                        readonly>
+                        [(ngModel)]="nombreUsuarioCookies" readonly>
                 </div>
                 <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar Proyecto" [(ngModel)]="agregarProyecto" required
-                        (change)="Grilla(nombreUsuarioCookies, proyecto, tarea)">
+                    <select class="form-select" title="Seleccionar Proyecto" [(ngModel)]="agregarProyecto">
                         <option value="0">Seleccionar Proyecto</option>
                         <option value="{{p.Id_PRY}}" *ngFor="let p of arProyect">
                             {{p.Nombre}}</option>
@@ -190,11 +188,9 @@
                 </div>
 
                 <div class="col-6 mt-3">
-                    <select class="form-select" title="Seleccionar Tarea" [(ngModel)]="agregarTarea"
-                        (change)="Grilla(nombreUsuarioCookies, proyecto, tarea)">
+                    <select class="form-select" title="Seleccionar Tarea" [(ngModel)]="agregarTarea">
                         <option value="0" selected>Seleccionar Tarea</option>
                         <option value="{{t.IdTipoTarea}}" *ngFor="let t of arTarea">{{t.Descripcion}}</option>
-
                     </select>
                 </div>
 
@@ -210,9 +206,8 @@
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
-                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2"
-                            (click)="AgregaActividad(templateMensaje)">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregaActividad(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar
                     </button>
 

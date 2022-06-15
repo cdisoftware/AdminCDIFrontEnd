@@ -75,7 +75,7 @@ export class PgregtroactividadesComponent implements OnInit {
     if (this.agregarProyecto == '0' || this.agregarProyecto == undefined || this.agregarTarea == '0'
       || this.agregarTarea == undefined || this.agregarDescripcion == '' || this.agregarDescripcion == undefined
       || this.agregarTiempo == '0' || this.agregarTiempo == undefined) {
-console.log('entro')
+      console.log('entro')
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = "Complete todos los campos para completar el registro";
     } else {
@@ -133,5 +133,8 @@ console.log('entro')
     this.tarea = '0';
 
     this.Grilla(this.usuario, this.proyecto, this.tarea);
+  }
+  MetPru(){
+    console.log('Si')
   }
 }
