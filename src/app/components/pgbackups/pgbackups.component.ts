@@ -244,14 +244,8 @@ export class PgbackupsComponent implements OnInit {
   }
 
   ListaUsuario() {
-    const ConsultaUsu =
-    {
-      Nombre: "0",
-      Apellido: "0",
-      Cedula: "0"
-    }
     this.ArregloListaUsuario = [];
-    this.Servicios.consultausuarios(ConsultaUsu).subscribe(respu => {
+    this.Servicios.conscusuario('1', '0', '0', '0', '0', '0').subscribe(respu => {
       this.ArregloListaUsuario = respu;
     })
   }

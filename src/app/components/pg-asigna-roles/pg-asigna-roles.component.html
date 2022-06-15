@@ -54,7 +54,7 @@
     </div>
 
 
-    <!--CAMPOS AGREGA Y EDITA-->
+    <!--CAMPOS AGREGA-->
     <div class="row" *ngIf="NuevoUsuario == true">
 
         <div class="row col-12 mt-5">
@@ -146,7 +146,7 @@
                 </select>
             </div>
             <div class="col-sm-4 mb-3 displayFlexbetween">
-                <input type="text" class="form-control table-bordered" title="Clave" placeholder="Clave" [(ngModel)]="ArrSeleccioneClientes.Clave">
+                <input type="text" readonly class="form-control table-bordered" title="Clave" placeholder="Clave" [(ngModel)]="ArrSeleccioneClientes.Clave">
             </div>
         </div>
     </div>
