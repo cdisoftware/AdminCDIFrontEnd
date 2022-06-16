@@ -3,7 +3,7 @@
     <div class="row justify-content-center ">
         <div class="col-sm-6 m-0">
             <div class="row justify-content-center ">
-                <p class="col-12 tituloformulario">Proyectos</p>
+                <p class="col-12 tituloformulario">PROYECTOS</p>
             </div>
             <div class="row mt-3">
                 <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
@@ -52,16 +52,16 @@
                 <div class="col-sm-12 mt-5">
                     <table class="table table-bordered text-center">
                         <tr>
-                            <th colspan="10">Proyectos</th>
+                            <th colspan="10">PROYECTOS</th>
                         </tr>
                         <tr>
-                            <th class="cursorPointer">Nombre</th>
-                            <th class="cursorPointer">Cliente</th>
+                            <th class="cursorPointer">NOMBRE</th>
+                            <th class="cursorPointer">CLIENTE</th>
 
-                            <th>Editar</th>
-                            <th>Ver</th>
-                            <th>Servicios</th>
-                            <th>Eliminar</th>
+                            <th>EDITAR</th>
+                            <th>VER</th>
+                            <th>SERVICIOS</th>
+                            <th>ELIMINAR</th>
                         </tr>
                         <tr *ngFor="let ArGrilla of ArrayConsultaProyecto">
                             <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
@@ -70,7 +70,7 @@
 
                             <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
                                 style="background-color: #1ABC9C;">{{ArGrilla.DescripcionCliente}}</td>
-                            <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.DescripcionCliente}}
+                            <td style='word-break: break-all; width: 200px; white-space: initial' *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.DescripcionCliente}}
                             </td>
 
                             <td class="text-center" *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
@@ -108,13 +108,15 @@
 
                             <td class="text-center" *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
                                 style="background-color: #1ABC9C;">
-                                <button class="BtnClaro mrd m-auto text-center" title="Ir a servicios" (click)="IrAServicios(ArGrilla)">
+                                <button class="BtnClaro mrd m-auto text-center" title="Ir a servicios"
+                                    (click)="IrAServicios(ArGrilla)">
                                     <img src="../../../../assets/ImagenesAdminCDI/ServiciosJava.png"
                                         class="BtnimgTamanoPeque mr-2">
                                 </button>
                             </td>
                             <td class="text-center" *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">
-                                <button class="BtnClaro mrd m-auto text-center" title="Ir a servicios" (click)="IrAServicios(ArGrilla)">
+                                <button class="BtnClaro mrd m-auto text-center" title="Ir a servicios"
+                                    (click)="IrAServicios(ArGrilla)">
                                     <img src="../../../../assets/ImagenesAdminCDI/ServiciosJava.png"
                                         class="BtnimgTamanoPeque mr-2">
                                 </button>
@@ -169,7 +171,7 @@
             <div class="col-sm-12 m-0">
                 <div class="w-100 ContenedorDerecha">
                     <div class="row float-right">
-                        <p class="col-12 tituloformulario">Clientes</p>
+                        <p class="col-12 tituloformulario">CLIENTES</p>
                     </div>
 
                 </div>
@@ -216,17 +218,19 @@
                     <div class="col-sm-12 mt-5">
                         <table class="table table-bordered text-center">
                             <tr>
-                                <th colspan="10">Clientes</th>
+                                <th colspan="10">CLIENTES</th>
                             </tr>
                             <tr>
-                                <th class="cursorPointer">Descripción</th>
+                                <th class="cursorPointer">DESCRIPCIÓN</th>
 
-                                <th>Editar</th>
+                                <th>EDITAR</th>
+                                <th>ELIMINAR</th>
                             </tr>
+
                             <tr *ngFor="let ArGrilla of ArrayConsultaCliente">
                                 <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
                                     style="background-color: #1ABC9C;">{{ArGrilla.Descripcion}}</td>
-                                <td *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Descripcion}}</td>
+                                <td style='word-break: break-all; width: 420px; white-space: initial' *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Descripcion}}</td>
 
                                 <td class="text-center" *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
                                     style="background-color: #1ABC9C;">
@@ -337,8 +341,8 @@
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
-                <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-                    <textarea id="form10" class="md-textarea form-control textarea" placeholder="Descripción"
+                <div class="col-sm-12 mb-3 displayFlexbetween">
+                    <textarea class="md-textarea form-control textarea" placeholder="Descripción"
                         title="Descripción" rows="3" [(ngModel)]="LblDescripcionAgrega"></textarea>
                 </div>
                 <!---Botones--->
