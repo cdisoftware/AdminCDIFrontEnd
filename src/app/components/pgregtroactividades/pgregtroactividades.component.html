@@ -183,7 +183,6 @@
                     <select class="form-select" title="Seleccionar Tarea" [(ngModel)]="agregarTarea">
                         <option value="0" selected>Seleccionar Tarea</option>
                         <option value="{{t.IdTipoTarea}}" *ngFor="let t of arTarea">{{t.Descripcion}}</option>
-
                     </select>
                 </div>
 
@@ -199,8 +198,7 @@
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
-                        (click)="AgregaActividad(templateMensaje)">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregaActividad(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar
                     </button>

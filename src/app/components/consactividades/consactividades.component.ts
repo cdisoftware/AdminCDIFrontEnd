@@ -16,7 +16,6 @@ export class ConsactividadesComponent implements OnInit {
 
   IdUsuarioCookies: string = this.cookies.get('IdUsuario');
   IdRolCookies: string = this.cookies.get('IdRol');
-
   nombreUsuarioCookies: string = this.cookies.get('Nombre');
 
   constructor(private modalService: BsModalService,
@@ -33,6 +32,7 @@ export class ConsactividadesComponent implements OnInit {
 
 
   ngOnInit(): void {
+  console.log(this.IdRolCookies)
     this.consultaProyecto();
     this.consultaTareas();
     this.Grilla('0', '0', '0', '0');
