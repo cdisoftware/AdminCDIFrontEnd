@@ -16,6 +16,7 @@ export class ConsactividadesComponent implements OnInit {
 
   IdUsuarioCookies: string = this.cookies.get('IdUsuario');
   IdRolCookies: string = this.cookies.get('IdRol');
+
   nombreUsuarioCookies: string = this.cookies.get('Nombre');
 
   constructor(private modalService: BsModalService,

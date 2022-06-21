@@ -18,8 +18,6 @@ export class LoginComponent implements OnInit {
   user: string = '';
   // variable contraseña login
   passw: string = '';
-  //Variable img
-  ImgPerfil: string;
 
   constructor(
     private fb: FormBuilder,
@@ -53,8 +51,7 @@ export class LoginComponent implements OnInit {
           this.cookies.set("Apellido", respu[0].Apellido);
           this.cookies.set("Usuario", respu[0].Usuario);
           this.cookies.set("Password", respu[0].Password);
-
-          if (respu.length > 1) {
+if (respu.length > 1) {
             var Id_Rol: string = '';
             for (var x = 0; x < respu.length; x++) {
               if (x == respu.length - 1) {
@@ -63,7 +60,6 @@ export class LoginComponent implements OnInit {
               Id_Rol = Id_Rol + respu[x].IdRol + ',';
             }
             this.cookies.set("IdRol", Id_Rol);
-
           } else {
             this.cookies.set("IdRol", respu[0].IdRol);
           }
