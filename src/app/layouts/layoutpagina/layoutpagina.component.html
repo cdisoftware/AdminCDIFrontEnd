@@ -15,7 +15,7 @@
       <li class="titulopopup services cursorPointer" *ngFor="let Menu of MenuPri"><a>{{Menu.Menu}}</a>
         <ul class="dropdown">
           <span *ngFor="let SubMenu of SubMenu">
-            <li class="li cursorPointer" *ngIf="SubMenu.Padre == Menu.IdMenu" (click)="IrPag(SubMenu.Path, templateMensaje)">
+            <li class="li cursorPointer" style="margin-left: 5px;" *ngIf="SubMenu.Padre == Menu.IdMenu" (click)="IrPag(SubMenu.Path, templateMensaje)">
               <a>{{SubMenu.NombreModulo}}</a>
             </li>
           </span>
