@@ -118,7 +118,6 @@ export class PgtipobackupComponent implements OnInit {
 
   //Borrar
   BorrarTb(templateMensaje: TemplateRef<any>, Array: any) {
-    console.log(Array)
     const deletetb =
     {
       Id_Tipo_BCK: Array.Id_Tipo_BCK,

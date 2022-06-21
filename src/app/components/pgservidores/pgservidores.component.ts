@@ -580,7 +580,6 @@ export class PgservidoresComponent implements OnInit {
     })
     this.ArrListaVerdetalles = [];
     this.Servicios.consdetallserv('1', this.IdServidorEditDetalle).subscribe(respu => {
-      console.log(respu)
       this.ArrListaVerdetalles = respu;
     })
   }
