@@ -53,8 +53,7 @@ export class LoginComponent implements OnInit {
           this.cookies.set("Apellido", respu[0].Apellido);
           this.cookies.set("Usuario", respu[0].Usuario);
           this.cookies.set("Password", respu[0].Password);
-          console.log(respu.length);
-          console.log(respu);
+
           if (respu.length > 1) {
             var Id_Rol: string = '';
             for (var x = 0; x < respu.length; x++) {
@@ -64,8 +63,8 @@ export class LoginComponent implements OnInit {
               Id_Rol = Id_Rol + respu[x].IdRol + ',';
             }
             this.cookies.set("IdRol", Id_Rol);
-            console.log(Id_Rol);
-          }else{
+
+          } else {
             this.cookies.set("IdRol", respu[0].IdRol);
           }
 

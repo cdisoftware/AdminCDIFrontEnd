@@ -62,7 +62,6 @@ export class PgregtroactividadesComponent implements OnInit {
       Usuario: auxUsuario
     }
     this.Servicios.consregistrotareas('1', consregistros).subscribe(respu => {
-      console.log(respu);
       this.arGrilla = respu;
     })
   }
@@ -137,7 +136,6 @@ export class PgregtroactividadesComponent implements OnInit {
       Tiempo: Arr.Tiempo
     }
     this.Servicios.eliminaregtareamod('4', elimActividad).subscribe(respu => {
-      console.log(respu);
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = respu;
       this.Limpiar();

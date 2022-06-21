@@ -32,7 +32,6 @@ export class ConsactividadesComponent implements OnInit {
 
 
   ngOnInit(): void {
-  console.log(this.IdRolCookies)
     this.consultaProyecto();
     this.consultaTareas();
     this.Grilla('0', '0', '0', '0');
