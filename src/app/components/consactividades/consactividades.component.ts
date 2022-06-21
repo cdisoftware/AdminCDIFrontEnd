@@ -15,6 +15,7 @@ import { Workbook } from "exceljs";
 export class ConsactividadesComponent implements OnInit {
 
   IdUsuarioCookies: string = this.cookies.get('IdUsuario');
+  IdRolCookies: string = this.cookies.get('IdRol');
 
   nombreUsuarioCookies: string = this.cookies.get('Nombre');
 
@@ -53,7 +54,7 @@ export class ConsactividadesComponent implements OnInit {
 
     const consregistros = {
       IdActividad: 0,
-      Id_U: this.IdUsuarioCookies,
+      Id_U: 0,
       Id_Pry: proyecto,
       IdTipoTarea: tarea,
       DescripcionTarea: 0,
