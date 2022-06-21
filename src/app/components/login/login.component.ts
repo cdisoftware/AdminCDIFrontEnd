@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
             this.cookies.set("IdRol", Id_Rol);
             console.log(Id_Rol);
           }else{
-            this.cookies.set("IdRol", respu.IdRol);
+            this.cookies.set("IdRol", respu[0].IdRol);
           }
 
           this.fakeLoading();
