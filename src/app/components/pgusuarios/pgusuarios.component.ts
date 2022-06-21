@@ -167,7 +167,6 @@ export class PgusuariosComponent implements OnInit {
       Cedula: this.LblEditCedula,
       UserAdmin: this.LblEditUserAdmin
     }
-    console.log(datosupdate)
     this.Servicios.actualizausuario('2', datosupdate).subscribe(respu => {
       if (respu.length > 0) {
         this.modalMensaje = this._modalService.show(templateMensaje);
@@ -178,8 +177,6 @@ export class PgusuariosComponent implements OnInit {
       }
     })
   }
-
-
 
 
   DescargarDatosPdf(templateMensaje: TemplateRef<any>) {

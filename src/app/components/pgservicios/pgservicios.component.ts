@@ -607,7 +607,6 @@ export class PgserviciosComponent implements OnInit {
       SP = '0';
     }
     this.Servicios.consultservicios(this.IdProyecto, TipoSer, Prio, SP).subscribe(respu => {
-      console.log(respu)
       if (respu.length > 0) {
         let workbook = new Workbook();
         let worksheet = workbook.addWorksheet("Registro servicios");

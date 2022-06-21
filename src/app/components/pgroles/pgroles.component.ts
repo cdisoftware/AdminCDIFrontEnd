@@ -176,7 +176,6 @@ export class PgrolesComponent implements OnInit {
     var Arreglo = [] = this.IdRol.split(",");
     var IdRol = Arreglo[0];
     this.Servicios.consrolmodulo(IdRol, Arr.ModuloPadre).subscribe(respu => {
-      console.log(respu)
     })
   }
 }

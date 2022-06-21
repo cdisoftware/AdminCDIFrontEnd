@@ -83,7 +83,6 @@ export class PgAsignaRolesComponent implements OnInit {
   ArrSeleccioneClientes: any = [];
   SeleccionaUsuario(Arr: any) {
     this.ArrSeleccioneClientes = Arr;
-    console.log(Arr)
     this.CancelaBusquedaCliente();
     this.EditaUsuario = true;
     this.ListaAsignaRol();
@@ -158,20 +157,18 @@ export class PgAsignaRolesComponent implements OnInit {
       Password: this.ArrNuevoUser.Clave
     }
     this.Servicios.insertausuarioconsmod('3', this.IdUsuarioCookies, Insert).subscribe(respu => {
-      var res = respu.split("."); 
-      console.log(res)
-
+      var res = respu.split(".");
       this.modalMensaje = this.modalService.show(templateMensaje);
       this.lblModalMsaje = res[0];
       if (res[0] == 'Datos Guardados') {
         this.NuevoUsuario = false;
         this.ArrNuevoUser = ({ Identificacion: '', Usuario: '', Nombre: '', Apellido: '', Estado: '0', Clave: '' });
-      this.Limpiar();
+        this.Limpiar();
       }
     })
   }
 
-  Limpiar(){
+  Limpiar() {
     this.NombreUsuario = '';
     this.IdRol = '0';
     this.Estado = '0';
