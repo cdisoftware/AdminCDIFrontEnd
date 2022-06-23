@@ -41,12 +41,21 @@ export class PgusuarioComponent implements OnInit {
     this.TraenfoUser();
   }
 
+
+  //Variables
+  Direccion: string;
+  Telefono: string;
+  Email: string;
   TraenfoUser() {
     this.Servicios.consultainfouser(this.IdUsuariokookies).subscribe(respu => {
+      this.Direccion = respu[0].Direccion;
+      this.Telefono = respu[0].Telefono;
+      this.Email = respu[0].Email;
+      console.log(respu)
       if (respu[0].UrlFoto == undefined || respu[0].UrlFoto == null || respu[0].UrlFoto == '') {
         this.ImgPerfil = 'http://192.168.3.186:8092/ImgDefaulUsario.png';
       } else {
-        this.ImgPerfil =  respu[0].UrlFoto;
+        this.ImgPerfil = respu[0].UrlFoto;
       }
     });
   }
@@ -61,11 +70,13 @@ export class PgusuarioComponent implements OnInit {
 
   ActualizarInfo(templateMensaje: TemplateRef<any>) {
     const Actualizar = {
-      Id_U: 1011,
+      Id_U: this.IdUsuariokookies,
       Nombre: this.NombreEdit,
       Apellido: this.ApellidoEdit,
-      Usuario: this.Usuario,
-      Password: this.Password
+      Password: this.Password,
+      Direccion: this.Direccion,
+      Telefono: this.Telefono,
+      Email: this.Email
     }
     this.Servicios.actualizainfousuario('2', Actualizar).subscribe(respu => {
       this.modalMensaje = this._modalService.show(templateMensaje);
