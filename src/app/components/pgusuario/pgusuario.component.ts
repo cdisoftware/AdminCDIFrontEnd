@@ -51,7 +51,6 @@ export class PgusuarioComponent implements OnInit {
       this.Direccion = respu[0].Direccion;
       this.Telefono = respu[0].Telefono;
       this.Email = respu[0].Email;
-      console.log(respu)
       if (respu[0].UrlFoto == undefined || respu[0].UrlFoto == null || respu[0].UrlFoto == '') {
         this.ImgPerfil = 'http://192.168.3.186:8092/ImgDefaulUsario.png';
       } else {
@@ -69,6 +68,10 @@ export class PgusuarioComponent implements OnInit {
   }
 
   ActualizarInfo(templateMensaje: TemplateRef<any>) {
+
+    this.cookies.set("Password", this.Password);
+    this.cookies.set("Nombre", this.NombreEdit);
+    this.cookies.set("Apellido", this.ApellidoEdit);
     const Actualizar = {
       Id_U: this.IdUsuariokookies,
       Nombre: this.NombreEdit,

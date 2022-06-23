@@ -8,32 +8,39 @@
             <!---->
             <div class="col-sm-8 m-0 mt-5 mb-3" style="margin-top: 50px;">
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
+                    <label class="Negrita">Nombre</label>
                     <input type="text" class="form-control InputCamposUsuario" placeholder="Nombre Usuario"
                         [(ngModel)]="NombreEdit" style="font-size: 18px;">
                 </div>
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
+                    <label class="Negrita">Apellido</label>
                     <input type="text" class="form-control InputCamposUsuario" style="font-size: 18px;"
                         placeholder="Apellido Usuario" [(ngModel)]="ApellidoEdit">
                 </div>
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
+                    <label class="Negrita">Nombre (No es pude modificar)</label>
                     <input type="text" class="form-control InputCamposUsuario" style="font-size: 18px;"
-                        placeholder="Usuario Usuario" [(ngModel)]="Usuario">
+                        placeholder="Usuario Usuario" [(ngModel)]="Usuario" readonly>
                 </div>
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
+                    <label class="Negrita">Password</label>
                     <input type="text" class="form-control InputCamposUsuario" style="font-size: 18px;"
                         placeholder="Password Usuario" [(ngModel)]="Password">
                 </div>
 
 
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
+                    <label class="Negrita">Dirección</label>
                     <input type="text" class="form-control InputCamposUsuario" style="font-size: 18px;"
                         placeholder="Dirección" [(ngModel)]="Direccion">
                 </div>
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
+                    <label class="Negrita">Telefono</label>
                     <input type="text" class="form-control InputCamposUsuario" style="font-size: 18px;"
                         placeholder="Telefono" [(ngModel)]="Telefono">
                 </div>
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
+                    <label class="Negrita">Correo electronico</label>
                     <input type="email" maxlength="20" class="form-control InputCamposUsuario" style="font-size: 18px;"
                         placeholder="Email" [(ngModel)]="Email">
                 </div>
@@ -48,26 +55,29 @@
                 <!--Fin botones-->
             </div>
             <div class="row col-sm-4 m-0 mb-3 ">
-                <img style="background: rgba(240,243,244,0.8);" src="{{ImgPerfil}}" width="100%" class="rounded-circle"
-                    alt="Cinque Terre">
+                <img style="background: rgba(240,243,244,0.8);" src="{{ImgPerfil}}" width="100%"
+                    class="rounded-circle" />
 
-                    <div class="row displayCenter col-12 mt-3">
+
+                <div class="row displayCenter col-12 mt-3">
                     <input *ngIf="ButtonsInput==true" name="file-input1" id="file-input1" type="file"
                         class="custom-file-input" (change)="cargandoImagen($event, templateMensaje)"
                         title="Las propiedades de la imagen deben ser peso máximo 1 MG y de tipo JPG o PNG" />
 
-                    <button *ngIf="ButtonsInput==true" class="btn btn-light col-sm-4 mrd mt-3" title="Editar Imagen"
+                    <button *ngIf="ButtonsInput==true" class="btn btn-light col-sm-4 Maxheight mt-3" title="Editar Imagen"
                         (click)="VerButons()">
                         Cancelar
+                        <img src="../../../../assets/ImagenesAdminCDI/ic_equis.png" style="margin-left: 5px;"
+                        class="BtnimgTamanoPeque mr-2">
                     </button>
                     <button *ngIf="ButtonsImg == true && ImgPerfil=='http://192.168.3.186:8092/ImgDefaulUsario.png'"
-                        class="btn btn-light col-sm-4 mrd mt-3" title="Agregar Imagen" (click)="VerFile()">
+                        class="btn btn-light col-sm-4 Maxheight mt-3" title="Agregar Imagen" (click)="VerFile()">
                         Agregar
                         <img src="../../../../assets/ImagenesAdminCDI/subirIMG.png" style="margin-left: 5px;"
                             class="BtnimgTamanoPeque mr-2">
                     </button>
-                    <button *ngIf="ButtonsImg == true" class="btn btn-light col-sm-4 mrd mt-3" title="Cancelar editar Imagen"
-                        (click)="VerFile()">
+                    <button *ngIf="ButtonsImg == true" class="btn btn-light col-sm-4 Maxheight mt-3"
+                        title="Cancelar editar Imagen" (click)="VerFile()">
                         Editar
                         <img src="../../../../assets/ImagenesAdminCDI/editIMG.png" style="margin-left: 5px;"
                             class="BtnimgTamanoPeque mr-2">
@@ -75,21 +85,19 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<ng-template #templateMensaje>
-    <div class="modaBody">
-        <div class="col-12">
-            <p class="pModals">{{ lblModalMsaje }}</p>
-        </div>
-    </div>
-    <div class="row text-center">
-        <div class="col-0">
-            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
-                Aceptar
-            </button>
-        </div>
-    </div>
-    <br>
-</ng-template>
+        <ng-template #templateMensaje>
+            <div class="modaBody">
+                <div class="col-12">
+                    <p class="pModals">{{ lblModalMsaje }}</p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-0">
+                    <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+            <br>
+        </ng-template>
