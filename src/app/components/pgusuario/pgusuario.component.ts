@@ -104,9 +104,6 @@ export class PgusuarioComponent implements OnInit {
               UrlFoto: this.imgRuedaForm
             }
             this.Servicios.modificaimagen(this.IdUsuariokookies, ActualizaImg).subscribe(respu => {
-              this.modalMensaje = this._modalService.show(templateMensaje);
-              this.lblModalMsaje = respu;
-
               this.TraenfoUser();
               this.VerButons();
             });
