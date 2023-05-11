@@ -4,27 +4,32 @@
     </div>
     <div class="row mt-3">
         <!--Ayuda IP-->
-        <div class="col-sm-8 m-0 mb-3 displayFlexbetween">
+        <div class="col-sm-8 m-0 mb-3">
+            <Label class="Llave">IP</Label>
             <input type="text" class="form-control table-bordered" #Ip placeholder="IP" title="IP" [(ngModel)]="LblIp"
                 (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)">
+
         </div>
         <!--Fin ayuda-->
 
         <!--Tipo lista-->
         <div class="col-sm-4 m-0 mb-3 ">
+            <label class="Llave">Usuario</label>
             <select class="form-select" title="Seleccionar usuario" [(ngModel)]="IdUsuario" #Selecusuario
                 (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)'>
                 <option value="0" selected>Seleccione usuario</option>
                 <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>
             </select>
+
         </div>
         <!--Fin Tipo lista-->
 
         <!--Tipo lista-->
         <div class="col-sm-4 m-0 mb-3 ">
+            <label class="Llave">Proyecto</label>
             <select class="form-select" title="Seleccionar proyecto" [(ngModel)]="IdCliente" #SelecioneProyecto
                 (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)'>
-                <option value="0" selected>Seleccione cliente</option>
+                <option value="0" selected>Seleccione proyecto</option>
                 <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">{{arRespu.Nombre}}
                 </option>
             </select>
@@ -32,7 +37,8 @@
         <!--Fin Tipo lista-->
 
         <!--Ayuda Nombre-->
-        <div class="col-sm-8 m-0 mb-3 displayFlexbetween">
+        <div class="col-sm-8 m-0 mb-3">
+            <label class="Llave">Nombre</label>
             <input type="text" class="form-control" placeholder="Nombre" #Nombre title="Nombre backup"
                 [(ngModel)]="NombreBCK"
                 (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)">
@@ -49,7 +55,8 @@
                 Limpiar
             </button>
 
-            <button *ngIf="ArregloGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf()">
+            <button *ngIf="ArregloGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF"
+                (click)="DescargarDatosPdf()">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
                 Descargar PDF
             </button>
@@ -80,10 +87,10 @@
                     <th (click)="OrdenarAmbiente()" class="cursorPointer">AMBIENTE</th>
                     <th (click)="OrdenarDescripcion()" class="cursorPointer">TIPO</th>
                     <th (click)="OrdenarPeriodicidad()" class="cursorPointer">PERIODICIDAD</th>
-                    <th (click)="OrdenarUsuarioModifi()" class="cursorPointer">USUARIO MOD</th>
-                    <th (click)="OrdenarFecha_Ult_Mod()" class="cursorPointer">FECHA ULTIMA MOD</th>
+                    <th (click)="OrdenarUsuarioModifi()" class="cursorPointer">FECHA ÚLTIMO BCK</th>
+                    <th (click)="OrdenarFecha_Ult_Mod()" class="cursorPointer">FECHA PRÓXIMO BCK</th>
                     <th>EDITAR</th>
-                    <th>VER</th>
+                    <th>REGISTRAR BCK</th>
                     <th>ELIMINAR</th>
                 </tr>
                 <tr *ngFor="let ArGrilla of ArregloGrilla">
@@ -93,8 +100,8 @@
                     <td>{{ArGrilla.Ambiente}}</td>
                     <td>{{ArGrilla.Descripcion}}</td>
                     <td>{{ArGrilla.Periodicidad}}</td>
-                    <td>{{ArGrilla.UsuarioModifi}}</td>
-                    <td>{{ArGrilla.Fecha_Ult_Mod}}</td>
+                    <td>dd/mm/aaa</td>
+                    <td>dd/mm/aaa</td>
                     <td class="text-center">
                         <button class="BtnClaro mrd m-auto text-center" title="Editar"
                             (click)="Editarbackup(templateEditarBackup, ArGrilla)">
@@ -109,7 +116,7 @@
                     </td>
                     <td class="text-center">
                         <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
-                        (click)="EliminarRegBCK(templateMensaje, ArGrilla)">
+                            (click)="EliminarRegBCK(templateMensaje, ArGrilla)">
                             <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
@@ -146,46 +153,78 @@
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
+
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Nombre Backup" class="col-sm-6 text-center form-control"
+                    <label class="Llave">Nombre backup</label>
+                    <input type="text" value="" placeholder="Nombre Backup" class="col-sm-6 form-control"
                         title="Nombre Kackup" [(ngModel)]="LblAgregarNombre" required>
                 </div>
+
                 <div class="col-6 mt-3">
+                    <label class="Llave">Seleccione proyecto</label>
                     <select class="form-select" title="Seleccionar proyecto" [(ngModel)]="IdAgregarCliente" required>
-                        <option value="0">Seleccione proyecto</option>
+                        <option value="0">Seleccione proyecto...</option>
                         <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">
                             {{arRespu.Nombre}}</option>
                     </select>
                 </div>
+
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control"
+                    <label class="Llave">Ambiente</label>
+                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 form-control"
                         title="Ambiente" [(ngModel)]="LblAgregarAmbiente" required>
                 </div>
+
                 <div class="col-6 mt-3">
+                    <label class="Llave">Seleccione periodicidad</label>
                     <select class="form-select" title="Seleccione periodicidad" [(ngModel)]="LblAgregarPeriodicidad"
                         required>
-                        <option value="0">Seleccione periodicidad</option>
+                        <option value="0">Seleccione periodicidad...</option>
                         <option value="DIARIO">DIARIO</option>
                         <option value="VIERNES">VIERNES</option>
                         <option value="QUINCENAL">QUINCENAL</option>
                         <option value="MENSUAL">MENSUAL</option>
                     </select>
                 </div>
+
                 <div class="col-6 mt-3">
+                    <label class="Llave">Seleccionar servidor</label>
                     <select class="form-select" title="Seleccionar servidor" [(ngModel)]="IdAgregarServidor" required>
-                        <option value="0">Seleccione servidor</option>
+                        <option value="0">Seleccione servidor...</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                         </option>
                     </select>
                 </div>
                 <div class="col-6 mt-3">
+                    <label class="Llave">Seleccionar el tipo backup</label>
                     <select class="form-select" title="Seleccionar el tipo backup" [(ngModel)]="IdAgregarTipoBackup"
                         required>
-                        <option value="0">Seleccione tipo backup</option>
+                        <option value="0">Seleccione tipo backup...</option>
                         <option value="{{arRespu.Id_Tipo_BCK}}" *ngFor="let arRespu of ArregloListaTipoBackup">
                             {{arRespu.Descripcion}}</option>
                     </select>
                 </div>
+
+                <div class="col-6 mt-3">
+                    <label class="Llave">Ruta</label>
+                    <input type="text" value="" placeholder="Ruta" class="col-sm-6 form-control"
+                        title="Ruta" required>
+                </div>
+                <div class="col-6 mt-3">
+                    <label class="Llave">Estado</label>
+                    <select class="form-select" title="Estado" [(ngModel)]="IdAgregarTipoBackup"
+                        required>
+                        <option value="0">Seleccione el estado...</option>
+                        <option value="1">xxx</option>
+                        <option value="1">xxx</option>
+                    </select>
+                </div>
+                <div class="col-12 mt-3">
+                    <label class="Llave">Descripción</label>
+                    <textarea type="text" value="" placeholder="Descripción" class="col-sm-6 form-control"
+                        title="Descripción"></textarea>
+                </div>
+
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
                     <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="AgregarBck(templateMensaje)">
@@ -226,17 +265,16 @@
                     class="btnEquis">
             </button>
         </div>
-        
+
     </div>
     <div class="mrd mld" id="htmlData_">
         <div class="row texto text-center">
             <div class="col-sm-8 mt-3">
-                <textarea id="form10" class="md-textarea form-control textarea" placeholder="Observaciones"
-                 rows="3" [(ngModel)]="LblObservaciones"></textarea>
+                <textarea id="form10" class="md-textarea form-control textarea" placeholder="Observaciones" rows="3"
+                    [(ngModel)]="LblObservaciones"></textarea>
             </div>
             <div class="col-sm-4 mt-3">
-                <select class="form-select mt-3" placeholder="Estado"
-                    [(ngModel)]="IdEstado">
+                <select class="form-select mt-3" placeholder="Estado" [(ngModel)]="IdEstado">
                     <option value="2">Seleccione estado</option>
                     <option value="0">Error</option>
                     <option value="1">Exitoso</option>
@@ -278,19 +316,23 @@
                         <td>{{ArGrilla.Nombre}}</td>
                         <td class="text-center">
                             <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
-                            (click)="EliminarRegistroBakup(templateMensaje, ArGrilla)">
-                                <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
+                                (click)="EliminarRegistroBakup(templateMensaje, ArGrilla)">
+                                <img src="../../../../assets/ImagenesAdminCDI/basura.png"
+                                    class="BtnimgTamanoPeque mr-2">
                             </button>
                         </td>
                     </tr>
-                    <tr><td colspan="5">--------------------------------------------------------------------</td></tr>
+                    <tr>
+                        <td colspan="5">--------------------------------------------------------------------</td>
+                    </tr>
                     <tr>
                         <th colspan="4">CLICK ELIMINAR TODOS LOS REGISTROS = </th>
                         <td>
-                            <button class="BtnClaro mrd m-auto text-center" title="Eliminar todos los registros" (click)="EliminarRegistrosBakup(templateMensaje, ArregloGrillaReguistroBck[0].Id_BCK)">
-                            <img src="../../../../assets/ImagenesAdminCDI/basura.png"
-                                class="BtnimgTamanoPeque mr-2">
-                        </button>
+                            <button class="BtnClaro mrd m-auto text-center" title="Eliminar todos los registros"
+                                (click)="EliminarRegistrosBakup(templateMensaje, ArregloGrillaReguistroBck[0].Id_BCK)">
+                                <img src="../../../../assets/ImagenesAdminCDI/basura.png"
+                                    class="BtnimgTamanoPeque mr-2">
+                            </button>
                         </td>
                     </tr>
                 </table>
@@ -310,20 +352,27 @@
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
                 <div class="col-sm-6 mt-3">
-                    <input type="text" value="" placeholder="Nombre Kackup" class="col-sm-6 text-center form-control"
+                    <label class="Llave">Nombre backup</label>
+                    <input type="text" value="" placeholder="Nombre backup" class="col-sm-6 form-control"
                         title="Nombre Kackup" [(ngModel)]="NombreBackup">
                 </div>
+
                 <div class="col-sm-6 mt-3">
+                    <label class="Llave">Seleccionar proyecto</label>
                     <select class="form-select" title="Seleccionar proyecto" [(ngModel)]="IdClientee">
                         <option *ngFor="let arRespu of ArregloListaCliente" value="{{arRespu.Id_PRY}}">
                             {{arRespu.Nombre}}</option>
                     </select>
                 </div>
+
                 <div class="col-sm-6 mt-3">
-                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 text-center form-control"
+                    <label class="Llave">Ambiente</label>
+                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 form-control"
                         title="Ambiente" [(ngModel)]="Ambiente">
                 </div>
+
                 <div class="col-sm-6 mt-3">
+                    <label class="Llave">Seleccione periodicidad</label>
                     <select class="form-select" title="Seleccione periodicidad" [(ngModel)]="Periodicidad">
                         <option value="DIARIO">DIARIO</option>
                         <option value="VIERNES">VIERNES</option>
@@ -331,20 +380,41 @@
                         <option value="MENSUAL">MENSUAL</option>
                     </select>
                 </div>
+
                 <div class="col-sm-6 mt-3">
+                    <label class="Llave">Seleccionar servidor</label>
                     <select class="form-select" title="Seleccionar servidor" [(ngModel)]="IdServidor">
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                         </option>
                     </select>
                 </div>
+
                 <div class="col-sm-6 mt-3">
+                    <label class="Llave">Seleccionar tipo backup</label>
                     <select class="form-select" title="Seleccionar el tipo backup" [(ngModel)]="IdTipoBackup">
                         <option value="{{arRespu.Id_Tipo_BCK}}" *ngFor="let arRespu of ArregloListaTipoBackup">
                             {{arRespu.Descripcion}}</option>
                     </select>
-
                 </div>
-
+                <div class="col-6 mt-3">
+                    <label class="Llave">Ruta</label>
+                    <input type="text" value="" placeholder="Ruta" class="col-sm-6 form-control"
+                        title="Ruta" required>
+                </div>
+                <div class="col-6 mt-3">
+                    <label class="Llave">Estado</label>
+                    <select class="form-select" title="Estado" [(ngModel)]="IdAgregarTipoBackup"
+                        required>
+                        <option value="0">Seleccione el estado...</option>
+                        <option value="1">xxx</option>
+                        <option value="1">xxx</option>
+                    </select>
+                </div>
+                <div class="col-12 mt-3">
+                    <label class="Llave">Descripción</label>
+                    <textarea type="text" value="" placeholder="Descripción" class="col-sm-6 form-control"
+                        title="Descripción"></textarea>
+                </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
                     <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="UpdateBck(templateMensaje)">

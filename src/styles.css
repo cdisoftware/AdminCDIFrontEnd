@@ -329,6 +329,11 @@ body::-webkit-scrollbar {
     background: #F0F0F0;
 }
 
+.Llave {
+    color: #181D23;
+    font-weight: 600;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
