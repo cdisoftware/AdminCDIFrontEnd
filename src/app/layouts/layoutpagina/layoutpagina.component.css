@@ -4,12 +4,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: cursive;
 }
+
 a {
   text-decoration: none;
 }
+
 li {
   list-style: none;
 }
@@ -20,54 +23,67 @@ li {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  background-color: teal;
+  background-color: #082444;
+  ;
   color: #fff;
 }
+
 .nav-links a {
   color: #fff;
 }
+
 /* LOGO */
 .logo {
   font-size: 32px;
 }
+
 /* NAVBAR MENU */
 .menu {
   display: flex;
   gap: 1em;
   font-size: 18px;
 }
+
 .menu li:hover {
-  background-color: #4c9e9e;
+  background-color: #2b3a5f;
   border-radius: 5px;
   transition: 0.3s ease;
 }
+
 /* DROPDOWN MENU */
 .services {
   position: relative;
 }
+
 .dropdown {
-  background-color: rgb(1, 139, 139);
+  background-color: #082444;
   padding: 1em 0;
-  position: absolute; /*WITH RESPECT TO PARENT*/
+  position: absolute;
+  /*WITH RESPECT TO PARENT*/
   display: none;
   border-radius: 8px;
   top: 25px;
 }
-.dropdown li + li {
+
+.dropdown li+li {
   margin-top: 10px;
 }
+
 .dropdown .li {
   padding: 0.5em 1em;
   width: 8em;
   text-align: center;
 }
+
 .dropdown .OpUsu {
   width: 2em;
   text-align: center;
 }
+
 .dropdown li:hover {
-  background-color: #4c9e9e;
+  background-color: #2b3a5f;
 }
+
 .services:hover .dropdown {
   display: block;
 }
@@ -77,10 +93,12 @@ li {
   height: 41px;
   padding: 0px;
 }
+
 .textarea {
   resize: none;
 }
-.TituloAgregar{
+
+.TituloAgregar {
   font-size: 15px;
   font-weight: bold;
   color: #000000;
@@ -88,7 +106,7 @@ li {
 }
 
 
-.BtnimgUsuario{
+.BtnimgUsuario {
   width: 31px;
   height: 31px;
   padding: 0px;
@@ -98,28 +116,44 @@ li {
 
 
 .dropdownCerrar {
-  background-color: rgb(1, 139, 139);
+  background-color: #082444;
   padding: 1em 7px;
-  position: absolute; /*WITH RESPECT TO PARENT*/
+  position: absolute;
+  /*WITH RESPECT TO PARENT*/
   display: none;
   border-radius: 8px;
   top: 24px;
 }
-.dropdownCerrar li + li {
+
+.dropdownCerrar li+li {
   margin-top: 10px;
 }
+
 .dropdownCerrar .li {
   padding: 0.5em 7px;
   width: 8em;
   text-align: center;
 }
+
 .dropdownCerrar .OpUsu {
   width: 2em;
   text-align: center;
 }
+
 .dropdownCerrar li:hover {
-  background-color: #4c9e9e;
+  background-color: #2b3a5f;
 }
+
 .services:hover .dropdownCerrar {
   display: block;
+}
+
+.labelMenuser {
+  color: #fff;
+  font-size: 20px;
+}
+
+.labelMenu {
+  color: #fff;
+  font-size: 17px;
 }

@@ -9,40 +9,40 @@
             <div class="col-sm-8 m-0 mt-5 mb-3" style="margin-top: 50px;">
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
                     <label class="Negrita">Nombre</label>
-                    <input type="text" class="form-control InputCamposUsuario" placeholder="Nombre Usuario"
-                        [(ngModel)]="NombreEdit" style="font-size: 18px;">
+                    <input type="text" class="form-control InputCamposUsuario" [(ngModel)]="NombreEdit"
+                        style="font-size: 18px;">
                 </div>
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
                     <label class="Negrita">Apellido</label>
                     <input type="text" class="form-control InputCamposUsuario" style="font-size: 18px;"
-                        placeholder="Apellido Usuario" [(ngModel)]="ApellidoEdit">
+                        [(ngModel)]="ApellidoEdit">
                 </div>
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
-                    <label class="Negrita">Nombre (No es pude modificar)</label>
+                    <label class="Negrita">Nombre (No se puede modificar)</label>
                     <input type="text" class="form-control InputCamposUsuario" style="font-size: 18px;"
-                        placeholder="Usuario Usuario" [(ngModel)]="Usuario" readonly>
+                        [(ngModel)]="Usuario" readonly>
                 </div>
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
-                    <label class="Negrita">Password</label>
+                    <label class="Negrita">Contraseña</label>
                     <input type="text" class="form-control InputCamposUsuario" style="font-size: 18px;"
-                        placeholder="Password Usuario" [(ngModel)]="Password">
+                        [(ngModel)]="Password">
                 </div>
 
 
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
                     <label class="Negrita">Dirección</label>
                     <input type="text" class="form-control InputCamposUsuario" style="font-size: 18px;"
-                        placeholder="Dirección" [(ngModel)]="Direccion">
+                        [(ngModel)]="Direccion">
                 </div>
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
                     <label class="Negrita">Telefono</label>
                     <input type="text" class="form-control InputCamposUsuario" style="font-size: 18px;"
-                        placeholder="Telefono" [(ngModel)]="Telefono">
+                        [(ngModel)]="Telefono">
                 </div>
                 <div class="col-sm-12 m-0 mt-2 mb-3 ">
                     <label class="Negrita">Correo electronico</label>
                     <input type="email" maxlength="20" class="form-control InputCamposUsuario" style="font-size: 18px;"
-                        placeholder="Email" [(ngModel)]="Email">
+                        [(ngModel)]="Email">
                 </div>
 
                 <!--Botones-->
@@ -64,11 +64,11 @@
                         class="custom-file-input" (change)="cargandoImagen($event, templateMensaje)"
                         title="Las propiedades de la imagen deben ser peso máximo 1 MG y de tipo JPG o PNG" />
 
-                    <button *ngIf="ButtonsInput==true" class="btn btn-light col-sm-4 Maxheight mt-3" title="Editar Imagen"
-                        (click)="VerButons()">
+                    <button *ngIf="ButtonsInput==true" class="btn btn-light col-sm-4 Maxheight mt-3"
+                        title="Editar Imagen" (click)="VerButons()">
                         Cancelar
                         <img src="../../../../assets/ImagenesAdminCDI/ic_equis.png" style="margin-left: 5px;"
-                        class="BtnimgTamanoPeque mr-2">
+                            class="BtnimgTamanoPeque mr-2">
                     </button>
                     <button *ngIf="ButtonsImg == true && ImgPerfil=='http://192.168.3.186:8092/ImgDefaulUsario.png'"
                         class="btn btn-light col-sm-4 Maxheight mt-3" title="Agregar Imagen" (click)="VerFile()">

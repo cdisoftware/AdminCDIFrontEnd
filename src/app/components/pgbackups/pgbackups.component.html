@@ -4,31 +4,19 @@
     </div>
     <div class="row mt-3">
         <!--Ayuda IP-->
-        <div class="col-sm-8 m-0 mb-3">
+        <div class="col-sm-6 m-0 mb-3">
             <Label class="Llave">IP</Label>
-            <input type="text" class="form-control table-bordered" #Ip placeholder="IP" title="IP" [(ngModel)]="LblIp"
-                (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)">
+            <input type="text" class="form-control table-bordered" #Ip  title="IP" [(ngModel)]="LblIp"
+                (keyup)="Grilla(Ip.value, Nombre.value, SelecioneProyecto.value)">
 
         </div>
         <!--Fin ayuda-->
-
+       
         <!--Tipo lista-->
-        <div class="col-sm-4 m-0 mb-3 ">
-            <label class="Llave">Usuario</label>
-            <select class="form-select" title="Seleccionar usuario" [(ngModel)]="IdUsuario" #Selecusuario
-                (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)'>
-                <option value="0" selected>Seleccione usuario</option>
-                <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>
-            </select>
-
-        </div>
-        <!--Fin Tipo lista-->
-
-        <!--Tipo lista-->
-        <div class="col-sm-4 m-0 mb-3 ">
+        <div class="col-sm-6 m-0 mb-3 ">
             <label class="Llave">Proyecto</label>
             <select class="form-select" title="Seleccionar proyecto" [(ngModel)]="IdCliente" #SelecioneProyecto
-                (change)='Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)'>
+                (change)='Grilla(Ip.value, Nombre.value, SelecioneProyecto.value)'>
                 <option value="0" selected>Seleccione proyecto</option>
                 <option value="{{arRespu.Id_PRY}}" *ngFor="let arRespu of ArregloListaCliente">{{arRespu.Nombre}}
                 </option>
@@ -37,17 +25,13 @@
         <!--Fin Tipo lista-->
 
         <!--Ayuda Nombre-->
-        <div class="col-sm-8 m-0 mb-3">
+        <div class="col-sm-12 m-0 mb-3">
             <label class="Llave">Nombre</label>
-            <input type="text" class="form-control" placeholder="Nombre" #Nombre title="Nombre backup"
+            <input type="text" class="form-control" #Nombre title="Nombre backup"
                 [(ngModel)]="NombreBCK"
-                (keyup)="Grilla(Ip.value, Nombre.value, Selecusuario.value, SelecioneProyecto.value)">
+                (keyup)="Grilla(Ip.value, Nombre.value, SelecioneProyecto.value)">
         </div>
         <!--Fin ayuda-->
-
-
-
-
         <!--Botones-->
         <div class="row displayCenter col-12 mt-3">
             <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="Limpiar()">
@@ -156,7 +140,7 @@
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Nombre backup</label>
-                    <input type="text" value="" placeholder="Nombre Backup" class="col-sm-6 form-control"
+                    <input type="text" value="" class="col-sm-6 form-control"
                         title="Nombre Kackup" [(ngModel)]="LblAgregarNombre" required>
                 </div>
 
@@ -171,7 +155,7 @@
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Ambiente</label>
-                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 form-control"
+                    <input type="text" value="" class="col-sm-6 form-control"
                         title="Ambiente" [(ngModel)]="LblAgregarAmbiente" required>
                 </div>
 
@@ -207,7 +191,7 @@
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Ruta</label>
-                    <input type="text" value="" placeholder="Ruta" class="col-sm-6 form-control"
+                    <input type="text" value="" class="col-sm-6 form-control"
                         title="Ruta" required>
                 </div>
                 <div class="col-6 mt-3">
@@ -221,7 +205,7 @@
                 </div>
                 <div class="col-12 mt-3">
                     <label class="Llave">Descripción</label>
-                    <textarea type="text" value="" placeholder="Descripción" class="col-sm-6 form-control"
+                    <textarea type="text" value="" class="col-sm-6 form-control"
                         title="Descripción"></textarea>
                 </div>
 
@@ -353,7 +337,7 @@
             <li class="row col-sm-12 displayCenter">
                 <div class="col-sm-6 mt-3">
                     <label class="Llave">Nombre backup</label>
-                    <input type="text" value="" placeholder="Nombre backup" class="col-sm-6 form-control"
+                    <input type="text" value="" class="col-sm-6 form-control"
                         title="Nombre Kackup" [(ngModel)]="NombreBackup">
                 </div>
 
@@ -367,7 +351,7 @@
 
                 <div class="col-sm-6 mt-3">
                     <label class="Llave">Ambiente</label>
-                    <input type="text" value="" placeholder="Ambiente" class="col-sm-6 form-control"
+                    <input type="text" value="" class="col-sm-6 form-control"
                         title="Ambiente" [(ngModel)]="Ambiente">
                 </div>
 
@@ -398,7 +382,7 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Ruta</label>
-                    <input type="text" value="" placeholder="Ruta" class="col-sm-6 form-control"
+                    <input type="text" value="" class="col-sm-6 form-control"
                         title="Ruta" required>
                 </div>
                 <div class="col-6 mt-3">
@@ -412,7 +396,7 @@
                 </div>
                 <div class="col-12 mt-3">
                     <label class="Llave">Descripción</label>
-                    <textarea type="text" value="" placeholder="Descripción" class="col-sm-6 form-control"
+                    <textarea type="text" value="" class="col-sm-6 form-control"
                         title="Descripción"></textarea>
                 </div>
                 <!---Botones--->

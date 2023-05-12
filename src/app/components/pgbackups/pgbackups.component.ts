@@ -70,10 +70,10 @@ export class PgbackupsComponent implements OnInit {
   modalVer: BsModalRef;
   IdBackupSelect: number;
 
-   //Titulos ver
-   IpBackupVer:string;
-   NombreBackupVer: string;
-   PeriodicidadVer: string;
+  //Titulos ver
+  IpBackupVer: string;
+  NombreBackupVer: string;
+  PeriodicidadVer: string;
 
   //Variables consultareguistri backup
   ArregloGrillaReguistroBck: any;
@@ -109,7 +109,7 @@ export class PgbackupsComponent implements OnInit {
     this.IdAgregarServidor = '0';
     this.IdAgregarTipoBackup = '0';
 
-    this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
+    this.Grilla(this.LblIp, this.NombreBCK, this.IdCliente);
     this.ListaUsuario();
     this.ListaCliente();
     this.ListaTipoServidor();
@@ -117,24 +117,19 @@ export class PgbackupsComponent implements OnInit {
   }
 
   //Grilla
-  Grilla(Ip: string, Nombre: string, IdUsuario: string, IdCliente: string) {
+  Grilla(Ip: string, Nombre: string, IdCliente: string) {
     if (Ip == undefined || Ip == '') {
       Ip = '0';
     }
-
     if (Nombre == undefined || Nombre == '') {
       Nombre = '0';
-    }
-
-    if (IdUsuario == undefined || IdUsuario == '') {
-      IdUsuario = '0';
     }
     if (IdCliente == undefined || IdCliente == '') {
       IdCliente = '0';
     }
     this.ArregloGrilla = [];
     this.AuxiliadorGrilla = false;
-    this.Servicios.consultabackup(Nombre, Ip, IdUsuario, IdCliente).subscribe(respu => {
+    this.Servicios.consultabackup(Nombre, Ip, '0', IdCliente).subscribe(respu => {
       if (respu.length > 0) {
         this.ArregloGrilla = respu;
         this.AuxiliadorGrilla = true;
@@ -235,7 +230,7 @@ export class PgbackupsComponent implements OnInit {
     this.IdAgregarServidor = '0';
     this.IdAgregarTipoBackup = '0';
 
-    this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
+    this.Grilla(this.LblIp, this.NombreBCK, this.IdCliente);
   }
 
   BtnNuevo(templateAgregar: TemplateRef<any>) {
@@ -400,7 +395,7 @@ export class PgbackupsComponent implements OnInit {
         if (respu.length > 0) {
           this.modalMensaje = this._modalService.show(templateMensaje);
           this.lblModalMsaje = respu;
-          this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
+          this.Grilla(this.LblIp, this.NombreBCK, this.IdCliente);
 
           this.modalAgregar.hide();
           this.Limpiar();
@@ -500,7 +495,7 @@ export class PgbackupsComponent implements OnInit {
       if (respu.length > 0) {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
-        this.Grilla(this.LblIp, this.NombreBCK, this.IdUsuario, this.IdCliente);
+        this.Grilla(this.LblIp, this.NombreBCK, this.IdCliente);
 
         this.modalVer.hide()
       }

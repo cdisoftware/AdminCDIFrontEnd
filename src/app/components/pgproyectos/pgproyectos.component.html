@@ -1,24 +1,31 @@
 <div class="container bg-white pt-5 pb-5">
+
     <!--Proyecto-->
     <div class="row justify-content-center ">
+
         <div class="col-sm-6 m-0">
-            <div class="row justify-content-center ">
+            <div class="row">
                 <p class="col-12 tituloformulario">PROYECTOS</p>
             </div>
-            <div class="row mt-3">
-                <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-                    <input type="text" class="form-control table-bordered" #Nombre placeholder="Nombre" title="Nombre"
-                        [(ngModel)]="LblNombre" (keyup)="consultaproyectos(Nombre.value, Cliente.value)">
-                </div>
 
-                <div class="col-sm-6 m-0 mb-3 ">
-                    <select class="form-select" title="Seleccionar Cliente" #Cliente
-                        (change)="consultaproyectos(Nombre.value, Cliente.value)" [(ngModel)]="IdCliente">
-                        <option value="0" selected>Seleccione Cliente</option>
-                        <option value="{{arRespu.Id_Cliente}}" *ngFor="let arRespu of Arraylistacliente">
-                            {{arRespu.Descripcion}}</option>
-                    </select>
-                </div>
+            <div class="row">
+                <li class="row col-sm-12 displayCenter">
+                    <div class="col-6 mt-3">
+                        <label class="Llave">Nombre</label>
+                        <input type="text" class="form-control table-bordered" #Nombre title="Nombre"
+                            [(ngModel)]="LblNombre" (keyup)="consultaproyectos(Nombre.value, Cliente.value)">
+                    </div>
+
+                    <div class="col-6 mt-3 ">
+                        <label class="Llave">Seleccionar cliente</label>
+                        <select class="form-select" title="Seleccionar Cliente" #Cliente
+                            (change)="consultaproyectos(Nombre.value, Cliente.value)" [(ngModel)]="IdCliente">
+                            <option value="0" selected>Seleccione Cliente</option>
+                            <option value="{{arRespu.Id_Cliente}}" *ngFor="let arRespu of Arraylistacliente">
+                                {{arRespu.Descripcion}}</option>
+                        </select>
+                    </div>
+                </li>
 
                 <!--Botones-->
                 <div class="row displayCenter col-12 mt-4">
@@ -70,7 +77,8 @@
 
                             <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
                                 style="background-color: #1ABC9C;">{{ArGrilla.DescripcionCliente}}</td>
-                            <td style='word-break: break-all; width: 200px; white-space: initial' *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.DescripcionCliente}}
+                            <td style='word-break: break-all; width: 200px; white-space: initial'
+                                *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.DescripcionCliente}}
                             </td>
 
                             <td class="text-center" *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
@@ -166,6 +174,9 @@
             </div>
         </div>
 
+
+
+
         <!--Cliente-->
         <div class="col-sm-6 m-0">
             <div class="col-sm-12 m-0">
@@ -173,18 +184,15 @@
                     <div class="row float-right">
                         <p class="col-12 tituloformulario">CLIENTES</p>
                     </div>
-
                 </div>
-                <div class="w-100 ContenedorDerecha">
-                    <div class="col-sm-6 m-0 mb-3 mt-3 float-right">
-                        <input type="text" class="form-control table-bordered" #Descripcion placeholder="Descripción"
-                            title="Descripción" [(ngModel)]="LblDescripcion"
-                            (keyup)="consultaclientes(Descripcion.value)">
+                <div class="col-sm-12 displayCenter">
+                    <div class="col-6 mt-3 ">
+                        <label class="Llave">Descripción</label>
+                        <input type="text" class="form-control table-bordered" #Descripcion title="Descripción"
+                            [(ngModel)]="LblDescripcion" (keyup)="consultaclientes(Descripcion.value)">
                     </div>
                 </div>
                 <div class="row mt-3">
-
-
                     <!--Botones-->
                     <div class="row displayCenter col-12 mt-3">
                         <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="LimpiarClientes();">
@@ -214,6 +222,7 @@
                     </div>
                     <!--Fin botones-->
 
+
                     <!--Grilla-->
                     <div class="col-sm-12 mt-5">
                         <table class="table table-bordered text-center">
@@ -230,7 +239,8 @@
                             <tr *ngFor="let ArGrilla of ArrayConsultaCliente">
                                 <td *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
                                     style="background-color: #1ABC9C;">{{ArGrilla.Descripcion}}</td>
-                                <td style='word-break: break-all; width: 420px; white-space: initial' *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Descripcion}}</td>
+                                <td style='word-break: break-all; width: 420px; white-space: initial'
+                                    *ngIf="ArGrilla.Id_Cliente != IdClienteGrillaDinamica">{{ArGrilla.Descripcion}}</td>
 
                                 <td class="text-center" *ngIf="ArGrilla.Id_Cliente == IdClienteGrillaDinamica"
                                     style="background-color: #1ABC9C;">
@@ -300,11 +310,13 @@
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
-                <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                <div class="col-sm-6 m-0 mb-3">
+                    <label class="Llave">Nombre</label>
                     <input type="text" class="form-control table-bordered" [(ngModel)]="LblNombreAgrega"
-                        placeholder="Nombre" title="Nombre proyecto">
+                        title="Nombre proyecto">
                 </div>
                 <div class="col-sm-6 m-0 mb-3 ">
+                    <label class="Llave">Seleccione cliente</label>
                     <select class="form-select" title="Seleccionar Cliente" [(ngModel)]="IdClienteAgrega">
                         <option value="0" selected>Seleccione Cliente</option>
                         <option value="{{arRespu.Id_Cliente}}" *ngFor="let arRespu of Arraylistacliente">
@@ -341,9 +353,10 @@
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
-                <div class="col-sm-12 mb-3 displayFlexbetween">
-                    <textarea class="md-textarea form-control textarea" placeholder="Descripción"
-                        title="Descripción" rows="3" [(ngModel)]="LblDescripcionAgrega"></textarea>
+                <div class="col-sm-12 mb-3 ">
+                    <label class="Llave">Descripción</label>
+                    <textarea class="md-textarea form-control" title="Descripción" rows="3"
+                        [(ngModel)]="LblDescripcionAgrega"></textarea>
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
@@ -374,11 +387,13 @@
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
-                <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
+                <div class="col-sm-6 m-0 mb-3">
+                    <label class="Llave">Nombre</label>
                     <input type="text" class="form-control table-bordered" [(ngModel)]="LblNombreEdit"
-                        placeholder="Nombre" title="Nombre proyecto">
+                        title="Nombre proyecto">
                 </div>
                 <div class="col-sm-6 m-0 mb-3 ">
+                    <label class="Llave">Seleccionar cliente</label>
                     <select class="form-select" title="Seleccionar Cliente" [(ngModel)]="IdClienteEdit">
                         <option value="{{arRespu.Id_Cliente}}" *ngFor="let arRespu of Arraylistacliente">
                             {{arRespu.Descripcion}}</option>
@@ -413,8 +428,9 @@
     <div class="modaBody">
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
-                <div class="col-sm-6 m-0 mb-3 displayFlexbetween">
-                    <textarea id="form10" class="md-textarea form-control textarea" placeholder="Descripción"
+                <div class="col-sm-12 m-0 mb-3">
+                    <label class="Llave">Descripción</label>
+                    <textarea id="form10" class="md-textarea form-control" placeholder="Descripción"
                         title="Descripción" rows="3" [(ngModel)]="LblDescripcionEdit"></textarea>
                 </div>
                 <!---Botones--->

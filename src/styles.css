@@ -201,9 +201,17 @@ body::-webkit-scrollbar {
 
 
 .titulopopup{
-    font-size: 18px;
-    font-weight: bold;
-    color: #000000;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    margin: auto;
+    
+}
+
+.tituloLi{
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
     margin: auto;
     text-transform: uppercase;
 }

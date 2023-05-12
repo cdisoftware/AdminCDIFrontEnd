@@ -4,19 +4,22 @@
     </div>
 
     <div class="row col-11 mt-3">
-        <div class="col-sm-4 m-0 mb-3 displayFlexbetween">
-            <input type="text" class="form-control table-bordered" placeholder="Nombre o usuario"
+        <div class="col-sm-4 m-0 mb-3 ">
+            <label class="Llave">Usuario</label>
+            <input type="text" class="form-control table-bordered" 
                 title="Nombre o usuario" [(ngModel)]="NombreUsuario"
                 (keyup)="BuscaCliente(Estado, IdRol, NombreUsuario)">
         </div>
-        <div class="col-sm-4 mb-3 displayFlexbetween">
+        <div class="col-sm-4 mb-3 ">
+            <label class="Llave">Seleccione rol</label>
             <select class="form-select" title="Seleccione rol" [(ngModel)]="IdRol"
                 (change)='BuscaCliente(Estado, IdRol, NombreUsuario)'>
                 <option value="0" selected>Seleccione rol....</option>
                 <option value="{{arRespu.IdRol}}" *ngFor="let arRespu of ArrRoles">{{arRespu.NombreRol}}</option>
             </select>
         </div>
-        <div class="col-sm-4 mb-3 displayFlexbetween">
+        <div class="col-sm-4 mb-3 ">
+            <label class="Llave">Seleccione estado</label>
             <select class="form-select" title="Seleccione estado" [(ngModel)]="Estado"
                 (change)='BuscaCliente(Estado, IdRol, NombreUsuario)'>
                 <option value="0" selected>Seleccione estado....</option>
