@@ -39,6 +39,9 @@ export class PgbackupsComponent implements OnInit {
   LblAgregarAmbiente: string;
   LblAgregarPeriodicidad: string;
   IdAgregarServidor: string;
+  RutaAgregar: string;
+  EstadoAgregar: string = '0';
+  DescripcionAgregar: string = '';
 
   //Variables lista Usuario
   IdUsuario: string;
@@ -65,6 +68,9 @@ export class PgbackupsComponent implements OnInit {
   IdServidor: string;
   IdTipoBackup: string;
   IdBackupEdit: string;
+  RutaEdit: string;
+  EstadoEdit: string = '0';
+  DescripcionEdit: string = '';
 
   //Variables Ver
   modalVer: BsModalRef;
@@ -375,22 +381,28 @@ export class PgbackupsComponent implements OnInit {
   AgregarBck(templateMensaje: TemplateRef<any>) {
     if (this.LblAgregarNombre == undefined || this.LblAgregarNombre == '' || this.IdAgregarCliente == undefined || this.IdAgregarCliente == ''
       || this.LblAgregarAmbiente == undefined || this.LblAgregarAmbiente == '' || this.LblAgregarPeriodicidad == undefined || this.LblAgregarPeriodicidad == '0'
-      || this.IdAgregarServidor == undefined || this.IdAgregarServidor == '0' || this.IdAgregarTipoBackup == undefined || this.IdAgregarTipoBackup == '0') {
+      || this.IdAgregarServidor == undefined || this.IdAgregarServidor == '0' || this.IdAgregarTipoBackup == undefined || this.IdAgregarTipoBackup == '0'
+      || this.RutaAgregar == undefined || this.RutaAgregar == '' || this.EstadoAgregar == undefined || this.EstadoAgregar == '0' || this.DescripcionAgregar == undefined || this.DescripcionAgregar == '') {
 
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = "Por favor complete los campos a agregar";
     } else {
       const datosinsert =
       {
+        IdBackup: 0,
         Nombre: this.LblAgregarNombre,
-        Id_PRY: this.IdAgregarCliente,
+        IdProyecto: this.IdAgregarCliente,
         Ambiente: this.LblAgregarAmbiente,
         Periodicidad: this.LblAgregarPeriodicidad,
         Id_Servidor: this.IdAgregarServidor,
-        Id_Tipo_BCK: this.IdAgregarTipoBackup,
-        Id_Usuario: this.IdUsuarioCookies,
-        Fecha_Ult_Mod: this.Fecha
+        IdTipoBackup: this.IdAgregarTipoBackup,
+        IdUsuario: this.IdUsuarioCookies,
+        Fecha: this.Fecha,
+        Ruta: this.RutaAgregar,
+        Descripcion: this.DescripcionAgregar,
+        Estado: this.EstadoAgregar
       }
+      console.log(datosinsert)
       this.Servicios.insertarbackup('3', datosinsert).subscribe(respu => {
         if (respu.length > 0) {
           this.modalMensaje = this._modalService.show(templateMensaje);
@@ -405,6 +417,7 @@ export class PgbackupsComponent implements OnInit {
   }
 
   Editarbackup(templateEditarBackup: TemplateRef<any>, Array: any) {
+    console.log(Array)
     this.modalVer = this._modalService.show(templateEditarBackup);
     this.modalVer.setClass('modal-lg');
     this.IdBackupEdit = Array.Id_B;
@@ -415,6 +428,14 @@ export class PgbackupsComponent implements OnInit {
     this.TipoBackup = Array.Descripcion;
     this.IdServidor = Array.Id_Servidor;
     this.IdTipoBackup = Array.Id_Tipo_BCK;
+
+    this.RutaEdit = Array.Ruta;
+    this.DescripcionEdit = Array.Descripcion;
+    if (Array.Estado != undefined || Array.Estado != null) {
+      this.EstadoEdit = Array.Estado;
+    } else {
+      this.EstadoEdit = '0';
+    }
   }
 
   AgregarRegistroBackup(templateMensaje: TemplateRef<any>) {
@@ -481,15 +502,18 @@ export class PgbackupsComponent implements OnInit {
   UpdateBck(templateMensaje: TemplateRef<any>) {
     const datosupdate =
     {
-      Id_B: this.IdBackupEdit,
+      IdBackup: this.IdBackupEdit,
       Nombre: this.NombreBackup,
-      Id_PRY: this.IdClientee,
+      IdProyecto: this.IdClientee,
       Ambiente: this.Ambiente,
       Periodicidad: this.Periodicidad,
       Id_Servidor: this.IdServidor,
-      Id_Tipo_BCK: this.IdTipoBackup,
-      Id_Usuario: this.IdUsuarioCookies,
-      Fecha_Ult_Mod: this.Fecha
+      IdTipoBackup: this.IdTipoBackup,
+      IdUsuario: this.IdUsuarioCookies,
+      Fecha: this.RutaEdit,
+      Ruta: this.RutaAgregar,
+      Descripcion: this.DescripcionAgregar,
+      Estado: this.EstadoAgregar
     }
     this.Servicios.actualizabackup('2', datosupdate).subscribe(respu => {
       if (respu.length > 0) {
