@@ -147,7 +147,7 @@
 
 <ng-template #templateAgregar>
     <div class="modal-header">
-        <th class="titulopopup">AGREGAR</th>
+        <p class="titulopopup">AGREGAR SERVIDOR</p>
         <button type="button" class="bot" aria-label="Close" (click)="modalAgregar.hide();">
             <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
         </button>
@@ -176,8 +176,8 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Sistema operativo</label>
-                    <input type="text" value="" [(ngModel)]="LblSO"
-                        class="col-sm-6 text-center form-control" title="Sistema Operativo">
+                    <input type="text" value="" [(ngModel)]="LblSO" class="col-sm-6 text-center form-control"
+                        title="Sistema Operativo">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Seleccionar estado</label>
@@ -204,13 +204,13 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Usuario</label>
-                    <input type="text" value="" class="col-sm-6 text-center form-control"
-                        [(ngModel)]="LblUsuarios" title="Usuario">
+                    <input type="text" value="" class="col-sm-6 text-center form-control" [(ngModel)]="LblUsuarios"
+                        title="Usuario">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Contraseña</label>
-                    <input type="password" value="" class="col-sm-6 text-center form-control"
-                        [(ngModel)]="LblPassword" autocomplete="off" title="Contraseña">
+                    <input type="password" value="" class="col-sm-6 text-center form-control" [(ngModel)]="LblPassword"
+                        autocomplete="off" title="Contraseña">
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
@@ -308,7 +308,7 @@
                     Descargar PDF
                 </button>
 
-                <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modal.dismiss('Cross click')">
+                <button class="btn btn-dark col-sm-2 mrd" title="Cancelar" (click)="modal.dismiss('Cross click')">
                     <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                     Cancelar
                 </button>
@@ -320,7 +320,7 @@
 
 <ng-template #templateEditarServidor>
     <div class="modal-header">
-        <th class="titulopopup">EDITAR</th>
+        <p class="titulopopup">EDITAR SERVIDOR</p>
         <button type="button" class="bot" aria-label="Close" (click)="modalEditarServidor.hide();">
             <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
         </button>
@@ -329,29 +329,26 @@
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
-                    <label class="Llave">Ip Servidor</label>
-                    <input type="text" value="" class="col-sm-6 text-center form-control"
-                        [(ngModel)]="LblIpServidorEdit" title="Ip Servidor">
+                    <label class="Llave">Ip local</label>
+                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblIpServidorEdit"
+                        title="Ip Servidor">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Nombre servidor</label>
-                    <input type="text" value="" class="col-sm-6 text-center form-control"
-                        [(ngModel)]="LblNombreEdit" title="Nombre Servidor">
+                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblNombreEdit"
+                        title="Nombre Servidor">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Observación</label>
-                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblObservacionEdit"
-                      rows="3"></textarea>
+                    <textarea class="md-textarea form-control" [(ngModel)]="LblObservacionEdit" rows="3"></textarea>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Software instalado</label>
-                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblSoftwareEdit"
-                         rows="3"></textarea>
+                    <textarea class="md-textarea form-control" [(ngModel)]="LblSoftwareEdit" rows="3"></textarea>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Sistema Operativo</label>
-                    <input type="text" value="" [(ngModel)]="LblSOEdit"
-                        class="col-sm-6 text-center form-control" title="Sistema Operativo">
+                    <input type="text" [(ngModel)]="LblSOEdit" class="col-sm-6 form-control" title="Sistema Operativo">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Seleccionar estado</label>
@@ -367,6 +364,30 @@
                             {{arRespu.Descripcion}}</option>
                     </select>
                 </div>
+
+                <div class="col-3 mt-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Ip publica</label>
+                    </div>
+                </div>
+
+                <div class="col-9 mt-3">
+                    <textarea class="md-textarea form-control" rows="2"></textarea>
+                </div>
+
+                <div class="col-3 mt-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Aplicaciones IIS</label>
+                    </div>
+                </div>
+
+                <div class="col-9 mt-3">
+                    <textarea class="md-textarea form-control" rows="2"></textarea>
+                </div>
+
+                
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
@@ -434,7 +455,7 @@
 
 <ng-template #templateEditarVerDetalles>
     <div class="modal-header">
-        <th class="titulopopup">EDITAR</th>
+        <p class="titulopopup">EDITAR</p>
         <button type="button" class="bot" aria-label="Close" (click)="modalEditarDetalle.hide();">
             <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
         </button>
@@ -444,20 +465,21 @@
             <li class="row col-sm-12 displayCenter">
 
                 <div class="col-12 mt-3">
-                    <input type="text" placeholder="Disco duro" class="form-control" title="Disco duro"
-                        [(ngModel)]="LblDiscoDuroEdit">
+                    <label class="Llave">Procesador</label>
+                    <input type="text" class="form-control" title="Procesador" [(ngModel)]="LblProcesadorEdit">
                 </div>
-
                 <div class="col-12 mt-3">
-                    <input type="text" placeholder="Ram" class="form-control" title="Ram" [(ngModel)]="LblRamEdit">
-                </div>
-
-                <div class="col-12 mt-3">
-                    <input type="text" placeholder="Procesador" class="form-control" title="Procesador"
-                        [(ngModel)]="LblProcesadorEdit">
+                    <label class="Llave">Disco duro</label>
+                    <input type="text" class="form-control" title="Disco duro" [(ngModel)]="LblDiscoDuroEdit">
                 </div>
 
                 <div class="col-6 mt-3">
+                    <label class="Llave">Ram</label>
+                    <input type="text" class="form-control" title="Ram" [(ngModel)]="LblRamEdit">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <label class="Llave">Seleccionar servidor aloja</label>
                     <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAlojaEdit">
                         <option value="0">N/A</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
@@ -465,12 +487,14 @@
                     </select>
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Usuario" class="col-sm-6 text-center form-control"
-                        [(ngModel)]="LblUsuariosEdit" title="Usuario">
+                    <label class="Llave">Usuario</label>
+                    <input type="text" class="col-sm-6 text-center form-control" [(ngModel)]="LblUsuariosEdit"
+                        title="Usuario">
                 </div>
                 <div class="col-6 mt-3">
-                    <input type="text" value="" placeholder="Contraseña" class="col-sm-6 text-center form-control"
-                        [(ngModel)]="LblPasswordEdit" autocomplete="off" title="Contraseña">
+                    <label class="Llave">Contraseña</label>
+                    <input type="text" class="col-sm-6 text-center form-control" [(ngModel)]="LblPasswordEdit"
+                        autocomplete="off" title="Contraseña">
                 </div>
 
                 <!---Botones--->

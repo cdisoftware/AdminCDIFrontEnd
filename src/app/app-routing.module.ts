@@ -18,7 +18,7 @@ import { ConsactividadesComponent } from './components/consactividades/consactiv
 import { PgregtroactividadesComponent } from './components/pgregtroactividades/pgregtroactividades.component';
 import { PgrolesComponent } from './components/pgroles/pgroles.component';
 import { PgAsignaRolesComponent } from './components/pg-asigna-roles/pg-asigna-roles.component';
-
+import { PgaplicacionesComponent } from './components/pgaplicaciones/pgaplicaciones.component';
 
 const routes: Routes = [
 
@@ -91,6 +91,11 @@ const routes: Routes = [
       {
         path: 'pgasignaroles',
         component: PgAsignaRolesComponent,
+
+      },
+      {
+        path: 'pgaplicaciones',
+        component: PgaplicacionesComponent,
 
       }
     ],

@@ -7,12 +7,12 @@
 
   <ul class="nav-links">
     <div class="menu">
-      <li class="titulopopup services cursorPointer" (click)="VerHome()"><a class="titulopopup"><a>Home</a>
+      <li class="tituloMenu services cursorPointer" (click)="VerHome()"><a class="titulopopup"><a>Home</a>
           <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/home.png"
             class="BtnimgTamanoPeque mr-2"></a>
       </li>
 
-      <li class="titulopopup services cursorPointer" *ngFor="let Menu of MenuPri"><a>{{Menu.Menu}}</a>
+      <li class="tituloMenu services cursorPointer" *ngFor="let Menu of MenuPri"><a>{{Menu.Menu}}</a>
         <ul class="dropdown">
           <span *ngFor="let SubMenu of SubMenu">
             <li class="li cursorPointer tituloLi" style="margin-left: 5px;" *ngIf="SubMenu.Padre == Menu.IdMenu" (click)="IrPag(SubMenu.Path, templateMensaje)">
@@ -23,7 +23,7 @@
       </li>
 
 
-      <li class="services titulopopup cursorPointer" (click)="VerPgUsuario()">
+      <li class="services tituloMenu cursorPointer" (click)="VerPgUsuario()">
         <img style="margin-left: 5px;" src="../../../../assets/ImagenesAdminCDI/usuario.png"
           class="BtnimgTamanoPeque mr-2">
         <ul class="dropdownCerrar">

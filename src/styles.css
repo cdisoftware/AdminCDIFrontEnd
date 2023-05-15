@@ -1,6 +1,8 @@
 body::-webkit-scrollbar {
-    width: 0px;               /* width of the entire scrollbar */
-  }
+    width: 0px;
+    /* width of the entire scrollbar */
+}
+
 :root {
     --main-bg-color-red: #DB0019;
     --main-bg-color-redOscuro: #8A0010;
@@ -9,18 +11,19 @@ body::-webkit-scrollbar {
     --main-bg-color-Blanco: white;
 
     --main-bg-color-grisWhiteFont: white;
-  }
+}
 
-  .textRedOscuro{
-      color: var(--main-bg-color-redOscuro) ;
-  }
+.textRedOscuro {
+    color: var(--main-bg-color-redOscuro);
+}
+
 /*-----ESTILOS BOTONES -------------*/
 .BtnClaro {
     background: var(--main-bg-color-Blanco) !important;
     border: solid 1px var(--main-bg-color-grisMedio);
     border-radius: 5px;
-    color: var(--main-bg-color-grisMedio) !important;    
-    height: 40px;    
+    color: var(--main-bg-color-grisMedio) !important;
+    height: 40px;
     border: 1px solid var(--main-bg-color-grisMedio);
     text-align: center;
     padding: auto;
@@ -30,7 +33,7 @@ body::-webkit-scrollbar {
     background: white;
     border: solid 1px var(--main-bg-color-grisMedio);
     border-radius: 5px;
-    color: var(--main-bg-color-grisMedio) !important;      
+    color: var(--main-bg-color-grisMedio) !important;
     border: 1px solid var(--main-bg-color-grisMedio);
     text-align: center;
     padding: auto;
@@ -44,7 +47,7 @@ body::-webkit-scrollbar {
     background: #E1E1E1;
     border: solid 1px var(--main-bg-color-grisMedio);
     border-radius: 5px;
-    color: var(--main-bg-color-grisMedio) !important;      
+    color: var(--main-bg-color-grisMedio) !important;
     border: 1px solid var(--main-bg-color-grisMedio);
     text-align: center;
     padding: auto;
@@ -59,24 +62,24 @@ body::-webkit-scrollbar {
     background: var(--main-bg-color-red) !important;
     border: solid 1px var(--main-bg-color-grisClaro);
     border-radius: 5px;
-    color: #ffffff !important;    
-    height: 40px;    
+    color: #ffffff !important;
+    height: 40px;
 }
 
 .btn-Login {
     background: var(--main-bg-color-red) !important;
     border: solid 1px var(--main-bg-color-grisClaro);
     border-radius: 5px;
-    color: #ffffff !important;    
-    height: 40px;    
+    color: #ffffff !important;
+    height: 40px;
 }
 
 .btn-desactivado {
     background: #8E8E8E !important;
     border: solid 1px var(--main-bg-color-grisClaro);
     border-radius: 5px;
-    color: #ffffff !important;    
-    height: 40px;    
+    color: #ffffff !important;
+    height: 40px;
 }
 
 .btnEquis {
@@ -84,75 +87,78 @@ body::-webkit-scrollbar {
     padding: 0px;
 }
 
-.btnReloj{
+.btnReloj {
 
     width: 19px;
     height: 19px;
     padding: 0px;
 }
 
-.BtnimgTamanoPeque{
+.BtnimgTamanoPeque {
     width: 21px;
     height: 21px;
     padding: 0px;
 }
 
-.BtnimgTamanoMediano{
+.BtnimgTamanoMediano {
     width: 28px;
     height: 28px;
     padding: 0px;
 }
 
-.btnsmall{
+.btnsmall {
     width: 30px;
     height: 30px;
 }
 
-.BtnimgTamano{
+.BtnimgTamano {
     width: 33px;
     height: 33px;
     padding: 0px;
 
 }
 
-.BtnGuardar{
+.BtnGuardar {
     background: var(--main-bg-color-red) !important;
     border: solid 1px var(--main-bg-color-grisClaro);
     border-radius: 5px;
-    color: #ffffff !important;    
+    color: #ffffff !important;
     font-size: 15px;
     padding-left: 80px;
     padding-right: 80px;
 }
 
-.bot{   
-    border:0;
+.bot {
+    border: 0;
     background: none;
     outline: none;
- }
+}
 
- .bot:active{   
-    border:0;
+.bot:active {
+    border: 0;
     background: none;
     outline: none;
- }
+}
 
 
 /*--------ESTILOS LETRAS---------------------*/
 
-.fontEstandar{ /* letralogin */
+.fontEstandar {
+    /* letralogin */
     font-size: 14px;
 }
 
-.fontEstandarMedia{ /* letraformulario */
+.fontEstandarMedia {
+    /* letraformulario */
     font-size: 16px;
 }
 
-.tituloformulario{ 
-    font-weight: bold;    
+.tituloformulario {
+    font-weight: bold;
     font-style: #333333;
     font-size: 20px;
 }
+
 .textarea {
     resize: none;
 }
@@ -164,51 +170,59 @@ body::-webkit-scrollbar {
 }
 
 /*----------ESTILOS DISPLAY-------------------*/
-.displayFlexStar{
+.displayFlexStar {
     display: flex;
     justify-content: start;
 }
 
-.displayFlexbetween{
+.displayFlexbetween {
     display: flex;
     justify-content: space-between;
 }
 
-.displayCenter{
+.displayCenter {
     display: flex;
-    justify-content:  center;
+    justify-content: center;
 }
 
-.displayend{
+.displayend {
     display: flex;
-    justify-content:flex-end;
+    justify-content: flex-end;
 }
 
 .disppleflex {
     display: flex;
     margin: 0px;
 }
-.block{
+
+.block {
     display: block;
 }
 
 /*----------ESTILOS MODALES-------------------*/
-.pModals{
+.pModals {
     font-size: large;
     align-items: center;
     padding: 20px !important;
 }
 
-
-.titulopopup{
+.tituloMenu {
     font-size: 15px;
     font-weight: 500;
-    color: #fff;
+    color: #102444;
     margin: auto;
-    
+
 }
 
-.tituloLi{
+.titulopopup {
+    font-size: 20px;
+    font-weight: bold;
+    color: #102444;
+    margin: auto;
+
+}
+
+.tituloLi {
     font-size: 14px;
     font-weight: 500;
     color: #fff;
@@ -216,61 +230,55 @@ body::-webkit-scrollbar {
     text-transform: uppercase;
 }
 
-.modaBody{
+.modaBody {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px;
 }
+
 /*-----ESTILOS CARGE DE IMAGENES------------------------*/
 
- .image-upload > input
- {
-     display: none;
- }
- 
- .image-upload img
- {
-     width: 30px;
-     cursor: pointer;
- }
+.image-upload>input {
+    display: none;
+}
 
- .image-uploadDos > input
- {
-     display: none;
- }
- 
- .image-uploadDos img
- {
-     width: 100%;
-     cursor: pointer;
- }
+.image-upload img {
+    width: 30px;
+    cursor: pointer;
+}
 
- .image-uploadTres > input
- {
-     display: none;
- }
- 
- .image-uploadTres img
- {
-     width: 200px;
-     cursor: pointer;
- }
+.image-uploadDos>input {
+    display: none;
+}
 
- .image-uploadCuatro > input
- {
-     display: none;
- }
- 
- .image-uploadCuatro img
- {
-     max-width: 100%;
-     max-height: 140px;
-     cursor: pointer;
- }
- /*-----------------------------*/
+.image-uploadDos img {
+    width: 100%;
+    cursor: pointer;
+}
 
- .BoderImg{
+.image-uploadTres>input {
+    display: none;
+}
+
+.image-uploadTres img {
+    width: 200px;
+    cursor: pointer;
+}
+
+.image-uploadCuatro>input {
+    display: none;
+}
+
+.image-uploadCuatro img {
+    max-width: 100%;
+    max-height: 140px;
+    cursor: pointer;
+}
+
+/*-----------------------------*/
+
+.BoderImg {
 
     border-style: solid;
     border-radius: 3px;
@@ -278,16 +286,16 @@ body::-webkit-scrollbar {
     border-width: 1px;
     padding-left: 5px;
     padding-right: 5px;
- }
+}
 
- /*-----------MENU SUPERIOR------------------*/
- .bg-red{
+/*-----------MENU SUPERIOR------------------*/
+.bg-red {
     background-color: var(--main-bg-color-red);
 }
 
 /*-----------------------------*/
 
-.tablaRedes{
+.tablaRedes {
     max-width: 600px;
     margin-bottom: 0px;
     padding-top: 0px;
@@ -296,44 +304,44 @@ body::-webkit-scrollbar {
 
 /*-----------------------------*/
 
-.espacioul{
+.espacioul {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
 }
 
-.SinEstilo{
+.SinEstilo {
     all: unset;
 }
 
-.mld{
+.mld {
     margin-left: 10px;
 }
 
-.mrd{
+.mrd {
     margin-right: 10px;
 }
 
-.mldDos{
+.mldDos {
     margin-left: 50px;
 }
 
-.mrdDos{
+.mrdDos {
     margin-right: 50px;
 }
 
-.mtdDos{
+.mtdDos {
     margin-top: 25px;
 }
 
-.mbdDos{
+.mbdDos {
     margin-bottom: 10px;
 }
 
-.cursorPointer{
+.cursorPointer {
     cursor: pointer;
 }
 
-.fondoGris{
+.fondoGris {
     background: #F0F0F0;
 }
 
@@ -342,17 +350,52 @@ body::-webkit-scrollbar {
     font-weight: 600;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
