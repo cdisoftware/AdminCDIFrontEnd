@@ -192,20 +192,20 @@
                 <div class="col-6 mt-3">
                     <label class="Llave">Ruta</label>
                     <input type="text" value="" class="col-sm-6 form-control"
-                        title="Ruta" required>
+                        title="Ruta" [(ngModel)]="RutaAgregar" required>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Estado</label>
-                    <select class="form-select" title="Estado" [(ngModel)]="IdAgregarTipoBackup"
+                    <select class="form-select" title="Estado" [(ngModel)]="EstadoAgregar"
                         required>
                         <option value="0">Seleccione el estado...</option>
-                        <option value="1">xxx</option>
-                        <option value="1">xxx</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
                     </select>
                 </div>
                 <div class="col-12 mt-3">
                     <label class="Llave">Descripción</label>
-                    <textarea type="text" value="" class="col-sm-6 form-control"
+                    <textarea type="text" value="" class="col-sm-6 form-control" [(ngModel)]="DescripcionAgregar"
                         title="Descripción"></textarea>
                 </div>
 
@@ -382,21 +382,21 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Ruta</label>
-                    <input type="text" value="" class="col-sm-6 form-control"
+                    <input type="text" value="" class="col-sm-6 form-control" [(ngModel)]="RutaEdit"
                         title="Ruta" required>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Estado</label>
-                    <select class="form-select" title="Estado" [(ngModel)]="IdAgregarTipoBackup"
+                    <select class="form-select" title="Estado"  [(ngModel)]="EstadoEdit"
                         required>
                         <option value="0">Seleccione el estado...</option>
-                        <option value="1">xxx</option>
-                        <option value="1">xxx</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
                     </select>
                 </div>
                 <div class="col-12 mt-3">
                     <label class="Llave">Descripción</label>
-                    <textarea type="text" value="" class="col-sm-6 form-control"
+                    <textarea type="text" value="" class="col-sm-6 form-control" [(ngModel)]="DescripcionEdit"
                         title="Descripción"></textarea>
                 </div>
                 <!---Botones--->
