@@ -104,6 +104,12 @@ export class PgservidoresComponent implements OnInit {
   IpServidorVer: string;
   NombreServidorVer: string;
 
+  //check
+  checkboxIp: boolean = false;
+  checkboxApps: boolean = false;
+  checkboxBD: boolean = false;
+
+
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService,
     private modalServiceDos: NgbModal,
@@ -206,10 +212,9 @@ export class PgservidoresComponent implements OnInit {
 
   //Popap agregar
   BtnNuevo(templateAgregar: TemplateRef<any>) {
-    this.modalAgregar = this._modalService.show(templateAgregar);
-    this.modalAgregar.setClass('modal-lg');
-    this.LblPassword = '';
+    this.modalServiceDos.open(templateAgregar, { size: 'xl' });
   }
+
   AgregarServidor(templateMensaje: TemplateRef<any>) {
     if (this.LblIpServidor == undefined || this.LblIpServidor == '' || this.LblNombre == undefined || this.LblNombre == '' || this.LblSO == undefined || this.LblSO == '' ||
       this.LblSoftware == undefined || this.LblSoftware == '' || this.IdEstadoAgregar == undefined || this.IdEstadoAgregar == '' || this.Id_TipoServidor == undefined || this.Id_TipoServidor == ''
@@ -268,7 +273,7 @@ export class PgservidoresComponent implements OnInit {
     this.IpServidorVer = ArGrilla.Ip_S;
     this.NombreServidorVer = ArGrilla.Nombre;
     this.AuxiliarDiv = false;
-    this.modalServiceDos.open(templateVerDetalles, { size: 'xl' });
+    this.modalServiceDos.open(templateVerDetalles, { size: 'md' });
     this.ArrListaVerdetalles = [];
     this.IdServidor = ArGrilla.Id_S;
     this.Servicios.consdetallserv('1', ArGrilla.Id_S).subscribe(respu => {
@@ -390,8 +395,7 @@ export class PgservidoresComponent implements OnInit {
 
   //Editar Servidor
   EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
-    this.modalEditarServidor = this._modalService.show(templateEditarServidor);
-    this.modalEditarServidor.setClass('modal-lg');
+    this.modalServiceDos.open(templateEditarServidor, { size: 'xl' });
     this.IdServidorServ = Array.Id_S;
     this.LblIpServidorEdit = Array.Ip_S;
     this.LblNombreEdit = Array.Nombre;
@@ -574,13 +578,38 @@ export class PgservidoresComponent implements OnInit {
       Fecha_Ult_Mod: this.Fecha
     }
     this.Servicios.updatedetllserv(UpdateSerDetalles).subscribe(respu => {
-      this.modalEditarDetalle.hide();
+
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = respu;
+      this.modalEditarDetalle.hide();
+
+      this.ArrListaVerdetalles = [];
+      this.Servicios.consdetallserv('1', this.IdServidorEditDetalle).subscribe(respu => {
+        if (respu.length > 0) {
+          this.ArrListaVerdetalles = respu;
+        }
+      })
     })
-    this.ArrListaVerdetalles = [];
-    this.Servicios.consdetallserv('1', this.IdServidorEditDetalle).subscribe(respu => {
-      this.ArrListaVerdetalles = respu;
-    })
+
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

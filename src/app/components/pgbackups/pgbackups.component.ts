@@ -272,7 +272,7 @@ export class PgbackupsComponent implements OnInit {
       if (respu.length > 0) {
         let workbook = new Workbook();
         let worksheet = workbook.addWorksheet("Registro backup");
-        let header = ["Ip", "Nombre", "Cliente", "Ambiente", "Tipo", "Periodicidad", "Usuario Mod", "Fecha Ultima Mod"];
+        let header = ["Ip", "Nombre", "Proyecto", "Ambiente", "Tipo", "Periodicidad", "Fecha último backup", "Fecha próximo backup"];
         worksheet.addRow(header);
 
         for (let x1 of respu) {
@@ -283,8 +283,8 @@ export class PgbackupsComponent implements OnInit {
           temp.push(x1['Ambiente'])
           temp.push(x1['Descripcion'])
           temp.push(x1['Periodicidad'])
-          temp.push(x1['UsuarioModifi'])
-          temp.push(x1['Fecha_Ult_Mod'])
+          temp.push(x1['FechaUltimoReg'])
+          temp.push(x1['ProximoBack'])
 
           worksheet.addRow(temp)
         }
@@ -326,15 +326,15 @@ export class PgbackupsComponent implements OnInit {
       },
       margin: { top: 10 },
       body: [
-        ['Ip', 'Nombre', 'Cliente', 'Ambiente', 'Tipo', 'Periodicidad', 'Usuario Mod', 'Fecha Ultima Mod'],
+        ["Ip", "Nombre", "Proyecto", "Ambiente", "Tipo", "Periodicidad", "Fecha último backup", "Fecha próximo backup"],
       ]
     })
 
     this.ArregloGrilla.forEach(function (respuesta: any) {
 
       var Res =
-        [respuesta.IpServidor, respuesta.Nombre, respuesta.NombreProyecto, respuesta.Ambiente, respuesta.Descripcion, respuesta.Periodicidad, respuesta.UsuarioModifi
-          , respuesta.Fecha_Ult_Mod];
+        [respuesta.IpServidor, respuesta.Nombre, respuesta.NombreProyecto, respuesta.Ambiente, respuesta.Descripcion, respuesta.Periodicidad, respuesta.FechaUltimoReg
+          , respuesta.ProximoBack];
 
       autoTable(doc, {
         margin: { top: 0, bottom: 0 },

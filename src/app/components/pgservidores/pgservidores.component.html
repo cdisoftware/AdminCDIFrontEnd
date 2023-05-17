@@ -45,24 +45,24 @@
 
         <!--Botones-->
         <div class="row displayCenter col-12 mt-3">
-            <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="Limpiar()">
+            <button class="btn btn-dark col-sm-2 mrd" (click)="Limpiar()">
                 <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
                 Limpiar
             </button>
 
-            <button *ngIf="ArregloGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Descargar PDF"
+            <button *ngIf="ArregloGrilla.length > 0" class="btn btn-dark col-sm-2 mrd"
                 (click)="DescargarDatosPdf(templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
                 Descargar PDF
             </button>
 
-            <button *ngIf="ArregloGrilla.length > 0" class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
+            <button *ngIf="ArregloGrilla.length > 0" class="btn btn-dark col-sm-2 mrd"
                 (click)="BtnExportarExcel(templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
                 Descarga excel
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Nuevo" (click)="BtnNuevo(templateAgregar)">
+            <button class="btn btn-dark col-sm-2 mrd" (click)="BtnNuevo(templateAgregar)">
                 <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
                 Agregar
             </button>
@@ -70,62 +70,63 @@
         <!--Fin botones-->
 
         <!--Grilla-->
-        <div class="col-sm-12 mt-5">
-            <table class="table table-bordered text-center">
-                <tr>
-                    <th colspan="12">SERVIDORES</th>
-                </tr>
-                <tr>
-                    <th class="cursorPointer">IP</th>
-                    <th class="cursorPointer">NOMBRE</th>
-                    <th class="cursorPointer">SISTEMA OPERATIVO</th>
-                    <th class="cursorPointer">SOFTWARE</th>
-                    <th class="cursorPointer">ESTADO</th>
-                    <th class="cursorPointer">OBSERVACIÓN</th>
-                    <th class="cursorPointer">TIPO SERVIDOR</th>
-                    <th class="cursorPointer">ULTIMA MOD</th>
-                    <th class="cursorPointer">FECHA ULTIMA MOD</th>
+        <div class="row mt-4">
+            <div class="col-lg-12 mx-auto">
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th colspan="12">SERVIDORES</th>
+                    </tr>
+                    <tr>
+                        <th class="cursorPointer">IP</th>
+                        <th class="cursorPointer">ESTADO</th>
+                        <th class="cursorPointer">TIPO</th>
+                        <th class="cursorPointer">IP PUBLICA</th>
+                        <th class="cursorPointer">APLICACIONES IIS</th>
+                        <th class="cursorPointer">BASE DE DATOS</th>
+                        <th class="cursorPointer">ULTIMA MOD</th>
+                        <th class="cursorPointer">FECHA ULTIMA MOD</th>
 
-                    <th>EDITAR</th>
-                    <th>VER</th>
-                    <th>ELIMINAR</th>
-                </tr>
-                <tr *ngFor="let ArGrilla of ArregloGrilla">
-                    <td>{{ArGrilla.Ip_S}}</td>
-                    <td>{{ArGrilla.Nombre}}</td>
-                    <td>{{ArGrilla.SO}}</td>
-                    <td>{{ArGrilla.Software}}</td>
+                        <th>EDITAR</th>
+                        <th>VER</th>
+                        <th>ELIMINAR</th>
+                    </tr>
+                    <tr *ngFor="let ArGrilla of ArregloGrilla">
+                        <td>{{ArGrilla.Ip_S}}</td>
+                        <td *ngIf="ArGrilla.Estado == 1">Activo</td>
+                        <td *ngIf="ArGrilla.Estado == 0">Inactivo</td>
+                        <td>{{ArGrilla.TipoServidor}}</td>
+                        <td>XXX</td>
+                        <td>XXXX</td>
+                        <td>XXX</td>
+                        <td>{{ArGrilla.UsuarioUltMod}}</td>
+                        <td>{{ArGrilla.Fecha_Ult_Mod}}</td>
 
-                    <td *ngIf="ArGrilla.Estado == 1">Activo</td>
-                    <td *ngIf="ArGrilla.Estado == 0">Inactivo</td>
-
-                    <td>{{ArGrilla.Observacion}}</td>
-                    <td>{{ArGrilla.TipoServidor}}</td>
-                    <td>{{ArGrilla.UsuarioUltMod}}</td>
-                    <td>{{ArGrilla.Fecha_Ult_Mod}}</td>
-
-                    <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Editar"
-                            (click)="EditarServidor(templateEditarServidor, ArGrilla)">
-                            <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
-                        </button>
-                    </td>
-                    <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Ver"
-                            (click)="VerDetalle(templateVerDetalles, templateMensaje, ArGrilla)">
-                            <img src="../../../../assets/ImagenesAdminCDI/ojo.png" class="BtnimgTamanoPeque mr-2">
-                        </button>
-                    </td>
-                    <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
-                            (click)="EliminaServidor(templateMensaje, ArGrilla)">
-                            <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
-                        </button>
-                    </td>
-                </tr>
-            </table>
+                        <td class="text-center">
+                            <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                                (click)="EditarServidor(templateEditarServidor, ArGrilla)">
+                                <img src="../../../../assets/ImagenesAdminCDI/editar.png"
+                                    class="BtnimgTamanoPeque mr-2">
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button class="BtnClaro mrd m-auto text-center" title="Ver"
+                                (click)="VerDetalle(templateVerDetalles, templateMensaje, ArGrilla)">
+                                <img src="../../../../assets/ImagenesAdminCDI/ojo.png" class="BtnimgTamanoPeque mr-2">
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                                (click)="EliminaServidor(templateMensaje, ArGrilla)">
+                                <img src="../../../../assets/ImagenesAdminCDI/basura.png"
+                                    class="BtnimgTamanoPeque mr-2">
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <!--fin Grilla-->
+
     </div>
 </div>
 
@@ -145,10 +146,10 @@
     <br>
 </ng-template>
 
-<ng-template #templateAgregar>
+<ng-template #templateAgregar let-modal>
     <div class="modal-header">
         <p class="titulopopup">AGREGAR SERVIDOR</p>
-        <button type="button" class="bot" aria-label="Close" (click)="modalAgregar.hide();">
+        <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
         </button>
     </div>
@@ -156,31 +157,30 @@
         <div class="col-sm-12 mt-3 row displayCenter">
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
-                    <label class="Llave">IP servidor</label>
-                    <input type="text" value="" class="col-sm-6 text-center form-control" [(ngModel)]="LblIpServidor"
+                    <label class="Llave">IP local</label>
+                    <input type="text" value="" class="col-sm-6 form-control" [(ngModel)]="LblIpServidor"
                         title="Ip Servidor">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Nombre servidor</label>
-                    <input type="text" value="" class="col-sm-6 text-center form-control" [(ngModel)]="LblNombre"
+                    <input type="text" value="" class="col-sm-6 form-control" [(ngModel)]="LblNombre"
                         title="Nombre Servidor">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Observación</label>
-                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblObservacion"
-                        rows="3"></textarea>
+                    <textarea class="md-textarea form-control" [(ngModel)]="LblObservacion" rows="3"></textarea>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Software instalado</label>
-                    <textarea class="md-textarea form-control textarea" [(ngModel)]="LblSoftware" rows="3"></textarea>
+                    <textarea class="md-textarea form-control" [(ngModel)]="LblSoftware" rows="3"></textarea>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Sistema operativo</label>
-                    <input type="text" value="" [(ngModel)]="LblSO" class="col-sm-6 text-center form-control"
+                    <input type="text" value="" [(ngModel)]="LblSO" class="col-sm-6  form-control"
                         title="Sistema Operativo">
                 </div>
                 <div class="col-6 mt-3">
-                    <label class="Llave">Seleccionar estado</label>
+                    <label class="Llave">Estado</label>
                     <select class="form-select" title="Seleccionar estado" [(ngModel)]="IdEstadoAgregar">
                         <option value="2">Seleccione estado</option>
                         <option value="1">Activo</option>
@@ -188,29 +188,80 @@
                     </select>
                 </div>
                 <div class="col-6 mt-3">
-                    <label class="Llave">Seleccionar tipo servidor</label>
+                    <label class="Llave">Procesador</label>
+                    <input type="text" class="form-control" title="Procesador" [(ngModel)]="LblProcesadorEdit">
+                </div>
+                <div class="col-6 mt-3">
+                    <label class="Llave">Disco duro</label>
+                    <input type="text" class="form-control" title="Disco duro" [(ngModel)]="LblDiscoDuroEdit">
+                </div>
+
+                <div class="col-12 mt-3">
+                    <label class="Llave">Ram</label>
+                    <input type="text" class="form-control" title="Ram" [(ngModel)]="LblRamEdit">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <label class="Llave">Tipo servidor</label>
                     <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidor">
                         <option value="0">Seleccione tipo servidor</option>
                         <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
                             {{arRespu.Descripcion}}</option>
                     </select>
                 </div>
+
                 <div class="col-6 mt-3">
-                    <label class="Llave">Seleccionar servidor aloja</label>
-                    <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAloja">
+                    <label class="Llave">Servidor aloja</label>
+                    <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAloja"
+                        [disabled]="Id_TipoServidor !== '2'">
                         <option value="0">Seleccione servidor aloja</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                     </select>
                 </div>
+
+                <div class="col-3 mt-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxIp">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Ip publica</label>
+                    </div>
+                </div>
+
+                <div class="col-9 mt-3">
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxIp" rows="2"
+                        placeholder="IP publica con puertos activos"></textarea>
+                </div>
+
+                <div class="col-3 mt-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxApps">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Aplicaciones IIS</label>
+                    </div>
+                </div>
+
+                <div class="col-9 mt-3">
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxApps" rows="2"
+                        placeholder="Descripción general de las aplicaciones en el IIS"></textarea>
+                </div>
+
+                <div class="col-3 mt-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxBD">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Base de datos</label>
+                    </div>
+                </div>
+
+                <div class="col-9 mt-3">
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxBD" rows="2"
+                        placeholder="Base de datos existentes"></textarea>
+                </div>
+
                 <div class="col-6 mt-3">
                     <label class="Llave">Usuario</label>
-                    <input type="text" value="" class="col-sm-6 text-center form-control" [(ngModel)]="LblUsuarios"
-                        title="Usuario">
+                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblUsuarios" title="Usuario">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Contraseña</label>
-                    <input type="password" value="" class="col-sm-6 text-center form-control" [(ngModel)]="LblPassword"
-                        autocomplete="off" title="Contraseña">
+                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblPassword" title="Contraseña">
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
@@ -220,108 +271,105 @@
                         Guardar..
                     </button>
 
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregar.hide();">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modal.dismiss('Cross click')">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
                 </div>
             </li>
         </div>
-        <br>
     </div>
-    <br>
 </ng-template>
 
 <ng-template #templateVerDetalles let-modal>
     <div class="modal-header">
-        <div class="row col-sm-11 text-center titulopopup">
-            <div class="col-sm-6">
-                {{IpServidorVer}}
-            </div>
-            <div class="col-sm-6">
-                {{NombreServidorVer}}
-            </div>
-        </div>
-        <div class="col-sm-1">
-            <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png"
-                    class="btnEquis">
-            </button>
-        </div>
+        <p class="titulopopup">DETALLE</p>
+        <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
+        </button>
     </div>
     <div class="mrd mld">
-        <div class="row texto text-center">
-            <div class="row texto text-center" id="htmlData_">
+        <div class="row texto">
+            <div class="row texto" id="htmlData_">
                 <div class="col-sm-12 mt-3">
-                    <table class="table table-bordered text-center tablaAjuste">
-                        <tr>
-                            <th colspan="9" style="background-color: teal; color: #000000;">Detalles servidor</th>
-                        </tr>
-                        <tr>
-                            <th class="cursorPointer">Usuario</th>
-                            <th class="cursorPointer">Contraseña</th>
-                            <th class="cursorPointer">Ubicacion</th>
-                            <th class="cursorPointer">Disco duro</th>
-                            <th class="cursorPointer">Ram</th>
-                            <th class="cursorPointer">Procesador</th>
-                            <th class="cursorPointer">Editar</th>
-                            <th class="cursorPointer">Eliminar</th>
-                        </tr>
-                        <tr *ngFor="let ArGrilla of ArrListaVerdetalles">
-                            <td>{{ArGrilla.Usuario_Ser}}</td>
-                            <td>{{ArGrilla.Password}}</td>
-                            <td>{{ArGrilla.NombreServidorAloja}}</td>
-                            <td>{{ArGrilla.DiscoDuro}}</td>
-                            <td>{{ArGrilla.RAM}}</td>
-                            <td>{{ArGrilla.Procesador}}</td>
-                            <td>
-                                <button class="BtnClaro mrd m-auto text-center" title="Editar"
-                                    (click)="AbrirPopap(templateEditarVerDetalles, ArGrilla)">
-                                    <img src="../../../../assets/ImagenesAdminCDI/editar.png"
-                                        class="BtnimgTamanoPeque mr-2">
-                                </button>
-                            </td>
-                            <td>
-                                <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
-                                    (click)="EliminaHardwareServidor(templateMensaje, ArGrilla)">
-                                    <img src="../../../../assets/ImagenesAdminCDI/basura.png"
-                                        class="BtnimgTamanoPeque mr-2">
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-
-                <div class="col-sm-12" *ngIf="AuxiliarDiv == true">
-                    <button class="btn btn-dark col-sm-2 mrd" title="Nuevo" style="margin-bottom: 10px;"
-                        (click)="AbrirpopapHardware(templateAgregarHARDWARE)">
-                        <img src="../../../../assets/ImagenesAdminCDI/agregar.png" class="BtnimgTamanoPeque mr-2">
-                        Ingresar
-                    </button>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="col-sm-12">
+                                <label class="Llave TextMay">IP local:&nbsp;</label><label
+                                    class="ValorIDOfer"><strong>xxxx</strong></label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="col-sm-12">
+                                <label class="Llave">Nombre:&nbsp;</label><label
+                                    class="Valor"><strong>xxxx</strong></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="Llave">Observación:&nbsp;</label><label class="Valor">xxx</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="Llave">Software instalado:&nbsp;</label><label class="Valor">xxxx</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="Llave">Sistema operativo:&nbsp;</label> <label class="Valor">xxxx</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="Llave">Estado:&nbsp;</label><label class="Valor">xxxx</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="Llave">Procesador:&nbsp;</label><label class="Valor">xxxx</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="Llave">Disco duro:&nbsp;</label><label class="Valor">xxxx</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="Llave">RAM:&nbsp;</label><label class="Valor">xxxx</label>
+                    </div>
+                    <hr>
+                    <div class="col-sm-12">
+                        <label class="Llave">Tipo servidor:&nbsp;</label><label class="Valor">xxxx</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="Llave">Servidor aloja:&nbsp;</label><label class="Valor">xxxx</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="Llave">IP publica:&nbsp;</label><label class="Valor">xxx</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="Llave">Aplicaciones IIS:&nbsp;</label><label class="Valor">xxx</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="Llave">Base de datos:&nbsp;</label><label class="Valor">xxx</label>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label class="Llave">Usuario:&nbsp;</label><label class="Valor">xxxx</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="Llave">Contraseña:&nbsp;</label><label class="Valor">xxxx</label>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!---Botones--->
-            <div class="row displayCenter col-12 mt-3" style="margin-bottom: 10px;">
-                <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargaPDF()">
-                    <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
-                    Descargar PDF
-                </button>
+        </div>
 
-                <button class="btn btn-dark col-sm-2 mrd" title="Cancelar" (click)="modal.dismiss('Cross click')">
-                    <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
-                    Cancelar
-                </button>
-            </div>
+        <div class="row displayCenter col-12 mt-3" style="margin-bottom: 10px;">
+            <button class="btn btn-dark col-sm-4 mrd" title="Cancelar" (click)="modal.dismiss('Cross click')">
+                <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
+                Aceptar
+            </button>
         </div>
     </div>
 </ng-template>
 
 
-<ng-template #templateEditarServidor>
+<ng-template #templateEditarServidor let-modal>
     <div class="modal-header">
         <p class="titulopopup">EDITAR SERVIDOR</p>
-        <button type="button" class="bot" aria-label="Close" (click)="modalEditarServidor.hide();">
+        <button type="button" class="bot" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
         </button>
     </div>
@@ -351,43 +399,89 @@
                     <input type="text" [(ngModel)]="LblSOEdit" class="col-sm-6 form-control" title="Sistema Operativo">
                 </div>
                 <div class="col-6 mt-3">
-                    <label class="Llave">Seleccionar estado</label>
+                    <label class="Llave">Estado</label>
                     <select class="form-select" title="Seleccionar estado" [(ngModel)]="IdEstadoAgregarEdit">
                         <option value="1">Activo</option>
                         <option value="0">Desabilitado</option>
                     </select>
                 </div>
+                <div class="col-6 mt-3">
+                    <label class="Llave">Procesador</label>
+                    <input type="text" class="form-control" title="Procesador" [(ngModel)]="LblProcesadorEdit">
+                </div>
+                <div class="col-6 mt-3">
+                    <label class="Llave">Disco duro</label>
+                    <input type="text" class="form-control" title="Disco duro" [(ngModel)]="LblDiscoDuroEdit">
+                </div>
+
                 <div class="col-12 mt-3">
-                    <label class="Llave">Seleccionar tipo servidor</label>
-                    <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidorEdit">
+                    <label class="Llave">Ram</label>
+                    <input type="text" class="form-control" title="Ram" [(ngModel)]="LblRamEdit">
+                </div>
+
+                <div class="col-6 mt-3">
+                    <label class="Llave">Tipo servidor</label>
+                    <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidor">
+                        <option value="0">Seleccione tipo servidor</option>
                         <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
                             {{arRespu.Descripcion}}</option>
                     </select>
                 </div>
 
+                <div class="col-6 mt-3">
+                    <label class="Llave">Servidor aloja</label>
+                    <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAloja"
+                        [disabled]="Id_TipoServidor !== '2'">
+                        <option value="0">Seleccione servidor aloja</option>
+                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
+                    </select>
+                </div>
+
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Ip publica</label>
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxIp">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Ip publica</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" rows="2"></textarea>
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxIp" rows="2"
+                        placeholder="IP publica con puertos activos"></textarea>
                 </div>
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
-                        <label class="form-check-label" for="flexSwitchCheckChecked">Aplicaciones IIS</label>
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxApps">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Aplicaciones IIS</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" rows="2"></textarea>
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxApps" rows="2"
+                        placeholder="Descripción general de las aplicaciones en el IIS"></textarea>
                 </div>
 
-                
+                <div class="col-3 mt-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxBD">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Base de datos</label>
+                    </div>
+                </div>
+
+                <div class="col-9 mt-3">
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxBD" rows="2"
+                        placeholder="Base de datos existentes"></textarea>
+                </div>
+
+                <div class="col-6 mt-3">
+                    <label class="Llave">Usuario</label>
+                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblUsuarios" title="Usuario">
+                </div>
+                <div class="col-6 mt-3">
+                    <label class="Llave">Contraseña</label>
+                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblPassword" title="Contraseña">
+                </div>
+
 
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
@@ -396,123 +490,14 @@
                         Guardar..
                     </button>
 
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarServidor.hide();">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modal.dismiss('Cross click')">
                         <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
                         Cancelar
                     </button>
                 </div>
             </li>
         </div>
-        <br>
+
     </div>
-    <br>
-</ng-template>
 
-<ng-template #templateAgregarHARDWARE>
-    <div class="modal-header">
-        <th class="titulopopup">AGREGAR HARDWARE</th>
-        <button type="button" class="bot" aria-label="Close" (click)="modalAgregarHardware.hide();">
-            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
-        </button>
-    </div>
-    <div class="modaBody">
-        <div class="col-sm-12 mt-3 row displayCenter">
-            <li class="row col-sm-12 displayCenter">
-
-                <div class="col-12 mt-3">
-                    <input type="text" placeholder="Disco duro" class="form-control" title="Disco duro"
-                        [(ngModel)]="LblDiscoDuro">
-                </div>
-
-                <div class="col-12 mt-3">
-                    <input type="text" placeholder="Ram" class="form-control" title="Ram" [(ngModel)]="LblRam">
-                </div>
-
-                <div class="col-12 mt-3">
-                    <input type="text" placeholder="Procesador" class="form-control" title="Procesador"
-                        [(ngModel)]="LblProcesador">
-                </div>
-
-                <!---Botones--->
-                <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="InsetHardware(templateMensaje)">
-                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
-                        Guardar..
-                    </button>
-
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalAgregarHardware.hide();">
-                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
-                        Cancelar
-                    </button>
-                </div>
-            </li>
-        </div>
-        <br>
-    </div>
-    <br>
-</ng-template>
-
-
-<ng-template #templateEditarVerDetalles>
-    <div class="modal-header">
-        <p class="titulopopup">EDITAR</p>
-        <button type="button" class="bot" aria-label="Close" (click)="modalEditarDetalle.hide();">
-            <img id="imgActual" alt="advertencia" src="../../../assets/ImagenesAdminCDI/ic_equis.png" class="btnEquis">
-        </button>
-    </div>
-    <div class="modaBody">
-        <div class="col-sm-12 mt-3 row displayCenter">
-            <li class="row col-sm-12 displayCenter">
-
-                <div class="col-12 mt-3">
-                    <label class="Llave">Procesador</label>
-                    <input type="text" class="form-control" title="Procesador" [(ngModel)]="LblProcesadorEdit">
-                </div>
-                <div class="col-12 mt-3">
-                    <label class="Llave">Disco duro</label>
-                    <input type="text" class="form-control" title="Disco duro" [(ngModel)]="LblDiscoDuroEdit">
-                </div>
-
-                <div class="col-6 mt-3">
-                    <label class="Llave">Ram</label>
-                    <input type="text" class="form-control" title="Ram" [(ngModel)]="LblRamEdit">
-                </div>
-
-                <div class="col-6 mt-3">
-                    <label class="Llave">Seleccionar servidor aloja</label>
-                    <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAlojaEdit">
-                        <option value="0">N/A</option>
-                        <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-6 mt-3">
-                    <label class="Llave">Usuario</label>
-                    <input type="text" class="col-sm-6 text-center form-control" [(ngModel)]="LblUsuariosEdit"
-                        title="Usuario">
-                </div>
-                <div class="col-6 mt-3">
-                    <label class="Llave">Contraseña</label>
-                    <input type="text" class="col-sm-6 text-center form-control" [(ngModel)]="LblPasswordEdit"
-                        autocomplete="off" title="Contraseña">
-                </div>
-
-                <!---Botones--->
-                <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
-                        (click)="EditarVerDetalles(templateMensaje)">
-                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
-                        Guardar..
-                    </button>
-
-                    <button class="btn btn-dark col-sm-3 mrd" title="Cancelar" (click)="modalEditarDetalle.hide();">
-                        <img src="../../../../assets/ImagenesAdminCDI/advertencia.png" class="BtnimgTamanoPeque mr-2">
-                        Cancelar
-                    </button>
-                </div>
-            </li>
-        </div>
-        <br>
-    </div>
-    <br>
 </ng-template>
