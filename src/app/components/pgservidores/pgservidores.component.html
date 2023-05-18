@@ -227,7 +227,7 @@
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxIp" rows="2"
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxIp" [(ngModel)]="LblSoftware" rows="2"
                         placeholder="IP publica con puertos activos"></textarea>
                 </div>
 
@@ -239,7 +239,7 @@
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxApps" rows="2"
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxApps"  rows="2"
                         placeholder="Descripción general de las aplicaciones en el IIS"></textarea>
                 </div>
 
@@ -251,7 +251,7 @@
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxBD" rows="2"
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxBD" [(ngModel)]="LblSoftware" rows="2"
                         placeholder="Base de datos existentes"></textarea>
                 </div>
 

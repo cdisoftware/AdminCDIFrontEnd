@@ -94,7 +94,7 @@ const routes: Routes = [
 
       },
       {
-        path: 'pgaplicaciones',
+        path: 'PgAdminPublicaciones',
         component: PgaplicacionesComponent,
 
       }
