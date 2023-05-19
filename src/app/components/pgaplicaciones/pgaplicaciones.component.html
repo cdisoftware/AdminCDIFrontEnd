@@ -6,10 +6,11 @@
         <!--Tipo lista Estado-->
         <div class="col-sm-12 m-0 mb-3 ">
             <label class="Llave">Tipo</label>
-            <select class="form-select" title="Seleccionar Estado">
+            <select class="form-select" title="Seleccionar Estado" [(ngModel)]="selectTipo" #SelecTipo
+                (change)='Grilla(Ip.value, SelecTipo.value, Estado.value)'>
                 <option value="0" selected>Seleccionar Tipo</option>
                 <option value="1">Base de datos</option>
-                <option value="2">Aplicación</option>
+                <option value="2">Aplicaciones</option>
             </select>
         </div>
         <!--Fin Tipo lista-->
@@ -17,13 +18,15 @@
         <!--Ayuda Nombre-->
         <div class="col-sm-6 m-0 mb-3">
             <label class="Llave">Ip</label>
-            <input type="text" class="form-control table-bordered" title="IP">
+            <input type="text" class="form-control table-bordered" title="IP" #Ip [(ngModel)]="LblIP"
+                (keyup)="Grilla(Ip.value, SelecTipo.value, Estado.value)">
         </div>
         <!--Fin ayuda-->
         <!--Tipo lista Estado-->
         <div class="col-sm-6 m-0 mb-3 ">
             <label class="Llave">Estado</label>
-            <select class="form-select" title="Seleccionar Estado">
+            <select class="form-select" title="Seleccionar Estado" #Estado [(ngModel)]="SelectEstado"
+                (change)='Grilla(Ip.value, SelecTipo.value, Estado.value)'>
                 <option value="0" selected>Seleccionar Estado</option>
                 <option value="1">Activo</option>
                 <option value="2">Inactivo</option>
@@ -33,7 +36,7 @@
 
         <!--Botones-->
         <div class="row displayCenter col-12 mt-3">
-            <button class="btn btn-dark col-sm-2 mrd" title="Limpiar">
+            <button class="btn btn-dark col-sm-2 mrd" title="Limpiar" (click)="LimpiarFiltros()">
                 <img src="../../../../assets/ImagenesAdminCDI/Limpiar.png" class="BtnimgTamanoPeque mr-2">
                 Limpiar
             </button>
@@ -59,7 +62,7 @@
         <div class="col-sm-12 mt-5">
             <table class="table table-bordered text-center">
                 <tr>
-                    <th colspan="12">TIPO XXXXXXXXXXXX</th>
+                    <th colspan="12">PUBLICACIONES</th>
                 </tr>
                 <tr>
                     <th class="cursorPointer">TIPO</th>
@@ -71,22 +74,21 @@
                     <th>EDITAR</th>
                     <th>ELIMINAR</th>
                 </tr>
-                <tr>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
-                    <td>xxxx</td>
+                <tr *ngFor="let ArGrllPublic of ArregloGrillaPublic">
+                    <td>{{ArGrllPublic.TipoPubli}}</td>
+                    <td>{{ArGrllPublic.IpPublicacion}}</td>
+                    <td>{{ArGrllPublic.Nombre}}</td>
+                    <td>{{ArGrllPublic.Descripcion}}</td>                    
+                    <td>{{ArGrllPublic.DescripcionEstado}}</td>                    
+                    <td>{{ArGrllPublic.DescripcionAmbiente}}</td>
 
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Editar"
-                            (click)="BtnEditar(templateEditar)">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="BtnEditar(templateEditar, ArGrllPublic)">
                             <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar">
+                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar" (click)="EliminarAdminPublic(templateMensaje, ArGrllPublic)">
                             <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
@@ -109,7 +111,7 @@
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
                     <label class="Llave">Tipo</label>
-                    <select class="form-select" title="Seleccionar tipo">
+                    <select class="form-select" title="Seleccionar tipo" [(ngModel)]="AddTipo">
                         <option value="0" selected>Seleccione tipo</option>
                         <option value="1">Aplicación</option>
                         <option value="2">Base de datos</option>
@@ -117,20 +119,22 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Ip</label>
-                    <input type="text" class="col-sm-6 form-control" title="Ip">
+                    <input type="text" class="col-sm-6 form-control" title="Ip" [(ngModel)]="AddLblIp" required>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Nombre</label>
-                    <input type="text" value="" class="col-sm-6 form-control" title="Nombre">
+                    <input type="text" value="" class="col-sm-6 form-control" title="Nombre" [(ngModel)]="AddLblNombre"
+                        required>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Descripción</label>
-                    <textarea class="md-textarea form-control" rows="2"></textarea>
+                    <textarea class="md-textarea form-control" rows="2" [(ngModel)]="AddLblDescripcion"
+                        required></textarea>
                 </div>
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Estado</label>
-                    <select class="form-select" title="Seleccionar estado">
+                    <select class="form-select" title="Seleccionar estado" [(ngModel)]="AddEstado" required>
                         <option value="0" selected>Seleccione estado</option>
                         <option value="1">Activo</option>
                         <option value="2">Inactivo</option>
@@ -139,7 +143,7 @@
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Ambiente</label>
-                    <select class="form-select" title="Seleccionar Ambiente">
+                    <select class="form-select" title="Seleccionar Ambiente" [(ngModel)]="AddAmbiente" required>
                         <option value="0" selected>Seleccione Ambiente</option>
                         <option value="1">Pruebas</option>
                         <option value="2">Productivo</option>
@@ -147,7 +151,8 @@
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
+                        (click)="AgregarAdminPublic(templateMensaje)">
                         <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
@@ -175,7 +180,7 @@
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
                     <label class="Llave">Tipo</label>
-                    <select class="form-select" title="Seleccionar tipo">
+                    <select class="form-select" title="Seleccionar tipo" [(ngModel)]="EditTipo">
                         <option value="0" selected>Seleccione tipo</option>
                         <option value="1">Aplicación</option>
                         <option value="2">Base de datos</option>
@@ -183,20 +188,20 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Ip</label>
-                    <input type="text" class="col-sm-6 form-control" title="Ip">
+                    <input type="text" class="col-sm-6 form-control" title="Ip" [(ngModel)]="EditLblIp">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Nombre</label>
-                    <input type="text" value="" class="col-sm-6 form-control" title="Nombre">
+                    <input type="text" value="" class="col-sm-6 form-control" title="Nombre" [(ngModel)]="EditLblNombre">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Descripción</label>
-                    <textarea class="md-textarea form-control" rows="2"></textarea>
+                    <textarea class="md-textarea form-control" rows="2" [(ngModel)]="EditLblDescripcion"></textarea>
                 </div>
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Estado</label>
-                    <select class="form-select" title="Seleccionar estado">
+                    <select class="form-select" title="Seleccionar estado" [(ngModel)]="EditEstado">
                         <option value="0" selected>Seleccione estado</option>
                         <option value="1">Activo</option>
                         <option value="2">Inactivo</option>
@@ -205,7 +210,7 @@
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Ambiente</label>
-                    <select class="form-select" title="Seleccionar Ambiente">
+                    <select class="form-select" title="Seleccionar Ambiente" [(ngModel)]="EditAmbiente">
                         <option value="0" selected>Seleccione Ambiente</option>
                         <option value="1">Pruebas</option>
                         <option value="2">Productivo</option>
@@ -213,8 +218,8 @@
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar">
-                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="EditarAdminPublic(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2" >
                         Guardar..
                     </button>
 
@@ -226,6 +231,22 @@
             </li>
         </div>
         <br>
+    </div>
+    <br>
+</ng-template>
+
+<ng-template #templateMensaje>
+    <div class="modaBody">
+        <div class="col-12">
+            <p class="pModals">{{ lblModalMsaje }}</p>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-0">
+            <button class="btn btn btn-dark bot" (click)="modalMensaje.hide();" title="Cerrar ventana">
+                Aceptar
+            </button>
+        </div>
     </div>
     <br>
 </ng-template>
