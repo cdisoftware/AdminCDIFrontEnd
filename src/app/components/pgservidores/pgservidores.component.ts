@@ -33,7 +33,7 @@ export class PgservidoresComponent implements OnInit {
   lblSO: string;
 
   //Variables Estado
-  IdEstado: string;
+  IdEstado: string = "2";
 
   //Variables lista usuario
   ArregloListaUsuario: any[];
@@ -51,7 +51,13 @@ export class PgservidoresComponent implements OnInit {
   LblObservacion: string;
   LblUsuarios: string;
   LblPassword: string;
-  IdServidorAloja: string;
+  IdServidorAloja: string = "0";
+  LblProcesadorAgregar: string = "";
+  LblDiscoDuroAgregar: string = "";
+  LblRamAgregar: string = "";
+  LblIpPublicaAgregar: string = "";
+  LblAplicacionesIISAgregar: string = "";
+  LblBaseDeDatosAgregar: string = "";
 
   //Variables Fecha
   Dia = new Date().getDate();
@@ -104,10 +110,15 @@ export class PgservidoresComponent implements OnInit {
   IpServidorVer: string;
   NombreServidorVer: string;
 
-  //check
-  checkboxIp: boolean = false;
-  checkboxApps: boolean = false;
-  checkboxBD: boolean = false;
+  //check Agregar
+  checkboxIpAgregar: boolean = false;
+  checkboxAppsAgregar: boolean = false;
+  checkboxBDAgregar: boolean = false;
+
+  //check Editar
+  checkboxIpEditar: boolean = false;
+  checkboxAppsEditar: boolean = false;
+  checkboxBDeDitar: boolean = false;
 
 
   constructor(private _modalService: BsModalService,
@@ -161,14 +172,20 @@ export class PgservidoresComponent implements OnInit {
     //Limpiar variables agregar servidor
     this.LblIpServidor = "";
     this.LblNombre = "";
-    this.LblSO = "";
-    this.LblSoftware = "";
-    this.IdEstadoAgregar = "2";
-    this.Id_TipoServidor = "0";
     this.LblObservacion = "";
-    this.LblUsuarios = "";
-    this.LblPassword = '';
+    this.LblSoftware = "";
+    this.LblSO = "";
+    this.IdEstadoAgregar = "2";
+    this.LblProcesadorAgregar = "";
+    this.LblDiscoDuroAgregar = "";
+    this.LblRamAgregar = "";
+    this.Id_TipoServidor = "0";
     this.IdServidorAloja = "0";
+    this.LblIpPublicaAgregar = "";
+    this.LblAplicacionesIISAgregar = "";
+    this.LblBaseDeDatosAgregar = "";
+    this.LblUsuarios = "";
+    this.LblPassword = "";
 
 
     //Limpiar variables editar servidor
@@ -194,6 +211,7 @@ export class PgservidoresComponent implements OnInit {
     }
     this.ArregloGrilla = [];
     this.AuxiliadorGrilla = false;
+    console.log('1', NombreServidor, SO, IdEstado, IdUsuario)
     this.Servicios.consultaservidors('1', NombreServidor, SO, IdEstado, IdUsuario).subscribe(respu => {
       console.log(respu)
       if (respu.length > 0) {
@@ -206,6 +224,7 @@ export class PgservidoresComponent implements OnInit {
   ListaUsuario() {
     this.ArregloListaUsuario = [];
     this.Servicios.conscusuario('1', '0', '0', '0', '0', '0').subscribe(respu => {
+      console.log(respu)
       this.ArregloListaUsuario = respu;
     })
   }
@@ -224,27 +243,40 @@ export class PgservidoresComponent implements OnInit {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = "Por favor complete los campos a agregar";
     } else {
-      const InsertaServidor = {
-        Ip_S: this.LblIpServidor,
-        Nombre: this.LblNombre,
-        SO: this.LblSO,
-        Software: this.LblSoftware,
-        Estado: this.IdEstadoAgregar,
-        Id_Tipo_S: this.Id_TipoServidor,
-        Observacion: this.LblObservacion,
-        Usuario_Ser: this.LblUsuarios,
-        Password: this.LblPassword,
-        Servicio_aloja: this.IdServidorAloja,
-        Id_U: this.IdUsuarioCookies,
-        Fecha_Ult_Mod: this.Fecha
+      var auxservAloja = null;
+      if (this.IdServidorAloja != "0") {
+        auxservAloja = this.IdServidorAloja;
       }
+
+      const InsertaServidor = {
+        IdServidor: 0,
+        IpServidor: this.LblIpServidor,
+        Nombre: this.LblNombre,
+        Observacion: this.LblObservacion,
+        Software: this.LblSoftware,
+        SistemaOper: this.LblSO,
+        Estado: this.IdEstadoAgregar,
+        Procesador: this.LblProcesadorAgregar,
+        DiscoDuro: this.LblDiscoDuroAgregar,
+        RAM: this.LblRamAgregar,
+        IdTipoServ: this.Id_TipoServidor,
+        ServidorAloja: auxservAloja,
+        IpPublica: this.LblIpPublicaAgregar,
+        AplicacionesIIS: this.LblAplicacionesIISAgregar,
+        BaseDeDatos: this.LblBaseDeDatosAgregar,
+        UserServidor: this.LblUsuarios,
+        Password: this.LblPassword,
+        IdUsuario: this.IdUsuarioCookies
+      }
+      console.log(InsertaServidor)
       this.Servicios.insertaserv('3', InsertaServidor).subscribe(respu => {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
 
         this.Limpiar();
+        this.modalServiceDos.dismissAll();
 
-        this.modalAgregar.hide();
+
       })
     }
   }
@@ -268,8 +300,12 @@ export class PgservidoresComponent implements OnInit {
     })
   }
 
+
+  ArrVerDetalles: any = [];
   //Ver detalle
   VerDetalle(templateVerDetalles: TemplateRef<any>, templateMensaje: TemplateRef<any>, ArGrilla: any) {
+    this.ArrVerDetalles = ArGrilla;
+
 
     this.IpServidorVer = ArGrilla.Ip_S;
     this.NombreServidorVer = ArGrilla.Nombre;
@@ -393,9 +429,16 @@ export class PgservidoresComponent implements OnInit {
 
 
 
-
+  ArrayEditar: any = [];
   //Editar Servidor
   EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
+    this.ArrayEditar = Array;
+    if (this.ArrayEditar.IdTipoServidor == '2') {
+      this.checkboxIpEditar = true;
+      this.checkboxAppsEditar = true;
+      this.checkboxBDeDitar = true;
+    }
+
     this.modalServiceDos.open(templateEditarServidor, { size: 'xl' });
     this.IdServidorServ = Array.Id_S;
     this.LblIpServidorEdit = Array.Ip_S;
@@ -415,21 +458,27 @@ export class PgservidoresComponent implements OnInit {
   }
   UpdateServDos(templateMensaje: TemplateRef<any>) {
     const Update = {
-      Id_S: this.IdServidorServ,
-      Ip_S: this.LblIpServidorEdit,
+      IdServidor: this.IdServidorServ,
+      IpServidor: this.LblIpServidorEdit,
       Nombre: this.LblNombreEdit,
-      SO: this.LblSOEdit,
-      Software: this.LblSoftwareEdit,
-      Estado: this.IdEstadoAgregarEdit,
-      Id_Tipo_S: this.Id_TipoServidorEdit,
       Observacion: this.LblObservacionEdit,
-      Usuario_Ser: "0",
-      Password: "0",
-      ServicioAloja: 0,
-      Id_U: this.IdUsuarioCookies,
-      Fecha_Ult_Mod: this.Fecha,
+      Software: this.LblSoftwareEdit,
+      SistemaOper: this.LblSOEdit,
+      Estado: this.IdEstadoAgregarEdit,
+      Procesador: this.ArrayEditar.Procesador,
+      DiscoDuro: this.ArrayEditar.DiscoDuro,
+      RAM: this.ArrayEditar.RAM,
+      IdTipoServ: this.Id_TipoServidorEdit,
+      ServidorAloja: this.ArrayEditar.Servidor_Aloja,
+      IpPublica: this.ArrayEditar.IpPublica,
+      AplicacionesIIS: this.ArrayEditar.AplicacionesIIS,
+      BaseDeDatos: this.ArrayEditar.BaseDeDatos,
+      UserServidor: this.ArrayEditar.Usuario_Ser,
+      Password: this.ArrayEditar.Password,
+      IdUsuario: this.IdUsuarioCookies
     }
     this.Servicios.actualizaservdos('2', Update).subscribe(respu => {
+      this.modalServiceDos.dismissAll();
       if (respu == 'Servidor actualizado exitosamente.') {
 
         this.modalMensaje = this._modalService.show(templateMensaje);
@@ -438,7 +487,6 @@ export class PgservidoresComponent implements OnInit {
         this.modalEditarServidor.hide();
 
         this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
-
       } else {
 
         this.modalMensaje = this._modalService.show(templateMensaje);
@@ -592,6 +640,21 @@ export class PgservidoresComponent implements OnInit {
       })
     })
 
+  }
+
+
+  ChangueAgregarTipoServidor(IdTipoServ: string) {
+    if (IdTipoServ != '2') {
+      this.IdServidorAloja = '0';
+    }
+  }
+
+
+  ChangueEditTipoServidor(IdTipoServ: string) {
+    console.log(IdTipoServ)
+    if (IdTipoServ != '2') {
+      this.ArrayEditar.Servidor_Aloja = 'null';
+    }
   }
 }
 

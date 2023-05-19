@@ -38,7 +38,7 @@
             <select class="form-select" title="Seleccionar usuario" [(ngModel)]="IdUsuario" #Selecusuario
                 (change)='Grilla(NombreServidor.value, SO.value, Estado.value,  Selecusuario.value)'>
                 <option value="0" selected>Seleccionar usuario</option>
-                <option value="{{arRespu.Id_U}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>
+                <option value="{{arRespu.IdUsuarioC}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Nombre}}</option>
             </select>
         </div>
         <!--Fin Tipo lista-->
@@ -95,9 +95,9 @@
                         <td *ngIf="ArGrilla.Estado == 1">Activo</td>
                         <td *ngIf="ArGrilla.Estado == 0">Inactivo</td>
                         <td>{{ArGrilla.TipoServidor}}</td>
-                        <td>XXX</td>
-                        <td>XXXX</td>
-                        <td>XXX</td>
+                        <td>{{ArGrilla.IpPublica}}</td>
+                        <td>{{ArGrilla.AplicacionesIIS}}</td>
+                        <td>{{ArGrilla.BaseDeDatos}}</td>
                         <td>{{ArGrilla.UsuarioUltMod}}</td>
                         <td>{{ArGrilla.Fecha_Ult_Mod}}</td>
 
@@ -189,21 +189,22 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Procesador</label>
-                    <input type="text" class="form-control" title="Procesador" [(ngModel)]="LblProcesadorEdit">
+                    <input type="text" class="form-control" title="Procesador" [(ngModel)]="LblProcesadorAgregar">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Disco duro</label>
-                    <input type="text" class="form-control" title="Disco duro" [(ngModel)]="LblDiscoDuroEdit">
+                    <input type="text" class="form-control" title="Disco duro" [(ngModel)]="LblDiscoDuroAgregar">
                 </div>
 
                 <div class="col-12 mt-3">
                     <label class="Llave">Ram</label>
-                    <input type="text" class="form-control" title="Ram" [(ngModel)]="LblRamEdit">
+                    <input type="text" class="form-control" title="Ram" [(ngModel)]="LblRamAgregar">
                 </div>
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Tipo servidor</label>
-                    <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidor">
+                    <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidor"
+                    (change)='ChangueAgregarTipoServidor(Id_TipoServidor)'>
                         <option value="0">Seleccione tipo servidor</option>
                         <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
                             {{arRespu.Descripcion}}</option>
@@ -213,7 +214,7 @@
                 <div class="col-6 mt-3">
                     <label class="Llave">Servidor aloja</label>
                     <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAloja"
-                        [disabled]="Id_TipoServidor !== '2'">
+                        [disabled]="Id_TipoServidor != '2'">
                         <option value="0">Seleccione servidor aloja</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                     </select>
@@ -221,37 +222,37 @@
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxIp">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxIpAgregar">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Ip publica</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxIp" [(ngModel)]="LblSoftware" rows="2"
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxIpAgregar" [(ngModel)]="LblIpPublicaAgregar" rows="2"
                         placeholder="IP publica con puertos activos"></textarea>
                 </div>
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxApps">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxAppsAgregar">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Aplicaciones IIS</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxApps"  rows="2"
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxAppsAgregar"  [(ngModel)]="LblAplicacionesIISAgregar" rows="2"
                         placeholder="Descripción general de las aplicaciones en el IIS"></textarea>
                 </div>
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxBD">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxBDAgregar">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Base de datos</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxBD" [(ngModel)]="LblSoftware" rows="2"
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxBDAgregar" [(ngModel)]="LblBaseDeDatosAgregar" rows="2"
                         placeholder="Base de datos existentes"></textarea>
                 </div>
 
@@ -296,60 +297,63 @@
                         <div class="col-sm-6">
                             <div class="col-sm-12">
                                 <label class="Llave TextMay">IP local:&nbsp;</label><label
-                                    class="ValorIDOfer"><strong>xxxx</strong></label>
+                                    class="ValorIDOfer"><strong>{{ArrVerDetalles.Ip_S}}</strong></label>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="col-sm-12">
                                 <label class="Llave">Nombre:&nbsp;</label><label
-                                    class="Valor"><strong>xxxx</strong></label>
+                                    class="Valor"><strong>{{ArrVerDetalles.Nombre}}</strong></label>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12">
-                        <label class="Llave">Observación:&nbsp;</label><label class="Valor">xxx</label>
+                        <label class="Llave">Observación:&nbsp;</label><label class="Valor">{{ArrVerDetalles.Observacion}}</label>
                     </div>
                     <div class="col-sm-12">
-                        <label class="Llave">Software instalado:&nbsp;</label><label class="Valor">xxxx</label>
+                        <label class="Llave">Software instalado:&nbsp;</label><label class="Valor">{{ArrVerDetalles.Software}}</label>
                     </div>
                     <div class="col-sm-12">
-                        <label class="Llave">Sistema operativo:&nbsp;</label> <label class="Valor">xxxx</label>
+                        <label class="Llave">Sistema operativo:&nbsp;</label> <label class="Valor">{{ArrVerDetalles.SO}}</label>
+                    </div>
+                    <div class="col-sm-12" *ngIf="ArrVerDetalles.Estado == '1'">
+                        <label class="Llave">Estado:&nbsp;</label><label class="Valor">Activo</label>
+                    </div>
+                    <div class="col-sm-12" *ngIf="ArrVerDetalles.Estado != '1'">
+                        <label class="Llave">Estado:&nbsp;</label><label class="Valor">Inactivo</label>
                     </div>
                     <div class="col-sm-12">
-                        <label class="Llave">Estado:&nbsp;</label><label class="Valor">xxxx</label>
+                        <label class="Llave">Procesador:&nbsp;</label><label class="Valor">{{ArrVerDetalles.Procesador}}</label>
                     </div>
                     <div class="col-sm-12">
-                        <label class="Llave">Procesador:&nbsp;</label><label class="Valor">xxxx</label>
-                    </div>
-                    <div class="col-sm-12">
-                        <label class="Llave">Disco duro:&nbsp;</label><label class="Valor">xxxx</label>
+                        <label class="Llave">Disco duro:&nbsp;</label><label class="Valor">{{ArrVerDetalles.DiscoDuro}}</label>
                     </div>
                     <div class="col-sm-6">
-                        <label class="Llave">RAM:&nbsp;</label><label class="Valor">xxxx</label>
+                        <label class="Llave">RAM:&nbsp;</label><label class="Valor">{{ArrVerDetalles.RAM}}</label>
                     </div>
                     <hr>
-                    <div class="col-sm-12">
-                        <label class="Llave">Tipo servidor:&nbsp;</label><label class="Valor">xxxx</label>
+                    <div class="col-sm-12" *ngIf="ArrVerDetalles.IdTipoServidor == '1'">
+                        <label class="Llave">Tipo servidor:&nbsp;</label><label class="Valor">Fisico</label>
+                    </div>
+                    <div class="col-sm-12" *ngIf="ArrVerDetalles.IdTipoServidor != '1'">
+                        <label class="Llave">Tipo servidor:&nbsp;</label><label class="Valor">Virtual</label>
                     </div>
                     <div class="col-sm-12">
-                        <label class="Llave">Servidor aloja:&nbsp;</label><label class="Valor">xxxx</label>
+                        <label class="Llave">Servidor aloja:&nbsp;</label><label class="Valor">{{ArrVerDetalles.Servidor_Aloja}}</label>
                     </div>
                     <div class="col-sm-12">
-                        <label class="Llave">IP publica:&nbsp;</label><label class="Valor">xxx</label>
+                        <label class="Llave">Aplicaciones IIS:&nbsp;</label><label class="Valor">{{ArrVerDetalles.AplicacionesIIS}}</label>
                     </div>
                     <div class="col-sm-12">
-                        <label class="Llave">Aplicaciones IIS:&nbsp;</label><label class="Valor">xxx</label>
-                    </div>
-                    <div class="col-sm-12">
-                        <label class="Llave">Base de datos:&nbsp;</label><label class="Valor">xxx</label>
+                        <label class="Llave">Base de datos:&nbsp;</label><label class="Valor">{{ArrVerDetalles.BaseDeDatos}}</label>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-sm-6">
-                            <label class="Llave">Usuario:&nbsp;</label><label class="Valor">xxxx</label>
+                            <label class="Llave">Usuario:&nbsp;</label><label class="Valor">{{ArrVerDetalles.Usuario_Ser}}</label>
                         </div>
                         <div class="col-sm-6">
-                            <label class="Llave">Contraseña:&nbsp;</label><label class="Valor">xxxx</label>
+                            <label class="Llave">Contraseña:&nbsp;</label><label class="Valor">{{ArrVerDetalles.Password}}</label>
                         </div>
                     </div>
                 </div>
@@ -407,21 +411,22 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Procesador</label>
-                    <input type="text" class="form-control" title="Procesador" [(ngModel)]="LblProcesadorEdit">
+                    <input type="text" class="form-control" title="Procesador" [(ngModel)]="ArrayEditar.Procesador">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Disco duro</label>
-                    <input type="text" class="form-control" title="Disco duro" [(ngModel)]="LblDiscoDuroEdit">
+                    <input type="text" class="form-control" title="Disco duro" [(ngModel)]="ArrayEditar.DiscoDuro">
                 </div>
 
                 <div class="col-12 mt-3">
                     <label class="Llave">Ram</label>
-                    <input type="text" class="form-control" title="Ram" [(ngModel)]="LblRamEdit">
+                    <input type="text" class="form-control" title="Ram" [(ngModel)]="ArrayEditar.RAM">
                 </div>
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Tipo servidor</label>
-                    <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="Id_TipoServidor">
+                    <select class="form-select" title="Seleccionar tipo servidor" [(ngModel)]="ArrayEditar.IdTipoServidor"
+                    (change)='ChangueEditTipoServidor(ArrayEditar.IdTipoServidor)'>
                         <option value="0">Seleccione tipo servidor</option>
                         <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
                             {{arRespu.Descripcion}}</option>
@@ -430,56 +435,56 @@
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Servidor aloja</label>
-                    <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAloja"
-                        [disabled]="Id_TipoServidor !== '2'">
-                        <option value="0">Seleccione servidor aloja</option>
+                    <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="ArrayEditar.Servidor_Aloja"
+                        [disabled]="ArrayEditar.IdTipoServidor != '2'">
+                        <option value="null">Seleccione servidor aloja</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                     </select>
                 </div>
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxIp">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxIpEditar">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Ip publica</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxIp" rows="2"
+                    <textarea class="md-textarea form-control" [(ngModel)]="ArrayEditar.IpPublica" [disabled]="!checkboxIpEditar" rows="2"
                         placeholder="IP publica con puertos activos"></textarea>
                 </div>
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxApps">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxAppsEditar">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Aplicaciones IIS</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxApps" rows="2"
+                    <textarea class="md-textarea form-control" [(ngModel)]="ArrayEditar.AplicacionesIIS" [disabled]="!checkboxAppsEditar" rows="2"
                         placeholder="Descripción general de las aplicaciones en el IIS"></textarea>
                 </div>
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxBD">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxBDeDitar">
                         <label class="form-check-label" for="flexSwitchCheckDefault">Base de datos</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxBD" rows="2"
+                    <textarea class="md-textarea form-control" [(ngModel)]="ArrayEditar.BaseDeDatos" [disabled]="!checkboxBDeDitar" rows="2"
                         placeholder="Base de datos existentes"></textarea>
                 </div>
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Usuario</label>
-                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblUsuarios" title="Usuario">
+                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="ArrayEditar.Usuario_Ser" title="Usuario">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Contraseña</label>
-                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblPassword" title="Contraseña">
+                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="ArrayEditar.Password" title="Contraseña">
                 </div>
 
 
