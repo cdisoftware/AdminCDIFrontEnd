@@ -222,37 +222,37 @@
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxIpAgregar">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Ip publica</label>
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxIpAgregar" (change)='ChangeCheck(checkboxIpAgregar, "IpAgregar")'>
+                        <label class="form-check-label" #IpPublicaAgregar for="flexSwitchCheckDefault">Ip publica</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxIpAgregar" [(ngModel)]="LblIpPublicaAgregar" rows="2"
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxIpAgregar" id="IpAgregar" [(ngModel)]="LblIpPublicaAgregar" rows="2"
                         placeholder="IP publica con puertos activos"></textarea>
                 </div>
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxAppsAgregar">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxAppsAgregar" (change)='ChangeCheck(checkboxAppsAgregar, "AppsAgregar")'>
                         <label class="form-check-label" for="flexSwitchCheckDefault">Aplicaciones IIS</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxAppsAgregar"  [(ngModel)]="LblAplicacionesIISAgregar" rows="2"
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxAppsAgregar" id="AppsAgregar" [(ngModel)]="LblAplicacionesIISAgregar" rows="2"
                         placeholder="Descripción general de las aplicaciones en el IIS"></textarea>
                 </div>
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxBDAgregar">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxBDAgregar" (change)='ChangeCheck(checkboxBDAgregar, "BdAgregar")'>
                         <label class="form-check-label" for="flexSwitchCheckDefault">Base de datos</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [disabled]="!checkboxBDAgregar" [(ngModel)]="LblBaseDeDatosAgregar" rows="2"
+                    <textarea class="md-textarea form-control" [disabled]="!checkboxBDAgregar" id="BdAgregar" [(ngModel)]="LblBaseDeDatosAgregar" rows="2"
                         placeholder="Base de datos existentes"></textarea>
                 </div>
 
@@ -444,37 +444,37 @@
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxIpEditar">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxIpEditar"  (change)='ChangeCheck(checkboxIpEditar, "IpEditar")'>
                         <label class="form-check-label" for="flexSwitchCheckDefault">Ip publica</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [(ngModel)]="ArrayEditar.IpPublica" [disabled]="!checkboxIpEditar" rows="2"
+                    <textarea class="md-textarea form-control" [(ngModel)]="ArrayEditar.IpPublica" id="IpEditar" [disabled]="!checkboxIpEditar" rows="2"
                         placeholder="IP publica con puertos activos"></textarea>
                 </div>
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxAppsEditar">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxAppsEditar" (change)='ChangeCheck(checkboxAppsEditar, "AppEditar")'>
                         <label class="form-check-label" for="flexSwitchCheckDefault">Aplicaciones IIS</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [(ngModel)]="ArrayEditar.AplicacionesIIS" [disabled]="!checkboxAppsEditar" rows="2"
+                    <textarea class="md-textarea form-control" [(ngModel)]="ArrayEditar.AplicacionesIIS" id="AppEditar" [disabled]="!checkboxAppsEditar" rows="2"
                         placeholder="Descripción general de las aplicaciones en el IIS"></textarea>
                 </div>
 
                 <div class="col-3 mt-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxBDeDitar">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkboxBDeDitar" (change)='ChangeCheck(checkboxBDeDitar, "BdEditar")'>
                         <label class="form-check-label" for="flexSwitchCheckDefault">Base de datos</label>
                     </div>
                 </div>
 
                 <div class="col-9 mt-3">
-                    <textarea class="md-textarea form-control" [(ngModel)]="ArrayEditar.BaseDeDatos" [disabled]="!checkboxBDeDitar" rows="2"
+                    <textarea class="md-textarea form-control" [(ngModel)]="ArrayEditar.BaseDeDatos" id="BdEditar" [disabled]="!checkboxBDeDitar" rows="2"
                         placeholder="Base de datos existentes"></textarea>
                 </div>
 

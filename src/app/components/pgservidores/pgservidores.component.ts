@@ -224,7 +224,6 @@ export class PgservidoresComponent implements OnInit {
   ListaUsuario() {
     this.ArregloListaUsuario = [];
     this.Servicios.conscusuario('1', '0', '0', '0', '0', '0').subscribe(respu => {
-      console.log(respu)
       this.ArregloListaUsuario = respu;
     })
   }
@@ -654,6 +653,16 @@ export class PgservidoresComponent implements OnInit {
     console.log(IdTipoServ)
     if (IdTipoServ != '2') {
       this.ArrayEditar.Servidor_Aloja = 'null';
+    }
+  }
+
+
+  ChangeCheck(Check: boolean, Id: string) {
+    if (Check == false) {
+      const input = document.getElementById(Id) as HTMLInputElement | null;
+      if (input != null) {
+        input.value = "";
+      }
     }
   }
 }
