@@ -157,7 +157,7 @@ export class PgservidoresComponent implements OnInit {
     this.LblPasswordEdit = '';
 
 
-    this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
+    this.Grilla(this.lblSO, this.IdEstado, this.IdUsuario);
     this.ListaUsuario();
     this.ListaServidor();
     this.ListaTipoServidor();
@@ -199,20 +199,17 @@ export class PgservidoresComponent implements OnInit {
     this.LblUsuariosEdit = '';
     this.LblPasswordEdit = '';
 
-    this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
+    this.Grilla(this.lblSO, this.IdEstado, this.IdUsuario);
   }
   //Grilla
-  Grilla(NombreServidor: string, SO: string, IdEstado: string, IdUsuario: string) {
-    if (NombreServidor == undefined || NombreServidor == '') {
-      NombreServidor = '0';
-    }
+  Grilla(SO: string, IdEstado: string, IdUsuario: string) {
     if (SO == undefined || SO == '') {
       SO = '0';
     }
     this.ArregloGrilla = [];
     this.AuxiliadorGrilla = false;
-    console.log('1', NombreServidor, SO, IdEstado, IdUsuario)
-    this.Servicios.consultaservidors('1', NombreServidor, SO, IdEstado, IdUsuario).subscribe(respu => {
+    console.log('1', '0', SO, IdEstado, IdUsuario)
+    this.Servicios.consultaservidors('1', '0', SO, IdEstado, IdUsuario).subscribe(respu => {
       console.log(respu)
       if (respu.length > 0) {
         this.ArregloGrilla = respu;
@@ -223,7 +220,10 @@ export class PgservidoresComponent implements OnInit {
 
   ListaUsuario() {
     this.ArregloListaUsuario = [];
-    this.Servicios.conscusuario('1', '0', '0', '0', '0', '0').subscribe(respu => {
+    const body = {
+      Descripcion:"0"
+    }
+    this.Servicios.consultatiposerv('0', body).subscribe(respu => {
       this.ArregloListaUsuario = respu;
     })
   }
@@ -455,7 +455,7 @@ export class PgservidoresComponent implements OnInit {
       this.IdServidorAlojaEdit = Array.Servidor_Aloja;
     }
   }
-  UpdateServDos(templateMensaje: TemplateRef<any>) {
+  UpdateServDos(templateMensaje: TemplateRef<any>, Ip: string, app: string, bd: string) {
     const Update = {
       IdServidor: this.IdServidorServ,
       IpServidor: this.LblIpServidorEdit,
@@ -469,25 +469,22 @@ export class PgservidoresComponent implements OnInit {
       RAM: this.ArrayEditar.RAM,
       IdTipoServ: this.Id_TipoServidorEdit,
       ServidorAloja: this.ArrayEditar.Servidor_Aloja,
-      IpPublica: this.ArrayEditar.IpPublica,
-      AplicacionesIIS: this.ArrayEditar.AplicacionesIIS,
-      BaseDeDatos: this.ArrayEditar.BaseDeDatos,
+      IpPublica: Ip,
+      AplicacionesIIS: app,
+      BaseDeDatos: bd,
       UserServidor: this.ArrayEditar.Usuario_Ser,
       Password: this.ArrayEditar.Password,
       IdUsuario: this.IdUsuarioCookies
     }
+    console.log(Update)
     this.Servicios.actualizaservdos('2', Update).subscribe(respu => {
       this.modalServiceDos.dismissAll();
+      this.Grilla(this.lblSO, this.IdEstado, this.IdUsuario);
       if (respu == 'Servidor actualizado exitosamente.') {
-
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
-
         this.modalEditarServidor.hide();
-
-        this.Grilla(this.lblNombreservidor, this.lblSO, this.IdEstado, this.IdUsuario);
       } else {
-
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = 'Por favor verefique los datos a actualizar.';
       }
@@ -643,25 +640,25 @@ export class PgservidoresComponent implements OnInit {
 
 
   ChangueAgregarTipoServidor(IdTipoServ: string) {
-    if (IdTipoServ != '2') {
+    if (IdTipoServ == 'Fisico') {
       this.IdServidorAloja = '0';
     }
   }
 
 
   ChangueEditTipoServidor(IdTipoServ: string) {
-    console.log(IdTipoServ)
-    if (IdTipoServ != '2') {
+    if (IdTipoServ == 'Fisico') {
       this.ArrayEditar.Servidor_Aloja = 'null';
     }
   }
 
 
-  ChangeCheck(Check: boolean, Id: string) {
+  ChangeCheck(Check: boolean, Id: string, Campo: string) {
     if (Check == false) {
       const input = document.getElementById(Id) as HTMLInputElement | null;
       if (input != null) {
         input.value = "";
+        Campo = '';
       }
     }
   }
