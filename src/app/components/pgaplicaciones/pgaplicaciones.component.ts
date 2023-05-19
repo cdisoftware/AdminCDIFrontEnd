@@ -1,7 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { MetodosGlobalesService } from 'src/app/core/metodosglobales.service';
-
+import { Workbook } from "exceljs";
+import { saveAs } from 'file-saver';
+import autoTable from 'jspdf-autotable'
+import jsPDF from 'jspdf';
 @Component({
   selector: 'app-pgaplicaciones',
   templateUrl: './pgaplicaciones.component.html',
@@ -22,9 +25,9 @@ export class PgaplicacionesComponent implements OnInit {
   ipPublic: string;
 
   //Variable lista Tipo Publicacion
-  selectTipo: string;
-  LblIP: string;
-  SelectEstado: string;
+  selectTipo: string = '0';
+  LblIP: string = '0';
+  SelectEstado: string = '0';
   ArregloListaTipo: any;
 
   //Variables agregar
@@ -44,6 +47,12 @@ export class PgaplicacionesComponent implements OnInit {
   EditEstado: string;
   EditAmbiente: string;
 
+  //Variables Fecha
+  Dia = new Date().getDate();
+  Mes = new Date().getMonth() + 1;
+  Año = new Date().getFullYear();
+
+  Fecha: string = this.Año + '-' + this.Mes + '-' + this.Dia;
   constructor(private _modalService: BsModalService,
     private Servicios: MetodosGlobalesService) { }
 
@@ -56,8 +65,6 @@ export class PgaplicacionesComponent implements OnInit {
     this.AddTipo = '0';
     this.AddEstado = '0';
     this.AddAmbiente = '0';
-
-
   }
 
   //Popap agregar
@@ -77,7 +84,6 @@ export class PgaplicacionesComponent implements OnInit {
     this.EditLblDescripcion = Array.Descripcion;
     this.EditEstado = Array.Estado;
     this.EditAmbiente = Array.Ambiente;
-
   }
 
   //Grilla
@@ -92,15 +98,14 @@ export class PgaplicacionesComponent implements OnInit {
     if (Estado == undefined || Estado == '') {
       Estado = '0';
     }
+
     this.ArregloGrillaPublic = [];
     this.AuxiliadorGrilla = false;
 
     const BodyPublic = {
       IpPublicacion: IpPublicacion
     }
-    console.log(BodyPublic)
     this.Servicios.consAdminPublic('1', TipoPublicacion, Estado, BodyPublic).subscribe(respu => {
-      console.log(respu)
       if (respu.length > 0) {
         this.ArregloGrillaPublic = respu;
         this.AuxiliadorGrilla = true;
@@ -112,7 +117,7 @@ export class PgaplicacionesComponent implements OnInit {
     this.selectTipo = '0';
     this.LblIP = '';
     this.SelectEstado = '0';
-
+    this.Grilla(this.selectTipo, this.LblIP, this.SelectEstado);
   }
 
   AgregarAdminPublic(templateMensaje: TemplateRef<any>) {
@@ -203,6 +208,89 @@ export class PgaplicacionesComponent implements OnInit {
         this.LimpiarFormAdd();
       }
     })
+  }
+  //Descargar Excel
+  BtnExportarExcel(templateMensaje: TemplateRef<any>) {
+    if (this.ArregloGrillaPublic.length > 0) {
+      let workbook = new Workbook();
+      let worksheet = workbook.addWorksheet("Registro Admin Publicaciones");
+      let header = ["Tipo", "Ip", "Nombre", "Descripción", "Estado", "Ambiente"];
+      worksheet.addRow(header);
+
+      for (let x1 of this.ArregloGrillaPublic) {
+        let temp = []
+        temp.push(x1['Tipo'])
+        temp.push(x1['Ip'])
+        temp.push(x1['Nombre'])
+        temp.push(x1['Descripción'])
+        temp.push(x1['Estado'])
+        temp.push(x1['Ambiente'])
+
+        worksheet.addRow(temp)
+      }
+
+      let fname = "RegistroAdminPublic - " + this.Fecha;
+
+      workbook.xlsx.writeBuffer().then((data) => {
+        let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        saveAs(blob, fname + '.xlsx');
+      });
+    } else {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
+    }
+  }
+
+  DescargarDatosPdf() {
+    const doc = new jsPDF('l', 'px', 'a3');
+
+    autoTable(doc, {
+      styles: { fillColor: [216, 216, 216] },
+      columnStyles: {
+        1: { cellWidth: 108 },
+        2: { cellWidth: 108 },
+        3: { cellWidth: 108 },
+        4: { cellWidth: 108 },
+        5: { cellWidth: 108 },
+        6: { cellWidth: 108 }
+      },
+      didParseCell: function (data) {
+        var rows = data.table.body;
+        if (data.row.index === 0) {
+          data.cell.styles.fillColor = [0, 80, 80];
+          data.cell.styles.textColor = [255, 255, 255];
+        }
+      },
+      margin: { top: 10 },
+      body: [
+        ["Tipo", "Ip", "Nombre", "Descripción", "Estado", "Ambiente"],
+      ]
+    })
+
+    this.ArregloGrillaPublic.forEach(function (respuesta: any) {
+
+      var Res =
+        [respuesta.TipoPubli, respuesta.IpPublicacion, respuesta.Nombre,
+        respuesta.Descripcion, respuesta.DescripcionEstado, respuesta.DescripcionAmbiente];
+
+      autoTable(doc, {
+        margin: { top: 0, bottom: 0 },
+        columnStyles: {
+          1: { cellWidth: 108 },
+          2: { cellWidth: 108 },
+          3: { cellWidth: 108 },
+          4: { cellWidth: 108 },
+          5: { cellWidth: 108 },
+          6: { cellWidth: 108 }
+        },
+        body:
+          [
+            Res
+          ]
+      })
+    });
+
+    doc.save('RegistroAdminPublic - ' + this.Fecha + '.pdf')
   }
 }
 

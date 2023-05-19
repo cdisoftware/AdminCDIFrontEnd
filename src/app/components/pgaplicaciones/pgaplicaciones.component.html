@@ -9,8 +9,8 @@
             <select class="form-select" title="Seleccionar Tipo" [(ngModel)]="selectTipo" #SelecTipo
                 (change)='Grilla(SelecTipo.value, Ip.value, Estado.value)'>
                 <option value="0" selected>Seleccionar Tipo</option>
-                <option value="1">Base de datos</option>
-                <option value="2">Aplicaciones</option>
+                <option value="2">Base de datos</option>
+                <option value="1">Aplicaciones</option>
             </select>
         </div>
         <!--Fin Tipo lista-->
@@ -41,12 +41,12 @@
                 Limpiar
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF">
+            <button class="btn btn-dark col-sm-2 mrd" title="Descargar PDF" (click)="DescargarDatosPdf()">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarpdf.png" class="BtnimgTamanoPeque mr-2">
                 Descargar PDF
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel">
+            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel" (click)="BtnExportarExcel(templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
                 Descarga excel
             </button>
