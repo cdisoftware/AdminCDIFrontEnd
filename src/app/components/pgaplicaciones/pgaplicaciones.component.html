@@ -6,8 +6,8 @@
         <!--Tipo lista Estado-->
         <div class="col-sm-12 m-0 mb-3 ">
             <label class="Llave">Tipo</label>
-            <select class="form-select" title="Seleccionar Estado" [(ngModel)]="selectTipo" #SelecTipo
-                (change)='Grilla(Ip.value, SelecTipo.value, Estado.value)'>
+            <select class="form-select" title="Seleccionar Tipo" [(ngModel)]="selectTipo" #SelecTipo
+                (change)='Grilla(SelecTipo.value, Ip.value, Estado.value)'>
                 <option value="0" selected>Seleccionar Tipo</option>
                 <option value="1">Base de datos</option>
                 <option value="2">Aplicaciones</option>
@@ -19,14 +19,14 @@
         <div class="col-sm-6 m-0 mb-3">
             <label class="Llave">Ip</label>
             <input type="text" class="form-control table-bordered" title="IP" #Ip [(ngModel)]="LblIP"
-                (keyup)="Grilla(Ip.value, SelecTipo.value, Estado.value)">
+                (keyup)="Grilla(SelecTipo.value, Ip.value, Estado.value)">
         </div>
         <!--Fin ayuda-->
         <!--Tipo lista Estado-->
         <div class="col-sm-6 m-0 mb-3 ">
             <label class="Llave">Estado</label>
             <select class="form-select" title="Seleccionar Estado" #Estado [(ngModel)]="SelectEstado"
-                (change)='Grilla(Ip.value, SelecTipo.value, Estado.value)'>
+                (change)='Grilla(SelecTipo.value, Ip.value, Estado.value)'>
                 <option value="0" selected>Seleccionar Estado</option>
                 <option value="1">Activo</option>
                 <option value="2">Inactivo</option>
