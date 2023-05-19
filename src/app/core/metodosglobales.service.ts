@@ -227,4 +227,12 @@ export class MetodosGlobalesService {
     return this.http.post<any>(this.url_servidor + 'eliminaregtareamod/' + Bandera, BodyPost);
   }
 
+  //Admin Internos
+  consAdminPublic(Bandera: string, TipoPublicacion: string, Estado: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'consadminpublicaciones/' + Bandera + '/' + TipoPublicacion + '/' + Estado, BodyPost);
+  }
+  ModAdminPublic(Bandera: string, BodyPost: any) {
+    return this.http.post<any>(this.url_servidor + 'modadminpublicaciones/' + Bandera, BodyPost);
+  }
+
 }
