@@ -209,7 +209,7 @@ export class PgservidoresComponent implements OnInit {
     this.ArregloGrilla = [];
     this.AuxiliadorGrilla = false;
     console.log('1', '0', SO, IdEstado, IdUsuario)
-    this.Servicios.consultaservidors('1', '0', SO, IdEstado, IdUsuario).subscribe(respu => {
+    this.Servicios.consultaservidors('1', SO, '0', IdEstado, IdUsuario).subscribe(respu => {
       console.log(respu)
       if (respu.length > 0) {
         this.ArregloGrilla = respu;
