@@ -30,7 +30,7 @@
             <select class="form-select" title="Seleccionar usuario" [(ngModel)]="IdUsuario" #Selecusuario
                 (change)='Grilla(Ip.value, Estado.value,  Selecusuario.value)'>
                 <option value="0" selected>Seleccionar tipo servidor</option>
-                <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaUsuario">{{arRespu.Descripcion}}</option>
+                <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">{{arRespu.Descripcion}}</option>
             </select>
         </div>
         <!--Fin Tipo lista-->
@@ -150,25 +150,25 @@
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
                     <label class="Llave">IP local</label>
-                    <input type="text" value="" class="col-sm-6 form-control" [(ngModel)]="LblIpServidor"
+                    <input type="text" value="" class="col-sm-6 form-control" [(ngModel)]="LblIpServidorAgregar"
                         title="Ip Servidor">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Nombre servidor</label>
-                    <input type="text" value="" class="col-sm-6 form-control" [(ngModel)]="LblNombre"
+                    <input type="text" value="" class="col-sm-6 form-control" [(ngModel)]="LblNombreAgregar"
                         title="Nombre Servidor">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Observación</label>
-                    <textarea class="md-textarea form-control" [(ngModel)]="LblObservacion" rows="3"></textarea>
+                    <textarea class="md-textarea form-control" [(ngModel)]="LblObservacionAgregar" rows="3"></textarea>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Software instalado</label>
-                    <textarea class="md-textarea form-control" [(ngModel)]="LblSoftware" rows="3"></textarea>
+                    <textarea class="md-textarea form-control" [(ngModel)]="LblSoftwareAgregar" rows="3"></textarea>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Sistema operativo</label>
-                    <input type="text" value="" [(ngModel)]="LblSO" class="col-sm-6  form-control"
+                    <input type="text" value="" [(ngModel)]="LblSOAgregar" class="col-sm-6  form-control"
                         title="Sistema Operativo">
                 </div>
                 <div class="col-6 mt-3">
@@ -195,7 +195,7 @@
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Tipo servidor</label>
-                    <select class="form-select" title="Seleccionar tipo servidor" #TipoSerAgrega [(ngModel)]="Id_TipoServidor"
+                    <select class="form-select" title="Seleccionar tipo servidor" #TipoSerAgrega [(ngModel)]="Id_TipoServidorAgregar"
                     (change)='ChangueAgregarTipoServidor(TipoSerAgrega.value)'>
                         <option value="0">Seleccione tipo servidor</option>
                         <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
@@ -206,7 +206,7 @@
                 <div class="col-6 mt-3">
                     <label class="Llave">Servidor aloja</label>
                     <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAloja"
-                        [disabled]="Id_TipoServidor != '2'">
+                        [disabled]="Id_TipoServidorAgregar != '2'">
                         <option value="0">Seleccione servidor aloja</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                     </select>
@@ -250,11 +250,11 @@
 
                 <div class="col-6 mt-3">
                     <label class="Llave">Usuario</label>
-                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblUsuarios" title="Usuario">
+                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblUsuariosAgregar" title="Usuario">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Contraseña</label>
-                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblPassword" title="Contraseña">
+                    <input type="text" class="col-sm-6 form-control" [(ngModel)]="LblPasswordAgregar" title="Contraseña">
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
@@ -330,7 +330,7 @@
                     <div class="col-sm-12" *ngIf="ArrVerDetalles.IdTipoServidor != '1'">
                         <label class="Llave">Tipo servidor:&nbsp;</label><label class="Valor">Virtual</label>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12">   
                         <label class="Llave">Servidor aloja:&nbsp;</label><label class="Valor">{{ArrVerDetalles.Servidor_Aloja}}</label>
                     </div>
                     <div class="col-sm-12">

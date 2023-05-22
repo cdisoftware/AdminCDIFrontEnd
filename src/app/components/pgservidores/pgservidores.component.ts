@@ -15,6 +15,45 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./pgservidores.component.css']
 })
 export class PgservidoresComponent implements OnInit {
+
+  //Filtros
+  lblSO: string = '';
+  IdEstado: string = "2";
+  IdUsuario: string = '';
+  ArregloListaTipoServidor: any[];
+
+
+  //Variables agregar servidor
+  LblIpServidorAgregar: string = '';
+  LblNombreAgregar: string = '';
+  LblObservacionAgregar: string = '';
+  LblSoftwareAgregar: string = '';
+  LblSOAgregar: string = '';
+  IdEstadoAgregar: string = '';
+  LblProcesadorAgregar: string = '';
+  LblDiscoDuroAgregar: string = '';
+  LblRamAgregar: string = '';
+  Id_TipoServidorAgregar: string = '';
+  IdServidorAloja: string = '';
+  checkboxIpAgregar: boolean = false;
+  checkboxAppsAgregar: boolean = false;
+  checkboxBDAgregar: boolean = false;
+  LblUsuariosAgregar: string = '';
+  LblPasswordAgregar: string = '';
+  LblIpPublicaAgregar: string = '';
+  LblAplicacionesIISAgregar: string = '';
+  LblBaseDeDatosAgregar: string = '';
+
+
+
+
+
+
+
+
+
+
+
   //Usuario
   IdUsuarioCookies: string = this.cookies.get('IdUsuario');
   //Variables globales
@@ -24,40 +63,35 @@ export class PgservidoresComponent implements OnInit {
 
   //Variables grilla
   ArregloGrilla: any;
-  AuxiliadorGrilla: boolean;
 
   //Variables nombre servidor
   lblNombreservidor: string;
 
   //Variables SO
-  lblSO: string;
+
 
   //Variables Estado
-  IdEstado: string = "2";
+
 
   //Variables lista usuario
-  ArregloListaUsuario: any[];
+  
 
   //Variables Usuario
-  IdUsuario: string;
 
-  //Variables agregar servidor
-  LblIpServidor: string;
-  LblNombre: string;
-  LblSO: string;
-  LblSoftware: string;
-  IdEstadoAgregar: string;
-  Id_TipoServidor: string;
-  LblObservacion: string;
-  LblUsuarios: string;
-  LblPassword: string;
-  IdServidorAloja: string = "0";
-  LblProcesadorAgregar: string = "";
-  LblDiscoDuroAgregar: string = "";
-  LblRamAgregar: string = "";
-  LblIpPublicaAgregar: string = "";
-  LblAplicacionesIISAgregar: string = "";
-  LblBaseDeDatosAgregar: string = "";
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   //Variables Fecha
   Dia = new Date().getDate();
@@ -68,8 +102,6 @@ export class PgservidoresComponent implements OnInit {
   //Variables lista agregar servidor
   ArregloListaServidor: any;
 
-  //Variables lista agregar servidor
-  ArregloListaTipoServidor: any;
 
   //Variables ver detalles
   LblUsuario: string;
@@ -111,9 +143,7 @@ export class PgservidoresComponent implements OnInit {
   NombreServidorVer: string;
 
   //check Agregar
-  checkboxIpAgregar: boolean = false;
-  checkboxAppsAgregar: boolean = false;
-  checkboxBDAgregar: boolean = false;
+  
 
   //check Editar
   checkboxIpEditar: boolean = false;
@@ -134,15 +164,15 @@ export class PgservidoresComponent implements OnInit {
     this.lblSO = '';
 
     //Inicializar variables agregar servidor
-    this.LblIpServidor = "";
-    this.LblNombre = "";
-    this.LblSO = "";
-    this.LblSoftware = "";
+    this.LblIpServidorAgregar = "";
+    this.LblNombreAgregar = "";
+    this.LblSOAgregar = "";
+    this.LblSoftwareAgregar = "";
     this.IdEstadoAgregar = "2";
-    this.Id_TipoServidor = "0";
-    this.LblObservacion = "";
-    this.LblUsuarios = "";
-    this.LblPassword = '';
+    this.Id_TipoServidorAgregar = "0";
+    this.LblObservacionAgregar = "";
+    this.LblUsuariosAgregar = "";
+    this.LblPasswordAgregar = '';
     this.IdServidorAloja = "0";
 
     //Inicializar variables editar servidor
@@ -158,34 +188,54 @@ export class PgservidoresComponent implements OnInit {
 
 
     this.Grilla(this.lblSO, this.IdEstado, this.IdUsuario);
-    this.ListaUsuario();
+    this.ListaTipoServ();
     this.ListaServidor();
-    this.ListaTipoServidor();
   }
-
+  ListaTipoServ() {
+    this.ArregloListaTipoServidor = [];
+    const body = {
+      Descripcion: "0"
+    }
+    this.Servicios.consultatiposerv('0', body).subscribe(respu => {
+      this.ArregloListaTipoServidor = respu;
+    })
+  }
+  //Grilla
+  Grilla(SO: string, IdEstado: string, IdUsuario: string) {
+    if (SO == undefined || SO == '') {
+      SO = '0';
+    }
+    this.ArregloGrilla = [];
+    this.Servicios.consultaservidors('1', SO, '0', IdEstado, IdUsuario).subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloGrilla = respu;
+      }
+    })
+  }
   Limpiar() {
+    //Limpiar filtros
     this.IdEstado = '2';
     this.IdUsuario = '0';
     this.lblNombreservidor = '';
     this.lblSO = '';
 
     //Limpiar variables agregar servidor
-    this.LblIpServidor = "";
-    this.LblNombre = "";
-    this.LblObservacion = "";
-    this.LblSoftware = "";
-    this.LblSO = "";
+    this.LblNombreAgregar = "";
+    this.LblNombreAgregar = "";
+    this.LblObservacionAgregar = "";
+    this.LblSoftwareAgregar = "";
+    this.LblSOAgregar = "";
     this.IdEstadoAgregar = "2";
     this.LblProcesadorAgregar = "";
     this.LblDiscoDuroAgregar = "";
     this.LblRamAgregar = "";
-    this.Id_TipoServidor = "0";
+    this.Id_TipoServidorAgregar = "0";
     this.IdServidorAloja = "0";
     this.LblIpPublicaAgregar = "";
     this.LblAplicacionesIISAgregar = "";
     this.LblBaseDeDatosAgregar = "";
-    this.LblUsuarios = "";
-    this.LblPassword = "";
+    this.LblUsuariosAgregar = "";
+    this.LblPasswordAgregar = "";
 
 
     //Limpiar variables editar servidor
@@ -201,129 +251,6 @@ export class PgservidoresComponent implements OnInit {
 
     this.Grilla(this.lblSO, this.IdEstado, this.IdUsuario);
   }
-  //Grilla
-  Grilla(SO: string, IdEstado: string, IdUsuario: string) {
-    if (SO == undefined || SO == '') {
-      SO = '0';
-    }
-    this.ArregloGrilla = [];
-    this.AuxiliadorGrilla = false;
-    console.log('1', '0', SO, IdEstado, IdUsuario)
-    this.Servicios.consultaservidors('1', SO, '0', IdEstado, IdUsuario).subscribe(respu => {
-      console.log(respu)
-      if (respu.length > 0) {
-        this.ArregloGrilla = respu;
-        this.AuxiliadorGrilla = true;
-      }
-    })
-  }
-
-  ListaUsuario() {
-    this.ArregloListaUsuario = [];
-    const body = {
-      Descripcion:"0"
-    }
-    this.Servicios.consultatiposerv('0', body).subscribe(respu => {
-      this.ArregloListaUsuario = respu;
-    })
-  }
-
-
-  //Popap agregar
-  BtnNuevo(templateAgregar: TemplateRef<any>) {
-    this.modalServiceDos.open(templateAgregar, { size: 'xl' });
-  }
-
-  AgregarServidor(templateMensaje: TemplateRef<any>) {
-    if (this.LblIpServidor == undefined || this.LblIpServidor == '' || this.LblNombre == undefined || this.LblNombre == '' || this.LblSO == undefined || this.LblSO == '' ||
-      this.LblSoftware == undefined || this.LblSoftware == '' || this.IdEstadoAgregar == undefined || this.IdEstadoAgregar == '' || this.Id_TipoServidor == undefined || this.Id_TipoServidor == ''
-      || this.LblObservacion == undefined || this.LblObservacion == '' || this.LblUsuarios == undefined || this.LblUsuarios == '' || this.LblPassword == undefined || this.LblPassword == ''
-      || this.IdServidorAloja == undefined || this.IdServidorAloja == '') {
-      this.modalMensaje = this._modalService.show(templateMensaje);
-      this.lblModalMsaje = "Por favor complete los campos a agregar";
-    } else {
-      var auxservAloja = null;
-      if (this.IdServidorAloja != "0") {
-        auxservAloja = this.IdServidorAloja;
-      }
-
-      const InsertaServidor = {
-        IdServidor: 0,
-        IpServidor: this.LblIpServidor,
-        Nombre: this.LblNombre,
-        Observacion: this.LblObservacion,
-        Software: this.LblSoftware,
-        SistemaOper: this.LblSO,
-        Estado: this.IdEstadoAgregar,
-        Procesador: this.LblProcesadorAgregar,
-        DiscoDuro: this.LblDiscoDuroAgregar,
-        RAM: this.LblRamAgregar,
-        IdTipoServ: this.Id_TipoServidor,
-        ServidorAloja: auxservAloja,
-        IpPublica: this.LblIpPublicaAgregar,
-        AplicacionesIIS: this.LblAplicacionesIISAgregar,
-        BaseDeDatos: this.LblBaseDeDatosAgregar,
-        UserServidor: this.LblUsuarios,
-        Password: this.LblPassword,
-        IdUsuario: this.IdUsuarioCookies
-      }
-      console.log(InsertaServidor)
-      this.Servicios.insertaserv('3', InsertaServidor).subscribe(respu => {
-        this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = respu;
-
-        this.Limpiar();
-        this.modalServiceDos.dismissAll();
-
-
-      })
-    }
-  }
-  ListaServidor() {
-    this.ArregloListaServidor = [];
-    this.Servicios.consultaservidors('1', '0', '0', '2', '0').subscribe(respu => {
-      if (respu.length > 0) {
-        this.ArregloListaServidor = respu;
-      }
-    })
-  }
-  ListaTipoServidor() {
-    this.ArregloListaTipoServidor = [];
-    const ListaTipoServidor = {
-      Descripcion: '0'
-    }
-    this.Servicios.consultatiposerv('0', ListaTipoServidor).subscribe(respu => {
-      if (respu.length > 0) {
-        this.ArregloListaTipoServidor = respu;
-      }
-    })
-  }
-
-
-  ArrVerDetalles: any = [];
-  //Ver detalle
-  VerDetalle(templateVerDetalles: TemplateRef<any>, templateMensaje: TemplateRef<any>, ArGrilla: any) {
-    this.ArrVerDetalles = ArGrilla;
-
-
-    this.IpServidorVer = ArGrilla.Ip_S;
-    this.NombreServidorVer = ArGrilla.Nombre;
-    this.AuxiliarDiv = false;
-    this.modalServiceDos.open(templateVerDetalles, { size: 'md' });
-    this.ArrListaVerdetalles = [];
-    this.IdServidor = ArGrilla.Id_S;
-    this.Servicios.consdetallserv('1', ArGrilla.Id_S).subscribe(respu => {
-      if (respu.length > 0) {
-        this.ArrListaVerdetalles = respu;
-        this.AuxiliarDiv = false;
-      } else {
-        this.AuxiliarDiv = true;
-        this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = 'No existe hardware inscrito para este servidor, por favor ingreselo.';
-      }
-    })
-  }
-
   //Descargar Pdf
   DescargarDatosPdf(templateMensaje: TemplateRef<any>) {
     const doc = new jsPDF('l', 'px', 'a3');
@@ -385,8 +312,6 @@ export class PgservidoresComponent implements OnInit {
       this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
     }
   }
-
-
   //Descargar Excel
   BtnExportarExcel(templateMensaje: TemplateRef<any>) {
     if (this.ArregloGrilla.length > 0) {
@@ -425,6 +350,109 @@ export class PgservidoresComponent implements OnInit {
       this.lblModalMsaje = 'No existen registros disponibles, por favor seleccione otros filtros';
     }
   }
+  //Popap agregar
+  BtnNuevo(templateAgregar: TemplateRef<any>) {
+    this.modalServiceDos.open(templateAgregar, { size: 'xl' });
+  }
+
+  AgregarServidor(templateMensaje: TemplateRef<any>) {
+    if (this.LblIpServidorAgregar == undefined || this.LblIpServidorAgregar == '' || this.LblNombreAgregar == undefined || this.LblNombreAgregar == '' || this.LblSOAgregar == undefined || this.LblSOAgregar == '' ||
+      this.LblSoftwareAgregar == undefined || this.LblSoftwareAgregar == '' || this.IdEstadoAgregar == undefined || this.IdEstadoAgregar == '' || this.Id_TipoServidorAgregar == undefined || this.Id_TipoServidorAgregar == ''
+      || this.LblObservacionAgregar == undefined || this.LblObservacionAgregar == '' || this.LblUsuariosAgregar == undefined || this.LblUsuariosAgregar == '' || this.LblPasswordAgregar == undefined || this.LblPasswordAgregar == ''
+      || this.IdServidorAloja == undefined || this.IdServidorAloja == '') {
+      this.modalMensaje = this._modalService.show(templateMensaje);
+      this.lblModalMsaje = "Por favor complete los campos a agregar";
+    } else {
+      var auxservAloja = null;
+      if (this.IdServidorAloja != "0") {
+        auxservAloja = this.IdServidorAloja;
+      }
+
+      const InsertaServidor = {
+        IdServidor: 0,
+        IpServidor: this.LblIpServidorAgregar,
+        Nombre: this.LblNombreAgregar,
+        Observacion: this.LblObservacionAgregar,
+        Software: this.LblSoftwareAgregar,
+        SistemaOper: this.LblSOAgregar,
+        Estado: this.IdEstadoAgregar,
+        Procesador: this.LblProcesadorAgregar,
+        DiscoDuro: this.LblDiscoDuroAgregar,
+        RAM: this.LblRamAgregar,
+        IdTipoServ: this.Id_TipoServidorAgregar,
+        ServidorAloja: auxservAloja,
+        IpPublica: this.LblIpPublicaAgregar,
+        AplicacionesIIS: this.LblAplicacionesIISAgregar,
+        BaseDeDatos: this.LblBaseDeDatosAgregar,
+        UserServidor: this.LblUsuariosAgregar,
+        Password: this.LblPasswordAgregar,
+        IdUsuario: this.IdUsuarioCookies
+      }
+      this.Servicios.insertaserv('3', InsertaServidor).subscribe(respu => {
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = respu;
+
+        this.Limpiar();
+        this.modalServiceDos.dismissAll();
+
+
+      })
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  ListaServidor() {
+    this.ArregloListaServidor = [];
+    this.Servicios.consultaservidors('1', '0', '0', '2', '0').subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaServidor = respu;
+      }
+    })
+  }
+
+
+  ArrVerDetalles: any = [];
+  //Ver detalle
+  VerDetalle(templateVerDetalles: TemplateRef<any>, templateMensaje: TemplateRef<any>, ArGrilla: any) {
+    this.ArrVerDetalles = ArGrilla;
+
+
+    this.IpServidorVer = ArGrilla.Ip_S;
+    this.NombreServidorVer = ArGrilla.Nombre;
+    this.AuxiliarDiv = false;
+    this.modalServiceDos.open(templateVerDetalles, { size: 'md' });
+    this.ArrListaVerdetalles = [];
+    this.IdServidor = ArGrilla.Id_S;
+    this.Servicios.consdetallserv('1', ArGrilla.Id_S).subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArrListaVerdetalles = respu;
+        this.AuxiliarDiv = false;
+      } else {
+        this.AuxiliarDiv = true;
+        this.modalMensaje = this._modalService.show(templateMensaje);
+        this.lblModalMsaje = 'No existe hardware inscrito para este servidor, por favor ingreselo.';
+      }
+    })
+  }
+
 
 
 
