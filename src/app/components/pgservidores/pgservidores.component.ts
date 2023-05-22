@@ -45,6 +45,16 @@ export class PgservidoresComponent implements OnInit {
   LblBaseDeDatosAgregar: string = '';
 
 
+  //Variables Editar servidor
+  LblIpServidorEdit: string = '';
+  LblNombreEdit: string = '';
+  LblObservacionEdit: string = '';
+  LblSoftwareEdit: string = '';
+  LblSOEdit: string = '';
+  IdEstadoAgregarEdit: string = '';
+  ArrayEditar: any = [];
+
+
 
 
 
@@ -74,24 +84,24 @@ export class PgservidoresComponent implements OnInit {
 
 
   //Variables lista usuario
-  
+
 
   //Variables Usuario
 
 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
 
   //Variables Fecha
   Dia = new Date().getDate();
@@ -111,13 +121,13 @@ export class PgservidoresComponent implements OnInit {
 
   //Variables editar servidor
   modalEditarServidor: BsModalRef;
-  LblIpServidorEdit: string;
-  LblNombreEdit: string;
-  LblSOEdit: string;
-  LblSoftwareEdit: string;
-  IdEstadoAgregarEdit: string;
+  
+  
+  
+  
+  
   Id_TipoServidorEdit: string;
-  LblObservacionEdit: string;
+  
   IdServidorServ: string;
 
   //Variables agregar hardware
@@ -143,7 +153,7 @@ export class PgservidoresComponent implements OnInit {
   NombreServidorVer: string;
 
   //check Agregar
-  
+
 
   //check Editar
   checkboxIpEditar: boolean = false;
@@ -399,26 +409,6 @@ export class PgservidoresComponent implements OnInit {
       })
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
   ListaServidor() {
     this.ArregloListaServidor = [];
     this.Servicios.consultaservidors('1', '0', '0', '2', '0').subscribe(respu => {
@@ -427,6 +417,20 @@ export class PgservidoresComponent implements OnInit {
       }
     })
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   ArrVerDetalles: any = [];
@@ -455,8 +459,6 @@ export class PgservidoresComponent implements OnInit {
 
 
 
-
-  ArrayEditar: any = [];
   //Editar Servidor
   EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
     this.ArrayEditar = Array;
