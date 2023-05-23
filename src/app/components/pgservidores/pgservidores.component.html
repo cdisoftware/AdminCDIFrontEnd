@@ -87,9 +87,9 @@
                         <td *ngIf="ArGrilla.Estado == 1">Activo</td>
                         <td *ngIf="ArGrilla.Estado == 0">Inactivo</td>
                         <td>{{ArGrilla.TipoServidor}}</td>
-                        <td>{{ArGrilla.IpPublica}}</td>
-                        <td>{{ArGrilla.AplicacionesIIS}}</td>
-                        <td>{{ArGrilla.BaseDeDatos}}</td>
+                        <td>{{ArGrilla.TieneIpPublica}}</td>
+                        <td>{{ArGrilla.TieneIIS}}</td>
+                        <td>{{ArGrilla.TieneBD}}</td>
                         <td>{{ArGrilla.UsuarioUltMod}}</td>
                         <td>{{ArGrilla.Fecha_Ult_Mod}}</td>
 
@@ -198,7 +198,7 @@
                     <select class="form-select" title="Seleccionar tipo servidor" #TipoSerAgrega [(ngModel)]="Id_TipoServidorAgregar"
                     (change)='ChangueAgregarTipoServidor(TipoSerAgrega.value)'>
                         <option value="0">Seleccione tipo servidor</option>
-                        <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
+                        <option [ngValue]="arRespu.TipoServ" *ngFor="let arRespu of ArregloListaTipoServidor">
                             {{arRespu.Descripcion}}</option>
                     </select>
                 </div>
@@ -206,7 +206,7 @@
                 <div class="col-6 mt-3">
                     <label class="Llave">Servidor aloja</label>
                     <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="IdServidorAloja"
-                        [disabled]="Id_TipoServidorAgregar != '2'">
+                        [disabled]="DisableServidorAlojaAgregar">
                         <option value="0">Seleccione servidor aloja</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                     </select>
@@ -421,9 +421,9 @@
                 <div class="col-6 mt-3">
                     <label class="Llave">Tipo servidor</label>
                     <select class="form-select" title="Seleccionar tipo servidor" #TipoSerEdit [(ngModel)]="ArrayEditar.IdTipoServidor"
-                    (change)='ChangueEditTipoServidor(ArrayEditar.TipoServidor)'>
+                    (change)='ChangueEditTipoServidor(TipoSerEdit.value)'>
                         <option value="0">Seleccione tipo servidor</option>
-                        <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
+                        <option [ngValue]="arRespu.TipoServ" *ngFor="let arRespu of ArregloListaTipoServidor">
                             {{arRespu.Descripcion}}</option>
                     </select>
                 </div>
@@ -431,7 +431,7 @@
                 <div class="col-6 mt-3">
                     <label class="Llave">Servidor aloja</label>
                     <select class="form-select" title="Seleccionar servidor aloja" [(ngModel)]="ArrayEditar.Servidor_Aloja"
-                        [disabled]="ArrayEditar.IdTipoServidor != '2'">
+                        [disabled]="DisableServidorAlojaEditar">
                         <option value="null">Seleccione servidor aloja</option>
                         <option value="{{arRespu.Id_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Nombre}}
                     </select>

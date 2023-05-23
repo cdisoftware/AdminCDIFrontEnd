@@ -33,7 +33,7 @@ export class PgservidoresComponent implements OnInit {
   LblProcesadorAgregar: string = '';
   LblDiscoDuroAgregar: string = '';
   LblRamAgregar: string = '';
-  Id_TipoServidorAgregar: string = '';
+  Id_TipoServidorAgregar: any;
   IdServidorAloja: string = '';
   checkboxIpAgregar: boolean = false;
   checkboxAppsAgregar: boolean = false;
@@ -43,6 +43,7 @@ export class PgservidoresComponent implements OnInit {
   LblIpPublicaAgregar: string = '';
   LblAplicacionesIISAgregar: string = '';
   LblBaseDeDatosAgregar: string = '';
+  DisableServidorAlojaAgregar: boolean = true;
 
 
   //Variables Editar servidor
@@ -53,6 +54,7 @@ export class PgservidoresComponent implements OnInit {
   LblSOEdit: string = '';
   IdEstadoAgregarEdit: string = '';
   ArrayEditar: any = [];
+  DisableServidorAlojaEditar: boolean = true;
 
 
 
@@ -121,13 +123,13 @@ export class PgservidoresComponent implements OnInit {
 
   //Variables editar servidor
   modalEditarServidor: BsModalRef;
-  
-  
-  
-  
-  
+
+
+
+
+
   Id_TipoServidorEdit: string;
-  
+
   IdServidorServ: string;
 
   //Variables agregar hardware
@@ -437,7 +439,15 @@ export class PgservidoresComponent implements OnInit {
   //Ver detalle
   VerDetalle(templateVerDetalles: TemplateRef<any>, templateMensaje: TemplateRef<any>, ArGrilla: any) {
     this.ArrVerDetalles = ArGrilla;
-
+    if (ArGrilla.TieneIpPublica == 'SI') {
+      this.checkboxIpAgregar = true;
+    }
+    if (ArGrilla.TieneIIS == 'SI') {
+      this.checkboxAppsAgregar = true;
+    }
+    if (ArGrilla.TieneBD == 'SI') {
+      this.checkboxBDAgregar = true;
+    }
 
     this.IpServidorVer = ArGrilla.Ip_S;
     this.NombreServidorVer = ArGrilla.Nombre;
@@ -445,16 +455,6 @@ export class PgservidoresComponent implements OnInit {
     this.modalServiceDos.open(templateVerDetalles, { size: 'md' });
     this.ArrListaVerdetalles = [];
     this.IdServidor = ArGrilla.Id_S;
-    this.Servicios.consdetallserv('1', ArGrilla.Id_S).subscribe(respu => {
-      if (respu.length > 0) {
-        this.ArrListaVerdetalles = respu;
-        this.AuxiliarDiv = false;
-      } else {
-        this.AuxiliarDiv = true;
-        this.modalMensaje = this._modalService.show(templateMensaje);
-        this.lblModalMsaje = 'No existe hardware inscrito para este servidor, por favor ingreselo.';
-      }
-    })
   }
 
 
@@ -486,6 +486,26 @@ export class PgservidoresComponent implements OnInit {
     }
   }
   UpdateServDos(templateMensaje: TemplateRef<any>, Ip: string, app: string, bd: string) {
+
+    var auxIpPublic: any;
+    var auxapp: any;
+    var auxbd: any;
+
+    if (Ip == '') {
+      auxIpPublic = null;
+    } else {
+      auxIpPublic = Ip;
+    }
+    if (app == '') {
+      auxapp = null;
+    } else {
+      auxapp = app;
+    }
+    if (bd == '') {
+      auxbd = null;
+    } else {
+      auxbd = bd;
+    }
     const Update = {
       IdServidor: this.IdServidorServ,
       IpServidor: this.LblIpServidorEdit,
@@ -499,9 +519,9 @@ export class PgservidoresComponent implements OnInit {
       RAM: this.ArrayEditar.RAM,
       IdTipoServ: this.Id_TipoServidorEdit,
       ServidorAloja: this.ArrayEditar.Servidor_Aloja,
-      IpPublica: Ip,
-      AplicacionesIIS: app,
-      BaseDeDatos: bd,
+      IpPublica: auxIpPublic,
+      AplicacionesIIS: auxapp,
+      BaseDeDatos: auxbd,
       UserServidor: this.ArrayEditar.Usuario_Ser,
       Password: this.ArrayEditar.Password,
       IdUsuario: this.IdUsuarioCookies
@@ -669,16 +689,25 @@ export class PgservidoresComponent implements OnInit {
   }
 
 
-  ChangueAgregarTipoServidor(IdTipoServ: string) {
-    if (IdTipoServ == 'Fisico') {
-      this.IdServidorAloja = '0';
+  ChangueAgregarTipoServidor(IdTipoServ: String) {
+    if (IdTipoServ != '0') {
+      var splitted = IdTipoServ.split(":");
+      if (splitted[1].trim() == '1') {
+        this.IdServidorAloja = '0';
+        this.DisableServidorAlojaAgregar = false;
+      }
     }
   }
 
 
   ChangueEditTipoServidor(IdTipoServ: string) {
-    if (IdTipoServ == 'Fisico') {
-      this.ArrayEditar.Servidor_Aloja = 'null';
+    console.log(IdTipoServ)
+    if (IdTipoServ != '0') {
+      var splitted = IdTipoServ.split(":");
+      if (splitted[1].trim() == '1') {
+        this.ArrayEditar.Servidor_Aloja = 'null';
+        this.DisableServidorAlojaEditar = false;
+      }
     }
   }
 
