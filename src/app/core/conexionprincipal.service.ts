@@ -9,7 +9,7 @@ export class ConexionprincipalService {
 
     constructor(private http: HttpClient) { }
     //ambiente de trabajo 1 desarrollo 2 produccion
-    ambientedetrabajo: string = '1';
+    ambientedetrabajo: string = '2';
 
     public url_ProduccionCDI = 'http://192.168.3.186:1003/AdministradorCDI/';
     public url_DesarolloCDI = 'http://192.168.3.186:1005/AdministradorCDI/';
