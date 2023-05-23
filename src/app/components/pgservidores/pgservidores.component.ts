@@ -8,6 +8,7 @@ import jsPDF from 'jspdf';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import html2canvas from 'html2canvas';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-pgservidores',
@@ -209,6 +210,7 @@ export class PgservidoresComponent implements OnInit {
       Descripcion: "0"
     }
     this.Servicios.consultatiposerv('0', body).subscribe(respu => {
+      console.log(respu)
       this.ArregloListaTipoServidor = respu;
     })
   }
@@ -462,10 +464,15 @@ export class PgservidoresComponent implements OnInit {
   //Editar Servidor
   EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
     this.ArrayEditar = Array;
-    if (this.ArrayEditar.IdTipoServidor == '2') {
-      this.checkboxIpEditar = true;
+    console.log(this.ArrayEditar)
+    if(this.ArrayEditar.AplicacionesIIS != undefined || this.ArrayEditar.AplicacionesIIS != null){
       this.checkboxAppsEditar = true;
+    }
+    if(this.ArrayEditar.BaseDeDatos != undefined || this.ArrayEditar.BaseDeDatos != null){
       this.checkboxBDeDitar = true;
+    }
+    if(this.ArrayEditar.IpPublica != undefined || this.ArrayEditar.IpPublica != null){
+      this.checkboxIpEditar = true;
     }
 
     this.modalServiceDos.open(templateEditarServidor, { size: 'xl' });
@@ -701,14 +708,13 @@ export class PgservidoresComponent implements OnInit {
 
 
   ChangueEditTipoServidor(IdTipoServ: string) {
-    console.log(IdTipoServ)
-    if (IdTipoServ != '0') {
-      var splitted = IdTipoServ.split(":");
-      if (splitted[1].trim() == '1') {
+
+      if (IdTipoServ.trim() == '1') {
         this.ArrayEditar.Servidor_Aloja = 'null';
+        this.DisableServidorAlojaEditar = true;
+      }else{
         this.DisableServidorAlojaEditar = false;
       }
-    }
   }
 
 
