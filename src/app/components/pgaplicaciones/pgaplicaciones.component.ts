@@ -20,10 +20,7 @@ export class PgaplicacionesComponent implements OnInit {
   //Variables grilla
   ArregloGrillaPublic: any;
   AuxiliadorGrilla: boolean;
-
-  //variables filtros
-  ipPublic: string;
-
+ 
   //Variable lista Tipo Publicacion
   selectTipo: string = '0';
   LblIP: string = '0';
@@ -47,6 +44,9 @@ export class PgaplicacionesComponent implements OnInit {
   EditEstado: string;
   EditAmbiente: string;
 
+  //Variable lista IP SERVIDOR
+  ArregloListaServidor: any;
+
   //Variables Fecha
   Dia = new Date().getDate();
   Mes = new Date().getMonth() + 1;
@@ -65,6 +65,7 @@ export class PgaplicacionesComponent implements OnInit {
     this.AddTipo = '0';
     this.AddEstado = '0';
     this.AddAmbiente = '0';
+    this.ListaServidor();
   }
 
   //Popap agregar
@@ -166,6 +167,16 @@ export class PgaplicacionesComponent implements OnInit {
     this.Grilla(this.selectTipo, this.LblIP, this.SelectEstado);
 
   }
+
+  ListaServidor() {
+    this.ArregloListaServidor = [];
+    this.Servicios.consultaservidors('1', '0', '0', '2', '0').subscribe(respu => {
+      if (respu.length > 0) {
+        this.ArregloListaServidor = respu;
+      }
+    })
+  }
+
 
   EditarAdminPublic(templateMensaje: TemplateRef<any>) {
     const AddBodyEdit =

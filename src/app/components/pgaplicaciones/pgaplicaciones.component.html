@@ -46,7 +46,8 @@
                 Descargar PDF
             </button>
 
-            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel" (click)="BtnExportarExcel(templateMensaje)">
+            <button class="btn btn-dark col-sm-2 mrd" title="Exportar Excel"
+                (click)="BtnExportarExcel(templateMensaje)">
                 <img src="../../../../assets/ImagenesAdminCDI/descargarexcel.png" class="BtnimgTamanoPeque mr-2">
                 Descarga excel
             </button>
@@ -78,17 +79,19 @@
                     <td>{{ArGrllPublic.TipoPubli}}</td>
                     <td>{{ArGrllPublic.IpPublicacion}}</td>
                     <td>{{ArGrllPublic.Nombre}}</td>
-                    <td>{{ArGrllPublic.Descripcion}}</td>                    
-                    <td>{{ArGrllPublic.DescripcionEstado}}</td>                    
+                    <td>{{ArGrllPublic.Descripcion}}</td>
+                    <td>{{ArGrllPublic.DescripcionEstado}}</td>
                     <td>{{ArGrllPublic.DescripcionAmbiente}}</td>
 
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Editar" (click)="BtnEditar(templateEditar, ArGrllPublic)">
+                        <button class="BtnClaro mrd m-auto text-center" title="Editar"
+                            (click)="BtnEditar(templateEditar, ArGrllPublic)">
                             <img src="../../../../assets/ImagenesAdminCDI/editar.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
                     <td class="text-center">
-                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar" (click)="EliminarAdminPublic(templateMensaje, ArGrllPublic)">
+                        <button class="BtnClaro mrd m-auto text-center" title="Eliminar"
+                            (click)="EliminarAdminPublic(templateMensaje, ArGrllPublic)">
                             <img src="../../../../assets/ImagenesAdminCDI/basura.png" class="BtnimgTamanoPeque mr-2">
                         </button>
                     </td>
@@ -117,10 +120,16 @@
                         <option value="2">Base de datos</option>
                     </select>
                 </div>
+
                 <div class="col-6 mt-3">
                     <label class="Llave">Ip</label>
-                    <input type="text" class="col-sm-6 form-control" title="Ip" [(ngModel)]="AddLblIp" required>
+                    <select class="form-select" title="Seleccionar Ip" [(ngModel)]="AddLblIp" required>
+                        <option value="0" selected>Seleccione tipo</option>
+                        <option value="{{arRespu.Ip_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Ip_S}}
+                        </option>
+                    </select>
                 </div>
+
                 <div class="col-6 mt-3">
                     <label class="Llave">Nombre</label>
                     <input type="text" value="" class="col-sm-6 form-control" title="Nombre" [(ngModel)]="AddLblNombre"
@@ -180,7 +189,7 @@
             <li class="row col-sm-12 displayCenter">
                 <div class="col-6 mt-3">
                     <label class="Llave">Tipo</label>
-                    <select class="form-select" title="Seleccionar tipo" [(ngModel)]="EditTipo">
+                    <select class="form-select" title="Seleccionar tipo" [(ngModel)]="EditTipo" required>
                         <option value="0" selected>Seleccione tipo</option>
                         <option value="1">Aplicación</option>
                         <option value="2">Base de datos</option>
@@ -188,11 +197,16 @@
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Ip</label>
-                    <input type="text" class="col-sm-6 form-control" title="Ip" [(ngModel)]="EditLblIp">
+                    <select class="form-select" title="Seleccionar Ip" [(ngModel)]="EditLblIp" required>
+                        <option value="0" selected>Seleccione tipo</option>
+                        <option value="{{arRespu.Ip_S}}" *ngFor="let arRespu of ArregloListaServidor">{{arRespu.Ip_S}}
+                        </option>
+                    </select>
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Nombre</label>
-                    <input type="text" value="" class="col-sm-6 form-control" title="Nombre" [(ngModel)]="EditLblNombre">
+                    <input type="text" value="" class="col-sm-6 form-control" title="Nombre"
+                        [(ngModel)]="EditLblNombre">
                 </div>
                 <div class="col-6 mt-3">
                     <label class="Llave">Descripción</label>
@@ -218,8 +232,9 @@
                 </div>
                 <!---Botones--->
                 <div class="row displayCenter col-12 mt-3">
-                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar" (click)="EditarAdminPublic(templateMensaje)">
-                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2" >
+                    <button class="btn btn-dark col-sm-3 mrd" title="Guardar"
+                        (click)="EditarAdminPublic(templateMensaje)">
+                        <img src="../../../../assets/ImagenesAdminCDI/disquete.png" class="BtnimgTamanoPeque mr-2">
                         Guardar..
                     </button>
 
