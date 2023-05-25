@@ -324,14 +324,11 @@
                         <label class="Llave">RAM:&nbsp;</label><label class="Valor">{{ArrVerDetalles.RAM}}</label>
                     </div>
                     <hr>
-                    <div class="col-sm-12" *ngIf="ArrVerDetalles.IdTipoServidor == '1'">
-                        <label class="Llave">Tipo servidor:&nbsp;</label><label class="Valor">Fisico</label>
-                    </div>
-                    <div class="col-sm-12" *ngIf="ArrVerDetalles.IdTipoServidor != '1'">
-                        <label class="Llave">Tipo servidor:&nbsp;</label><label class="Valor">Virtual</label>
+                    <div class="col-sm-12">
+                        <label class="Llave">Tipo servidor:&nbsp;</label><label class="Valor">{{ArrVerDetalles.TipoServidor}}</label>
                     </div>
                     <div class="col-sm-12">   
-                        <label class="Llave">Servidor aloja:&nbsp;</label><label class="Valor">{{ArrVerDetalles.Servidor_Aloja}}</label>
+                        <label class="Llave">Servidor aloja:&nbsp;</label><label class="Valor">{{ArrVerDetalles.NombreServidorAloja}}</label>
                     </div>
                     <div class="col-sm-12">
                         <label class="Llave">Ip Publica:&nbsp;</label><label class="Valor">{{ArrVerDetalles.IpPublica}}</label>
@@ -421,8 +418,8 @@
                 <div class="col-6 mt-3">
                     <label class="Llave">Tipo servidor</label>
                     <select class="form-select" title="Seleccionar tipo servidor" #TipoSerEdit [(ngModel)]="ArrayEditar.IdTipoServidor"
-                    (change)='ChangueEditTipoServidor(TipoSerEdit.value)'>
-                        <option value="{{arRespu.TipoServ}}" *ngFor="let arRespu of ArregloListaTipoServidor">
+                    (change)='ChangueEditTipoServidor(ArrayEditar)'>
+                        <option value="{{arRespu.Id_Tipo_S}}" *ngFor="let arRespu of ArregloListaTipoServidor">
                             {{arRespu.Descripcion}}</option>
                     </select>
                 </div>

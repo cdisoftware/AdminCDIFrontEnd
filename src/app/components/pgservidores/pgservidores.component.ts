@@ -468,6 +468,12 @@ export class PgservidoresComponent implements OnInit {
   EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
     this.ArrayEditar = Array;
     console.log(this.ArrayEditar)
+
+
+    this.checkboxAppsEditar = false;
+    this.checkboxBDeDitar = false;
+    this.checkboxIpEditar = false;
+
     if (this.ArrayEditar.AplicacionesIIS != undefined || this.ArrayEditar.AplicacionesIIS != null) {
       this.checkboxAppsEditar = true;
     }
@@ -476,6 +482,11 @@ export class PgservidoresComponent implements OnInit {
     }
     if (this.ArrayEditar.IpPublica != undefined || this.ArrayEditar.IpPublica != null) {
       this.checkboxIpEditar = true;
+    }
+    if (this.ArrayEditar.TipoServ == "1") {
+      this.DisableServidorAlojaEditar = true;
+    } else {
+      this.DisableServidorAlojaEditar = false;
     }
 
     this.modalServiceDos.open(templateEditarServidor, { size: 'xl' });
@@ -516,6 +527,9 @@ export class PgservidoresComponent implements OnInit {
     } else {
       auxbd = bd;
     }
+    if (this.ArrayEditar.Servidor_Aloja == 'null') {
+      this.ArrayEditar.Servidor_Aloja = null;
+    }
 
     const Update = {
       IdServidor: this.IdServidorServ,
@@ -539,9 +553,9 @@ export class PgservidoresComponent implements OnInit {
     }
     console.log(Update)
     this.Servicios.actualizaservdos('2', Update).subscribe(respu => {
-      this.modalServiceDos.dismissAll();
       this.Grilla(this.lblSO, this.IdEstado, this.IdUsuario);
       if (respu == 'Servidor actualizado exitosamente.') {
+        this.modalServiceDos.dismissAll();
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
       } else {
@@ -710,9 +724,14 @@ export class PgservidoresComponent implements OnInit {
   }
 
 
-  ChangueEditTipoServidor(IdTipoServ: string) {
+  ChangueEditTipoServidor(item: any) {
 
-    if (IdTipoServ.trim() == '1') {
+    if (item.TipoServ == "1") {
+      this.ArrayEditar.TipoServ = "2";
+    } else if (item.TipoServ == "2") {
+      this.ArrayEditar.TipoServ = "1";
+    }
+    if (item.TipoServ.trim() == "1") {
       this.ArrayEditar.Servidor_Aloja = 'null';
       this.DisableServidorAlojaEditar = true;
     } else {
