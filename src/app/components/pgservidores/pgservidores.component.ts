@@ -516,6 +516,7 @@ export class PgservidoresComponent implements OnInit {
     } else {
       auxbd = bd;
     }
+
     const Update = {
       IdServidor: this.IdServidorServ,
       IpServidor: this.LblIpServidorEdit,
@@ -527,7 +528,7 @@ export class PgservidoresComponent implements OnInit {
       Procesador: this.ArrayEditar.Procesador,
       DiscoDuro: this.ArrayEditar.DiscoDuro,
       RAM: this.ArrayEditar.RAM,
-      IdTipoServ: this.Id_TipoServidorEdit,
+      IdTipoServ: this.ArrayEditar.IdTipoServidor,
       ServidorAloja: this.ArrayEditar.Servidor_Aloja,
       IpPublica: auxIpPublic,
       AplicacionesIIS: auxapp,
