@@ -467,6 +467,7 @@ export class PgbackupsComponent implements OnInit {
           this.Servicios.consultaregistbck(this.IdBackupSelect, ConsultaRegistroBck).subscribe(respu => {
             if (respu.length > 0) {
               this.ArregloGrillaReguistroBck = respu;
+              this.Grilla(this.LblIp, this.NombreBCK, this.IdCliente);
             }
           })
         } else {

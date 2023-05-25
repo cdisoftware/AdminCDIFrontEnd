@@ -450,6 +450,9 @@ export class PgservidoresComponent implements OnInit {
     if (ArGrilla.TieneBD == 'SI') {
       this.checkboxBDAgregar = true;
     }
+    if (ArGrilla.TipoServ == "1") {
+      this.DisableServidorAlojaEditar = false;
+    }
 
     this.IpServidorVer = ArGrilla.Ip_S;
     this.NombreServidorVer = ArGrilla.Nombre;
@@ -465,13 +468,13 @@ export class PgservidoresComponent implements OnInit {
   EditarServidor(templateEditarServidor: TemplateRef<any>, Array: any) {
     this.ArrayEditar = Array;
     console.log(this.ArrayEditar)
-    if(this.ArrayEditar.AplicacionesIIS != undefined || this.ArrayEditar.AplicacionesIIS != null){
+    if (this.ArrayEditar.AplicacionesIIS != undefined || this.ArrayEditar.AplicacionesIIS != null) {
       this.checkboxAppsEditar = true;
     }
-    if(this.ArrayEditar.BaseDeDatos != undefined || this.ArrayEditar.BaseDeDatos != null){
+    if (this.ArrayEditar.BaseDeDatos != undefined || this.ArrayEditar.BaseDeDatos != null) {
       this.checkboxBDeDitar = true;
     }
-    if(this.ArrayEditar.IpPublica != undefined || this.ArrayEditar.IpPublica != null){
+    if (this.ArrayEditar.IpPublica != undefined || this.ArrayEditar.IpPublica != null) {
       this.checkboxIpEditar = true;
     }
 
@@ -540,7 +543,6 @@ export class PgservidoresComponent implements OnInit {
       if (respu == 'Servidor actualizado exitosamente.') {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
-        this.modalEditarServidor.hide();
       } else {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = 'Por favor verefique los datos a actualizar.';
@@ -709,12 +711,12 @@ export class PgservidoresComponent implements OnInit {
 
   ChangueEditTipoServidor(IdTipoServ: string) {
 
-      if (IdTipoServ.trim() == '1') {
-        this.ArrayEditar.Servidor_Aloja = 'null';
-        this.DisableServidorAlojaEditar = true;
-      }else{
-        this.DisableServidorAlojaEditar = false;
-      }
+    if (IdTipoServ.trim() == '1') {
+      this.ArrayEditar.Servidor_Aloja = 'null';
+      this.DisableServidorAlojaEditar = true;
+    } else {
+      this.DisableServidorAlojaEditar = false;
+    }
   }
 
 
