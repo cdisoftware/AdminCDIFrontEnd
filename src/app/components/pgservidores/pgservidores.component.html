@@ -198,7 +198,7 @@
                     <select class="form-select" title="Seleccionar tipo servidor" #TipoSerAgrega [(ngModel)]="Id_TipoServidorAgregar"
                     (change)='ChangueAgregarTipoServidor(TipoSerAgrega.value)'>
                         <option value="0">Seleccione tipo servidor</option>
-                        <option [ngValue]="arRespu.TipoServ" *ngFor="let arRespu of ArregloListaTipoServidor">
+                        <option value="{{arRespu.Id_Tipo_S}}|{{arRespu.TipoServ}}" *ngFor="let arRespu of ArregloListaTipoServidor">
                             {{arRespu.Descripcion}}</option>
                     </select>
                 </div>

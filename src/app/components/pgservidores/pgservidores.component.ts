@@ -373,13 +373,33 @@ export class PgservidoresComponent implements OnInit {
     if (this.LblIpServidorAgregar == undefined || this.LblIpServidorAgregar == '' || this.LblNombreAgregar == undefined || this.LblNombreAgregar == '' || this.LblSOAgregar == undefined || this.LblSOAgregar == '' ||
       this.LblSoftwareAgregar == undefined || this.LblSoftwareAgregar == '' || this.IdEstadoAgregar == undefined || this.IdEstadoAgregar == '' || this.Id_TipoServidorAgregar == undefined || this.Id_TipoServidorAgregar == ''
       || this.LblObservacionAgregar == undefined || this.LblObservacionAgregar == '' || this.LblUsuariosAgregar == undefined || this.LblUsuariosAgregar == '' || this.LblPasswordAgregar == undefined || this.LblPasswordAgregar == ''
-      || this.IdServidorAloja == undefined || this.IdServidorAloja == '') {
+      || this.IdServidorAloja == undefined || this.IdServidorAloja == '' || this.Id_TipoServidorAgregar == '0' || this.Id_TipoServidorAgregar == '') {
       this.modalMensaje = this._modalService.show(templateMensaje);
       this.lblModalMsaje = "Por favor complete los campos a agregar";
     } else {
       var auxservAloja = null;
       if (this.IdServidorAloja != "0") {
         auxservAloja = this.IdServidorAloja;
+      }
+      var auxsplit = this.Id_TipoServidorAgregar.split("|");
+      var auxIpPublic: any;
+      var auxapp: any;
+      var auxbd: any;
+
+      if (this.LblIpPublicaAgregar == '') {
+        auxIpPublic = null;
+      } else {
+        auxIpPublic = this.LblIpPublicaAgregar;
+      }
+      if (this.LblAplicacionesIISAgregar == '') {
+        auxapp = null;
+      } else {
+        auxapp = this.LblAplicacionesIISAgregar;
+      }
+      if (this.LblBaseDeDatosAgregar == '') {
+        auxbd = null;
+      } else {
+        auxbd = this.LblBaseDeDatosAgregar;
       }
 
       const InsertaServidor = {
@@ -393,21 +413,22 @@ export class PgservidoresComponent implements OnInit {
         Procesador: this.LblProcesadorAgregar,
         DiscoDuro: this.LblDiscoDuroAgregar,
         RAM: this.LblRamAgregar,
-        IdTipoServ: this.Id_TipoServidorAgregar,
+        IdTipoServ: auxsplit[0],
         ServidorAloja: auxservAloja,
-        IpPublica: this.LblIpPublicaAgregar,
-        AplicacionesIIS: this.LblAplicacionesIISAgregar,
-        BaseDeDatos: this.LblBaseDeDatosAgregar,
+        IpPublica: auxIpPublic,
+        AplicacionesIIS: auxapp,
+        BaseDeDatos: auxbd,
         UserServidor: this.LblUsuariosAgregar,
         Password: this.LblPasswordAgregar,
         IdUsuario: this.IdUsuarioCookies
       }
+      console.log(InsertaServidor)
       this.Servicios.insertaserv('3', InsertaServidor).subscribe(respu => {
         this.modalMensaje = this._modalService.show(templateMensaje);
         this.lblModalMsaje = respu;
 
         this.Limpiar();
-        this.modalServiceDos.dismissAll();
+        //this.modalServiceDos.dismissAll();
 
 
       })
@@ -551,7 +572,6 @@ export class PgservidoresComponent implements OnInit {
       Password: this.ArrayEditar.Password,
       IdUsuario: this.IdUsuarioCookies
     }
-    console.log(Update)
     this.Servicios.actualizaservdos('2', Update).subscribe(respu => {
       this.Grilla(this.lblSO, this.IdEstado, this.IdUsuario);
       if (respu == 'Servidor actualizado exitosamente.') {
@@ -714,10 +734,15 @@ export class PgservidoresComponent implements OnInit {
 
 
   ChangueAgregarTipoServidor(IdTipoServ: String) {
-    if (IdTipoServ != '0') {
-      var splitted = IdTipoServ.split(":");
+    if (IdTipoServ.trim().toString() == "0") {
+      this.IdServidorAloja = '0';
+      this.DisableServidorAlojaAgregar = true;
+    } else {
+      var splitted = IdTipoServ.split("|");
       if (splitted[1].trim() == '1') {
         this.IdServidorAloja = '0';
+        this.DisableServidorAlojaAgregar = true;
+      } else {
         this.DisableServidorAlojaAgregar = false;
       }
     }
